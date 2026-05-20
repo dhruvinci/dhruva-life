@@ -14,7 +14,6 @@ interface OutputBlockProps {
 export function OutputBlock({ id, timestamp, command, content, type = "command" }: OutputBlockProps) {
   const [showMore, setShowMore] = useState(false)
   const [isLongContent, setIsLongContent] = useState(false)
-  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const contentString = typeof content === "string" ? content : content?.toString() || ""
@@ -31,9 +30,6 @@ export function OutputBlock({ id, timestamp, command, content, type = "command" 
   const handleCopyLink = async () => {
     const permalink = `${window.location.origin}${window.location.pathname}#block-${id}`
     await navigator.clipboard.writeText(permalink)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-
     const toast = document.createElement("div")
     toast.textContent = "Link copied."
     toast.className =

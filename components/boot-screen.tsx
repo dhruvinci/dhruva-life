@@ -2,6 +2,15 @@
 
 import { useState, useEffect } from "react"
 
+const bootSequence = [
+  "dhruva.life",
+  "Loading identity...",
+  "",
+  "I build products for people I care about",
+  "RESPONSIVE_LINE",
+  "Type help to begin",
+]
+
 interface BootScreenProps {
   onComplete: () => void
   hasExecutedCommand: boolean
@@ -11,15 +20,6 @@ export function BootScreen({ onComplete, hasExecutedCommand }: BootScreenProps) 
   const [step, setStep] = useState(0)
   const [skipped, setSkipped] = useState(false)
 
-  const bootSequence = [
-    "dhruva.life",
-    "Loading identity...",
-    "",
-    "I build products for people I care about",
-    "RESPONSIVE_LINE",
-    "Type help to begin",
-  ]
-
   useEffect(() => {
     const handleSkip = () => {
       if (!skipped) {
@@ -28,7 +28,7 @@ export function BootScreen({ onComplete, hasExecutedCommand }: BootScreenProps) 
       }
     }
 
-    const handleKeyPress = (e: KeyboardEvent) => handleSkip()
+    const handleKeyPress = () => handleSkip()
     const handleClick = () => handleSkip()
 
     document.addEventListener("keydown", handleKeyPress)

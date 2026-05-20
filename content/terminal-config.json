@@ -1,0 +1,805 @@
+{
+  "site": {
+    "name": "dhruva.life",
+    "tagline": "I build products for people I care about",
+    "description": "Creative Technologist & Product Builder. I build product for people I care about."
+  },
+  "discovery": {
+    "basicUnlockThreshold": 3,
+    "advancedUnlockThreshold": 3,
+    "advancedUnlockNotice": "Advanced Commands Unlocked! Use help to see new options.",
+    "secretUnlockNotice": "Secret Commands Now Visible! Check help for cryptic hints...",
+    "lockedAdvancedTitle": "Advanced command locked",
+    "lockedAdvancedHint": "Try {remaining} more basic commands to unlock advanced features.",
+    "lockedAdvancedExamples": "Hint: about, work, contact, now, writing",
+    "lockedSecretTitle": "Command exists but remains hidden",
+    "lockedSecretHint": "Secret commands reveal themselves to those who explore deeper...",
+    "journeyPath": [
+      {
+        "command": "about",
+        "label": "Start with identity"
+      },
+      {
+        "command": "work",
+        "label": "Scan the current projects"
+      },
+      {
+        "command": "writing",
+        "label": "Read the thinking"
+      },
+      {
+        "command": "stack",
+        "label": "Go deeper after unlock"
+      }
+    ],
+    "secretHints": [
+      {
+        "hint": "Brazilian art form meets flowing movement...",
+        "command": "jits"
+      },
+      {
+        "hint": "Vinyl spins with warm, imperfect beauty...",
+        "command": "analog"
+      },
+      {
+        "hint": "Green rain falls in digital patterns...",
+        "command": "matrix"
+      },
+      {
+        "hint": "Sacred geometry blooms from intention...",
+        "command": "rangoli"
+      },
+      {
+        "hint": "Press to begin infinite game...",
+        "command": "play"
+      }
+    ]
+  },
+  "mobile": {
+    "defaultActions": [
+      {
+        "label": "about",
+        "command": "about",
+        "tone": "primary"
+      },
+      {
+        "label": "work",
+        "command": "work",
+        "tone": "accent"
+      },
+      {
+        "label": "writing",
+        "command": "writing",
+        "tone": "muted"
+      },
+      {
+        "label": "contact",
+        "command": "contact",
+        "tone": "muted"
+      }
+    ],
+    "menuGroups": [
+      {
+        "label": "Start",
+        "commands": ["about", "now", "work", "writing", "contact"]
+      },
+      {
+        "label": "Projects",
+        "commands": ["work", "open graicie", "open cultureco", "open shaadi-fun", "open arenatwo"]
+      },
+      {
+        "label": "Writing",
+        "commands": ["writing", "open meditations-on-community", "open entropy-and-order", "open positive-sum-systems", "search community"]
+      },
+      {
+        "label": "Go deeper",
+        "commands": ["stack", "github", "research", "journey", "philosophy", "random"]
+      },
+      {
+        "label": "Utilities",
+        "commands": ["help", "search", "ls", "history", "theme dark", "theme light", "clear"]
+      },
+      {
+        "label": "Hidden",
+        "commands": ["jits", "analog", "matrix", "rangoli", "play"]
+      }
+    ]
+  },
+  "collections": {
+    "projects": [
+      {
+        "title": "Graicie",
+        "slug": "graicie",
+        "cluster": "AI",
+        "status": "Active",
+        "year": "2025",
+        "summary": "An AI training assistant for Jiu-Jitsu: video analysis, sequence maps, and drills.",
+        "links": [
+          {
+            "label": "Spec",
+            "href": "#"
+          }
+        ]
+      },
+      {
+        "title": "CultureCo",
+        "slug": "cultureco",
+        "cluster": "Web3",
+        "status": "Active",
+        "year": "2025",
+        "summary": "Creator commerce stack for Indian artists: subscriptions, drops, badges.",
+        "links": [
+          {
+            "label": "Overview",
+            "href": "#"
+          }
+        ]
+      },
+      {
+        "title": "Shaadi.fun",
+        "slug": "shaadi-fun",
+        "cluster": "Culture",
+        "status": "Archived",
+        "year": "2024",
+        "summary": "Wedding engagement SaaS with guest cameras, prediction games, and recap videos.",
+        "links": [
+          {
+            "label": "Notes",
+            "href": "#"
+          }
+        ]
+      },
+      {
+        "title": "ArenaTwo",
+        "slug": "arenatwo",
+        "cluster": "Sport",
+        "status": "Concept",
+        "year": "2025",
+        "summary": "Fan-in-the-loop football league on Solana; real-time votes influence play.",
+        "links": [
+          {
+            "label": "Deck",
+            "href": "#"
+          }
+        ]
+      }
+    ],
+    "writingPosts": [
+      {
+        "title": "Meditations on Community",
+        "slug": "meditations-on-community",
+        "date": "2025-08-10",
+        "excerpt": "Communities are the real engines of progress...",
+        "content": "Communities are the real engines of progress. Not individuals, not institutions, but the spaces where people gather around shared purpose.\n\nI've been thinking about what makes communities thrive versus what makes them fragment. The difference isn't in the tools or platforms; it's in the incentive structures. Do people win together, or do they compete for scarce resources?\n\nThe best communities I've been part of have this quality: everyone's success makes everyone else more successful. Positive-sum dynamics. When someone shares knowledge, everyone gets smarter. When someone builds something useful, everyone benefits.\n\nThis is why I'm drawn to building systems that amplify collective intelligence rather than extract from it. Technology should make communities stronger, not more fragmented."
+      },
+      {
+        "title": "Entropy and Order",
+        "slug": "entropy-and-order",
+        "date": "2025-07-28",
+        "excerpt": "Order -> chaos -> order again...",
+        "content": "Order -> chaos -> order again. This cycle shows up everywhere: in code, in communities, in creative work.\n\nI used to think entropy was the enemy. That good systems should resist chaos. But I've learned that the most resilient systems actually embrace it. They use chaos as a source of energy for reorganization.\n\nIn software, this looks like refactoring. In communities, it's conflict resolution. In creative work, it's iteration. The key is having strong enough foundations to survive the chaos and emerge more organized on the other side.\n\nThis is why I'm fascinated by fractal patterns; they maintain structure at every scale, even as they embrace infinite complexity. Rangoli patterns do this beautifully. Order and chaos dancing together."
+      },
+      {
+        "title": "Positive-Sum Systems",
+        "slug": "positive-sum-systems",
+        "date": "2025-07-15",
+        "excerpt": "Design games where everyone can win.",
+        "content": "Design games where everyone can win. This is the core principle behind everything I build.\n\nMost systems are zero-sum by default. For someone to win, someone else has to lose. But the most interesting opportunities exist in creating positive-sum dynamics: where everyone's success contributes to everyone else's success.\n\nIn creator economies, this means building platforms where artists' success makes the platform more valuable for other artists. In sports, it means designing fan engagement that makes the game better for everyone. In AI, it means building tools that amplify human creativity rather than replace it.\n\nThe challenge is that positive-sum systems are harder to design and often take longer to show results. But when they work, they create sustainable value that compounds over time."
+      }
+    ],
+    "logs": [
+      {
+        "date": "2025-08-15",
+        "bullets": [
+          "Benchmarked Qwen2.5-VL on 15s/3m/16m BJJ clips",
+          "Shipped CLI website spec draft",
+          "Met 2 indie artists for CultureCo onboarding"
+        ],
+        "links": [
+          {
+            "label": "Spec",
+            "href": "#"
+          }
+        ]
+      }
+    ]
+  },
+  "commands": [
+    {
+      "name": "about",
+      "description": "Learn about Dhruva",
+      "category": "Core",
+      "tier": "basic",
+      "unlockGroup": "basic",
+      "actions": [
+        {
+          "label": "work",
+          "command": "work",
+          "tone": "primary"
+        },
+        {
+          "label": "writing",
+          "command": "writing",
+          "tone": "accent"
+        },
+        {
+          "label": "contact",
+          "command": "contact",
+          "tone": "muted"
+        }
+      ],
+      "output": [
+        {
+          "type": "paragraph",
+          "text": "I'm Dhruva - Creative Technologist & Product Builder."
+        },
+        {
+          "type": "paragraph",
+          "text": "I build product for people I care about.",
+          "tone": "accent"
+        },
+        {
+          "type": "paragraph",
+          "text": "I work at the intersection of technology, culture, and sport: designing systems where communities thrive."
+        },
+        {
+          "type": "linkList",
+          "links": [
+            {
+              "label": "projects",
+              "command": "work"
+            },
+            {
+              "label": "writing",
+              "command": "writing"
+            },
+            {
+              "label": "contact",
+              "command": "contact"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "now",
+      "description": "What Dhruva is working on now",
+      "category": "Core",
+      "tier": "basic",
+      "unlockGroup": "basic",
+      "output": [
+        {
+          "type": "paragraph",
+          "text": "Now: Building Graicie (AI Jiu-Jitsu), refining CultureCo (creator commerce), and shipping a terminal website refresh. Training no-gi, writing short meditations, and experimenting with fractal rangoli."
+        },
+        {
+          "type": "muted",
+          "text": "Updated from terminal-config.json"
+        }
+      ]
+    },
+    {
+      "name": "work",
+      "description": "Current projects and portfolio",
+      "category": "Core",
+      "tier": "basic",
+      "unlockGroup": "basic",
+      "aliases": ["projects"],
+      "actions": [
+        {
+          "label": "open graicie",
+          "command": "open graicie",
+          "tone": "primary"
+        },
+        {
+          "label": "open cultureco",
+          "command": "open cultureco",
+          "tone": "accent"
+        },
+        {
+          "label": "writing",
+          "command": "writing",
+          "tone": "muted"
+        }
+      ],
+      "output": [
+        {
+          "type": "projectList",
+          "clusters": ["AI", "Web3", "Culture", "Sport"]
+        }
+      ]
+    },
+    {
+      "name": "writing",
+      "description": "Read blog posts and essays",
+      "category": "Core",
+      "tier": "basic",
+      "unlockGroup": "basic",
+      "actions": [
+        {
+          "label": "open meditations",
+          "command": "open meditations-on-community",
+          "tone": "primary"
+        },
+        {
+          "label": "search community",
+          "command": "search community",
+          "tone": "accent"
+        },
+        {
+          "label": "work",
+          "command": "work",
+          "tone": "muted"
+        }
+      ],
+      "output": [
+        {
+          "type": "heading",
+          "text": "Writing"
+        },
+        {
+          "type": "postList"
+        }
+      ]
+    },
+    {
+      "name": "whativedone",
+      "description": "Weekly changelog and updates",
+      "category": "Core",
+      "tier": "basic",
+      "aliases": ["logs"],
+      "output": [
+        {
+          "type": "heading",
+          "text": "What I've Done"
+        },
+        {
+          "type": "logList"
+        }
+      ]
+    },
+    {
+      "name": "resume",
+      "description": "View resume and CV",
+      "category": "Core",
+      "tier": "basic",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Dhruva Chakravarthi"
+        },
+        {
+          "type": "muted",
+          "text": "Creative Technologist & Product Builder"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Role",
+              "value": "Creative Technologist & Product Builder"
+            },
+            {
+              "label": "Focus",
+              "value": "AI, Web3, community systems"
+            },
+            {
+              "label": "Global",
+              "value": "India <-> US"
+            }
+          ]
+        },
+        {
+          "type": "linkList",
+          "links": [
+            {
+              "label": "open resume",
+              "command": "open resume"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "contact",
+      "description": "Get in touch with Dhruva",
+      "category": "Core",
+      "tier": "basic",
+      "unlockGroup": "basic",
+      "actions": [
+        {
+          "label": "about",
+          "command": "about",
+          "tone": "primary"
+        },
+        {
+          "label": "work",
+          "command": "work",
+          "tone": "accent"
+        },
+        {
+          "label": "writing",
+          "command": "writing",
+          "tone": "muted"
+        }
+      ],
+      "output": [
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Email",
+              "value": "0xdhruva@gmail.com",
+              "href": "mailto:0xdhruva@gmail.com"
+            }
+          ]
+        },
+        {
+          "type": "linkList",
+          "label": "Socials",
+          "links": [
+            {
+              "label": "X/Twitter",
+              "href": "https://x.com/dhrude/"
+            },
+            {
+              "label": "LinkedIn",
+              "href": "https://in.linkedin.com/in/dhruva-chakravarthi"
+            },
+            {
+              "label": "Instagram",
+              "href": "https://instagram.com/dhrude/"
+            }
+          ]
+        },
+        {
+          "type": "linkList",
+          "label": "Quick Catchup",
+          "links": [
+            {
+              "label": "Book a time",
+              "href": "https://calendar.app.google/586qyoAWdRjQMcB1A"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "stack",
+      "description": "My technology stack",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "actions": [
+        {
+          "label": "github",
+          "command": "github",
+          "tone": "primary"
+        },
+        {
+          "label": "research",
+          "command": "research",
+          "tone": "accent"
+        },
+        {
+          "label": "philosophy",
+          "command": "philosophy",
+          "tone": "muted"
+        }
+      ],
+      "output": [
+        {
+          "type": "heading",
+          "text": "Tech Stack",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Languages",
+              "value": "TypeScript, Python, Solidity, Go"
+            },
+            {
+              "label": "Frameworks",
+              "value": "Next.js, React, FastAPI, Hardhat"
+            },
+            {
+              "label": "AI/ML",
+              "value": "OpenAI, Anthropic, Hugging Face, LangChain"
+            },
+            {
+              "label": "Infrastructure",
+              "value": "Vercel, AWS, Supabase, Ethereum"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "github",
+      "description": "GitHub activity and contributions",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "GitHub Activity",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Username",
+              "value": "@dhruva-chakravarthi"
+            },
+            {
+              "label": "Repositories",
+              "value": "50+ public"
+            },
+            {
+              "label": "Languages",
+              "value": "TypeScript, Python, Solidity"
+            },
+            {
+              "label": "Recent",
+              "value": "Graicie AI, CultureCo, ArenaTwo"
+            }
+          ]
+        },
+        {
+          "type": "linkList",
+          "links": [
+            {
+              "label": "View Profile",
+              "href": "https://github.com/dhruva-chakravarthi"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "research",
+      "description": "Research interests and explorations",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Research Interests",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "AI Systems",
+              "value": "Multimodal models for sports analysis, embodied AI for movement"
+            },
+            {
+              "label": "Community Dynamics",
+              "value": "Positive-sum game design, creator economy infrastructure"
+            },
+            {
+              "label": "Cultural Bridges",
+              "value": "Technology as cultural preservation, diaspora identity"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "journey",
+      "description": "Personal and professional story",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Journey",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Origins",
+              "value": "Growing up between Indian traditions and global technology"
+            },
+            {
+              "label": "Discovery",
+              "value": "Found jiu-jitsu, learned about flow states and resilience"
+            },
+            {
+              "label": "Evolution",
+              "value": "Building systems that honor culture while embracing innovation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "philosophy",
+      "description": "Core beliefs and principles",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Philosophy",
+          "tone": "olive"
+        },
+        {
+          "type": "quoteList",
+          "quotes": [
+            {
+              "quote": "Build positive-sum systems where communities thrive",
+              "detail": "Technology should amplify collective intelligence, not extract from it"
+            },
+            {
+              "quote": "Flow states are everywhere",
+              "detail": "From code to combat, creativity emerges when we find the rhythm"
+            },
+            {
+              "quote": "Culture is the compass",
+              "detail": "Innovation without cultural context is just clever distraction"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "gigs",
+      "description": "Concert and live music history",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Live Music",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Radiohead",
+              "value": "Madison Square Garden, 2018"
+            },
+            {
+              "label": "Bonobo",
+              "value": "Brooklyn Steel, 2019"
+            },
+            {
+              "label": "Kiasmos",
+              "value": "Elsewhere, 2020"
+            }
+          ]
+        },
+        {
+          "type": "muted",
+          "text": "Live music is temporary community: shared rhythm, shared moment."
+        }
+      ]
+    },
+    {
+      "name": "vinyls",
+      "description": "Record collection highlights",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "aliases": ["vinyl"],
+      "output": [
+        {
+          "type": "heading",
+          "text": "Vinyl Collection",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Miles Davis",
+              "value": "Kind of Blue (Blue Note reissue)"
+            },
+            {
+              "label": "Kiasmos",
+              "value": "Blurred EP (Limited white)"
+            },
+            {
+              "label": "Bonobo",
+              "value": "Migration (Deluxe edition)"
+            }
+          ]
+        },
+        {
+          "type": "muted",
+          "text": "Analog warmth > digital precision"
+        }
+      ]
+    },
+    {
+      "name": "spotify",
+      "description": "Current playlist and listening habits",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Currently Playing",
+          "tone": "olive"
+        },
+        {
+          "type": "keyValueList",
+          "items": [
+            {
+              "label": "Deep Focus",
+              "value": "Ambient techno for coding sessions"
+            },
+            {
+              "label": "Flow States",
+              "value": "Minimalist beats for training"
+            },
+            {
+              "label": "Sunday Mornings",
+              "value": "Jazz & reflection"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "random",
+      "description": "Random thoughts and observations",
+      "category": "Core",
+      "tier": "advanced",
+      "unlockGroup": "advanced",
+      "output": [
+        {
+          "type": "heading",
+          "text": "Random Thoughts",
+          "tone": "olive"
+        },
+        {
+          "type": "quoteList",
+          "quotes": [
+            {
+              "quote": "The best technical solutions feel inevitable in hindsight"
+            },
+            {
+              "quote": "Jiu-jitsu is chess with your body as the pieces"
+            },
+            {
+              "quote": "Community forms around shared struggle, not shared comfort"
+            },
+            {
+              "quote": "Vinyl records are meditation objects for the digital age"
+            },
+            {
+              "quote": "Code is culture made executable"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ls",
+      "description": "List directories",
+      "category": "Utilities",
+      "tier": "basic",
+      "output": [
+        {
+          "type": "directoryList",
+          "items": ["/about", "/projects", "/writing", "/logs", "/resume", "/contact"]
+        }
+      ]
+    }
+  ]
+}

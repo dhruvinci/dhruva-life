@@ -2,6 +2,16 @@
 
 import { useState, useEffect } from "react"
 
+const compileLogs = [
+  "Checking dependencies...",
+  "Compiling TypeScript...",
+  "Bundling assets...",
+  "Optimizing build...",
+  "Build complete!",
+]
+
+const deployStages = ["Building application...", "Uploading to CDN...", "Configuring routes...", "Deployment complete!"]
+
 interface AnimatedASCIIProps {
   frames: string[]
   duration: number
@@ -92,14 +102,6 @@ export function CompileAnimation() {
   const [currentLog, setCurrentLog] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
 
-  const logs = [
-    "Checking dependencies...",
-    "Compiling TypeScript...",
-    "Bundling assets...",
-    "Optimizing build...",
-    "Build complete!",
-  ]
-
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
@@ -113,7 +115,7 @@ export function CompileAnimation() {
     }, 50)
 
     const logInterval = setInterval(() => {
-      setCurrentLog((prev) => Math.min(prev + 1, logs.length - 1))
+      setCurrentLog((prev) => Math.min(prev + 1, compileLogs.length - 1))
     }, 600)
 
     return () => {
@@ -130,7 +132,7 @@ export function CompileAnimation() {
         [{progressBar}] {progress}%
       </div>
       <div className="text-sage">
-        {logs.slice(0, currentLog + 1).map((log, i) => (
+        {compileLogs.slice(0, currentLog + 1).map((log, i) => (
           <div key={i} className={i === currentLog ? "text-olive" : "text-sage opacity-60"}>
             {log}
           </div>
@@ -145,11 +147,9 @@ export function DeployAnimation() {
   const [stage, setStage] = useState(0)
   const [dots, setDots] = useState("")
 
-  const stages = ["Building application...", "Uploading to CDN...", "Configuring routes...", "Deployment complete!"]
-
   useEffect(() => {
     const stageInterval = setInterval(() => {
-      setStage((prev) => Math.min(prev + 1, stages.length - 1))
+      setStage((prev) => Math.min(prev + 1, deployStages.length - 1))
     }, 800)
 
     const dotsInterval = setInterval(() => {
@@ -164,13 +164,13 @@ export function DeployAnimation() {
 
   return (
     <div className="space-y-2 font-mono text-sm">
-      {stages.slice(0, stage + 1).map((stageText, i) => (
+      {deployStages.slice(0, stage + 1).map((stageText, i) => (
         <div key={i} className={i === stage ? "text-olive" : "text-sage opacity-60"}>
-          {i === stage && stage < stages.length - 1 ? `${stageText}${dots}` : stageText}
+          {i === stage && stage < deployStages.length - 1 ? `${stageText}${dots}` : stageText}
           {i < stage && " ✓"}
         </div>
       ))}
-      {stage === stages.length - 1 && <div className="text-olive font-medium">🚀 Live at dhruva.life</div>}
+      {stage === deployStages.length - 1 && <div className="text-olive font-medium">🚀 Live at dhruva.life</div>}
     </div>
   )
 }

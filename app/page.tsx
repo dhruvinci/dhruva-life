@@ -11,8 +11,18 @@ export default function HomePage() {
   const [hasExecutedCommand, setHasExecutedCommand] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const { output, input, setInput, executeCommand, history, historyIndex, setHistoryIndex, suggestions, clearOutput } =
-    useTerminal()
+  const {
+    output,
+    input,
+    setInput,
+    executeCommand,
+    history,
+    historyIndex,
+    setHistoryIndex,
+    suggestions,
+    mobileActions,
+    discoveryState,
+  } = useTerminal()
 
   const handleBootComplete = () => {
     setBootCompleted(true)
@@ -38,7 +48,8 @@ export default function HomePage() {
         historyIndex={historyIndex}
         setHistoryIndex={setHistoryIndex}
         suggestions={suggestions}
-        clearOutput={clearOutput}
+        mobileActions={mobileActions}
+        discoveryState={discoveryState}
         bootCompleted={bootCompleted}
       />
 

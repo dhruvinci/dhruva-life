@@ -2,6 +2,8 @@
 
 import type React from "react"
 import { useRef, useEffect } from "react"
+import type { DiscoveryState } from "@/lib/commands"
+import type { TerminalAction } from "@/lib/terminal-config"
 import { OutputBlock } from "./output-block"
 import { TerminalInput } from "./terminal-input"
 
@@ -20,7 +22,8 @@ interface TerminalProps {
   historyIndex: number
   setHistoryIndex: (index: number) => void
   suggestions: string[]
-  clearOutput: () => void
+  mobileActions: TerminalAction[]
+  discoveryState: DiscoveryState
   bootCompleted: boolean
 }
 
@@ -33,7 +36,8 @@ export function Terminal({
   historyIndex,
   setHistoryIndex,
   suggestions,
-  clearOutput,
+  mobileActions,
+  discoveryState,
   bootCompleted,
 }: TerminalProps) {
   const terminalRef = useRef<HTMLDivElement>(null)
@@ -55,10 +59,10 @@ export function Terminal({
       {/* Terminal Content - Only renders if there's output */}
       {output.length > 0 && (
         <div className="flex flex-col min-h-screen">
-          <div ref={terminalRef} className="flex-1 pb-20 sm:pb-24">
+          <div ref={terminalRef} className="flex-1 pb-44 md:pb-24">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
               <div className="space-y-8">
-                {output.map((block, index) => (
+                {output.map((block) => (
                   <OutputBlock key={block.id} {...block} />
                 ))}
               </div>
@@ -77,6 +81,8 @@ export function Terminal({
           historyIndex={historyIndex}
           setHistoryIndex={setHistoryIndex}
           suggestions={suggestions}
+          mobileActions={mobileActions}
+          discoveryState={discoveryState}
         />
       )}
     </>

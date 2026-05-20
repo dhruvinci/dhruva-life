@@ -10,9 +10,57 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "dhruva.life — terminal",
+  metadataBase: new URL("https://dhruva.life"),
+  title: {
+    default: "dhruva.life - terminal",
+    template: "%s | dhruva.life",
+  },
   description: "Creative Technologist & Product Builder. I build product for people I care about.",
-  generator: "v0.app",
+  applicationName: "dhruva.life",
+  authors: [{ name: "Dhruva Chakravarthi" }],
+  creator: "Dhruva Chakravarthi",
+  keywords: [
+    "Dhruva Chakravarthi",
+    "creative technologist",
+    "product builder",
+    "AI",
+    "Web3",
+    "terminal website",
+    "jiu-jitsu",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "dhruva.life - terminal",
+    description: "Creative Technologist & Product Builder. I build product for people I care about.",
+    url: "/",
+    siteName: "dhruva.life",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "dhruva.life terminal card",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "dhruva.life - terminal",
+    description: "Creative Technologist & Product Builder. I build product for people I care about.",
+    creator: "@dhrude",
+    images: ["/twitter-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  icons: {
+    icon: "/icon.svg",
+  },
 }
 
 export default function RootLayout({
