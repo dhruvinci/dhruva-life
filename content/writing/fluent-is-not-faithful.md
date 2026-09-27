@@ -8,7 +8,7 @@ Last summer I fed an open vision model a few minutes of an Andrew Tackett match 
 
 That paragraph has followed me around ever since.
 
-I started Kakashi in October as a side hobby, an AI that watches your jiu-jitsu rolls and tells you what actually happened. This month it grew wings and became a real product, which is exciting and a little terrifying, because now the gap between sounding right and being right isn't something I get to be curious about on a Sunday. It's somebody's training. If you drill six days a week and upload a roll, you deserve to hear what actually happened, not a nice story about it.
+The side project I've been tinkering with, the thing that watches your rolls and tells you what happened, is turning into a real product this month. Which is exciting and a little terrifying, because now the gap between sounding right and being right isn't something I get to be curious about on a Sunday. It's somebody's training. If you drill six days a week and upload a roll, you deserve to hear what actually happened, not a nice story about it.
 
 Here's what I keep coming back to. These models don't understand you in the way we'd like to believe - they predict the most probable next token, and they're astonishingly good at it. But when they don't know something, they have two options. They can admit they're uncertain, which almost never gets rewarded. Or they can generate something plausible, which gets rewarded constantly, by the benchmarks, by the way they're trained, and honestly by us, because we like confident answers. So they learn to be fluent. Nobody really taught them to be faithful.
 

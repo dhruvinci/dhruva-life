@@ -4,7 +4,7 @@ date: 2026-04-26
 excerpt: "Every model sees from somewhere. I'd rather it told me where it's standing."
 ---
 
-In 2017, during my Masters at Syracuse, where I was majoring in AI, I put my hand up in class and asked my professor a question I thought was pretty obvious. Were there any studies that factored in the biases of the humans who build these models? Not the bias in the data, which people were already talking about, but the people themselves - what they chose to measure, what they thought was normal, what they never thought to ask.
+In 2017, when I was majoring in AI during my Masters, I put my hand up in class and asked my professor a question I thought was pretty obvious. Were there any studies that factored in the biases of the humans who build these models? Not the bias in the data, which people were already talking about, but the people themselves - what they chose to measure, what they thought was normal, what they never thought to ask.
 
 There weren't. And that scared me.
 

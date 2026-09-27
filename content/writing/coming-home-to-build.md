@@ -1,31 +1,29 @@
 ---
 title: Coming Home to Build
 date: 2021-12-05
-excerpt: "Four years away, and the city I came back to wants to build just as badly as I do."
+excerpt: "Is it strange to feel homesick for a place while you're standing in it?"
 ---
 
 Is it strange to feel homesick for a place while you're standing in it?
 
-That's been my first few weeks back in Bangalore. I left PwC in November, packed up four years of life in the US, and flew home to build Dehidden full time. Everything is familiar and everything has moved slightly to the left. Roads I knew have new flyovers, cafés I loved have become other cafés, friends have become managers and parents and founders, and I keep catching myself converting prices in my head like a tourist. I'm home, but I'm also new here. I think that's a good way to start something.
+That's been my first few weeks back in Bangalore. Everything is familiar and everything has moved slightly to the left. The roads are the same roads with new names for the traffic. Friends have become managers and parents and, surprisingly often, founders. I keep catching myself converting prices in my head like a tourist. I'm home, but I'm also new here, and I'm not sure yet which of those feelings is going to win.
 
-People asked why I didn't just build from the US. It's a fair question. The ecosystem there is deeper, the money is closer, and the time zones line up with most of crypto Twitter. But I kept coming back to one thing. I want to build here, and I want to be part of making it easier for other people to build here too. Bangalore gave me my education at BNMIT, my first gigs, my friends, the whole idea that you could make things with a computer and people would use them. It feels right to put something back into it.
+A lot of people asked why I'd come back to build instead of staying in the US, where the money is closer and the ecosystem is deeper. It's a fair question and I gave a different answer every time, which probably means none of them were the real one.
 
-So after a few weeks, here's how it looks to me.
+The real one is simpler and a bit embarrassing. I missed it. I missed the chaos and the food and the gigs and my people. I missed being in a place where I knew how things worked, even when they didn't work. Five years away is long enough to realise that home isn't where you're comfortable, it's where you care what happens.
 
-Bangalore has engineers, and not just a lot of them. It has engineers who are hungry, who learn a new stack over a weekend because they're curious, who'll stay up with you debugging something because they want to see it work. The young builders I've spoken to about Web3 since I got back ask sharp, hungry questions, the kind that tell you they've already been reading about it at 2am. It has a cost of building that lets a small team try things, fail, and try again without the runway burning down in three months. And it has a culture that I don't think gets enough credit. Since 2012 I've been going to indie gigs here. I've painted my face for Motherjane, sung Hey Jude at the top of my lungs with Thermal and a Quarter, watched Parvaaz launch their first album. The same energy that fills those rooms, people making original things for a small crowd because they love it, is the energy you need in a startup. It's all here.
+And I do care what happens here.
 
-What it lacks is harder to say without sounding ungrateful, so I'll just say it plainly.
+The thing I keep noticing, now that I'm back with fresh eyes, is how much talent there is that doesn't know what it could be. Everyone I meet is sharp. Engineers who learn a new stack over a weekend because they're curious, who'll stay up with you debugging something just to see it work. But so many of them have been trained, and trained well, to build someone else's roadmap. Building your own thing still feels like a risk you have to justify to your family and your neighbours and yourself.
 
-It lacks permission. So much of the talent here has been trained to build other people's roadmaps, and trained well, that building your own thing still feels like a risk you need to justify to your family and your neighbours. There are plenty of people who could be founders and don't know it yet. It lacks early believers for the weird ideas, the people who'll back something before it makes sense on a spreadsheet. And with crypto specifically, it lacks clarity. Nobody quite knows what the rules are going to be, and that fog makes a lot of good people wait on the sidelines.
+I get it. I only did it after years of the safe version.
 
-None of those are things you fix with a policy paper. You fix them by building, out loud, in public, and by pulling people in with you.
+What Bangalore lacks isn't people or ideas. It's permission, and early believers for weird ideas, the ones who'll back you before it makes sense on a spreadsheet. With crypto it also lacks clarity - nobody quite knows what the rules are going to be, and that fog keeps a lot of good people waiting on the sidelines. I don't think you fix any of that with a policy paper. I think you fix it one person at a time, by building out loud and pulling people in with you.
 
-That's the part I'm most excited about. At PwC I worked with offshore teams for years, brilliant engineers in India building systems for companies they'd never visit, and I always felt they deserved to be closer to the problem, to own more of the outcome. Now I get to give people that. Young builders who want to learn Web3 by actually shipping it, not by watching YouTube about it. If a few of them go off and start their own things someday, that's not me losing people. That's the whole point.
+Being able to go to gigs here again has been the best part of coming back. The small ones, where you can't tell who's in the band and who's just a friend of the band. Half the room knows each other, nobody's getting rich, and everybody's having the time of their lives. I've been going to rooms like that since college, and it hits different now. That's the feeling. That's what I want to build a company around.
 
-A candle doesn't lose any light when you use it to light another candle, but makes the room brighter. I believe that more every day I'm here.
+I'm not naive about it. Some days the fog will win. There'll be late calls across time zones, and a lot of explaining to people who think I've taken a step backwards.
 
-I'm not naive about it. I'm going to miss things about the US, the gigs in New York especially (seeing Radiohead at Madison Square Garden has permanently ruined my standards, chuckle chuckle). Building a company from here will mean some late calls and some explaining. Some days the fog will win.
-
-But when I walk around this city at night now, I don't feel like I've taken a step backwards from the safe path. I feel like I've walked into a room full of people who haven't lit their candles yet.
+It doesn't feel like a step backwards. It feels like I finally walked into the room I've been trying to get back to.
 
 It's good to be home.

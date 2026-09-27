@@ -8,7 +8,7 @@ My parents taught me to chase what is true and share it. I don't think they ever
 
 The paper got accepted at CAISc 2026. Sole author, independent researcher, no lab behind me - just a question I couldn't stop asking and a lot of footage from real mats. The camera-ready is done. I'm still a little in disbelief.
 
-For anyone who hasn't followed the saga, the paper is called "Harnessing Vision-Language Models for Faithful Human-Movement Understanding", which is a very formal way of saying: these models describe people moving in lovely, confident prose, and they're often wrong, so how do you make them right? My answer was to stop throwing more at them. Instead of a bigger model, I built a harness around a frozen one - small, cheap computer-vision hints about pose, motion and contact, treated as hints rather than gospel, a compact answer instead of a verbose one, and the video cached once so you can take several cheap passes at it. Win by removing.
+The paper is called "Harnessing Vision-Language Models for Faithful Human-Movement Understanding", which is a very formal way of saying: these models describe people moving in lovely, confident prose, and they're often wrong, so how do you make them right? My answer was to stop throwing more at them. Instead of a bigger model, I built a harness around a frozen one - small, cheap computer-vision hints about pose, motion and contact, treated as hints rather than gospel, a compact answer instead of a verbose one, and the video cached once so you can take several cheap passes at it. Win by removing.
 
 It worked better than I'd hoped. On one densely annotated match, position accuracy went up about 11x. Across 496 clips, it identifies the position 58.9% of the time.
 
@@ -25,8 +25,6 @@ The limitations section was the other part I'm proud of, which is a strange thin
 I've been thinking about why that felt so important to me, and I think it's because the entire paper is about machines that sound more certain than they are. It would've been a bit rich to write it in a voice that sounded more certain than I was. If I'm going to ask models to know what they don't know, I should at least be able to do it myself.
 
 That's what research is, for me, at its best. The pursuit of what's actually true, including the parts that don't flatter you, and then handing it to other people so they can go further. The code and a first cut of the benchmark, MoveBench v0, are open source. Someone out there can take my one dense match and make it a hundred. Someone can try a different model family and prove me wrong about something. I hope they do.
-
-A candle doesn't lose any light when you use it to light another candle, but makes the room brighter.
 
 This work happened on real mats, with real people rolling, and it will get better the same way jiu-jitsu gets better - one honest correction at a time. I'm just glad I got to share the first round.
 

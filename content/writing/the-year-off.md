@@ -14,11 +14,11 @@ Jiu-jitsu. Mostly jiu-jitsu.
 
 Let me explain, because I know how it sounds.
 
-Since 2018 I haven't really stopped. Four years at PwC in the US, where the job was big and the hours were bigger. Then Dehidden, which started while I was still at PwC and swallowed every waking hour for over two years - every client, every delivery, every launch night. I loved it. I'd do it again. But somewhere in there I stopped asking what I wanted to do and only asked what needed to be done next, and those are very different questions.
+I haven't really stopped in years. I loved every bit of it and I'd do it again. But somewhere in there I stopped asking what I wanted to do and only asked what needed to be done next, and those are very different questions.
 
-So when Dehidden found its home at the end of last year, I made myself a promise. I'd take a proper career break. Not a two-week trip and then back to pitch decks. A real one.
+So when the last chapter closed at the end of the year, I made myself a promise. I'd take a proper career break. Not a two-week trip and then back to pitch decks. A real one.
 
-The thing is, I know myself. I can't do nothing. I've tried, and it lasts about four days before I start reorganising my bookshelf and building a spreadsheet to track something that doesn't need tracking. Even on a break I have to obsess over something, and if I'm going to obsess, I want it to be something meaningful. Something that'll still be paying me back when I'm sixty.
+The thing is, I know myself. I can't do nothing. I've tried, and it lasts about four days before I start inventing projects nobody asked for. Even on a break I have to obsess over something, and if I'm going to obsess, I want it to be something meaningful. Something that'll still be paying me back when I'm sixty.
 
 When I sat with that honestly, two things came up, and they turned out to be the same thing.
 

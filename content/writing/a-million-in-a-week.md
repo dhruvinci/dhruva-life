@@ -26,10 +26,8 @@ It still does.
 
 I want to be honest about the "buggy" part, because it would be easy to leave it out now that it worked. It wasn't perfect. There were rough edges, there were fixes pushed during the week while real people were using it, and there were things I'd do differently with more time. But I've started to believe that if you wait until it's perfect, you never get the week. You have to be willing to ship something slightly embarrassing and then show up every hour to make it less so. That's what the team did. They didn't just build it, they stayed with it.
 
-What I'll remember isn't the number, though. It's the feeling in the team when it became real. People who'd been quietly exhausted suddenly had this lit-up look, sharing screenshots, reading user messages out loud, laughing at the dumb bugs we'd been scared of a week earlier. It's the look of people realising they built something at a scale most engineers never get to touch, and they did it here, from Bangalore, at an age where most of their friends are still being told to wait their turn.
+What I'll remember isn't the number, though. It's the feeling in the team when it became real. People who'd been quietly exhausted suddenly had this lit-up look, sharing screenshots, reading user messages out loud, laughing at the dumb bugs we'd been scared of a week earlier. For a few days, nobody really wanted to go home.
 
-That's why I came home. I can't do any of this alone, and I never wanted to. The best part of building Dehidden has been watching young people I took a chance on turn out to be far better than even I'd hoped (and I'm an optimist, so that's saying something).
-
-I don't know if we'll ever have a week like that again. Maybe we'll have bigger ones. Maybe this was the peak and I just don't know it yet. Either way, I got to stand in the middle of it with people I love working with, giving it everything we had.
+I don't know if we'll ever have a week like that again. Maybe we'll have bigger ones, maybe this was the one. Either way, I got to stand in the middle of it with people I love working with, all of us giving it everything we had.
 
 I slept a lot the week after. Worth it.

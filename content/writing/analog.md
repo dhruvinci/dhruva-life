@@ -18,7 +18,7 @@ Chopping vegetables is another one. Onions, then tomatoes, then whatever else th
 
 And then there's photography, which might be the slowest of them all, even though a shutter is over in a fraction of a second. The picture isn't the click. The picture is the waiting. You see something - light hitting a wall a certain way, someone about to turn their head, a moment that's building - and you wait for it to become the thing you saw coming. Most of the time it doesn't. Sometimes it does, and you're ready, and you get it. Most of photography, for me, is standing still and paying attention.
 
-Kahneman's Thinking, Fast and Slow has been on my mind a lot, and it's hard not to see my own life in it. There's the fast, reflexive part of you that reacts before you've thought, and the slow, deliberate part that actually reasons. My paper was, in a roundabout way, about getting machines to do both, cheap instinctive vision tools that react and big slow models that think, working together instead of fighting. But I've started to wonder if I need the same balance myself. My days are all speed. Everything reflexive, everything immediate.
+Kahneman's Thinking, Fast and Slow has been on my mind a lot, and it's hard not to see my own life in it. There's the fast, reflexive part of you that reacts before you've thought, and the slow, deliberate part that actually reasons. I spend my working hours trying to get machines to do both. I've started to wonder if I need the same balance myself. My days are all speed. Everything reflexive, everything immediate.
 
 The record, the onion and the camera are where I get to be slow on purpose.
 

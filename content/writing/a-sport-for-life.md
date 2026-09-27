@@ -14,17 +14,17 @@ It's nearly the end of the year I gave myself, so I've been thinking about what 
 
 On paper, it's simple. Six hours a day, six days a week, since January. More rolls than I could count, a body that looks and moves differently, and a lot of humility served cold. But the thing that's really stuck with me isn't any technique. It's watching the people who've been doing this much longer than I have.
 
-There are people on the mats I train on who are well into their forties, fifties, some older, and they're not there for nostalgia. They're rolling. They're tapping people half their age with a kind of lazy precision that makes you want to throw your notebook away. They don't have the explosiveness they had at twenty-five, and they don't need it. They've swapped strength for timing, speed for patience, and they'll probably be on the mat long after the athletic twenty-somethings have moved on to something else.
+There are people on the mats I train on who are much older than me, some of them by decades, and they're not there for nostalgia. They're rolling. They're tapping people half their age with a kind of lazy precision that makes you want to throw your notebook away. They don't have the explosiveness they had at twenty-five, and they don't need it. They've swapped strength for timing, speed for patience, and they'll probably be on the mat long after the athletic twenty-somethings have moved on to something else.
 
 That's what sold me on jiu-jitsu as a sport for life. So many sports are built around a peak. You train for a decade to be the best for a few years and then you coach, or you watch, or you get a bad knee and tell stories. Jiu-jitsu doesn't really have a peak in that sense. It has a long, slow curve where the thing you lose (youth, mostly) gets traded for the thing you gain (understanding), and if you look after your body, the trade keeps working for a very long time.
 
 Which means the real opponent isn't whoever's across from me at a competition. It's me, in twenty years. Am I going to be able to keep doing this? Am I training in a way that my fifty-year-old self will thank me for, or am I spending my body like a bull market spends money? (I've seen how that one ends.) I've started thinking about recovery, mobility, sleep, and all the unglamorous stuff the way I used to think about infrastructure - the boring parts that decide whether the exciting parts still work in five years.
 
-It's a long game. I like long games. I think I've always liked them, I just didn't always play them. At Dehidden we sprinted, because that's what the market demanded, and there were months I treated my body like a cheap laptop I'd replace next year. This year was a correction. And the funny thing is, I don't think the lessons stay on the mat. Patience, reps, reading people, staying calm when everything is going wrong at once. I suspect those are going to show up in whatever I build next.
+It's a long game. I like long games. I think I've always liked them, I just didn't always play them. There were years I treated my body like a cheap laptop I'd replace next year. This year was a correction.
 
 So, what's next?
 
-Honestly, I don't fully know yet, and I'm letting that be okay for a few more weeks. I know I'll build again. I can feel it, the itch is back, I catch myself sketching systems in my head on the drive home from training. But I also know I'm not giving this up to do it. The sport stays. Maybe fewer hours - my body would like a word about the six - but it stays, every week, for as long as I've got.
+Honestly, I don't know yet, and I'm letting that be okay for a few more weeks. Whatever it is, I'm not giving this up for it. The sport stays. Maybe fewer hours - my body would like a word about the six - but it stays, every week, for as long as I've got.
 
 I've spent a lot of my life chasing what's next. This is the first thing I've found that I want to keep doing for the rest of it.
 

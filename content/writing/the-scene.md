@@ -4,7 +4,7 @@ date: 2025-09-21
 excerpt: "I've been showing up to small rooms with loud bands since 2012. It's the best education I never paid for."
 ---
 
-The first time I painted my face for a gig, it was for Motherjane, and I remember thinking halfway through the set that I'd never felt more at home in a room full of strangers. I was in my first year of engineering at BNMIT, I had no idea what I wanted to do with my life, and I didn't care, because the guitars were loud and everyone around me was screaming the same words.
+The first time I painted my face for a gig, it was for Motherjane, and I remember thinking halfway through the set that I'd never felt more at home in a room full of strangers. I was in my first year of college, I had no idea what I wanted to do with my life, and I didn't care, because the guitars were loud and everyone around me was screaming the same words.
 
 That was 2012. I've been going to gigs ever since.
 

@@ -12,7 +12,7 @@ It's cold out here now. Winter came in stages this year, and this is the part wh
 
 The strange thing is that I feel calmer than I did at the peak.
 
-At the peak, everything was loud. Every brand wanted an NFT, every announcement got attention, every roadmap sounded plausible because the market was rewarding plausible. We were busy in a way that felt like success, and in a lot of ways it was. We built good things for good clients. We gave young builders real work at real scale. We had that week where a million people showed up. I'm proud of all of that and I'm not going to let the winter rewrite it.
+At the peak, everything was loud. Every brand wanted an NFT, every announcement got attention, every roadmap sounded plausible because the market was rewarding plausible. We were busy in a way that felt like success, and some of it was.
 
 But I'd be lying if I said I didn't sometimes feel a gap back then, between how much the world was willing to pay for what we did and how much what we did was actually worth to the people using it. In a bull market, those two numbers drift apart and nobody complains, because the drift feels like momentum. It was easy to look at the demand and assume it meant value. Some of it did. Some of it was the tide.
 
@@ -22,10 +22,8 @@ I believed in self-custody before any of this, and FTX is the loudest possible a
 
 So what does building look like when it's cold?
 
-For me, right now, it looks like quieter work. Paying more attention to the patterns across everything we've built than to any single launch. Listening harder to which things people kept using after the airdrop, after the announcement, after the hype cycle moved on. Being more honest with clients about what's worth doing and what's just noise, even when saying so costs us a deal. Being honest with myself about what we're really good at, and what we were only being paid for because the market was generous.
+For me, right now, it looks like quieter work. Listening harder to which things people kept using after the airdrop, after the announcement, after the hype cycle moved on. Being more honest with clients about what's worth doing and what's just noise, even when saying so costs us a deal. Being honest with myself about what we're really good at, and what we were only being paid for because the market was generous.
 
-I don't have a neat plan yet. I'm not going to pretend I do. What I've got is a feeling that the next year is going to be about value in the plainest sense of the word, what's actually useful to someone, and that anything built on less than that won't last the season.
-
-I've always said life is a game and the point is to keep playing. I still believe that. I'm also starting to understand that part of playing well is knowing what game you're really in, and noticing when the scoreboard and the pitch stop agreeing with each other.
+I don't have a neat plan. What I've got is a feeling that the next year is going to be about value in the plainest sense of the word, what's actually useful to someone, and that anything built on less than that won't last the season.
 
 It's cold. We're still here. Back to work.

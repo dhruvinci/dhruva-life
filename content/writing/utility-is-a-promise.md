@@ -12,11 +12,11 @@ When a brand says utility, they usually mean a feature. Holders get access to so
 
 A feature can ship and be done. A promise has to be kept.
 
-Over the last several months at Dehidden we've built NFT products for some genuinely big names, Adidas x Prada, Mercedes and Polygon Studios among them, and the thing I keep coming back to isn't the tech. The tech is the fun part, and I'll get to it, but the hard part is helping a brand understand that the moment they mint, they've entered a relationship, and relationships don't have a launch date and an end date.
+The thing I keep coming back to, after months of these calls, isn't the tech. The tech is the fun part, and I'll get to it, but the hard part is helping a brand understand that the moment they mint, they've entered a relationship, and relationships don't have a launch date and an end date.
 
 Take token-gated access. In plain terms it means the NFT in your wallet is your ticket. Hold it, and you get into the Discord channel, the early product drop, the event, the page nobody else can see. It's a beautiful idea, because the wallet becomes a membership card that you actually own and can carry anywhere. But a ticket is only worth something if there's still a show. If the brand gates something exciting in month one and then goes quiet, the ticket turns into a receipt.
 
-Dynamic metadata is where it gets really fun for me as an architect. Most NFTs are frozen, the picture and its traits never change. With dynamic metadata the token can evolve, it can level up when you take part, change with the seasons, reflect things you've done. It turns a collectible into something closer to a living thing. And again, a living thing needs feeding. If you promise a token that grows with the community, somebody has to be there next year to make it grow.
+Dynamic metadata is where it gets really fun for me. Most NFTs are frozen, the picture and its traits never change. With dynamic metadata the token can evolve, it can level up when you take part, change with the seasons, reflect things you've done. It turns a collectible into something closer to a living thing. And again, a living thing needs feeding. If you promise a token that grows with the community, somebody has to be there next year to make it grow.
 
 Airdrops are the simplest version of all this. You held, so here's something extra, for free, because you were here. When they're done well, they feel like a thank-you note from someone who remembered you. When they're done badly, they feel like spam in a wallet.
 
