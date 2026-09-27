@@ -17,6 +17,6 @@ It started as a hobby in October 2025. I wanted something that could watch my ro
 
 The trick that made it work was the harness, not the model. Cheap computer vision signals - pose, optical flow, who's touching whom - get passed to the VLM as hints, so it looks where it should and stays honest over a long match. That work is written up in [my paper](/research/faithful-movement).
 
-Gyms and athletes use it to break down training footage, and every upload makes the system better, because coaches review and correct what it says. I built all of it myself - the analysis pipeline, the app, payments, the lot.
+Gyms and athletes use it to break down training footage, and every upload makes the system better, because coaches review and correct what it says. I built nearly all of it myself - the analysis pipeline, the app, payments, the lot.
 
 Kakashi carries on as a side project while I go deeper on the research.
