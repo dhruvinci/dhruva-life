@@ -5,17 +5,61 @@
   "tagline": "Teaching machines how humans interact",
   "description": "Teaching machines how humans interact. Vision AI research and products for human movement.",
   "twitter": "@dhrude",
-  "nav": ["about", "now", "work", "writing", "log", "resume", "contact"],
-  "quickActions": ["about", "work", "writing", "contact"],
-  "projectClusters": ["AI", "Web3", "Culture", "Sport"],
+  "nav": [
+    "about",
+    "research",
+    "work",
+    "writing",
+    "now",
+    "cv",
+    "contact"
+  ],
+  "quickActions": [
+    "about",
+    "research",
+    "work",
+    "contact"
+  ],
+  "projectClusters": [
+    "Vision AI",
+    "AI",
+    "Crypto",
+    "Enterprise",
+    "Culture"
+  ],
   "secrets": {
     "hintsAfter": 5,
     "hints": [
-      { "hint": "Brazilian art form meets flowing movement...", "command": "jits" },
-      { "hint": "Vinyl spins with warm, imperfect beauty...", "command": "analog" },
-      { "hint": "Green rain falls in digital patterns...", "command": "matrix" },
-      { "hint": "Sacred geometry blooms from intention...", "command": "rangoli" },
-      { "hint": "Press to begin infinite game...", "command": "play" }
+      {
+        "hint": "Brazilian art form meets flowing movement...",
+        "command": "jits"
+      },
+      {
+        "hint": "Vinyl spins with warm, imperfect beauty...",
+        "command": "analog"
+      },
+      {
+        "hint": "Green rain falls in digital patterns...",
+        "command": "matrix"
+      },
+      {
+        "hint": "Sacred geometry blooms from intention...",
+        "command": "rangoli"
+      },
+      {
+        "hint": "Press to begin infinite game...",
+        "command": "play"
+      }
     ]
-  }
+  },
+  "availability": [
+    {
+      "label": "open to research",
+      "command": "research"
+    },
+    {
+      "label": "open to work",
+      "command": "contact"
+    }
+  ]
 }

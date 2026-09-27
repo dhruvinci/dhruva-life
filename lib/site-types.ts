@@ -13,6 +13,8 @@ export interface SiteConfig {
   quickActions: string[]
   /** Display order for project clusters on /work. Unlisted clusters follow. */
   projectClusters: string[]
+  /** Short status tags on the home page, e.g. "open to research", each linking to a command. */
+  availability: Array<{ label: string; command: string }>
   secrets: {
     /** Number of distinct commands a visitor runs before secret hints appear in help. */
     hintsAfter: number
@@ -66,6 +68,20 @@ export interface Post {
   raw: string
 }
 
+export interface ResearchItem {
+  slug: string
+  title: string
+  date: string
+  /** paper | experiment | ongoing | note — shown as a tag. */
+  kind: string
+  venue?: string
+  summary: string
+  links: Link[]
+  bibtex?: string
+  html: string
+  text: string
+}
+
 export interface LogEntry {
   date: string
   /** First line/bullet, used in previews. */
@@ -79,5 +95,8 @@ export interface SiteData {
   pages: Page[]
   projects: Project[]
   posts: Post[]
+  research: ResearchItem[]
   logs: LogEntry[]
+  /** Optional intro text from content/<collection>/_intro.md. */
+  intros: { work: string; writing: string; research: string }
 }

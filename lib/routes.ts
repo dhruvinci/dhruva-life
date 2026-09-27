@@ -16,6 +16,8 @@ export interface Route {
 export const RESERVED_COMMANDS = [
   "work",
   "projects",
+  "research",
+  "cite",
   "writing",
   "log",
   "logs",
@@ -55,6 +57,13 @@ export function getRoutes(data: SiteData): Route[] {
       input: `open ${post.slug}`,
       title: post.title,
       description: post.excerpt,
+    })),
+    { path: "/research", input: "research", title: "Research", description: "Papers, experiments, and open questions" },
+    ...data.research.map((item) => ({
+      path: `/research/${item.slug}`,
+      input: `open ${item.slug}`,
+      title: item.title,
+      description: item.summary,
     })),
     { path: "/log", input: "log", title: "Log", description: "What I've been doing, week by week" },
   ]

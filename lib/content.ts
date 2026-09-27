@@ -6,7 +6,7 @@ import fs from "node:fs"
 import path from "node:path"
 import matter from "gray-matter"
 import { Marked } from "marked"
-import type { LogEntry, Page, Post, Project, SiteConfig, SiteData } from "./site-types"
+import type { Link, LogEntry, Page, Post, Project, ResearchItem, SiteConfig, SiteData } from "./site-types"
 import { RESERVED_COMMANDS } from "./routes"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
@@ -40,7 +40,8 @@ function readDir(dir: string) {
 
   return fs
     .readdirSync(full)
-    .filter((file) => file.endsWith(".md"))
+    // Files starting with "_" (like _intro.md) are not collection entries.
+    .filter((file) => file.endsWith(".md") && !file.startsWith("_"))
     .sort()
     .map((file) => {
       const relative = `${dir}/${file}`
@@ -110,6 +111,21 @@ function optionalStringList(data: Record<string, unknown>, field: string, file: 
   return value as string[]
 }
 
+function linkList(data: Record<string, unknown>, file: string): Link[] {
+  const links = data.links ?? []
+  if (!Array.isArray(links) || links.some((link) => typeof link?.label !== "string" || typeof link?.href !== "string")) {
+    throw new ContentError(file, `"links" must be a list of { label, href }`)
+  }
+  return links as Link[]
+}
+
+/** content/<dir>/_intro.md rendered to HTML, or "" when absent. */
+function loadIntro(dir: string) {
+  const file = path.join(CONTENT_DIR, dir, "_intro.md")
+  if (!fs.existsSync(file)) return ""
+  return renderMarkdown(matter(fs.readFileSync(file, "utf8")).content.trim())
+}
+
 function loadPages(): Page[] {
   return readDir("pages").map(({ file, slug, data, body }) => {
     if (RESERVED_COMMANDS.includes(slug)) {
@@ -131,13 +147,7 @@ function loadPages(): Page[] {
 function loadProjects(): Project[] {
   return readDir("projects")
     .map(({ file, slug, data, body }) => {
-      const links = data.links ?? []
-      if (
-        !Array.isArray(links) ||
-        links.some((link) => typeof link?.label !== "string" || typeof link?.href !== "string")
-      ) {
-        throw new ContentError(file, `"links" must be a list of { label, href }`)
-      }
+      const links = linkList(data, file)
       return {
         slug,
         title: requireString(data, "title", file),
@@ -172,6 +182,24 @@ function loadPosts(): Post[] {
     .sort((a, b) => b.date.localeCompare(a.date))
 }
 
+function loadResearch(): ResearchItem[] {
+  return readDir("research")
+    .map(({ file, slug, data, body }) => ({
+      slug,
+      title: requireString(data, "title", file),
+      date: toDateString(data.date, file, "date"),
+      kind: requireString(data, "kind", file),
+      venue: optionalString(data, "venue", file),
+      summary: requireString(data, "summary", file),
+      links: linkList(data, file),
+      bibtex: optionalString(data, "bibtex", file)?.trim(),
+      html: hasBody(body) ? renderMarkdown(body) : "",
+      text: plainText(body),
+    }))
+    // Published papers lead; everything else follows by date.
+    .sort((a, b) => Number(b.kind === "paper") - Number(a.kind === "paper") || b.date.localeCompare(a.date))
+}
+
 function loadLogs(): LogEntry[] {
   return readDir("log")
     .map(({ file, slug, body }) => ({
@@ -192,12 +220,30 @@ let cached: SiteData | undefined
 export function getSiteData(): SiteData {
   if (cached && process.env.NODE_ENV === "production") return cached
 
-  cached = {
+  const data: SiteData = {
     config: loadConfig(),
     pages: loadPages(),
     projects: loadProjects(),
     posts: loadPosts(),
+    research: loadResearch(),
     logs: loadLogs(),
+    intros: { work: loadIntro("projects"), writing: loadIntro("writing"), research: loadIntro("research") },
   }
+
+  // `open <slug>` searches every collection, so slugs must be unique across them.
+  const seen = new Map<string, string>()
+  for (const [dir, slugs] of [
+    ["projects", data.projects.map((item) => item.slug)],
+    ["research", data.research.map((item) => item.slug)],
+    ["writing", data.posts.map((item) => item.slug)],
+    ["pages", data.pages.map((item) => item.name)],
+  ] as const) {
+    for (const slug of slugs) {
+      if (seen.has(slug)) throw new ContentError(`${dir}/${slug}.md`, `name "${slug}" is already used in content/${seen.get(slug)}/`)
+      seen.set(slug, dir)
+    }
+  }
+
+  cached = data
   return cached
 }

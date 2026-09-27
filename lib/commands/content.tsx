@@ -1,7 +1,7 @@
 import type React from "react"
 import { CommandLink } from "@/components/terminal/command-link"
 import { Markdown } from "@/components/terminal/markdown"
-import type { Page, Post, Project, SiteData } from "@/lib/site-types"
+import type { Page, Post, Project, ResearchItem, SiteData } from "@/lib/site-types"
 import type { Command, CommandSection } from "./types"
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -23,7 +23,7 @@ function Tag({ children, tone = "ochre" }: { children: React.ReactNode; tone?: "
 }
 
 function statusTone(status: string) {
-  return status === "Archived" ? "muted" : "accent"
+  return ["Archived", "Past", "Acquired"].includes(status) ? "muted" : "accent"
 }
 
 function ExternalLinks({ links }: { links: Project["links"] }) {
@@ -71,6 +71,7 @@ function WorkView({ data }: { data: SiteData }) {
   return (
     <div className="space-y-7">
       <Heading>Work</Heading>
+      {data.intros.work && <Markdown html={data.intros.work} />}
       {clusters.map((cluster) => {
         const projects = data.projects.filter((project) => project.cluster === cluster)
         if (projects.length === 0) return null
@@ -141,6 +142,7 @@ function WritingView({ data }: { data: SiteData }) {
   return (
     <div className="space-y-5">
       <Heading>Writing</Heading>
+      {data.intros.writing && <Markdown html={data.intros.writing} />}
       {data.posts.map((post) => (
         <div key={post.slug} className="group/item">
           <div className="flex flex-wrap items-baseline gap-x-3">
@@ -193,9 +195,67 @@ function LogView({ data }: { data: SiteData }) {
   )
 }
 
+function ResearchView({ data }: { data: SiteData }) {
+  return (
+    <div className="space-y-6">
+      <Heading>Research</Heading>
+      {data.intros.research && <Markdown html={data.intros.research} />}
+      <div className="space-y-5">
+        {data.research.map((item) => (
+          <div key={item.slug} className="group/item">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <Tag tone="accent">{item.kind}</Tag>
+              <CommandLink command={`open ${item.slug}`} className="text-foreground font-medium hover:text-accent">
+                {item.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+              </CommandLink>
+            </div>
+            <p className="text-muted-foreground mt-1 max-w-[65ch]">{item.summary}</p>
+            <p className="text-muted-foreground text-xs mt-1">
+              {[item.venue, formatDate(item.date)].filter(Boolean).join(" · ")}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function ResearchItemView({ item, data }: { item: ResearchItem; data: SiteData }) {
+  const index = data.research.indexOf(item)
+  return (
+    <article className="space-y-5">
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-x-3">
+          <Tag tone="accent">{item.kind}</Tag>
+          {item.venue && <Tag>{item.venue}</Tag>}
+          <Tag tone="muted">{formatDate(item.date)}</Tag>
+        </div>
+        <Heading>{item.title}</Heading>
+        <p className="font-serif text-lg max-w-[65ch]">{item.summary}</p>
+      </div>
+      <ExternalLinks links={item.links} />
+      {item.html && <Markdown html={item.html} />}
+      {item.bibtex && (
+        <p className="text-sm text-muted-foreground">
+          Citing this? <CommandLink command={`cite ${item.slug}`}>cite {item.slug}</CommandLink> prints BibTeX.
+        </p>
+      )}
+      <Sequence
+        items={data.research.map((entry) => ({ title: entry.title, command: `open ${entry.slug}` }))}
+        index={index}
+        back={<CommandLink command="research">all research</CommandLink>}
+      />
+    </article>
+  )
+}
+
 export function createContentCommands(data: SiteData): Command[] {
   const sectionFor = (name: string): CommandSection => (data.config.nav.includes(name) ? "explore" : "more")
-  const slugs = () => [...data.projects.map((project) => project.slug), ...data.posts.map((post) => post.slug)]
+  const slugs = () => [
+    ...data.projects.map((project) => project.slug),
+    ...data.research.map((item) => item.slug),
+    ...data.posts.map((post) => post.slug),
+  ]
 
   const pageCommands: Command[] = data.pages.map((page) => ({
     name: page.name,
@@ -229,6 +289,34 @@ export function createContentCommands(data: SiteData): Command[] {
       }),
     },
     {
+      name: "research",
+      description: "Papers, experiments, and open questions",
+      aliases: ["papers"],
+      section: sectionFor("research"),
+      run: () => ({
+        title: "Research",
+        next: data.research.slice(0, 2).map((item) => `open ${item.slug}`).concat("work"),
+        content: <ResearchView data={data} />,
+      }),
+    },
+    {
+      name: "cite",
+      description: "Print BibTeX for a paper",
+      usage: "cite <slug>",
+      section: "utility",
+      complete: () => data.research.filter((item) => item.bibtex).map((item) => item.slug),
+      run: (args) => {
+        const citable = data.research.filter((item) => item.bibtex)
+        const item = citable.find((entry) => entry.slug === args[0]?.toLowerCase()) ?? (args[0] ? undefined : citable[0])
+        if (!item?.bibtex) return { tone: "error", content: `Usage: cite <slug>. Citable: ${citable.map((entry) => entry.slug).join(", ") || "none yet"}` }
+        return {
+          content: (
+            <pre className="whitespace-pre-wrap text-sm bg-muted rounded px-4 py-3 overflow-x-auto">{item.bibtex}</pre>
+          ),
+        }
+      },
+    },
+    {
       name: "log",
       description: "What I've been doing, week by week",
       aliases: ["logs", "whativedone"],
@@ -247,6 +335,9 @@ export function createContentCommands(data: SiteData): Command[] {
 
         const project = data.projects.find((item) => item.slug === slug)
         if (project) return { title: project.title, next: ["work", "contact"], content: <ProjectView project={project} data={data} /> }
+
+        const research = data.research.find((item) => item.slug === slug)
+        if (research) return { title: research.title, next: ["research", "work"], content: <ResearchItemView item={research} data={data} /> }
 
         const post = data.posts.find((item) => item.slug === slug)
         if (post) return { title: post.title, next: ["writing", "work"], content: <PostView post={post} data={data} /> }

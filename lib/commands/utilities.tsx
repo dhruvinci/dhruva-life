@@ -32,6 +32,9 @@ export const utilityCommands: Command[] = [
         ...data.projects
           .filter((p) => matches(p.title, p.summary, p.cluster, p.status, p.text))
           .map((p) => ({ kind: "Project", title: p.title, snippet: p.summary, command: `open ${p.slug}` })),
+        ...data.research
+          .filter((r) => matches(r.title, r.summary, r.kind, r.venue ?? "", r.text))
+          .map((r) => ({ kind: "Research", title: r.title, snippet: r.summary, command: `open ${r.slug}` })),
         ...data.posts
           .filter((p) => matches(p.title, p.excerpt, p.text))
           .map((p) => ({ kind: "Writing", title: p.title, snippet: snippet(p.text, term), command: `open ${p.slug}` })),

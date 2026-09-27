@@ -21,7 +21,8 @@ interface PromptProps {
 function menuGroups(data: SiteData, registry: Registry, discovery: Discovery) {
   const groups = [
     { label: "Start", commands: data.config.nav },
-    { label: "Projects", commands: data.projects.map((project) => `open ${project.slug}`) },
+    { label: "Research", commands: data.research.map((item) => `open ${item.slug}`) },
+    { label: "Work", commands: data.projects.map((project) => `open ${project.slug}`) },
     { label: "Writing", commands: data.posts.map((post) => `open ${post.slug}`) },
     { label: "Go deeper", commands: registry.commands.filter((c) => c.section === "more").map((c) => c.name) },
     { label: "Utilities", commands: ["help", "ls", "history", "theme dark", "theme light", "clear"] },

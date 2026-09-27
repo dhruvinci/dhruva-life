@@ -12,10 +12,18 @@ function firstSentence(text: string, max = 140) {
 export function Intro({ data }: { data: SiteData }) {
   const { config } = data
   const post = data.posts[0]
+  const paper = data.research[0]
   const now = data.pages.find((page) => page.name === "now")
   const log = data.logs[0]
 
   const latest = [
+    paper && {
+      key: "research",
+      label: "research",
+      command: `open ${paper.slug}`,
+      title: paper.title,
+      meta: [paper.venue, formatDate(paper.date)].filter(Boolean).join(" · "),
+    },
     post && {
       key: "writing",
       label: "writing",
@@ -39,18 +47,28 @@ export function Intro({ data }: { data: SiteData }) {
     },
   ].filter(Boolean) as Array<{ key: string; label: string; command: string; title: string; meta?: string }>
 
-  const lines: React.ReactNode[] = [
+  const lines = [
     <h1 key="name" className="text-2xl font-semibold tracking-tight">
       {config.author}
     </h1>,
     <p key="tagline" className="font-serif text-xl text-muted-foreground max-w-[40ch]">
       {config.tagline}.
     </p>,
+    config.availability.length > 0 && (
+      <p key="availability" className="flex flex-wrap gap-x-3 gap-y-1 text-sm">
+        {config.availability.map((item) => (
+          <CommandLink key={item.label} command={item.command} className="text-olive hover:underline">
+            <span aria-hidden>● </span>
+            {item.label}
+          </CommandLink>
+        ))}
+      </p>
+    ),
     <section key="latest" aria-label="Latest" className="pt-4 space-y-3">
       <h2 className="text-xs uppercase tracking-widest text-muted-foreground">latest</h2>
       <ul className="space-y-3">
         {latest.map((item) => (
-          <li key={item.key} className="grid grid-cols-[4.5rem_1fr] gap-x-3">
+          <li key={item.key} className="grid grid-cols-[5.5rem_1fr] gap-x-3">
             <span className="text-ochre text-sm">[{item.label}]</span>
             <span>
               <CommandLink command={item.command} className="text-foreground hover:text-accent">
@@ -72,7 +90,7 @@ export function Intro({ data }: { data: SiteData }) {
     <p key="hint" className="text-muted-foreground text-xs">
       Click around, type <CommandLink command="help" className="text-accent hover:underline" />, or press ⌘K to jump anywhere.
     </p>,
-  ]
+  ].filter(Boolean) as React.ReactNode[]
 
   return (
     <div className="space-y-4 sm:pt-[8vh]">
