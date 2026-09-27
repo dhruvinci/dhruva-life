@@ -6,7 +6,7 @@ next: [work, writing, contact]
 
 I'm Dhruva - Creative Technologist & Product Builder.
 
-**I build product for people I care about.**
+**Teaching machines how humans interact.**
 
 I work at the intersection of technology, culture, and sport: designing systems where communities thrive.
 
