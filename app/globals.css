@@ -183,3 +183,93 @@
   .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
   .pt-safe { padding-top: env(safe-area-inset-top); }
 }
+
+/* Markdown rendered from content/*.md */
+.md > * + * {
+  margin-top: 0.9em;
+}
+.md a {
+  color: var(--accent);
+}
+.md a:hover {
+  text-decoration: underline;
+}
+.md strong {
+  color: var(--accent);
+  font-weight: 500;
+}
+.md em {
+  color: var(--muted-foreground);
+}
+.md ul {
+  list-style: none;
+  padding-left: 0;
+}
+.md ul > li + li,
+.md ol > li + li {
+  margin-top: 0.4em;
+}
+.md ul > li {
+  position: relative;
+  padding-left: 1.25em;
+}
+.md ul > li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--muted-foreground);
+}
+.md ol {
+  list-style: decimal;
+  padding-left: 1.5em;
+}
+.md blockquote {
+  border-left: 2px solid color-mix(in srgb, var(--olive) 40%, transparent);
+  padding-left: 1em;
+}
+.md blockquote p + p {
+  color: var(--muted-foreground);
+}
+.md h2,
+.md h3 {
+  color: var(--foreground);
+  font-weight: 600;
+}
+.md code {
+  background: var(--muted);
+  padding: 0.1em 0.3em;
+  border-radius: 0.2em;
+}
+.md pre {
+  background: var(--muted);
+  padding: 0.75em 1em;
+  border-radius: var(--radius);
+  overflow-x: auto;
+}
+.md img {
+  max-width: 100%;
+  border-radius: var(--radius);
+}
+
+/* Intro lines type in once on a visitor's first visit. */
+@keyframes intro-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+.intro-line {
+  animation: intro-in 0.35s ease-out both;
+  animation-delay: calc(var(--i) * 220ms);
+}
+.returning .intro-line {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro-line {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

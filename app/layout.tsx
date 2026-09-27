@@ -1,6 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono } from "next/font/google"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { getSiteData } from "@/lib/content"
 import "./globals.css"
 
 const jetbrainsMono = JetBrains_Mono({
@@ -9,59 +11,44 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
 })
 
+const { config } = getSiteData()
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dhruva.life"),
+  metadataBase: new URL(config.url),
   title: {
-    default: "dhruva.life - terminal",
-    template: "%s | dhruva.life",
+    default: `${config.name} - terminal`,
+    template: `%s | ${config.name}`,
   },
-  description: "Creative Technologist & Product Builder. I build product for people I care about.",
-  applicationName: "dhruva.life",
-  authors: [{ name: "Dhruva Chakravarthi" }],
-  creator: "Dhruva Chakravarthi",
-  keywords: [
-    "Dhruva Chakravarthi",
-    "creative technologist",
-    "product builder",
-    "AI",
-    "Web3",
-    "terminal website",
-    "jiu-jitsu",
-  ],
+  description: config.description,
+  applicationName: config.name,
+  authors: [{ name: config.author }],
+  creator: config.author,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "dhruva.life - terminal",
-    description: "Creative Technologist & Product Builder. I build product for people I care about.",
+    title: `${config.name} - terminal`,
+    description: config.description,
     url: "/",
-    siteName: "dhruva.life",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "dhruva.life terminal card",
-      },
-    ],
+    siteName: config.name,
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "dhruva.life - terminal",
-    description: "Creative Technologist & Product Builder. I build product for people I care about.",
-    creator: "@dhrude",
-    images: ["/twitter-image"],
+    title: `${config.name} - terminal`,
+    description: config.description,
+    creator: config.twitter,
   },
   robots: {
     index: true,
     follow: true,
   },
-  icons: {
-    icon: "/icon.svg",
-  },
 }
+
+// Runs before paint so the saved theme applies without a flash, and marks returning
+// visitors so the intro animation only plays on the first visit.
+const bootScript = `try{var t=localStorage.getItem("terminal-theme")||"dark",m=t==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t,c=document.documentElement.classList;c.toggle("dark",m==="dark");if(localStorage.getItem("terminal-visited"))c.add("returning")}catch(e){}`
 
 export default function RootLayout({
   children,
@@ -69,7 +56,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
+    <html lang="en" className={`${jetbrainsMono.variable} dark`} suppressHydrationWarning>
       <head>
         <style>{`
 html {
@@ -77,8 +64,12 @@ html {
   --font-mono: ${jetbrainsMono.style.fontFamily};
 }
         `}</style>
+        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
-      <body className="font-mono antialiased">{children}</body>
+      <body className="font-mono antialiased">
+        <ThemeToggle />
+        {children}
+      </body>
     </html>
   )
 }

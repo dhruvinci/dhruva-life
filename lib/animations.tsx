@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useTerminalApi } from "@/components/terminal/context"
 
 const compileLogs = [
   "Checking dependencies...",
@@ -175,21 +176,14 @@ export function DeployAnimation() {
   )
 }
 
-interface ReplayButtonProps {
-  command: string
-}
-
-export function ReplayButton({ command }: ReplayButtonProps) {
-  const handleReplay = () => {
-    // Trigger command re-execution
-    const event = new CustomEvent("replayCommand", { detail: { command } })
-    window.dispatchEvent(event)
-  }
+export function ReplayButton({ command }: { command: string }) {
+  const { run } = useTerminalApi()
 
   return (
     <button
-      onClick={handleReplay}
-      className="px-3 py-1 text-xs bg-muted/20 text-muted-foreground border border-muted/30 rounded hover:bg-muted/30 transition-colors"
+      type="button"
+      onClick={() => run(command)}
+      className="px-3 py-1 text-xs bg-muted text-muted-foreground border border-border rounded hover:text-foreground transition-colors"
     >
       ↻ Replay
     </button>
