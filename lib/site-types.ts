@@ -63,6 +63,8 @@ export interface Post {
   title: string
   date: string
   excerpt: string
+  /** Estimated reading time in minutes. */
+  minutes: number
   html: string
   text: string
   raw: string

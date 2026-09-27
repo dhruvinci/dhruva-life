@@ -175,6 +175,7 @@ function loadPosts(): Post[] {
       title: requireString(data, "title", file),
       date: toDateString(data.date, file, "date"),
       excerpt: typeof data.excerpt === "string" ? data.excerpt : plainText(body).slice(0, 140),
+      minutes: Math.max(1, Math.round(plainText(body).split(" ").length / 230)),
       html: renderMarkdown(body),
       text: plainText(body),
       raw: body,

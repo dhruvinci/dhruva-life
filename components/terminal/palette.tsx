@@ -28,11 +28,16 @@ function buildItems(registry: Registry): PaletteItem[] {
   return [{ label: "Home", hint: "/", input: "cd ~" }, ...routes, ...tools]
 }
 
-/** Lower is better; undefined means no match. Substring beats scattered letters. */
+/**
+ * Lower is better; undefined means no match. A substring match in any one field
+ * (title, path, command) beats scattered letters, and earlier beats later.
+ */
 function score(item: PaletteItem, query: string) {
-  const haystack = `${item.label} ${item.hint} ${item.input}`.toLowerCase()
-  const index = haystack.indexOf(query)
-  if (index !== -1) return index
+  const fields = [item.label, item.hint.replace(/^\/[^/]+\//, ""), item.input.replace(/^open /, "")].map((field) => field.toLowerCase())
+  const direct = Math.min(...fields.map((field) => field.indexOf(query)).filter((index) => index !== -1))
+  if (Number.isFinite(direct)) return direct
+
+  const haystack = fields.join(" ")
   let position = -1
   for (const char of query) {
     position = haystack.indexOf(char, position + 1)

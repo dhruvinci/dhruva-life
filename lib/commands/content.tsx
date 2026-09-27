@@ -139,20 +139,29 @@ function ProjectView({ project, data }: { project: Project; data: SiteData }) {
 }
 
 function WritingView({ data }: { data: SiteData }) {
+  const years = [...new Set(data.posts.map((post) => post.date.slice(0, 4)))]
+
   return (
-    <div className="space-y-5">
+    <div className="space-y-7">
       <Heading>Writing</Heading>
       {data.intros.writing && <Markdown html={data.intros.writing} />}
-      {data.posts.map((post) => (
-        <div key={post.slug} className="group/item">
-          <div className="flex flex-wrap items-baseline gap-x-3">
-            <CommandLink command={`open ${post.slug}`} className="text-foreground font-medium hover:text-accent">
-              {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
-            </CommandLink>
-            <Tag tone="muted">{formatDate(post.date)}</Tag>
-          </div>
-          <p className="text-muted-foreground mt-1 max-w-[65ch]">{post.excerpt}</p>
-        </div>
+      {years.map((year) => (
+        <section key={year} className="space-y-4">
+          <h3 className="text-ochre text-xs uppercase tracking-widest">{year}</h3>
+          {data.posts
+            .filter((post) => post.date.startsWith(year))
+            .map((post) => (
+              <div key={post.slug} className="group/item">
+                <div className="flex flex-wrap items-baseline gap-x-3">
+                  <CommandLink command={`open ${post.slug}`} className="text-foreground font-medium hover:text-accent">
+                    {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+                  </CommandLink>
+                  <Tag tone="muted">{formatDate(post.date)}</Tag>
+                </div>
+                <p className="text-muted-foreground mt-1 max-w-[65ch]">{post.excerpt}</p>
+              </div>
+            ))}
+        </section>
       ))}
       <p className="text-xs text-muted-foreground">
         <a href="/feed.xml" className="hover:text-accent">
@@ -168,7 +177,9 @@ function PostView({ post, data }: { post: Post; data: SiteData }) {
   return (
     <article className="space-y-5">
       <div className="space-y-2">
-        <Tag tone="muted">{formatDate(post.date)}</Tag>
+        <Tag tone="muted">
+          {formatDate(post.date)} · {post.minutes} min read
+        </Tag>
         <Heading>{post.title}</Heading>
       </div>
       <Markdown html={post.html} />
