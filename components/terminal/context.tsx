@@ -3,7 +3,8 @@
 import { createContext, useContext } from "react"
 
 export interface TerminalApi {
-  run: (input: string) => void
+  /** "click" (default) replaces the screen like navigation; "typed" appends like a shell. */
+  run: (input: string, source?: "typed" | "click") => void
   pathFor: (input: string) => string | undefined
 }
 

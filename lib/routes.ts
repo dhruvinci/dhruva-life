@@ -29,6 +29,8 @@ export const RESERVED_COMMANDS = [
   "alias",
   "theme",
   "clear",
+  "cls",
+  "cd",
   "share",
 ]
 

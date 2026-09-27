@@ -1,5 +1,5 @@
 import { CommandLink } from "@/components/terminal/command-link"
-import { getRoutes } from "@/lib/routes"
+import { getRoutes, routeForPath } from "@/lib/routes"
 import { storage } from "@/lib/storage"
 import type { Command } from "./types"
 
@@ -164,6 +164,31 @@ export const utilityCommands: Command[] = [
     run: () => {
       navigator.clipboard?.writeText(window.location.href).catch(() => {})
       return { tone: "success", content: `Copied ${window.location.href}` }
+    },
+  },
+  {
+    name: "cd",
+    description: "Go to a path, e.g. cd work, cd .., cd ~",
+    usage: "cd <path>",
+    section: "utility",
+    complete: (_prefix, data) => getRoutes(data).map((route) => route.path.slice(1)),
+    run: (args, { data }) => {
+      const target = args[0] ?? "~"
+      if (target === "~" || target === "/") return { content: null, home: true }
+
+      const current = typeof window === "undefined" ? "/" : window.location.pathname
+      const path =
+        target === ".."
+          ? current.split("/").slice(0, -1).join("/") || "/"
+          : target.startsWith("/")
+            ? target
+            : `${current === "/" ? "" : current}/${target}`.replace(/\/+/g, "/")
+
+      if (path === "/") return { content: null, home: true }
+      // Relative first (cd graicie from /work), then from the root (cd work from anywhere).
+      const route = routeForPath(data, path) ?? routeForPath(data, `/${target}`)
+      if (!route) return { tone: "error", content: `cd: no such path: ${target}. Try ls.` }
+      return { content: null, redirect: route.input }
     },
   },
   {

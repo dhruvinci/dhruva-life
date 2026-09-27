@@ -13,22 +13,23 @@ export function formatDate(date: string) {
 }
 
 function Heading({ children }: { children: React.ReactNode }) {
-  return <h2 className="text-accent font-semibold text-lg">{children}</h2>
+  return <h2 className="text-foreground font-semibold text-xl leading-snug">{children}</h2>
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const active = status === "Active" || status === "Concept"
-  return (
-    <span className={`text-xs px-2 py-0.5 rounded ${active ? "bg-accent/15 text-accent" : "bg-muted text-muted-foreground"}`}>
-      {status}
-    </span>
-  )
+/** Terminal-style tag, e.g. [AI]. */
+function Tag({ children, tone = "ochre" }: { children: React.ReactNode; tone?: "ochre" | "muted" | "accent" }) {
+  const toneClass = { ochre: "text-ochre", muted: "text-muted-foreground", accent: "text-accent" }[tone]
+  return <span className={`text-xs ${toneClass}`}>[{children}]</span>
+}
+
+function statusTone(status: string) {
+  return status === "Archived" ? "muted" : "accent"
 }
 
 function ExternalLinks({ links }: { links: Project["links"] }) {
   if (links.length === 0) return null
   return (
-    <div className="flex flex-wrap gap-3 text-sm">
+    <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
       {links.map((link) => (
         <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
           {link.label} ↗
@@ -38,11 +39,24 @@ function ExternalLinks({ links }: { links: Project["links"] }) {
   )
 }
 
+/** Previous/next links at the bottom of a post or project. */
+function Sequence({ items, index, back }: { items: Array<{ title: string; command: string }>; index: number; back: React.ReactNode }) {
+  const previous = items[index - 1]
+  const next = items[index + 1]
+  return (
+    <nav aria-label="More" className="border-t border-border pt-4 mt-2 grid grid-cols-1 sm:grid-cols-3 gap-2 text-sm">
+      <div>{previous && <CommandLink command={previous.command}>← {previous.title}</CommandLink>}</div>
+      <div className="sm:text-center">{back}</div>
+      <div className="sm:text-right">{next && <CommandLink command={next.command}>{next.title} →</CommandLink>}</div>
+    </nav>
+  )
+}
+
 function PageView({ page }: { page: Page }) {
   return (
     <article className="space-y-4">
       <Heading>{page.title}</Heading>
-      {page.updated && <p className="text-muted-foreground text-xs">Updated {formatDate(page.updated)}</p>}
+      {page.updated && <p className="text-muted-foreground text-xs">updated {formatDate(page.updated)}</p>}
       <Markdown html={page.html} />
     </article>
   )
@@ -55,24 +69,24 @@ function WorkView({ data }: { data: SiteData }) {
   ].filter((cluster, index, all) => all.indexOf(cluster) === index)
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       <Heading>Work</Heading>
       {clusters.map((cluster) => {
         const projects = data.projects.filter((project) => project.cluster === cluster)
         if (projects.length === 0) return null
         return (
-          <section key={cluster} className="space-y-3">
-            <h3 className="text-muted-foreground text-xs uppercase tracking-wide">{cluster}</h3>
+          <section key={cluster} className="space-y-4">
+            <h3 className="text-ochre text-xs uppercase tracking-widest">{cluster}</h3>
             {projects.map((project) => (
-              <div key={project.slug} className="border-l-2 border-border pl-4">
-                <div className="flex flex-wrap items-center gap-2">
-                  <CommandLink command={`open ${project.slug}`} className="text-foreground font-medium hover:text-accent hover:underline">
-                    {project.title}
+              <div key={project.slug} className="group/item">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <CommandLink command={`open ${project.slug}`} className="text-foreground font-medium hover:text-accent">
+                    {project.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
                   </CommandLink>
-                  <span className="text-muted-foreground text-xs">{project.year}</span>
-                  <StatusBadge status={project.status} />
+                  <Tag tone="muted">{project.period ?? project.year}</Tag>
+                  <Tag tone={statusTone(project.status)}>{project.status.toLowerCase()}</Tag>
                 </div>
-                <p className="text-muted-foreground mt-1">{project.summary}</p>
+                <p className="text-muted-foreground mt-1 max-w-[65ch]">{project.summary}</p>
               </div>
             ))}
           </section>
@@ -82,62 +96,96 @@ function WorkView({ data }: { data: SiteData }) {
   )
 }
 
-function ProjectView({ project }: { project: Project }) {
+function ProjectView({ project, data }: { project: Project; data: SiteData }) {
+  const index = data.projects.indexOf(project)
+  const facts = [
+    ["role", project.role],
+    ["when", project.period ?? project.year],
+    ["stack", project.stack.join(", ")],
+  ].filter(([, value]) => value)
+
   return (
-    <article className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3">
+    <article className="space-y-5">
+      <div className="space-y-2">
+        <div className="flex flex-wrap gap-x-3">
+          <Tag>{project.cluster}</Tag>
+          <Tag tone={statusTone(project.status)}>{project.status.toLowerCase()}</Tag>
+        </div>
         <Heading>{project.title}</Heading>
-        <span className="text-xs bg-muted text-muted-foreground px-2 py-0.5 rounded">{project.cluster}</span>
-        <StatusBadge status={project.status} />
+        <p className="font-serif text-lg max-w-[65ch]">{project.summary}</p>
       </div>
-      <p className="text-muted-foreground text-xs">{project.year}</p>
-      <p>{project.summary}</p>
+      <dl className="grid grid-cols-[4.5rem_1fr] gap-x-3 gap-y-1 text-sm">
+        {facts.map(([label, value]) => (
+          <div key={label} className="contents">
+            <dt className="text-muted-foreground">{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      {project.cover && (
+        // eslint-disable-next-line @next/next/no-img-element -- static export-friendly, images live in public/
+        <img src={project.cover} alt={`${project.title} screenshot`} className="rounded border border-border w-full" />
+      )}
       {project.html && <Markdown html={project.html} />}
       <ExternalLinks links={project.links} />
-      <p className="text-sm">
-        <CommandLink command="work">← all work</CommandLink>
-      </p>
+      <Sequence
+        items={data.projects.map((item) => ({ title: item.title, command: `open ${item.slug}` }))}
+        index={index}
+        back={<CommandLink command="work">all work</CommandLink>}
+      />
     </article>
   )
 }
 
 function WritingView({ data }: { data: SiteData }) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <Heading>Writing</Heading>
       {data.posts.map((post) => (
-        <div key={post.slug} className="border-l-2 border-border pl-4">
-          <CommandLink command={`open ${post.slug}`} className="text-foreground font-medium hover:text-accent hover:underline">
-            {post.title}
-          </CommandLink>
-          <p className="text-muted-foreground mt-1">{post.excerpt}</p>
-          <p className="text-muted-foreground text-xs mt-1">{formatDate(post.date)}</p>
+        <div key={post.slug} className="group/item">
+          <div className="flex flex-wrap items-baseline gap-x-3">
+            <CommandLink command={`open ${post.slug}`} className="text-foreground font-medium hover:text-accent">
+              {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+            </CommandLink>
+            <Tag tone="muted">{formatDate(post.date)}</Tag>
+          </div>
+          <p className="text-muted-foreground mt-1 max-w-[65ch]">{post.excerpt}</p>
         </div>
       ))}
+      <p className="text-xs text-muted-foreground">
+        <a href="/feed.xml" className="hover:text-accent">
+          rss ↗
+        </a>
+      </p>
     </div>
   )
 }
 
-function PostView({ post }: { post: Post }) {
+function PostView({ post, data }: { post: Post; data: SiteData }) {
+  const index = data.posts.indexOf(post)
   return (
-    <article className="space-y-4">
-      <Heading>{post.title}</Heading>
-      <p className="text-muted-foreground text-xs">{formatDate(post.date)}</p>
+    <article className="space-y-5">
+      <div className="space-y-2">
+        <Tag tone="muted">{formatDate(post.date)}</Tag>
+        <Heading>{post.title}</Heading>
+      </div>
       <Markdown html={post.html} />
-      <p className="text-sm">
-        <CommandLink command="writing">← all writing</CommandLink>
-      </p>
+      <Sequence
+        items={data.posts.map((item) => ({ title: item.title, command: `open ${item.slug}` }))}
+        index={index}
+        back={<CommandLink command="writing">all writing</CommandLink>}
+      />
     </article>
   )
 }
 
 function LogView({ data }: { data: SiteData }) {
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <Heading>Log</Heading>
       {data.logs.map((entry) => (
-        <section key={entry.date} className="border-l-2 border-border pl-4 space-y-2">
-          <h3 className="text-accent font-medium">{formatDate(entry.date)}</h3>
+        <section key={entry.date} className="grid sm:grid-cols-[7.5rem_1fr] gap-x-4 gap-y-1">
+          <h3 className="text-olive text-sm">{formatDate(entry.date)}</h3>
           <Markdown html={entry.html} />
         </section>
       ))}
@@ -198,10 +246,10 @@ export function createContentCommands(data: SiteData): Command[] {
         if (!slug) return { tone: "error", content: "Usage: open <slug>. Try work or writing to see what's there." }
 
         const project = data.projects.find((item) => item.slug === slug)
-        if (project) return { title: project.title, next: ["work", "contact"], content: <ProjectView project={project} /> }
+        if (project) return { title: project.title, next: ["work", "contact"], content: <ProjectView project={project} data={data} /> }
 
         const post = data.posts.find((item) => item.slug === slug)
-        if (post) return { title: post.title, next: ["writing", "work"], content: <PostView post={post} /> }
+        if (post) return { title: post.title, next: ["writing", "work"], content: <PostView post={post} data={data} /> }
 
         const page = data.pages.find((item) => item.name === slug)
         if (page) return { title: page.title, next: page.next, content: <PageView page={page} /> }

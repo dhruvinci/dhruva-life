@@ -27,9 +27,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: route.title,
     description: route.description,
     alternates: { canonical: route.path },
-    // Nested openGraph/twitter objects replace the root ones, so the shared card image is repeated here.
-    openGraph: { title: route.title, description: route.description, url: route.path, images: ["/opengraph-image"] },
-    twitter: { card: "summary_large_image", title: route.title, description: route.description, images: ["/twitter-image"] },
+    // Per-page social card rendered by app/og/[...slug]/route.tsx.
+    openGraph: { title: route.title, description: route.description, url: route.path, images: [`/og${route.path}`] },
+    twitter: { card: "summary_large_image", title: route.title, description: route.description, images: [`/og${route.path}`] },
   }
 }
 

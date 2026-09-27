@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { JetBrains_Mono } from "next/font/google"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { JetBrains_Mono, Newsreader } from "next/font/google"
 import { getSiteData } from "@/lib/content"
 import "./globals.css"
 
@@ -9,6 +8,13 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains-mono",
+})
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  display: "swap",
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
 })
 
 const { config } = getSiteData()
@@ -23,9 +29,6 @@ export const metadata: Metadata = {
   applicationName: config.name,
   authors: [{ name: config.author }],
   creator: config.author,
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: `${config.name} - terminal`,
     description: config.description,
@@ -39,6 +42,10 @@ export const metadata: Metadata = {
     title: `${config.name} - terminal`,
     description: config.description,
     creator: config.twitter,
+  },
+  alternates: {
+    canonical: "/",
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: `${config.name} writing` }] },
   },
   robots: {
     index: true,
@@ -56,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${jetbrainsMono.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${jetbrainsMono.variable} ${newsreader.variable} dark`} suppressHydrationWarning>
       <head>
         <style>{`
 html {
@@ -67,7 +74,6 @@ html {
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
       </head>
       <body className="font-mono antialiased">
-        <ThemeToggle />
         {children}
       </body>
     </html>

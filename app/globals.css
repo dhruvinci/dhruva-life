@@ -2,91 +2,63 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Earthy palette. Every text color below is checked at >= 4.5:1 (WCAG AA) against
+ * --background, --card and --muted in its theme, so any text/surface pairing is safe.
+ * Roles: foreground for headings/body, accent (terracotta) for links and the prompt,
+ * muted-foreground for metadata, and one quiet hue per section (teal-stone = research,
+ * ochre = work, olive = success/writing, sage = the shell prompt).
+ */
 :root {
-  /* Full earthy color palette */
-  --peat-charcoal: #2d2a2a;
-  --bone: #ede6da;
-  --terracotta: #c7684a;
-  --sage: #7a8f80;
-  --olive: #6e7f4f;
-  --ochre: #c2a05d;
-  --teal-stone: #3e6d6c;
-
-  /* Light mode */
-  --background: #fafafa;
-  --foreground: #171717;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --popover: #ffffff;
-  --popover-foreground: #171717;
-  --primary: #171717;
-  --primary-foreground: #fafafa;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #171717;
-  --muted: #f5f5f5;
-  --muted-foreground: #737373;
-  --accent: var(--terracotta);
-  --accent-foreground: #fafafa;
-  --destructive: #dc2626;
-  --destructive-foreground: #fafafa;
-  --border: #e5e5e5;
-  --input: #f5f5f5;
-  --ring: var(--terracotta);
+  --background: #f5efe6;
+  --card: #fbf8f2;
+  --muted: #ebe3d7;
+  --foreground: #231f1b;
+  --muted-foreground: #675e53;
+  --border: #ddd3c4;
+  --accent: #a4472a;
+  --terracotta: #a4472a;
+  --olive: #56663a;
+  --ochre: #7a5a17;
+  --teal-stone: #2c615f;
+  --sage: #4f6656;
+  --destructive: #b3261e;
   --radius: 0.375rem;
+  color-scheme: light;
 }
 
 .dark {
-  /* Dark mode */
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-  --card: #161616;
-  --card-foreground: #f5f5f5;
-  --popover: #161616;
-  --popover-foreground: #f5f5f5;
-  --primary: #f5f5f5;
-  --primary-foreground: #0a0a0a;
-  --secondary: #262626;
-  --secondary-foreground: #f5f5f5;
-  --muted: #262626;
-  --muted-foreground: #a3a3a3;
-  --accent: var(--terracotta);
-  --accent-foreground: #f5f5f5;
-  --destructive: #ef4444;
-  --destructive-foreground: #f5f5f5;
-  --border: #262626;
-  --input: #262626;
-  --ring: var(--terracotta);
+  --background: #161412;
+  --card: #1e1b18;
+  --muted: #262220;
+  --foreground: #ece5d8;
+  --muted-foreground: #a69d90;
+  --border: #302b27;
+  --accent: #df7c5c;
+  --terracotta: #df7c5c;
+  --olive: #a7b57f;
+  --ochre: #d6b36a;
+  --teal-stone: #7cb8b2;
+  --sage: #93a898;
+  --destructive: #f07a6a;
+  color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  
-  /* Earthy color utilities */
-  --color-peat-charcoal: var(--peat-charcoal);
-  --color-bone: var(--bone);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
   --color-terracotta: var(--terracotta);
   --color-sage: var(--sage);
   --color-olive: var(--olive);
   --color-ochre: var(--ochre);
   --color-teal-stone: var(--teal-stone);
+  --font-serif: var(--font-newsreader), Georgia, serif;
 }
 
 @layer base {
@@ -94,127 +66,84 @@
     @apply border-border;
   }
 
+  html {
+    background: var(--background);
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
-  /* Terminal cursor */
-  .terminal-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1.2em;
-    background-color: var(--foreground);
-    animation: blink 1s infinite;
-  }
-
-  @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-  }
-
-  /* Focus styles */
   *:focus-visible {
-    outline: 2px solid var(--ring);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
+    border-radius: 2px;
   }
 
-  /* Input styles */
-  input[type="text"] {
-    @apply bg-transparent border-none outline-none;
+  [tabindex="-1"]:focus {
+    outline: none;
   }
 
-  /* Custom scrollbar */
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
-
   ::-webkit-scrollbar-track {
     background: transparent;
   }
-
   ::-webkit-scrollbar-thumb {
-    background: var(--muted);
-    border-radius: 3px;
+    background: var(--border);
+    border-radius: 4px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--muted-foreground);
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
-
-  /* Smooth transitions */
-  button, a {
-    transition: all 0.15s ease;
-  }
-
-  /* Content width constraint */
-  .content-width {
-    max-width: 80ch;
-  }
-
-  /* Earthy color utilities */
-  .text-peat-charcoal { color: var(--peat-charcoal); }
-  .text-bone { color: var(--bone); }
-  .text-terracotta { color: var(--terracotta); }
-  .text-sage { color: var(--sage); }
-  .text-olive { color: var(--olive); }
-  .text-ochre { color: var(--ochre); }
-  .text-teal-stone { color: var(--teal-stone); }
-  
-  .bg-peat-charcoal { background-color: var(--peat-charcoal); }
-  .bg-bone { background-color: var(--bone); }
-  .bg-terracotta { background-color: var(--terracotta); }
-  .bg-sage { background-color: var(--sage); }
-  .bg-olive { background-color: var(--olive); }
-  .bg-ochre { background-color: var(--ochre); }
-  .bg-teal-stone { background-color: var(--teal-stone); }
-  
-  .border-peat-charcoal { border-color: var(--peat-charcoal); }
-  .border-bone { border-color: var(--bone); }
-  .border-terracotta { border-color: var(--terracotta); }
-  .border-sage { border-color: var(--sage); }
-  .border-olive { border-color: var(--olive); }
-  .border-ochre { border-color: var(--ochre); }
-  .border-teal-stone { border-color: var(--teal-stone); }
-
-  /* Mobile safe areas */
-  .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
-  .pt-safe { padding-top: env(safe-area-inset-top); }
 }
 
-/* Markdown rendered from content/*.md */
+/* Things you read are serif; things you operate are mono. */
+.md {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 65ch;
+}
 .md > * + * {
   margin-top: 0.9em;
 }
 .md a {
   color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
 }
 .md a:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--accent);
 }
 .md strong {
-  color: var(--accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 .md em {
-  color: var(--muted-foreground);
+  font-style: italic;
 }
 .md ul {
   list-style: none;
   padding-left: 0;
 }
-.md ul > li + li,
-.md ol > li + li {
-  margin-top: 0.4em;
+.md li + li {
+  margin-top: 0.35em;
 }
 .md ul > li {
   position: relative;
   padding-left: 1.25em;
 }
 .md ul > li::before {
-  content: "•";
+  content: "–";
   position: absolute;
   left: 0;
   color: var(--muted-foreground);
@@ -224,7 +153,7 @@
   padding-left: 1.5em;
 }
 .md blockquote {
-  border-left: 2px solid color-mix(in srgb, var(--olive) 40%, transparent);
+  border-left: 2px solid var(--olive);
   padding-left: 1em;
 }
 .md blockquote p + p {
@@ -232,26 +161,42 @@
 }
 .md h2,
 .md h3 {
-  color: var(--foreground);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
   font-weight: 600;
+  margin-top: 1.6em;
+}
+.md code,
+.md pre {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--muted);
+  border-radius: 0.25em;
 }
 .md code {
-  background: var(--muted);
-  padding: 0.1em 0.3em;
-  border-radius: 0.2em;
+  padding: 0.1em 0.35em;
 }
 .md pre {
-  background: var(--muted);
   padding: 0.75em 1em;
-  border-radius: var(--radius);
   overflow-x: auto;
+}
+.md pre code {
+  padding: 0;
+  background: none;
 }
 .md img {
   max-width: 100%;
   border-radius: var(--radius);
+  border: 1px solid var(--border);
 }
 
-/* Intro lines type in once on a visitor's first visit. */
+/* The prompt caret is a block, like a real terminal (where supported). */
+.prompt-input {
+  caret-color: var(--accent);
+  caret-shape: block;
+}
+
+/* Home intro lines type in once, on a visitor's first visit. */
 @keyframes intro-in {
   from {
     opacity: 0;
@@ -260,16 +205,17 @@
 }
 .intro-line {
   animation: intro-in 0.35s ease-out both;
-  animation-delay: calc(var(--i) * 220ms);
+  animation-delay: calc(var(--i) * 160ms);
 }
 .returning .intro-line {
   animation: none;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .intro-line {
     animation: none;
   }
-  html {
-    scroll-behavior: auto;
+  * {
+    scroll-behavior: auto !important;
   }
 }

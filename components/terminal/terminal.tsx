@@ -8,8 +8,10 @@ import { routeForPath } from "@/lib/routes"
 import type { SiteData } from "@/lib/site-types"
 import { emptyDiscovery, storage } from "@/lib/storage"
 import { TerminalContext, type TerminalApi } from "./context"
+import { Header } from "./header"
 import { Intro } from "./intro"
 import { OutputBlock, type Block } from "./output-block"
+import { Palette } from "./palette"
 import { Prompt } from "./prompt"
 
 interface TerminalProps {
@@ -18,26 +20,45 @@ interface TerminalProps {
   initialInput?: string
 }
 
+/**
+ * typed:   appended below earlier output, like a shell.
+ * click:   replaces the screen, like following a link.
+ * history: back/forward; replaces without pushing a new history entry.
+ */
+type Source = "typed" | "click" | "history"
+
 const MAX_BLOCKS = 50
 
 function isInteractive(target: EventTarget | null) {
-  return target instanceof Element && Boolean(target.closest("a, button, input, textarea, select, [role=button]"))
+  return target instanceof Element && Boolean(target.closest("a, button, input, textarea, select, [role=button], [role=option]"))
 }
 
 export function Terminal({ data, initialInput }: TerminalProps) {
   const registry = useMemo(() => createRegistry(data), [data])
   const nextId = useRef(1)
-  const scrollTarget = useRef<string | null>(null)
+  const pendingScroll = useRef<{ id?: string; focus: boolean } | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const baseTitle = `${data.config.name} - terminal`
 
   const [initial] = useState(() => (initialInput ? registry.execute(initialInput, { data, discovery: emptyDiscovery }) : undefined))
   const [blocks, setBlocks] = useState<Block[]>(() =>
     initial && initialInput
-      ? [{ id: "b0", input: initialInput, content: initial.result.content, tone: initial.result.tone, path: initial.path }]
+      ? [
+          {
+            id: "b0",
+            input: initialInput,
+            content: initial.result.content,
+            tone: initial.result.tone,
+            path: initial.path,
+            next: initial.result.next,
+          },
+        ]
       : [],
   )
-  const [chips, setChips] = useState<string[]>(initial?.result.next ?? data.config.quickActions)
+  const [path, setPath] = useState(initial?.path ?? "/")
   const [history, setHistory] = useState<string[]>([])
+  const [paletteOpen, setPaletteOpen] = useState(false)
+  const [announcement, setAnnouncement] = useState("")
   const discovery = useRef<Discovery>(emptyDiscovery)
   const [discoverySnapshot, setDiscoverySnapshot] = useState<Discovery>(emptyDiscovery)
 
@@ -66,26 +87,37 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     [data, registry],
   )
 
+  const goHome = useCallback(
+    (source: Source, { replace = false } = {}) => {
+      setBlocks([])
+      setPath("/")
+      if (source !== "history" && window.location.pathname !== "/") {
+        if (replace) window.history.replaceState(null, "", "/")
+        else window.history.pushState(null, "", "/")
+      }
+      document.title = baseTitle
+      setAnnouncement("Home")
+      pendingScroll.current = { focus: false }
+    },
+    [baseTitle],
+  )
+
   const run = useCallback(
-    (input: string, { fromHistory = false } = {}) => {
+    function runCommand(input: string, source: Source = "click", depth = 0): void {
       const trimmed = input.trim()
       if (!trimmed) return
 
-      if (!fromHistory) {
+      if (source === "typed") {
         const nextHistory = [...storage.getHistory().filter((item) => item !== trimmed), trimmed].slice(-50)
         storage.setHistory(nextHistory)
         setHistory(nextHistory)
       }
 
-      const { result, resolved, path } = registry.execute(trimmed, { data, discovery: discovery.current }, storage.getAliases())
+      const { result, resolved, path: routePath } = registry.execute(trimmed, { data, discovery: discovery.current }, storage.getAliases())
 
-      if (result.clear) {
-        setBlocks([])
-        setChips(data.config.quickActions)
-        if (window.location.pathname !== "/") window.history.replaceState(null, "", "/")
-        document.title = `${data.config.name} - terminal`
-        return
-      }
+      if (result.redirect && depth < 2) return runCommand(result.redirect, source, depth + 1)
+      if (result.clear) return goHome(source, { replace: true })
+      if (result.home) return goHome(source)
 
       const notice =
         resolved.command && result.tone !== "error"
@@ -97,19 +129,22 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         input: trimmed,
         content: result.content,
         tone: result.tone,
-        path,
+        path: routePath,
         notice,
+        next: result.next,
       }
-      scrollTarget.current = block.id
-      setBlocks((previous) => [...previous, block].slice(-MAX_BLOCKS))
-      if (result.next) setChips(result.next)
 
-      if (path) {
-        if (!fromHistory && path !== window.location.pathname) window.history.pushState(null, "", path)
+      setBlocks((previous) => (source === "typed" ? [...previous, block].slice(-MAX_BLOCKS) : [block]))
+      pendingScroll.current = { id: block.id, focus: source === "click" }
+      setAnnouncement(result.title ?? `${trimmed}${result.tone === "error" ? " failed" : ""}`)
+
+      if (routePath) {
+        setPath(routePath)
+        if (source !== "history" && routePath !== window.location.pathname) window.history.pushState(null, "", routePath)
         if (result.title) document.title = `${result.title} | ${data.config.name}`
       }
     },
-    [data, recordDiscovery, registry],
+    [data, goHome, recordDiscovery, registry],
   )
 
   // Restore per-visitor state once mounted (never during SSR, so hydration matches).
@@ -121,7 +156,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     storage.markVisited()
   }, [initial, recordDiscovery])
 
-  // Back/forward replays the command for that URL instead of reloading the page.
+  // Back/forward shows the page for that URL instead of reloading.
   const runRef = useRef(run)
   useEffect(() => {
     runRef.current = run
@@ -129,19 +164,38 @@ export function Terminal({ data, initialInput }: TerminalProps) {
   useEffect(() => {
     const onPopState = () => {
       const route = routeForPath(data, window.location.pathname)
-      if (route) runRef.current(route.input, { fromHistory: true })
-      else window.scrollTo({ top: 0 })
+      runRef.current(route ? route.input : "cd ~", "history")
     }
     window.addEventListener("popstate", onPopState)
     return () => window.removeEventListener("popstate", onPopState)
   }, [data])
 
+  // ⌘K / Ctrl+K opens the jump palette from anywhere.
   useEffect(() => {
-    if (!scrollTarget.current) return
-    const element = document.getElementById(scrollTarget.current)
-    scrollTarget.current = null
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault()
+        setPaletteOpen((open) => !open)
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [])
+
+  useEffect(() => {
+    const pending = pendingScroll.current
+    if (!pending) return
+    pendingScroll.current = null
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    element?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" })
+    const element = pending.id ? document.getElementById(pending.id) : null
+
+    if (element && blocks.length > 1) {
+      element.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" })
+    } else {
+      window.scrollTo({ top: 0, behavior: "auto" })
+    }
+    // Move focus to new content after navigation so keyboard and screen-reader users land on it.
+    if (pending.focus) element?.focus({ preventScroll: true })
   }, [blocks])
 
   // Plain left-clicks on internal links run the matching command in place;
@@ -160,23 +214,30 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
     if (anchor.target === "_blank") return
     const href = anchor.getAttribute("href")
-    const route = href?.startsWith("/") ? routeForPath(data, href) : undefined
-    if (!route) return
+    if (!href?.startsWith("/")) return
 
+    if (href === "/") {
+      event.preventDefault()
+      run("cd ~")
+      return
+    }
+    const route = routeForPath(data, href)
+    if (!route) return
     event.preventDefault()
     run(route.input)
   }
 
-  const api = useMemo<TerminalApi>(() => ({ run, pathFor: registry.pathFor }), [run, registry])
+  const api = useMemo<TerminalApi>(() => ({ run: (input, source) => run(input, source), pathFor: registry.pathFor }), [run, registry])
 
   return (
     <TerminalContext.Provider value={api}>
       <div onClick={handleClick} className="min-h-screen">
-        <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-[45vh]">
-          <Intro config={data.config} variant={initialInput && blocks.length > 0 ? "compact" : "full"} dimmed={blocks.length > 0} />
-          <div className="space-y-10 mt-8">
-            {blocks.map((block) => (
-              <OutputBlock key={block.id} block={block} />
+        <Header config={data.config} path={path} onFind={() => setPaletteOpen(true)} />
+        <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-[35vh]">
+          {blocks.length === 0 && <Intro data={data} />}
+          <div className="space-y-10">
+            {blocks.map((block, index) => (
+              <OutputBlock key={block.id} block={block} latest={index === blocks.length - 1} />
             ))}
           </div>
         </main>
@@ -184,10 +245,15 @@ export function Terminal({ data, initialInput }: TerminalProps) {
           data={data}
           registry={registry}
           history={history}
-          chips={chips}
+          path={path}
           discovery={discoverySnapshot}
           inputRef={inputRef}
+          onFind={() => setPaletteOpen(true)}
         />
+        {paletteOpen && <Palette registry={registry} onRun={(input) => run(input)} onClose={() => setPaletteOpen(false)} />}
+        <p aria-live="polite" className="sr-only">
+          {announcement}
+        </p>
       </div>
     </TerminalContext.Provider>
   )

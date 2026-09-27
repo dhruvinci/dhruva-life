@@ -30,7 +30,7 @@ export const helpCommand: Command = {
       content: (
         <div className="space-y-6">
           <p className="text-muted-foreground">
-            Click anything, or type it. Tab autocompletes, ↑/↓ walks history, and every page has its own URL.
+            Click anything, or type it. Tab autocompletes, ↑/↓ walks history, ⌘K jumps anywhere, cd works, and every page has its own URL.
           </p>
 
           {SECTIONS.map(({ section, title, marker, markerClass }) => (

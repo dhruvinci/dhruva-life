@@ -46,6 +46,12 @@ export interface Project {
   summary: string
   links: Link[]
   order: number
+  /** Optional case-study details, shown on the project page when present. */
+  role?: string
+  period?: string
+  stack: string[]
+  /** Image under public/, e.g. /images/graicie.png */
+  cover?: string
   html: string
   text: string
 }
@@ -62,6 +68,8 @@ export interface Post {
 
 export interface LogEntry {
   date: string
+  /** First line/bullet, used in previews. */
+  summary: string
   html: string
   text: string
 }

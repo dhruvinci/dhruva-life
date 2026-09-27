@@ -51,6 +51,8 @@ function readDir(dir: string) {
       const { data, content } = matter(fs.readFileSync(path.join(full, file), "utf8"))
       return { file: relative, slug, data: data as Record<string, unknown>, body: content.trim() }
     })
+    // `draft: true` files show up in `pnpm dev` but are left out of production builds.
+    .filter((entry) => !(entry.data.draft === true && process.env.NODE_ENV === "production"))
 }
 
 function renderMarkdown(body: string) {
@@ -61,9 +63,16 @@ function plainText(body: string) {
   return body
     .replace(/<!--[\s\S]*?-->/g, "")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[*_>#`-]/g, "")
+    .replace(/^\s*(?:[-*+]|\d+\.|#+|>)\s+/gm, "")
+    .replace(/[*_`]/g, "")
     .replace(/\s+/g, " ")
     .trim()
+}
+
+/** First line of a Markdown body as plain text, e.g. the first bullet of a log entry. */
+function firstLine(body: string) {
+  const line = body.split("\n").find((candidate) => plainText(candidate).length > 0) ?? ""
+  return plainText(line)
 }
 
 function hasBody(body: string) {
@@ -82,6 +91,14 @@ function requireString(data: Record<string, unknown>, field: string, file: strin
   if (typeof value === "number") return String(value)
   if (typeof value !== "string" || !value.trim()) throw new ContentError(file, `missing "${field}"`)
   return value.trim()
+}
+
+function optionalString(data: Record<string, unknown>, field: string, file: string) {
+  const value = data[field]
+  if (value === undefined) return undefined
+  if (typeof value === "number") return String(value)
+  if (typeof value !== "string") throw new ContentError(file, `"${field}" must be text`)
+  return value
 }
 
 function optionalStringList(data: Record<string, unknown>, field: string, file: string) {
@@ -130,6 +147,10 @@ function loadProjects(): Project[] {
         summary: requireString(data, "summary", file),
         links,
         order: typeof data.order === "number" ? data.order : 999,
+        role: optionalString(data, "role", file),
+        period: optionalString(data, "period", file),
+        stack: optionalStringList(data, "stack", file),
+        cover: optionalString(data, "cover", file),
         html: hasBody(body) ? renderMarkdown(body) : "",
         text: plainText(body),
       }
@@ -155,6 +176,7 @@ function loadLogs(): LogEntry[] {
   return readDir("log")
     .map(({ file, slug, body }) => ({
       date: toDateString(slug, file, "file name"),
+      summary: firstLine(body),
       html: renderMarkdown(body),
       text: plainText(body),
     }))

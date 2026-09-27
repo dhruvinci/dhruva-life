@@ -12,9 +12,10 @@ interface PromptProps {
   data: SiteData
   registry: Registry
   history: string[]
-  chips: string[]
+  path: string
   discovery: Discovery
   inputRef: React.RefObject<HTMLInputElement | null>
+  onFind: () => void
 }
 
 function menuGroups(data: SiteData, registry: Registry, discovery: Discovery) {
@@ -31,8 +32,9 @@ function menuGroups(data: SiteData, registry: Registry, discovery: Discovery) {
   return groups.filter((group) => group.commands.length > 0)
 }
 
-export function Prompt({ data, registry, history, chips, discovery, inputRef }: PromptProps) {
+export function Prompt({ data, registry, history, path, discovery, inputRef, onFind }: PromptProps) {
   const { run } = useTerminalApi()
+  const eggsTotal = registry.commands.filter((command) => command.section === "secret").length
   const [input, setInput] = useState("")
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [focused, setFocused] = useState(false)
@@ -56,8 +58,9 @@ export function Prompt({ data, registry, history, chips, discovery, inputRef }: 
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [inputRef])
 
-  const submit = (command: string) => {
-    run(command)
+  // Typed commands append like a real terminal; picks from the menu navigate (replace).
+  const submit = (command: string, source: "typed" | "click" = "typed") => {
+    run(command, source)
     setInput("")
     setHistoryIndex(-1)
     setMenuOpen(false)
@@ -114,29 +117,16 @@ export function Prompt({ data, registry, history, chips, discovery, inputRef }: 
           </div>
         )}
 
-        <div className="flex items-center gap-2 md:hidden overflow-x-auto pb-1 -mx-1 px-1">
-          <button
-            type="button"
-            onClick={() => setMenuOpen(true)}
-            className="shrink-0 rounded border border-border bg-card px-2.5 py-1.5 text-xs"
-          >
-            ☰ menu
-          </button>
-          {chips.slice(0, 4).map((chip, index) => (
-            <button
-              key={chip}
-              type="button"
-              onClick={() => submit(chip)}
-              className={`shrink-0 rounded border px-2.5 py-1.5 text-xs ${
-                index === 0 ? "border-accent/30 bg-accent/15 text-accent" : "border-border bg-muted text-muted-foreground"
-              }`}
-            >
-              {chip}
-            </button>
-          ))}
-        </div>
-
-        <label className="flex items-center gap-3 rounded md:rounded-none border md:border-0 border-border bg-card md:bg-transparent px-3 md:px-0 py-2 md:py-1">
+        <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => setMenuOpen(true)}
+          className="md:hidden shrink-0 rounded border border-border bg-card px-2.5 py-2 text-xs"
+          aria-label="Open command menu"
+        >
+          ☰
+        </button>
+        <label className="flex flex-1 items-center gap-3 rounded md:rounded-none border md:border-0 border-border bg-card md:bg-transparent px-3 md:px-0 py-2 md:py-1">
           <span className="text-sage text-sm" aria-hidden>
             $
           </span>
@@ -161,7 +151,7 @@ export function Prompt({ data, registry, history, chips, discovery, inputRef }: 
               enterKeyHint="go"
               aria-label="Command"
               placeholder="type a command, or help"
-              className="relative w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              className="prompt-input relative w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
@@ -169,6 +159,24 @@ export function Prompt({ data, registry, history, chips, discovery, inputRef }: 
             />
           </span>
         </label>
+        </div>
+
+        <div className="hidden md:flex items-center justify-between gap-4 text-xs text-muted-foreground" aria-hidden>
+          <span className="truncate">
+            <span className="text-sage">{data.config.name}</span>
+            <span className="text-ochre"> ~{path === "/" ? "" : path}</span>
+          </span>
+          <span className="flex items-center gap-3 shrink-0">
+            <span>
+              secrets {discovery.eggsFound.length}/{eggsTotal}
+            </span>
+            <span>tab complete</span>
+            <button type="button" tabIndex={-1} onClick={onFind} className="hover:text-foreground">
+              ⌘K jump
+            </button>
+            <span>/ focus</span>
+          </span>
+        </div>
       </div>
 
       {menuOpen && (
@@ -190,7 +198,7 @@ export function Prompt({ data, registry, history, chips, discovery, inputRef }: 
                       <button
                         key={command}
                         type="button"
-                        onClick={() => submit(command)}
+                        onClick={() => submit(command, "click")}
                         className="rounded border border-border bg-muted px-2.5 py-1.5 text-xs"
                       >
                         {command}

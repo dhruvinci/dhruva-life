@@ -1,57 +1,86 @@
 import type React from "react"
-import type { SiteConfig } from "@/lib/site-types"
+import { formatDate } from "@/lib/commands/content"
+import type { SiteData } from "@/lib/site-types"
 import { CommandLink } from "./command-link"
-import Link from "next/link"
 
-interface IntroProps {
-  config: SiteConfig
-  /** full on the home page; compact on deep links so the content is above the fold. */
-  variant: "full" | "compact"
-  dimmed: boolean
+function firstSentence(text: string, max = 140) {
+  const sentence = text.split(/(?<=[.!?])\s/)[0] ?? text
+  return sentence.length > max ? `${sentence.slice(0, max).trimEnd()}…` : sentence
 }
 
-export function Intro({ config, variant, dimmed }: IntroProps) {
-  if (variant === "compact") {
-    return (
-      <header className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 pr-12 text-sm transition-opacity ${dimmed ? "opacity-70" : ""}`}>
-        <Link href="/" className="font-medium hover:text-accent">
-          {config.name}
-        </Link>
-        <span className="text-terracotta">{config.tagline}</span>
-      </header>
-    )
-  }
+/** Home screen: who this is, what's fresh, and where to go. */
+export function Intro({ data }: { data: SiteData }) {
+  const { config } = data
+  const post = data.posts[0]
+  const now = data.pages.find((page) => page.name === "now")
+  const log = data.logs[0]
 
-  const lines = [
-    <span key="name" className="font-medium">
-      {config.name}
-    </span>,
-    <span key="loading" className="text-muted-foreground">
-      Loading identity...
-    </span>,
-    <span key="tagline" className="text-terracotta font-medium text-base">
-      {config.tagline}
-    </span>,
-    <span key="rule" className="block h-px w-full bg-border" />,
-    <nav key="nav" aria-label="Main" className="flex flex-wrap gap-x-4 gap-y-2">
+  const latest = [
+    post && {
+      key: "writing",
+      label: "writing",
+      command: `open ${post.slug}`,
+      title: post.title,
+      meta: formatDate(post.date),
+    },
+    now && {
+      key: "now",
+      label: "now",
+      command: "now",
+      title: firstSentence(now.text),
+      meta: now.updated ? formatDate(now.updated) : undefined,
+    },
+    log && {
+      key: "log",
+      label: "log",
+      command: "log",
+      title: log.summary,
+      meta: formatDate(log.date),
+    },
+  ].filter(Boolean) as Array<{ key: string; label: string; command: string; title: string; meta?: string }>
+
+  const lines: React.ReactNode[] = [
+    <h1 key="name" className="text-2xl font-semibold tracking-tight">
+      {config.author}
+    </h1>,
+    <p key="tagline" className="font-serif text-xl text-muted-foreground max-w-[40ch]">
+      {config.tagline}.
+    </p>,
+    <section key="latest" aria-label="Latest" className="pt-4 space-y-3">
+      <h2 className="text-xs uppercase tracking-widest text-muted-foreground">latest</h2>
+      <ul className="space-y-3">
+        {latest.map((item) => (
+          <li key={item.key} className="grid grid-cols-[4.5rem_1fr] gap-x-3">
+            <span className="text-ochre text-sm">[{item.label}]</span>
+            <span>
+              <CommandLink command={item.command} className="text-foreground hover:text-accent">
+                {item.title}
+              </CommandLink>
+              {item.meta && <span className="text-muted-foreground text-xs ml-2">{item.meta}</span>}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>,
+    <nav key="nav" aria-label="Explore" className="pt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
       {config.nav.map((command) => (
-        <CommandLink key={command} command={command}>
+        <CommandLink key={command} command={command} className="text-accent hover:underline">
           {command}
         </CommandLink>
       ))}
     </nav>,
-    <span key="hint" className="text-muted-foreground text-xs">
-      Click around, or type <CommandLink command="help" /> to see everything.
-    </span>,
+    <p key="hint" className="text-muted-foreground text-xs">
+      Click around, type <CommandLink command="help" className="text-accent hover:underline" />, or press ⌘K to jump anywhere.
+    </p>,
   ]
 
   return (
-    <header className={`space-y-3 pr-12 sm:pr-0 text-sm transition-opacity ${dimmed ? "opacity-70" : ""} sm:pt-[12vh]`}>
+    <div className="space-y-4 sm:pt-[8vh]">
       {lines.map((line, index) => (
         <div key={index} className="intro-line" style={{ "--i": index } as React.CSSProperties}>
           {line}
         </div>
       ))}
-    </header>
+    </div>
   )
 }

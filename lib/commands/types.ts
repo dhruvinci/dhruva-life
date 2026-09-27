@@ -22,6 +22,10 @@ export interface CommandResult {
   /** Suggested follow-up commands, shown as mobile chips. */
   next?: string[]
   clear?: boolean
+  /** Go to the home screen (cd ~). */
+  home?: boolean
+  /** Run this input instead, e.g. `cd work` runs `work`. */
+  redirect?: string
 }
 
 /** explore/more are content, utility is tooling, secret is hidden from help. */

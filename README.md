@@ -16,6 +16,8 @@ All content is Markdown in `content/`. Pushing to `main` deploys (Vercel). If a 
 | Add a whole new command + URL | `pnpm new page "Title"` (file name becomes the command and `/path`) |
 | Change nav, tagline, hints    | Edit `content/site.json`                                           |
 
+**Drafts:** add `draft: true` to any file's frontmatter. It shows in `pnpm dev` but is left out of the live site until you remove it.
+
 **From a phone:** open the file on github.com, tap the pencil, edit, commit to `main`. For a new post, use "Add file → Create new file" in `content/writing/` and copy the frontmatter from an existing post.
 
 ### Content reference
@@ -46,6 +48,10 @@ status: Active                    # Active | Concept | Archived | anything
 year: "2025"
 summary: One sentence.
 order: 1                          # optional, lower first
+role: Founder, engineer           # optional case-study facts
+period: 2025 – now                # optional, shown instead of year
+stack: [Python, Gemini, SAM]      # optional
+cover: /images/graicie.png        # optional, file in public/
 links:                            # optional
   - label: Site
     href: https://example.com
@@ -76,9 +82,14 @@ lib/commands/         command registry, one file per concern (content, help, uti
 components/terminal/  the terminal UI (client component, server-rendered on first load)
 app/page.tsx          home
 app/[...slug]/        every content route, statically generated from content/
+app/og/[...slug]/     per-page social card images
+app/feed.xml/         RSS for writing
 app/sitemap.ts        generated from the same route table
 ```
 
 - Each route is statically generated with its command already "run", so the HTML contains the content (SEO, link previews, works without JS).
 - After hydration, commands run client-side. Routed commands update the URL with `history.pushState`; back/forward replay the matching command; plain clicks on internal links are intercepted and run in place, modified clicks open new tabs normally.
+- Clicking a link replaces the screen (like a website); typing appends below (like a shell), with older output collapsed. `cd <path>`, `cd ..` and `cd ~` work, and ⌘K opens a fuzzy jump palette.
+- The sticky header shows the current path as a clickable prompt, e.g. `dhruva@life:~/work/graicie $`.
+- Each page gets its own social card from `app/og/[...slug]/route.tsx`; writing has an RSS feed at `/feed.xml`.
 - Per-visitor state (history, aliases, discovered secrets, theme) lives in `localStorage` and is optional.
