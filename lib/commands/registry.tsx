@@ -2,17 +2,16 @@ import { routeForInput } from "@/lib/routes"
 import type { SiteData } from "@/lib/site-types"
 import { CommandLink } from "@/components/terminal/command-link"
 import { createContentCommands } from "./content"
-import { easterEggCommands } from "./easter-eggs"
 import { helpCommand } from "./help"
 import { utilityCommands } from "./utilities"
-import type { Command, CommandContext, CommandResult } from "./types"
+import type { Command, CommandContext, CommandResult, MenuItem } from "./types"
 
 export interface Resolved {
   command?: Command
-  /** The command word as typed (after user-alias expansion). */
+  /** The command word as typed, without the leading slash. */
   name: string
   args: string[]
-  /** Command name + args, lowercased; matches Route.input for routed commands. */
+  /** "/name args", lowercased; matches Route.input for routed commands. */
   canonicalInput: string
 }
 
@@ -23,7 +22,7 @@ export interface Execution {
 }
 
 function tokenize(input: string) {
-  const [name = "", ...args] = input.trim().split(/\s+/)
+  const [name = "", ...args] = input.trim().replace(/^\//, "").split(/\s+/)
   return { name, args }
 }
 
@@ -42,7 +41,7 @@ function editDistance(a: string, b: string) {
 }
 
 export function createRegistry(data: SiteData) {
-  const commands: Command[] = [...createContentCommands(data), helpCommand, ...utilityCommands, ...easterEggCommands]
+  const commands: Command[] = [...createContentCommands(data), helpCommand, ...utilityCommands]
   const byName = new Map<string, Command>()
 
   for (const command of commands) {
@@ -55,21 +54,21 @@ export function createRegistry(data: SiteData) {
 
   const find = (name: string) => byName.get(name.toLowerCase())
 
-  function resolve(input: string, userAliases: Record<string, string> = {}, depth = 0): Resolved {
+  /** Commands shown in the slash menu and in /help, in the configured order. */
+  const menuCommands = () => {
+    const visible = commands.filter((command) => !command.hidden)
+    const order = [...data.config.nav, "help", "clear"]
+    return visible.sort((a, b) => (order.indexOf(a.name) + 1 || 99) - (order.indexOf(b.name) + 1 || 99))
+  }
+
+  function resolve(input: string): Resolved {
     const { name, args } = tokenize(input)
-    const aliasKey = Object.keys(userAliases).find((alias) => alias.toLowerCase() === name.toLowerCase())
-
-    // User aliases shadow built-ins, but only one level deep: no alias loops.
-    if (aliasKey && depth === 0) {
-      return resolve(`${userAliases[aliasKey]} ${args.join(" ")}`, userAliases, depth + 1)
-    }
-
     const command = find(name)
     return {
       command,
       name,
       args,
-      canonicalInput: [command?.name ?? name, ...args].join(" ").toLowerCase(),
+      canonicalInput: `/${[command?.name ?? name, ...args].join(" ")}`.toLowerCase(),
     }
   }
 
@@ -78,45 +77,48 @@ export function createRegistry(data: SiteData) {
     return routeForInput(data, resolve(input).canonicalInput)?.path
   }
 
-  /** Closest real command name for a typo, or undefined when nothing is close. */
+  /** Closest menu command for a typo, or undefined when nothing is close. */
   function closest(name: string) {
     const lower = name.toLowerCase()
     let best: { name: string; distance: number } | undefined
-    for (const command of commands) {
-      if (command.section === "secret") continue
+    for (const command of menuCommands()) {
       const distance = editDistance(lower, command.name)
       if (!best || distance < best.distance) best = { name: command.name, distance }
     }
-    // Two edits covers the common typos (swapped letters, one missing) without wild guesses.
     const allowed = lower.length <= 2 ? 1 : Math.max(2, Math.floor(lower.length / 3))
     return best && best.distance <= allowed ? best.name : undefined
   }
 
-  function suggest(input: string, userAliases: Record<string, string> = {}) {
-    const query = input.toLowerCase().replace(/^\s+/, "")
-    if (!query) return []
+  /**
+   * What the slash menu shows for the current input:
+   * "/wr" -> matching commands; "/writing see" -> matching essays.
+   */
+  function menu(input: string): MenuItem[] {
+    if (!input.startsWith("/")) return []
+    const body = input.slice(1)
+    const spaceAt = body.indexOf(" ")
 
-    const { name, args } = tokenize(query)
-    const hasArgs = /\s/.test(query)
-
-    if (hasArgs) {
-      const command = find(name)
-      const prefix = args.join(" ")
-      return (command?.complete?.(prefix, data) ?? [])
-        .filter((option) => option.startsWith(prefix))
-        .map((option) => `${name} ${option}`)
-        .slice(0, 5)
+    if (spaceAt === -1) {
+      const prefix = body.toLowerCase()
+      return menuCommands()
+        .filter((command) => command.name.startsWith(prefix))
+        .map((command) => ({ value: `/${command.name}`, label: `/${command.name}`, description: command.description }))
     }
 
-    const names = commands
-      .filter((command) => command.section !== "secret")
-      .flatMap((command) => [command.name, ...(command.aliases ?? [])])
-
-    return [...new Set([...names, ...Object.keys(userAliases)])].filter((option) => option.startsWith(query)).slice(0, 5)
+    const command = find(body.slice(0, spaceAt))
+    const query = body.slice(spaceAt + 1).trim().toLowerCase()
+    const items = command?.complete?.(data) ?? []
+    return items.filter(
+      (item) =>
+        !query ||
+        item.value.toLowerCase().split(" ").slice(1).join(" ").startsWith(query) ||
+        item.label.toLowerCase().includes(query),
+    )
   }
 
-  function execute(input: string, ctx: Omit<CommandContext, "registry">, userAliases: Record<string, string> = {}): Execution {
-    const resolved = resolve(input, userAliases)
+  function execute(input: string, ctx: Omit<CommandContext, "registry">): Execution {
+    const resolved = resolve(input)
+    const slashed = input.trim().startsWith("/")
 
     if (!resolved.command) {
       const suggestion = closest(resolved.name)
@@ -124,18 +126,28 @@ export function createRegistry(data: SiteData) {
         resolved,
         result: {
           tone: "error",
-          content: (
+          content: slashed ? (
             <p>
-              Command not found: {resolved.name}.{" "}
+              Unknown command /{resolved.name}.{" "}
               {suggestion ? (
                 <>
-                  Did you mean <CommandLink command={suggestion} />?
+                  Did you mean <CommandLink command={`/${suggestion}`} />?
                 </>
               ) : (
                 <>
-                  Type <CommandLink command="help" /> for available commands.
+                  Type <span className="text-accent">/</span> to see what&apos;s here.
                 </>
               )}
+            </p>
+          ) : (
+            <p>
+              Commands start with a slash. Type <span className="text-accent">/</span> to see them
+              {suggestion ? (
+                <>
+                  , or try <CommandLink command={`/${suggestion}`} />
+                </>
+              ) : null}
+              .
             </p>
           ),
         },
@@ -146,11 +158,11 @@ export function createRegistry(data: SiteData) {
       const result = resolved.command.run(resolved.args, { ...ctx, registry })
       return { resolved, result, path: result.tone === "error" ? undefined : routeForInput(data, resolved.canonicalInput)?.path }
     } catch (error) {
-      return { resolved, result: { tone: "error", content: `Error running ${resolved.command.name}: ${String(error)}` } }
+      return { resolved, result: { tone: "error", content: `Error running /${resolved.command.name}: ${String(error)}` } }
     }
   }
 
-  const registry = { data, commands, find, resolve, pathFor, closest, suggest, execute }
+  const registry = { data, commands, find, menuCommands, resolve, pathFor, closest, menu, execute }
   return registry
 }
 

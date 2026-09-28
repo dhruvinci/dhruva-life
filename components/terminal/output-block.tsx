@@ -52,10 +52,10 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
           aria-expanded={open}
           className="flex flex-1 min-w-0 items-center gap-2 text-left"
         >
-          <span className="text-sage" aria-hidden>
-            {latest ? "$" : open ? "▾" : "▸"}
+          <span className="text-accent" aria-hidden>
+            {latest || open ? ">" : "▸"}
           </span>
-          <span className={`break-words min-w-0 ${open ? "" : "text-muted-foreground"}`}>{block.input}</span>
+          <span className={`break-words min-w-0 ${open ? "text-foreground" : "text-muted-foreground"}`}>{block.input}</span>
         </button>
         {block.path && open && (
           <button
@@ -76,7 +76,11 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
       </div>
 
       {open && (
-        <div className="mt-4 print:mt-0">
+        <div className="mt-3 grid grid-cols-[1.25rem_1fr] print:mt-0 print:block">
+          <span className="text-muted-foreground print:hidden" aria-hidden>
+            ⎿
+          </span>
+          <div className="min-w-0">
           <div className={`leading-relaxed ${block.tone ? toneClasses[block.tone] : ""}`}>{block.content}</div>
           {block.notice && (
             <p role="status" className="mt-4 text-sm text-teal-stone bg-teal-stone/10 border border-teal-stone/25 rounded px-3 py-2">
@@ -95,6 +99,7 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
               ))}
             </nav>
           )}
+          </div>
         </div>
       )}
     </section>

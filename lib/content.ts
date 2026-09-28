@@ -136,6 +136,7 @@ function loadPages(): Page[] {
       title: requireString(data, "title", file),
       description: requireString(data, "description", file),
       aliases: optionalStringList(data, "aliases", file),
+      listed: data.listed !== false,
       next: optionalStringList(data, "next", file),
       updated: data.updated === undefined ? undefined : toDateString(data.updated, file, "updated"),
       html: renderMarkdown(body),
@@ -231,7 +232,7 @@ export function getSiteData(): SiteData {
     intros: { work: loadIntro("projects"), writing: loadIntro("writing"), research: loadIntro("research") },
   }
 
-  // `open <slug>` searches every collection, so slugs must be unique across them.
+  // Slugs stay unique across collections so a name always means one thing.
   const seen = new Map<string, string>()
   for (const [dir, slugs] of [
     ["projects", data.projects.map((item) => item.slug)],

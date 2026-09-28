@@ -1,8 +1,9 @@
 import type React from "react"
 import { CommandLink } from "@/components/terminal/command-link"
+import { CopyButton } from "@/components/terminal/copy-button"
 import { Markdown } from "@/components/terminal/markdown"
 import type { Page, Post, Project, ResearchItem, SiteData } from "@/lib/site-types"
-import type { Command, CommandSection } from "./types"
+import type { Command, MenuItem } from "./types"
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
@@ -52,12 +53,13 @@ function Sequence({ items, index, back }: { items: Array<{ title: string; comman
   )
 }
 
-function PageView({ page }: { page: Page }) {
+function PageView({ page, children }: { page: Page; children?: React.ReactNode }) {
   return (
     <article className="space-y-4">
       <Heading>{page.title}</Heading>
       {page.updated && <p className="text-muted-foreground text-xs">updated {formatDate(page.updated)}</p>}
       <Markdown html={page.html} />
+      {children}
     </article>
   )
 }
@@ -81,7 +83,7 @@ function WorkView({ data }: { data: SiteData }) {
             {projects.map((project) => (
               <div key={project.slug} className="group/item">
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <CommandLink command={`open ${project.slug}`} className="text-foreground font-medium hover:text-accent">
+                  <CommandLink command={`/work ${project.slug}`} className="text-foreground font-medium hover:text-accent">
                     {project.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
                   </CommandLink>
                   <Tag tone="muted">{project.period ?? project.year}</Tag>
@@ -130,9 +132,9 @@ function ProjectView({ project, data }: { project: Project; data: SiteData }) {
       {project.html && <Markdown html={project.html} />}
       <ExternalLinks links={project.links} />
       <Sequence
-        items={data.projects.map((item) => ({ title: item.title, command: `open ${item.slug}` }))}
+        items={data.projects.map((item) => ({ title: item.title, command: `/work ${item.slug}` }))}
         index={index}
-        back={<CommandLink command="work">all work</CommandLink>}
+        back={<CommandLink command="/work">all work</CommandLink>}
       />
     </article>
   )
@@ -153,7 +155,7 @@ function WritingView({ data }: { data: SiteData }) {
             .map((post) => (
               <div key={post.slug} className="group/item">
                 <div className="flex flex-wrap items-baseline gap-x-3">
-                  <CommandLink command={`open ${post.slug}`} className="text-foreground font-medium hover:text-accent">
+                  <CommandLink command={`/writing ${post.slug}`} className="text-foreground font-medium hover:text-accent">
                     {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
                   </CommandLink>
                   <Tag tone="muted">{formatDate(post.date)}</Tag>
@@ -184,25 +186,26 @@ function PostView({ post, data }: { post: Post; data: SiteData }) {
       </div>
       <Markdown html={post.html} />
       <Sequence
-        items={data.posts.map((item) => ({ title: item.title, command: `open ${item.slug}` }))}
+        items={data.posts.map((item) => ({ title: item.title, command: `/writing ${item.slug}` }))}
         index={index}
-        back={<CommandLink command="writing">all writing</CommandLink>}
+        back={<CommandLink command="/writing">all writing</CommandLink>}
       />
     </article>
   )
 }
 
-function LogView({ data }: { data: SiteData }) {
+function RecentLog({ data }: { data: SiteData }) {
+  if (data.logs.length === 0) return null
   return (
-    <div className="space-y-6">
-      <Heading>Log</Heading>
+    <section className="space-y-4 pt-2">
+      <h3 className="text-ochre text-xs uppercase tracking-widest">Recently</h3>
       {data.logs.map((entry) => (
-        <section key={entry.date} className="grid sm:grid-cols-[7.5rem_1fr] gap-x-4 gap-y-1">
-          <h3 className="text-olive text-sm">{formatDate(entry.date)}</h3>
+        <div key={entry.date} className="grid sm:grid-cols-[7.5rem_1fr] gap-x-4 gap-y-1">
+          <h4 className="text-olive text-sm">{formatDate(entry.date)}</h4>
           <Markdown html={entry.html} />
-        </section>
+        </div>
       ))}
-    </div>
+    </section>
   )
 }
 
@@ -216,7 +219,7 @@ function ResearchView({ data }: { data: SiteData }) {
           <div key={item.slug} className="group/item">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <Tag tone="accent">{item.kind}</Tag>
-              <CommandLink command={`open ${item.slug}`} className="text-foreground font-medium hover:text-accent">
+              <CommandLink command={`/research ${item.slug}`} className="text-foreground font-medium hover:text-accent">
                 {item.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
               </CommandLink>
             </div>
@@ -248,133 +251,107 @@ function ResearchItemView({ item, data }: { item: ResearchItem; data: SiteData }
       {item.html && <Markdown html={item.html} />}
       {item.bibtex && (
         <p className="text-sm text-muted-foreground">
-          Citing this? <CommandLink command={`cite ${item.slug}`}>cite {item.slug}</CommandLink> prints BibTeX.
+          <CopyButton text={item.bibtex} label="Copy BibTeX" />
         </p>
       )}
       <Sequence
-        items={data.research.map((entry) => ({ title: entry.title, command: `open ${entry.slug}` }))}
+        items={data.research.map((entry) => ({ title: entry.title, command: `/research ${entry.slug}` }))}
         index={index}
-        back={<CommandLink command="research">all research</CommandLink>}
+        back={<CommandLink command="/research">all research</CommandLink>}
       />
     </article>
   )
 }
 
-export function createContentCommands(data: SiteData): Command[] {
-  const sectionFor = (name: string): CommandSection => (data.config.nav.includes(name) ? "explore" : "more")
-  const slugs = () => [
-    ...data.projects.map((project) => project.slug),
-    ...data.research.map((item) => item.slug),
-    ...data.posts.map((post) => post.slug),
-  ]
+function notFound(kind: string, command: string, arg: string) {
+  return {
+    tone: "error" as const,
+    content: (
+      <p>
+        No {kind} called &quot;{arg}&quot;. Type <span className="text-accent">/{command} </span> (with a space) to pick one.
+      </p>
+    ),
+  }
+}
 
+const withSlash = (commands: string[]) => commands.map((command) => (command.startsWith("/") ? command : `/${command}`))
+
+export function createContentCommands(data: SiteData): Command[] {
   const pageCommands: Command[] = data.pages.map((page) => ({
     name: page.name,
     description: page.description,
     aliases: page.aliases,
-    section: sectionFor(page.name),
-    run: () => ({ title: page.title, next: page.next, content: <PageView page={page} /> }),
+    hidden: !page.listed,
+    run: () => ({
+      title: page.title,
+      next: withSlash(page.next),
+      content: <PageView page={page}>{page.name === "now" && <RecentLog data={data} />}</PageView>,
+    }),
   }))
+
+  const researchItems = (): MenuItem[] =>
+    data.research.map((item) => ({ value: `/research ${item.slug}`, label: item.title, description: item.kind }))
+  const projectItems = (): MenuItem[] =>
+    data.projects.map((project) => ({ value: `/work ${project.slug}`, label: project.title, description: project.period ?? project.year }))
+  const postItems = (): MenuItem[] =>
+    data.posts.map((post) => ({ value: `/writing ${post.slug}`, label: post.title, description: formatDate(post.date) }))
 
   return [
     ...pageCommands,
     {
-      name: "work",
-      description: "Current projects and portfolio",
-      aliases: ["projects"],
-      section: sectionFor("work"),
-      run: () => ({
-        title: "Work",
-        next: data.projects.slice(0, 2).map((project) => `open ${project.slug}`).concat("writing"),
-        content: <WorkView data={data} />,
-      }),
-    },
-    {
-      name: "writing",
-      description: "Essays and short meditations",
-      section: sectionFor("writing"),
-      run: () => ({
-        title: "Writing",
-        next: data.posts.slice(0, 2).map((post) => `open ${post.slug}`).concat("work"),
-        content: <WritingView data={data} />,
-      }),
-    },
-    {
       name: "research",
       description: "Papers, experiments, and open questions",
       aliases: ["papers"],
-      section: sectionFor("research"),
-      run: () => ({
-        title: "Research",
-        next: data.research.slice(0, 2).map((item) => `open ${item.slug}`).concat("work"),
-        content: <ResearchView data={data} />,
-      }),
-    },
-    {
-      name: "cite",
-      description: "Print BibTeX for a paper",
-      usage: "cite <slug>",
-      section: "utility",
-      complete: () => data.research.filter((item) => item.bibtex).map((item) => item.slug),
-      run: (args) => {
-        const citable = data.research.filter((item) => item.bibtex)
-        const item = citable.find((entry) => entry.slug === args[0]?.toLowerCase()) ?? (args[0] ? undefined : citable[0])
-        if (!item?.bibtex) return { tone: "error", content: `Usage: cite <slug>. Citable: ${citable.map((entry) => entry.slug).join(", ") || "none yet"}` }
-        return {
-          content: (
-            <pre className="whitespace-pre-wrap text-sm bg-muted rounded px-4 py-3 overflow-x-auto">{item.bibtex}</pre>
-          ),
-        }
-      },
-    },
-    {
-      name: "log",
-      description: "What I've been doing, week by week",
-      aliases: ["logs", "whativedone"],
-      section: sectionFor("log"),
-      run: () => ({ title: "Log", next: ["now", "work"], content: <LogView data={data} /> }),
-    },
-    {
-      name: "open",
-      description: "Open a project, post, or page",
-      usage: "open <slug>",
-      section: "utility",
-      complete: () => slugs(),
+      complete: researchItems,
       run: (args) => {
         const slug = args[0]?.toLowerCase()
-        if (!slug) return { tone: "error", content: "Usage: open <slug>. Try work or writing to see what's there." }
-
-        const project = data.projects.find((item) => item.slug === slug)
-        if (project) return { title: project.title, next: ["work", "contact"], content: <ProjectView project={project} data={data} /> }
-
-        const research = data.research.find((item) => item.slug === slug)
-        if (research) return { title: research.title, next: ["research", "work"], content: <ResearchItemView item={research} data={data} /> }
-
-        const post = data.posts.find((item) => item.slug === slug)
-        if (post) return { title: post.title, next: ["writing", "work"], content: <PostView post={post} data={data} /> }
-
-        const page = data.pages.find((item) => item.name === slug)
-        if (page) return { title: page.title, next: page.next, content: <PageView page={page} /> }
-
-        return { tone: "error", content: `Nothing called "${slug}". Try work or writing to see what's there.` }
+        if (!slug) {
+          return {
+            title: "Research",
+            next: data.research.slice(0, 2).map((item) => `/research ${item.slug}`).concat("/work"),
+            content: <ResearchView data={data} />,
+          }
+        }
+        const item = data.research.find((entry) => entry.slug === slug)
+        if (!item) return notFound("research entry", "research", slug)
+        return { title: item.title, next: ["/research", "/work"], content: <ResearchItemView item={item} data={data} /> }
       },
     },
     {
-      name: "cat",
-      description: "Print a post's raw Markdown",
-      usage: "cat <slug>",
-      section: "utility",
-      complete: () => data.posts.map((post) => post.slug),
+      name: "work",
+      description: "What I've built, most recent first",
+      aliases: ["projects"],
+      complete: projectItems,
       run: (args) => {
-        const post = data.posts.find((item) => item.slug === args[0]?.toLowerCase())
-        if (!post) return { tone: "error", content: args[0] ? `File not found: ${args[0]}` : "Usage: cat <slug>" }
-        return {
-          content: (
-            <pre className="whitespace-pre-wrap text-muted-foreground">
-              {`---\ntitle: ${post.title}\ndate: ${post.date}\nexcerpt: ${post.excerpt}\n---\n\n${post.raw}`}
-            </pre>
-          ),
+        const slug = args[0]?.toLowerCase()
+        if (!slug) {
+          return {
+            title: "Work",
+            next: data.projects.slice(0, 2).map((project) => `/work ${project.slug}`).concat("/research"),
+            content: <WorkView data={data} />,
+          }
         }
+        const project = data.projects.find((entry) => entry.slug === slug)
+        if (!project) return notFound("project", "work", slug)
+        return { title: project.title, next: ["/work", "/contact"], content: <ProjectView project={project} data={data} /> }
+      },
+    },
+    {
+      name: "writing",
+      description: "Essays, one or more a quarter since 2021",
+      complete: postItems,
+      run: (args) => {
+        const slug = args[0]?.toLowerCase()
+        if (!slug) {
+          return {
+            title: "Writing",
+            next: data.posts.slice(0, 2).map((post) => `/writing ${post.slug}`).concat("/research"),
+            content: <WritingView data={data} />,
+          }
+        }
+        const post = data.posts.find((entry) => entry.slug === slug)
+        if (!post) return notFound("essay", "writing", slug)
+        return { title: post.title, next: ["/writing", "/research"], content: <PostView post={post} data={data} /> }
       },
     },
   ]

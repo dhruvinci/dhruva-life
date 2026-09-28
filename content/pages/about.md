@@ -12,6 +12,6 @@ Before this I was the founding AI engineer at [Zopu.ai](/work/zopu), where we tu
 
 In 2024 I took a year off and trained jiu-jitsu six hours a day, six days a week. Competed twice. Even on a break I need something to obsess over, and I wanted it to be my health and something I could keep learning for the rest of my life.
 
-If there's a pattern, it's that the things I love don't stay hobbies for long. Jiu-jitsu became Kakashi and a paper. Music became [pushit.tv](/work/pushit). I sow seeds and play long games.
+If there's a pattern, it's that the things I love don't stay hobbies for long. Jiu-jitsu became Kakashi and a paper. Music became [pushit.tv](/work/pushit), and a list of [265 bands I've seen live](/music) that keeps growing. I sow seeds and play long games.
 
 I'm open to research and open to work - [say hi](/contact).

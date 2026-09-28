@@ -8,38 +8,27 @@ Quick context for coding agents working in this repository.
 
 ## Commands
 
-- `pnpm dev` - development server
 - `pnpm check` - typecheck + lint + build (run before pushing)
 - `pnpm new <log | post "Title" | project "Title" | page "Title">` - scaffold content
 
 Use `pnpm`. Pushing to `main` deploys to production via Vercel. The owner is fine with direct pushes to `main`.
 
-## Content updates (most common task)
+## Content
 
-Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json`. See README.md for the frontmatter reference. When asked to "add a log entry", "post this", "update now", etc.:
-
-1. Edit or create the file under `content/` (use `pnpm new ...` for new files).
-2. Use `draft: true` for anything not ready to publish; it only appears in `pnpm dev`.
-3. For `content/pages/now.md`, also bump `updated:` to today's date.
-4. Run `pnpm build`. `lib/content.ts` validates every file and fails with `content/<file>: <problem>` on bad input.
-5. Commit and push to `main` if the user asked to publish.
+Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json`. For content updates ("add a log entry", "post this", "update now"), use the `content-update` skill.
 
 Never invent biographical facts, links, or numbers; ask.
 
 ## Architecture
 
-- `lib/content.ts` - server-only loader and validator; renders Markdown to HTML at build time.
-- `lib/routes.ts` - single URL <-> command table used by static params, metadata, sitemap, and the terminal.
-- `lib/commands/` - `registry.tsx` (resolve, aliases, suggestions, execute), `content.tsx` (page/work/writing/log/open/cat), `help.tsx`, `utilities.tsx`, `easter-eggs.tsx`.
-- `components/terminal/` - `terminal.tsx` owns state, pushState/popstate, link interception, and the typed-appends / clicked-replaces model; `header.tsx` is the sticky prompt-path breadcrumb; `palette.tsx` is the ⌘K jump list; `intro.tsx` is the home screen with the latest strip; `prompt.tsx` is the input, status line and mobile menu; `context.tsx` exposes `run`/`pathFor`; `command-link.tsx` renders routed commands as real `<a href>`.
-- `app/page.tsx` (home) and `app/[...slug]/page.tsx` (all content routes, `dynamicParams = false`).
+`lib/routes.ts` is the single URL <-> command table used by static params, metadata, sitemap, and the terminal. Every route is statically generated with its command already run, so the HTML carries the content; after hydration the same commands run client-side and update the URL via `pushState`. A new routed command therefore needs an entry in `getRoutes`, not just a registry command, or it gets no URL.
 
-A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Easter eggs have section `"secret"` and stay out of help/autocomplete.
+A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Keep the menu small: nine visible commands. Pages with `listed: false` (e.g. /music) keep their URL but stay out of the menu. There is no navbar and no ⌘K by design.
 
 ## Styling
 
-Tailwind CSS 4 via `app/globals.css`. Earthy palette (terracotta, sage, olive, ochre, teal-stone) defined per theme; every text color is >= 4.5:1 against background, card and muted surfaces, so keep that invariant when adding colors. Mono (JetBrains) for interface, serif (Newsreader) for anything read at length (`.md`, `font-serif`). Markdown output is styled by the `.md` rules at the bottom of `globals.css`. Fonts load in `app/layout.tsx`, which also has the inline pre-paint theme script.
+Earthy palette (terracotta, sage, olive, ochre, teal-stone) defined per theme; every text color is >= 4.5:1 against background, card and muted surfaces, so keep that invariant when adding colors. Mono (JetBrains) for interface, serif (Newsreader) for anything read at length (`.md`, `font-serif`).
 
 ## Verification
 
-Run `pnpm check`. For terminal behavior changes, smoke test: home intro, `help`, clicking nav links (URL changes without reload), back/forward, deep-link reload (e.g. `/work/graicie`), tab completion, typo suggestion, `search`, `alias`, an easter egg, `clear`, theme toggle, and the mobile menu at phone width.
+There is no test suite; `pnpm check` is the gate. For terminal behavior changes, also run the `terminal-smoke-test` skill.

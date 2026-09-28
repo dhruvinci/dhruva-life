@@ -13,59 +13,37 @@ export interface Route {
 }
 
 /** Command names implemented in code; content pages cannot reuse them. */
-export const RESERVED_COMMANDS = [
-  "work",
-  "projects",
-  "research",
-  "cite",
-  "writing",
-  "log",
-  "logs",
-  "whativedone",
-  "open",
-  "cat",
-  "help",
-  "search",
-  "ls",
-  "history",
-  "alias",
-  "theme",
-  "clear",
-  "cls",
-  "cd",
-  "share",
-]
+export const RESERVED_COMMANDS = ["work", "writing", "research", "help", "clear", "theme"]
 
 export function getRoutes(data: SiteData): Route[] {
   return [
     ...data.pages.map((page) => ({
       path: `/${page.name}`,
-      input: page.name,
+      input: `/${page.name}`,
       title: page.title,
       description: page.description,
     })),
-    { path: "/work", input: "work", title: "Work", description: "Current projects and portfolio" },
-    ...data.projects.map((project) => ({
-      path: `/work/${project.slug}`,
-      input: `open ${project.slug}`,
-      title: project.title,
-      description: project.summary,
-    })),
-    { path: "/writing", input: "writing", title: "Writing", description: "Essays and short meditations" },
-    ...data.posts.map((post) => ({
-      path: `/writing/${post.slug}`,
-      input: `open ${post.slug}`,
-      title: post.title,
-      description: post.excerpt,
-    })),
-    { path: "/research", input: "research", title: "Research", description: "Papers, experiments, and open questions" },
+    { path: "/research", input: "/research", title: "Research", description: "Papers, experiments, and open questions" },
     ...data.research.map((item) => ({
       path: `/research/${item.slug}`,
-      input: `open ${item.slug}`,
+      input: `/research ${item.slug}`,
       title: item.title,
       description: item.summary,
     })),
-    { path: "/log", input: "log", title: "Log", description: "What I've been doing, week by week" },
+    { path: "/work", input: "/work", title: "Work", description: "What I've built, most recent first" },
+    ...data.projects.map((project) => ({
+      path: `/work/${project.slug}`,
+      input: `/work ${project.slug}`,
+      title: project.title,
+      description: project.summary,
+    })),
+    { path: "/writing", input: "/writing", title: "Writing", description: "Essays, one or more a quarter since 2021" },
+    ...data.posts.map((post) => ({
+      path: `/writing/${post.slug}`,
+      input: `/writing ${post.slug}`,
+      title: post.title,
+      description: post.excerpt,
+    })),
   ]
 }
 

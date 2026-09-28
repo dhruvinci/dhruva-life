@@ -7,19 +7,14 @@ export interface SiteConfig {
   tagline: string
   description: string
   twitter: string
-  /** Commands shown as the primary navigation, in order. */
+  /** Order of commands in the slash menu and /help. */
   nav: string[]
-  /** Mobile quick-action chips shown before any command has run. */
+  /** Suggested commands shown under /help output. */
   quickActions: string[]
   /** Display order for project clusters on /work. Unlisted clusters follow. */
   projectClusters: string[]
   /** Short status tags on the home page, e.g. "open to research", each linking to a command. */
   availability: Array<{ label: string; command: string }>
-  secrets: {
-    /** Number of distinct commands a visitor runs before secret hints appear in help. */
-    hintsAfter: number
-    hints: Array<{ hint: string; command: string }>
-  }
 }
 
 export interface Link {
@@ -32,7 +27,9 @@ export interface Page {
   title: string
   description: string
   aliases: string[]
-  /** Suggested follow-up commands (mobile chips). */
+  /** false keeps the page reachable by URL but out of the slash menu (e.g. /music). */
+  listed: boolean
+  /** Suggested follow-up commands. */
   next: string[]
   updated?: string
   html: string

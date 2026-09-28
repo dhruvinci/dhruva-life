@@ -78,7 +78,7 @@ pnpm check        # typecheck + lint + build
 content/**            Markdown + site.json (the only place content lives)
 lib/content.ts        server-only loader: parses + validates content, renders Markdown to HTML
 lib/routes.ts         the URL <-> command table used by everything below
-lib/commands/         command registry, one file per concern (content, help, utilities, easter eggs)
+lib/commands/         command registry: content commands, /help, /clear and hidden /theme
 components/terminal/  the terminal UI (client component, server-rendered on first load)
 app/page.tsx          home
 app/[...slug]/        every content route, statically generated from content/
@@ -89,7 +89,6 @@ app/sitemap.ts        generated from the same route table
 
 - Each route is statically generated with its command already "run", so the HTML contains the content (SEO, link previews, works without JS).
 - After hydration, commands run client-side. Routed commands update the URL with `history.pushState`; back/forward replay the matching command; plain clicks on internal links are intercepted and run in place, modified clicks open new tabs normally.
-- Clicking a link replaces the screen (like a website); typing appends below (like a shell), with older output collapsed. `cd <path>`, `cd ..` and `cd ~` work, and ⌘K opens a fuzzy jump palette.
-- The sticky header shows the current path as a clickable prompt, e.g. `dhruva@life:~/work/graicie $`.
+- It works like Claude Code: type `/` to open the command menu (`/about /research /work /writing /now /cv /contact /help /clear`). A space after `/work`, `/research` or `/writing` lists their items. Menu picks and typed commands append below like a terminal; clicking links in the content replaces the screen like a website.
 - Each page gets its own social card from `app/og/[...slug]/route.tsx`; writing has an RSS feed at `/feed.xml`.
-- Per-visitor state (history, aliases, discovered secrets, theme) lives in `localStorage` and is optional.
+- Per-visitor state (command history, theme) lives in `localStorage` and is optional. `/theme dark|light|auto` switches colours.

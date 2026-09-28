@@ -2,6 +2,7 @@
 title: Music
 description: Gigs, records, and what's playing
 aliases: [gigs, vinyls, vinyl, spotify]
+listed: false
 next: [about, writing]
 ---
 

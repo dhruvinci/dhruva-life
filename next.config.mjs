@@ -13,6 +13,7 @@ const nextConfig = {
       "/philosophy": "/about",
       "/random": "/about",
       "/work/graicie": "/work/kakashi",
+      "/log": "/now",
       "/work/cultureco": "/work",
       "/work/shaadi-fun": "/work",
       "/work/arenatwo": "/work",

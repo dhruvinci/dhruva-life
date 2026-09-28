@@ -15,10 +15,10 @@
     "contact"
   ],
   "quickActions": [
-    "about",
-    "research",
-    "work",
-    "contact"
+    "/about",
+    "/research",
+    "/work",
+    "/contact"
   ],
   "projectClusters": [
     "Vision AI",
@@ -27,39 +27,14 @@
     "Enterprise",
     "Culture"
   ],
-  "secrets": {
-    "hintsAfter": 5,
-    "hints": [
-      {
-        "hint": "Brazilian art form meets flowing movement...",
-        "command": "jits"
-      },
-      {
-        "hint": "Vinyl spins with warm, imperfect beauty...",
-        "command": "analog"
-      },
-      {
-        "hint": "Green rain falls in digital patterns...",
-        "command": "matrix"
-      },
-      {
-        "hint": "Sacred geometry blooms from intention...",
-        "command": "rangoli"
-      },
-      {
-        "hint": "Press to begin infinite game...",
-        "command": "play"
-      }
-    ]
-  },
   "availability": [
     {
       "label": "open to research",
-      "command": "research"
+      "command": "/research"
     },
     {
       "label": "open to work",
-      "command": "contact"
+      "command": "/contact"
     }
   ]
 }
