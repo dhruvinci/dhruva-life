@@ -18,6 +18,4 @@ Seeing the models fail made that idea more interesting to me, not less. If they 
 
 I want to be clear with myself that this is curiosity, not a company. It's an itch. I'll probably keep poking at it the way I poke at a position I keep losing in - try something, fail, go home, think about it in the shower, try something slightly different next time.
 
-The mats taught me that the stuck feeling is usually right before something opens up.
-
-Let's see.
+The mats taught me that the stuck feeling is usually right before something opens up. I'm going to keep pulling on this thread.

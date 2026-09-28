@@ -1,5 +1,5 @@
 ---
-title: Twenty-Nine Clients
+title: Productization
 date: 2023-05-28
 excerpt: "Somewhere around the twentieth kickoff call, I realised I could finish the brand's sentences for them."
 ---

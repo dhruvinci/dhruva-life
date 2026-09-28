@@ -26,4 +26,4 @@ For me, right now, it looks like quieter work. Listening harder to which things 
 
 I don't have a neat plan. What I've got is a feeling that the next year is going to be about value in the plainest sense of the word, what's actually useful to someone, and that anything built on less than that won't last the season.
 
-It's cold. We're still here. Back to work.
+It's cold. We're still here. Build things that are worth something when nobody's cheering, and the seasons stop mattering.

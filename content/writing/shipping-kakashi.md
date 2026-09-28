@@ -28,4 +28,4 @@ So no big numbers to share, no screenshot of a dashboard going vertical. Just a 
 
 I went to bed exhausted the night it launched, knowing I'd given it my all. Then I woke up and read the first round of corrections.
 
-Back to work.
+This is going to take years. Good. I'm not going anywhere.

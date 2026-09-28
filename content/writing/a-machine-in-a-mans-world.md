@@ -1,5 +1,5 @@
 ---
-title: Time Is the Missing Variable
+title: A Machine in a Man's World
 date: 2025-10-19
 excerpt: "Our smartest AIs have the memory of a goldfish. That's a bigger problem than it sounds."
 ---

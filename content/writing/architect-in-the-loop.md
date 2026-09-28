@@ -18,10 +18,12 @@ The other thing I've noticed is that the models have personalities, and they're 
 
 The trick isn't picking the "best" model. It's designing how they hand off to each other. Which one drafts, which one checks, which one gets the final say. It's a lot like running a team, because it is running a team. You're architecting your dream team, and just like with people, chemistry is key.
 
-And here's the part I didn't expect. This has made me fall back in love with coding again. For a long time, building meant a lot of waiting - waiting on tickets, waiting on reviews, waiting on someone else's sprint. Now the distance between an idea and a working thing is an evening. I've been building more this year than I have in a long time, and it feels like being in college again, hacking things together just to see if they work, except the things actually work now.
+And here's the part I didn't expect. This has made me fall back in love with coding.
+
+I lost that love in college. I walked into my first semester exams able to write good code, better than what we'd been taught in places, and I almost failed, because the examiner could only give me marks if my code matched the answer key. Four years of memorising code instead of thinking about it, and by the end I didn't want to write another line. Now the distance between an idea and a working thing is an evening, and nobody's checking whether my code matches anyone's answer. It only has to work. I've been building more this year than I have in a decade, and it feels like being eighteen again, before the system got to me.
 
 I won't pretend it's all rosy. The models are improving faster than any developer can, which is exciting and a little unsettling at the same time - that's Karpathy's lament, and I feel it too. The skill that holds its value is knowing what to build and how it should fit together. The typing was never the hard part.
 
 So if you've got an idea you've been sitting on, this is the year the excuses ran out. Sit down and build the thing. Keep an architect in the loop, even if the architect is you.
 
-See you on the other side of the build.
+Don't get left behind.
