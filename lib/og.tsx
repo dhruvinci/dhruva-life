@@ -1,6 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 import { ImageResponse } from "next/og"
+import { logoDataUri } from "./logo"
 
 // Cards are rendered at build time with the site's own faces (both SIL Open Font License).
 const font = (file: string) => fs.readFileSync(path.join(process.cwd(), "assets", "fonts", file))
@@ -47,7 +48,11 @@ export function renderOgImage({ path, title, description, eyebrow }: { path: str
           <div style={{ fontSize: 27, color: "#a69d90", lineHeight: 1.45 }}>{trimmed}</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, color: "#a69d90" }}>
-          <span style={{ color: "#df7c5c" }}>dhruva.life</span>
+          <span style={{ display: "flex", alignItems: "center", gap: 14, color: "#df7c5c" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- rendered to PNG by next/og */}
+            <img src={logoDataUri()} width={40} height={40} alt="" />
+            dhruva.life
+          </span>
           <span>Dhruva Chakravarthi</span>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import type React from "react"
 import type { SiteData } from "@/lib/site-types"
+import { Logo } from "@/components/logo"
 import { CommandLink } from "./command-link"
 
 /**
@@ -14,7 +15,8 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
     return (
       <header className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- intercepted by the terminal to go home */}
-        <a href="/" className="font-medium hover:text-accent">
+        <a href="/" className="inline-flex items-center gap-2 self-center font-medium hover:text-accent">
+          <Logo className="h-4 w-4" />
           {config.name}
         </a>
         <span className="text-terracotta">{config.tagline}</span>
@@ -32,7 +34,8 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
   ].filter(Boolean) as Array<{ label: string; command: string; title: string }>
 
   const lines: React.ReactNode[] = [
-    <span key="name" className="font-medium">
+    <span key="name" className="inline-flex items-center gap-2.5 font-medium">
+      <Logo className="h-6 w-6" />
       {config.name}
     </span>,
     <span key="loading" className="text-muted-foreground">

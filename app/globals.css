@@ -303,8 +303,20 @@ html[data-theme="amber"] body {
   }
 }
 
+/* The logo's cursor blinks like the prompt's. */
+.logo-cursor {
+  animation: logo-blink 1.1s steps(1, end) infinite;
+}
+
+@keyframes logo-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .intro-line,
+  .logo-cursor,
   .loading-dots::after {
     animation: none;
   }

@@ -50,6 +50,13 @@ export const metadata: Metadata = {
     canonical: "/",
     types: { "application/rss+xml": [{ url: "/feed.xml", title: `${config.author}'s blog` }] },
   },
+  icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml" },
+      { url: "/logo.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
   robots: {
     index: true,
     follow: true,

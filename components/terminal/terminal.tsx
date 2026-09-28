@@ -6,6 +6,7 @@ import { useTheme } from "@/hooks/use-theme"
 import { createRegistry } from "@/lib/commands/registry"
 import { routeForPath } from "@/lib/routes"
 import type { SiteData } from "@/lib/site-types"
+import { homeTitle, pageTitle } from "@/lib/seo"
 import { storage } from "@/lib/storage"
 import { TerminalContext, type TerminalApi } from "./context"
 import { Welcome } from "./intro"
@@ -43,7 +44,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
   const nextId = useRef(1)
   const pendingScroll = useRef<{ id?: string; focus: boolean } | null>(null)
   const inputRef = useRef<HTMLInputElement>(null)
-  const baseTitle = `${data.config.name} - terminal`
+  const baseTitle = homeTitle(data)
 
   const [initial] = useState(() => (initialInput ? registry.execute(initialInput, { data }) : undefined))
   const [blocks, setBlocks] = useState<Block[]>(() =>
@@ -110,7 +111,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
       if (routePath) {
         setPath(routePath)
         if (source !== "history" && routePath !== window.location.pathname) window.history.pushState(null, "", routePath)
-        if (result.title) document.title = `${result.title} | ${data.config.name}`
+        if (result.title) document.title = pageTitle(data, result.title)
       }
     },
     [data, registry],
