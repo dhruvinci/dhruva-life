@@ -119,11 +119,17 @@ function linkList(data: Record<string, unknown>, file: string): Link[] {
   return links as Link[]
 }
 
-/** content/<dir>/_intro.md rendered to HTML, or "" when absent. */
-function loadIntro(dir: string, name = "_intro.md") {
+/** content/<dir>/_intro.md as Markdown, or "" when absent. */
+function loadIntroMarkdown(dir: string, name = "_intro.md") {
   const file = path.join(CONTENT_DIR, dir, name)
   if (!fs.existsSync(file)) return ""
-  return renderMarkdown(matter(fs.readFileSync(file, "utf8")).content.trim())
+  return matter(fs.readFileSync(file, "utf8")).content.trim()
+}
+
+/** content/<dir>/_intro.md rendered to HTML, or "" when absent. */
+function loadIntro(dir: string, name = "_intro.md") {
+  const markdown = loadIntroMarkdown(dir, name)
+  return markdown ? renderMarkdown(markdown) : ""
 }
 
 function loadPages(): Page[] {
@@ -143,6 +149,7 @@ function loadPages(): Page[] {
       updated: data.updated === undefined ? undefined : toDateString(data.updated, file, "updated"),
       html: renderMarkdown(body),
       text: plainText(body),
+      raw: body,
     }
   })
 }
@@ -166,6 +173,7 @@ function loadProjects(): Project[] {
         cover: optionalString(data, "cover", file),
         html: hasBody(body) ? renderMarkdown(body) : "",
         text: plainText(body),
+        raw: body,
       }
     })
     .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title))
@@ -200,6 +208,7 @@ function loadResearch(): ResearchItem[] {
       highlights: optionalStringList(data, "highlights", file),
       html: hasBody(body) ? renderMarkdown(body) : "",
       text: plainText(body),
+      raw: body,
     }))
     // Published papers lead; everything else follows by date.
     .sort((a, b) => Number(b.kind === "paper") - Number(a.kind === "paper") || b.date.localeCompare(a.date))
@@ -212,6 +221,7 @@ function loadLogs(): LogEntry[] {
       summary: firstLine(body),
       html: renderMarkdown(body),
       text: plainText(body),
+      raw: body,
     }))
     .sort((a, b) => b.date.localeCompare(a.date))
 }
@@ -277,6 +287,12 @@ export function getSiteData(): SiteData {
     records: loadJson<VinylRecord[]>("records.json", []),
     intros: { work: loadIntro("projects"), blog: loadIntro("blog"), research: loadIntro("research") },
     outros: { work: loadIntro("projects", "_outro.md"), blog: loadIntro("blog", "_outro.md"), research: loadIntro("research", "_outro.md") },
+    notes: {
+      workIntro: loadIntroMarkdown("projects"),
+      workOutro: loadIntroMarkdown("projects", "_outro.md"),
+      researchIntro: loadIntroMarkdown("research"),
+      researchOutro: loadIntroMarkdown("research", "_outro.md"),
+    },
   }
 
   // Slugs stay unique across collections so a name always means one thing.

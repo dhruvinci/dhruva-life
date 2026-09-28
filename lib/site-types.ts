@@ -42,6 +42,8 @@ export interface Page {
   updated?: string
   html: string
   text: string
+  /** The Markdown source, for plain-text outputs like /llms-full.txt. */
+  raw: string
 }
 
 export interface Project {
@@ -61,6 +63,8 @@ export interface Project {
   cover?: string
   html: string
   text: string
+  /** The Markdown source, for plain-text outputs like /llms-full.txt. */
+  raw: string
 }
 
 export interface Post {
@@ -89,6 +93,8 @@ export interface ResearchItem {
   highlights: string[]
   html: string
   text: string
+  /** The Markdown source, for plain-text outputs like /llms-full.txt. */
+  raw: string
 }
 
 export interface Photo {
@@ -133,6 +139,8 @@ export interface LogEntry {
   summary: string
   html: string
   text: string
+  /** The Markdown source, for plain-text outputs like /llms-full.txt. */
+  raw: string
 }
 
 export interface SiteData {
@@ -150,4 +158,6 @@ export interface SiteData {
   /** Optional text from content/<collection>/_intro.md (above) and _outro.md (below). */
   intros: { work: string; blog: string; research: string }
   outros: { work: string; blog: string; research: string }
+  /** Markdown source of the intros and outros, for plain-text outputs. */
+  notes: { workIntro: string; workOutro: string; researchIntro: string; researchOutro: string }
 }
