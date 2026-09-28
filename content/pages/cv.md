@@ -18,7 +18,10 @@ Applied AI engineer and independent researcher building vision-language systems 
 - On 200 out-of-distribution uploads (4,620 expert-reviewed segments), accuracy fell to 46.7% but 93% of errors were adjacent-position confusions - graceful, structured degradation.
 - Released MoveBench v0: an ontology-based scorer with strict, alias-folding and LLM-as-judge regimes.
 
-**Current work** - System 1 / System 2 visual understanding: fast CV and classifier models paired with slow VLM reasoning; probing vision-tower layers of a fine-tuned Qwen model for recoverable spatial information; trained a lightweight actor-segmentation decoder on frozen Qwen3-VL and SAM 3 features for identity-aware segmentation of people in close contact.
+**Current work** - limb ownership and fast/slow vision for people in contact:
+
+- Ran a 146 GiB frozen-representation campaign on Qwen3.8-27B (27 vision layers, 64 language-layer actor states) and trained ownership probes; showed with fixed-decoder and actor-swap controls that global actor queries act as identity codes and do not fix trapped-limb ownership. [Details](/research/whose-arm-is-it)
+- Built matched DINO / Laya / Qwen encoder comparisons with small trained readouts; a frozen DINO posture readout passed a fresh three-family audit (0.789 macro recall vs 0.25 majority); pair-centroid movement cut error 62% at 98.5% coverage. [Details](/research/fast-and-slow)
 
 ## Experience
 
@@ -77,8 +80,8 @@ Applied AI engineer and independent researcher building vision-language systems 
 
 ## Skills
 
-- **Vision & ML:** VLMs (Gemini 2.5, Qwen2.5-VL, Qwen3-VL, LLaVA, Keye-VL), SAM / SAM 3, YOLO pose, ViTPose, MediaPipe, ByteTrack, RAFT optical flow, ST-GCN, representation probing, PyTorch, GPU training on RunPod
-- **Evaluation:** benchmark and ontology design, LLM-as-judge, bootstrap confidence intervals, human-in-the-loop labelling, classical baselines (HMM)
+- **Vision & ML:** VLMs (Gemini 2.5, Qwen3.8, Qwen2.5-VL, LLaVA, Keye-VL, Laya), DINO, SAM 2.1 / SAM 3 / 3.1, PromptHMR, YOLO pose, RTMPose, ViTPose, MediaPipe, ByteTrack, RAFT optical flow, ST-GCN, representation probing, PyTorch, cloud and local GPU workflows (RunPod, RTX PRO 6000)
+- **Evaluation:** benchmark and ontology design, pre-registered gates and controls, source-separated holdouts, LLM-as-judge, bootstrap confidence intervals, blind human-review tooling, classical baselines (HMM, geometry, interpolation)
 - **LLM systems:** multi-model orchestration, context caching, prompt and pipeline versioning, latency and cost optimisation, self-hosted inference
 - **Languages:** Python, TypeScript, JavaScript, Rust, Solidity, SQL
 - **Product engineering:** React, Next.js, Astro, Node/Express, FastAPI, Postgres, Supabase, job queues, FFmpeg, Cloudflare R2 and Workers, Vercel, Railway, Fly.io, GitHub Actions
