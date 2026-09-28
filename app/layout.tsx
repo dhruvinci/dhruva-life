@@ -53,9 +53,8 @@ export const metadata: Metadata = {
   },
 }
 
-// Runs before paint so the saved theme applies without a flash, and marks returning
-// visitors so the intro animation only plays on the first visit.
-const bootScript = `try{var t=localStorage.getItem("terminal-theme")||"dark",m=t==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t,c=document.documentElement.classList;c.toggle("dark",m==="dark");if(localStorage.getItem("terminal-visited"))c.add("returning")}catch(e){}`
+// Runs before paint so the saved theme applies without a flash.
+const bootScript = `try{var t=localStorage.getItem("terminal-theme")||"dark",m=t==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t,c=document.documentElement.classList;c.toggle("dark",m==="dark")}catch(e){}`
 
 export default function RootLayout({
   children,

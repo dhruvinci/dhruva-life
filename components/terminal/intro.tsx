@@ -4,7 +4,7 @@ import { CommandLink } from "./command-link"
 
 /**
  * The boot screen: name, "Loading identity...", tagline, sections, hint. Lines type in
- * one after another on a visitor's first visit. Once there's output below, it collapses
+ * one after another every time the home screen loads. Once there's output below, it collapses
  * to a single line.
  */
 export function Welcome({ data, compact }: { data: SiteData; compact: boolean }) {

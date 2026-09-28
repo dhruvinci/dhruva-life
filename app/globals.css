@@ -196,7 +196,7 @@
   caret-shape: block;
 }
 
-/* Home intro lines type in once, on a visitor's first visit. */
+/* Home intro lines type in on every visit to the home screen. */
 @keyframes intro-in {
   from {
     opacity: 0;
@@ -229,12 +229,6 @@
   75% {
     content: "...";
   }
-}
-.returning .loading-dots::after {
-  animation: none;
-}
-.returning .intro-line {
-  animation: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

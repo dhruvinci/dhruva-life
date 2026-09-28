@@ -3,7 +3,6 @@
 
 const KEYS = {
   history: "terminal-history",
-  visited: "terminal-visited",
 }
 
 function read<T>(key: string, fallback: T): T {
@@ -26,5 +25,4 @@ function write(key: string, value: unknown) {
 export const storage = {
   getHistory: () => read<string[]>(KEYS.history, []),
   setHistory: (history: string[]) => write(KEYS.history, history),
-  markVisited: () => write(KEYS.visited, true),
 }

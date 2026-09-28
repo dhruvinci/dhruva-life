@@ -116,7 +116,6 @@ export function Terminal({ data, initialInput }: TerminalProps) {
 
   useEffect(() => {
     setHistory(storage.getHistory())
-    storage.markVisited()
   }, [])
 
   // Back/forward shows the page for that URL instead of reloading.
