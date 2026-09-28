@@ -52,8 +52,8 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
           aria-expanded={open}
           className="flex flex-1 min-w-0 items-center gap-2 text-left"
         >
-          <span className="text-accent" aria-hidden>
-            {latest || open ? ">" : "▸"}
+          <span className="text-sage" aria-hidden>
+            {latest || open ? "$" : "▸"}
           </span>
           <span className={`break-words min-w-0 ${open ? "text-foreground" : "text-muted-foreground"}`}>{block.input}</span>
         </button>

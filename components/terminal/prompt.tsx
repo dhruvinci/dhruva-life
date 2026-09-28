@@ -101,8 +101,8 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
   }
 
   return (
-    <div className="print:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur pb-safe">
-      <div className="max-w-3xl mx-auto px-3 sm:px-6 pt-2 pb-3 space-y-2">
+    <div className="print:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border pb-safe">
+      <div className="max-w-3xl mx-auto px-3 sm:px-6 py-3 space-y-2">
         {menuOpen && (
           <ul
             id="slash-menu"
@@ -142,9 +142,9 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
           >
             /
           </button>
-          <label className="flex flex-1 items-center gap-3 rounded-lg border border-border focus-within:border-accent/60 bg-card px-3 py-2.5 transition-colors">
-            <span className="text-accent text-sm" aria-hidden>
-              &gt;
+          <label className="flex flex-1 items-center gap-3 rounded-lg md:rounded-none border md:border-0 border-border bg-card md:bg-transparent px-3 md:px-0 py-2.5 md:py-1">
+            <span className="text-sage text-sm" aria-hidden>
+              $
             </span>
             <input
               ref={inputRef}
@@ -161,7 +161,7 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
               aria-controls="slash-menu"
               aria-activedescendant={menuOpen ? `slash-${Math.min(active, items.length - 1)}` : undefined}
               aria-autocomplete="list"
-              placeholder="Type / for commands"
+              placeholder="type / for commands"
               className="prompt-input w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               autoComplete="off"
               autoCorrect="off"
