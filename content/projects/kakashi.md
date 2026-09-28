@@ -5,7 +5,7 @@ status: Active
 year: "2026"
 period: Oct 2025 – now
 order: 1
-role: Founder
+role: Founder & Engineer
 summary: "An AI training partner for jiu-jitsu: upload a roll, get back what actually happened - positions, transitions, and what to work on."
 stack: [Gemini, YOLO pose, optical flow, React, Express, Postgres, Cloudflare R2]
 links:

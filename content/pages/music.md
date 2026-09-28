@@ -14,9 +14,39 @@ Parvaaz · Raghu Dixit · Baiju Dharmajan · Gray Matter · The Beta Funktion ·
 
 ## On the shelf
 
-- **Miles Davis:** Kind of Blue (Blue Note reissue)
-- **Kiasmos:** Blurred EP (Limited white)
-- **Bonobo:** Migration (Deluxe edition)
+Every record I own, 100 of them. A few are ex-radio-station copies with the reviewer's notes still on the sleeve.
+
+### Classic rock
+
+ABBA – *Gold* · The Alan Parsons Project – *I Robot* · The Beatles – *1* · Black Sabbath – *Paranoid* · Bob Dylan – *Bob Dylan's Greatest Hits* · Creedence Clearwater Revival – *Chronicle* · Creedence Clearwater Revival – *Creedence Gold* · Crosby, Stills & Nash – *Crosby, Stills & Nash* · David Bowie – *ChangesOneBowie* · Deep Purple – *Burn* · Dire Straits – *Alchemy* · Dire Straits & Mark Knopfler – *Private Investigations* · The Doors – *The Doors* · Electric Light Orchestra – *A New World Record* · Fleetwood Mac – *Greatest Hits* · Grateful Dead – *From the Mars Hotel* · Jimi Hendrix – *Experience Hendrix* · Led Zeppelin – *Led Zeppelin* · Oasis – *Definitely Maybe* · Outlaws – *Outlaws* · Pink Floyd – *Relics* · Pink Floyd – *The Dark Side of the Moon* · Pink Floyd – *Wish You Were Here* · Pink Floyd – *Animals* · Pink Floyd – *The Wall* · Pink Floyd – *A Momentary Lapse of Reason* · Pink Floyd – *The Division Bell* · Queen – *A Night at the Opera* · Rush – *Moving Pictures* · The Who – *The Who by Numbers* · The Who – *Who's Greatest Hits* · XTC – *Go 2*
+
+### Prog
+
+Camel – *I Can See Your House From Here* · Camel – *A Live Record* · King Crimson – *In the Court of the Crimson King* · Porcupine Tree – *In Absentia* · Porcupine Tree – *Deadwing* · Porcupine Tree – *Fear of a Blank Planet* · Porcupine Tree – *Closure/Continuation* · Puscifer – *Existential Reckoning* · Steven Wilson – *Hand. Cannot. Erase.* · Steven Wilson – *Transience* · Tool – *Fear Inoculum* · White Moth Black Butterfly – *Atone*
+
+### Rock and metal
+
+A Perfect Circle – *Mer de Noms* · Arctic Monkeys – *AM* · Foo Fighters – *Greatest Hits* · Foo Fighters – *Concrete and Gold* · Gojira – *From Mars to Sirius* · Greta Van Fleet – *Anthem of the Peaceful Army* · Linkin Park – *Meteora* · Metallica – *Master of Puppets* · Nirvana – *Nevermind* · Noel Gallagher's High Flying Birds – *Who Built the Moon?* · Pearl Jam – *Ten* · Pearl Jam – *Vs.* · Radiohead – *OK Computer OKNOTOK 1997–2017* · Radiohead – *Kid A* · Rage Against the Machine – *Rage Against the Machine* · Red Hot Chili Peppers – *Californication* · Red Hot Chili Peppers – *By the Way* · Weezer – *Weezer (Blue Album)*
+
+### Indie and electronic
+
+Bonobo – *Black Sands* · Cigarettes After Sex – *Cigarettes After Sex* · Daft Punk – *Random Access Memories* · Gorillaz – *Demon Days* · Khruangbin – *Mordechai* · Kias Fansuri – *Dua Tahun Pertama* · King Gizzard & the Lizard Wizard – *Nonagon Infinity* · MGMT – *Oracular Spectacular* · Of Monsters and Men – *My Head Is an Animal* · Ratatat – *Ratatat* · The Shins – *Oh, Inverted World* · Sigur Rós – *Með suð í eyrum við spilum endalaust* · Tame Impala – *Lonerism*
+
+### Pop and singer-songwriters
+
+Billie Eilish – *When We All Fall Asleep, Where Do We Go?* · boygenius – *boygenius* · boygenius – *the record* · Halsey – *If I Can't Have Love, I Want Power* · Mali – *Caution to the Wind* · Phoebe Bridgers – *Punisher* · Taylor Swift – *Red (Taylor's Version)*
+
+### Soul, jazz and hip-hop
+
+Arthur Blythe – *Elaborations* · Hiatus Kaiyote – *Tawk Tomahawk* · Little Simz – *Sometimes I Might Be Introvert* · Nu Soul Habits – *Meant to Be* (1993 Motown promo 12") · Phil Bodner & Company – *Fine & Dandy* · Ray Cash – *Dope Game* (12") · Thelonious Monk Quartet – *Monk's Dream* · Tom Misch & Yussef Dayes – *What Kinda Music*
+
+### Oldies
+
+The Beach Boys – *Best of The Beach Boys* · Bob Marley & the Wailers – *Legend* · Buddy Holly – *The Very Best of Buddy Holly* · Harry Belafonte – *Calypso*
+
+### Everything else
+
+*Absolute Beginners* (soundtrack) · The Alley Cats – *Nightmare City* · Ananda Shankar – *Ananda Shankar* · Annie Anxiety – *Soul Possession* · Lata Mangeshkar – *Live at Royal Albert Hall, 1974* · Various Artists – *Live From Lawrence* (KJHK's Quest for Vinyl)
 
 ## On repeat
 
