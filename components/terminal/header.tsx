@@ -17,7 +17,7 @@ export function Header({ config, path, onFind }: HeaderProps) {
   const currentTop = segments[0]
 
   return (
-    <header className="sticky top-0 z-30 bg-background/90 backdrop-blur border-b border-border">
+    <header className="print:hidden sticky top-0 z-30 bg-background/90 backdrop-blur border-b border-border">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 h-12 flex items-center gap-4 text-sm">
         <nav aria-label="Location" className="flex-1 min-w-0 truncate">
           {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- intercepted by the terminal as `cd ~` */}

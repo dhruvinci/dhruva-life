@@ -45,7 +45,7 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
 
   return (
     <section id={block.id} tabIndex={-1} aria-label={block.input} className="group scroll-mt-16">
-      <div className="flex items-center gap-2 text-sm">
+      <div className="print:hidden flex items-center gap-2 text-sm">
         <button
           type="button"
           onClick={() => setExpanded(!open)}
@@ -76,7 +76,7 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
       </div>
 
       {open && (
-        <div className="mt-4">
+        <div className="mt-4 print:mt-0">
           <div className={`leading-relaxed ${block.tone ? toneClasses[block.tone] : ""}`}>{block.content}</div>
           {block.notice && (
             <p role="status" className="mt-4 text-sm text-teal-stone bg-teal-stone/10 border border-teal-stone/25 rounded px-3 py-2">
@@ -84,7 +84,7 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
             </p>
           )}
           {latest && block.next && block.next.length > 0 && (
-            <nav aria-label="Next" className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
+            <nav aria-label="Next" className="print:hidden mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
               <span className="text-muted-foreground">next:</span>
               {block.next.map((command) => (
                 <CommandLink

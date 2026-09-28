@@ -233,7 +233,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     <TerminalContext.Provider value={api}>
       <div onClick={handleClick} className="min-h-screen">
         <Header config={data.config} path={path} onFind={() => setPaletteOpen(true)} />
-        <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-[35vh]">
+        <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-[35vh] print:p-0 print:max-w-none">
           {blocks.length === 0 && <Intro data={data} />}
           <div className="space-y-10">
             {blocks.map((block, index) => (

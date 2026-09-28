@@ -219,3 +219,49 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Printing (e.g. /cv -> Save as PDF): plain black on white, no terminal chrome. */
+@media print {
+  :root,
+  .dark {
+    --background: #ffffff;
+    --card: #ffffff;
+    --muted: #f2f2f2;
+    --foreground: #111111;
+    --muted-foreground: #444444;
+    --border: #cccccc;
+    --accent: #111111;
+    --ochre: #444444;
+    --olive: #111111;
+    --teal-stone: #111111;
+  }
+  @page {
+    margin: 14mm 14mm;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+  }
+  body {
+    font-size: 10.5pt;
+  }
+  .md {
+    font-size: 10.5pt;
+    line-height: 1.45;
+    max-width: none;
+  }
+  .md > * + * {
+    margin-top: 0.5em;
+  }
+  .md h2 {
+    margin-top: 1.1em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.15em;
+  }
+  .md a {
+    text-decoration: none;
+  }
+  .md li + li {
+    margin-top: 0.15em;
+  }
+}

@@ -99,7 +99,7 @@ export function Prompt({ data, registry, history, path, discovery, inputRef, onF
   const showSuggestions = focused && input.length > 0 && suggestions.length > 0
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border pb-safe">
+    <div className="print:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border pb-safe">
       <div className="max-w-3xl mx-auto px-3 sm:px-6 py-3 space-y-2">
         {showSuggestions && (
           <div className="flex flex-wrap gap-2" aria-label="Suggestions">
