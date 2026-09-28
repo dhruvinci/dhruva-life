@@ -10,7 +10,7 @@ I mean really noticed. Because I've started doing it, and it's a little weird. W
 
 Then I go back and rewatch it, and it's a completely different experience. Slow. Frame by frame. Okay, his left hand was here, his hips turned there, that's why the sweep worked. I can explain it now. But it takes me ten minutes to understand what my eyes figured out in half a second.
 
-I've been going back and forth like this with the Tackett and Rotolo match from CJI for a while now. Live, it's just chaos and adrenaline. Slowed down, it's a conversation between two people, move and counter move. Both versions are true. They're just happening at different speeds.
+I've been going back and forth like this with the Tackett and Ruotolo match from CJI for a while now. Live, it's just chaos and adrenaline. Slowed down, it's a conversation between two people, move and counter move. Both versions are true. They're just happening at different speeds.
 
 So I've been thinking a lot about Daniel Kahneman's Thinking, Fast and Slow. His idea is that we have two systems. System 1 is fast, automatic, instinctive - it's the part of you that flinches before you decide to. System 2 is slow, deliberate, effortful - it's the part of you that does long division. Kahneman was writing about thinking, not about eyes. But I can't stop seeing it in how we see.
 
