@@ -17,6 +17,8 @@ export interface SiteConfig {
   projectClusters: string[]
   /** Short status tags on the home page, e.g. "open to research", each linking to a command. */
   availability: Array<{ label: string; command: string }>
+  /** Profile URLs elsewhere (GitHub, LinkedIn, X...), for search engines' structured data. */
+  profiles?: string[]
 }
 
 export interface Link {
@@ -28,6 +30,8 @@ export interface Page {
   name: string
   title: string
   description: string
+  /** Longer description for search results and link previews; falls back to description. */
+  seo?: string
   aliases: string[]
   /** Fun pages (/music, /bjj, /camera) join the menu once /fun has been run. */
   fun: boolean

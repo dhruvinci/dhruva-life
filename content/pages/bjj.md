@@ -1,6 +1,7 @@
 ---
 title: Jiu-jitsu
 description: Fights, gyms, and the sport that started the research
+seo: "Dhruva Chakravarthi's jiu-jitsu: a competition record from ADCC India Nationals, Strangle and PKD, the gyms, and how the sport led to the research."
 fun: true
 emoji: "🤼"
 next: [music, camera, fun]

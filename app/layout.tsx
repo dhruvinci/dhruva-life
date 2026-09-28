@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono, Newsreader } from "next/font/google"
 import { getSiteData } from "@/lib/content"
+import { homeTitle, titleTemplate } from "@/lib/seo"
 import { DARK_THEMES, THEME_NAMES } from "@/lib/themes"
 import "./globals.css"
 
@@ -18,20 +19,21 @@ const newsreader = Newsreader({
   variable: "--font-newsreader",
 })
 
-const { config } = getSiteData()
+const data = getSiteData()
+const { config } = data
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.url),
   title: {
-    default: `${config.name} - terminal`,
-    template: `%s | ${config.name}`,
+    default: homeTitle(data),
+    template: titleTemplate(data),
   },
   description: config.description,
   applicationName: config.name,
   authors: [{ name: config.author }],
   creator: config.author,
   openGraph: {
-    title: `${config.name} - terminal`,
+    title: homeTitle(data),
     description: config.description,
     url: "/",
     siteName: config.name,
@@ -40,17 +42,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${config.name} - terminal`,
+    title: homeTitle(data),
     description: config.description,
     creator: config.twitter,
   },
   alternates: {
     canonical: "/",
-    types: { "application/rss+xml": [{ url: "/feed.xml", title: `${config.name} writing` }] },
+    types: { "application/rss+xml": [{ url: "/feed.xml", title: `${config.author}'s blog` }] },
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
   },
 }
 

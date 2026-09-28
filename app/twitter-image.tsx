@@ -1,7 +1,7 @@
 import { getSiteData } from "@/lib/content"
 import { ogSize, renderOgImage } from "@/lib/og"
 
-export const alt = "dhruva.life"
+export const alt = "Dhruva Chakravarthi · dhruva.life"
 export const size = ogSize
 export const contentType = "image/png"
 

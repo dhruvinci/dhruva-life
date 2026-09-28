@@ -1,6 +1,7 @@
 ---
 title: Contact
 description: Get in touch
+seo: "How to reach Dhruva Chakravarthi about vision AI research, collaborations or roles: email, GitHub, LinkedIn, or book a call."
 next: [research, work, about]
 ---
 

@@ -23,7 +23,11 @@ Never invent biographical facts, links, or numbers; ask.
 
 `lib/routes.ts` is the single URL <-> command table used by static params, metadata, sitemap, and the terminal. Every route is statically generated with its command already run, so the HTML carries the content; after hydration the same commands run client-side and update the URL via `pushState`. A new routed command therefore needs an entry in `getRoutes`, not just a registry command, or it gets no URL.
 
-A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Keep the menu small: /about /research /work /blog /contact /fun. Pages with `fun: true` (/music, /bjj, /camera) plus /theme join the menu only after /fun and show as emojis in the prompt bar. No navbar, no ⌘K, no aliases, by design. /research and /work show a persistent contact strip.
+A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Keep the menu small: /about /research /work /blog /contact /fun. Pages with `fun: true` (/music, /bjj, /camera) plus /theme are always in the menu after the main six and show as emojis in the prompt bar. On phones the prompt is a tap-to-open command list with no typing. No navbar, no ⌘K, no aliases, by design. /research and /work show a persistent contact strip.
+
+## SEO
+
+`lib/seo.ts` owns titles (server metadata and the terminal's `document.title` both use it) and schema.org JSON-LD. Each route's `description` in `lib/routes.ts` is its search/preview text; pages can set a longer `seo:` in frontmatter. Social cards are rendered by `lib/og.tsx` with the fonts in `assets/fonts/`. `/llms.txt` and `/llms-full.txt` are generated from content (`lib/llms.ts`), so they update themselves.
 
 ## Styling
 

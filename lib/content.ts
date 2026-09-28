@@ -135,6 +135,7 @@ function loadPages(): Page[] {
       name: slug,
       title: requireString(data, "title", file),
       description: requireString(data, "description", file),
+      seo: optionalString(data, "seo", file),
       aliases: optionalStringList(data, "aliases", file),
       fun: data.fun === true,
       emoji: optionalString(data, "emoji", file),

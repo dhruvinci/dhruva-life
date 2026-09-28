@@ -1,6 +1,7 @@
 ---
 title: About
 description: Who I am and how I got here
+seo: "Dhruva Chakravarthi works on vision AI for human movement: founder of kakashi.ai, with a paper at CAISc 2026. Before that, Zopu.ai, Dehidden (acquired by Polygon) and PwC."
 next: [research, work, contact]
 ---
 

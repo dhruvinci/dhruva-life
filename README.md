@@ -27,7 +27,7 @@ All content is in `content/`. Pushing to `main` deploys (Vercel). If a file is m
 | Edit about / contact / music / bjj / camera | Edit the file in `content/pages/` |
 | Change the player's songs | Edit `content/playlist.json` (YouTube video ids) |
 | Add gallery photos | Put images in `public/photos/` and list them in `content/photos.json` |
-| Change tagline, main menu, contact links | Edit `content/site.json` |
+| Change tagline, main menu, contact links, profile links | Edit `content/site.json` |
 
 **Drafts:** `draft: true` in frontmatter shows a file in `pnpm dev` only.
 
@@ -50,6 +50,7 @@ content/
 # pages/<name>.md
 title: Music
 description: Shown in the slash menu
+seo: Longer line for Google and link previews   # optional
 fun: true                          # optional: a fun command (emoji row + /fun)
 emoji: "🎵"                        # optional: its emoji in the fun row
 next: [bjj, camera]                # optional follow-up links
@@ -105,6 +106,8 @@ components/terminal/   terminal, boot intro, prompt + slash menu, output blocks,
 app/[...slug]/         every content route, statically generated
 app/og/[...slug]/      per-page social card images
 app/feed.xml/          RSS for the blog
+app/llms.txt/          map of the site for LLMs (and llms-full.txt with every page's text)
+lib/seo.ts             page titles and schema.org structured data
 ```
 
 - Each route is statically generated with its command already run, so the HTML contains the content.

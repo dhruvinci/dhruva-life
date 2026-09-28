@@ -15,5 +15,5 @@ export async function GET(_request: Request, { params }: { params: Promise<{ slu
   const { slug } = await params
   const route = routeForPath(getSiteData(), `/${slug.join("/")}`)
   if (!route) return new Response("Not found", { status: 404 })
-  return renderOgImage({ path: route.path, title: route.title, description: route.description })
+  return renderOgImage({ path: route.path, title: route.title, description: route.description, eyebrow: route.eyebrow })
 }
