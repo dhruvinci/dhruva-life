@@ -1,33 +1,43 @@
 ---
 title: Seeing, Fast and Slow
 date: 2026-09-27
-excerpt: "I've started watching how I watch things. I think my eyes work at two speeds, and I'm trying to teach machines both."
+excerpt: "Kahneman wrote about thinking fast and slow. I went looking for whether anyone had studied seeing fast and slow - and it sent me down a rabbit hole about what our models actually see."
 ---
 
-Have you ever noticed how you watch a fight?
+You can recognise someone you love from the far end of a street.
 
-I mean really noticed. Because I've started doing it, and it's a little weird. When I watch a match live, I don't see individual moves. I see a feeling. Someone's about to get swept. Someone's losing the grip. Someone's in trouble, and I know it before I can say why. My body even reacts before my brain does, I'll lean or wince or shout something at the screen.
+Long before you can see their face, before you could describe their clothes, you just know it's them. It's the walk. The way their shoulders move, the rhythm of it. Ask you to explain how you knew and you'd struggle. You'd say something vague like "I just know how she walks". And you'd be right.
 
-Then I go back and rewatch it, and it's a completely different experience. Slow. Frame by frame. Okay, his left hand was here, his hips turned there, that's why the sweep worked. I can explain it now. But it takes me ten minutes to understand what my eyes figured out in half a second.
+I've been thinking about that a lot lately, because it's exactly the kind of seeing my models are bad at.
 
-I've been going back and forth like this with the Tackett and Ruotolo match from CJI for a while now. Live, it's just chaos and adrenaline. Slowed down, it's a conversation between two people, move and counter move. Both versions are true. They're just happening at different speeds.
+It started with Daniel Kahneman's Thinking, Fast and Slow. His idea is that we run on two systems. System 1 is fast, automatic, instinctive - the part of you that flinches before you decide to. System 2 is slow, deliberate, effortful - the part of you that does long division. But Kahneman was writing about thinking. I wanted to know if anyone had looked at seeing the same way.
 
-So I've been thinking a lot about Daniel Kahneman's Thinking, Fast and Slow. His idea is that we have two systems. System 1 is fast, automatic, instinctive - it's the part of you that flinches before you decide to. System 2 is slow, deliberate, effortful - it's the part of you that does long division. Kahneman was writing about thinking, not about eyes. But I can't stop seeing it in how we see.
+Turns out, a lot of people have.
 
-Think about walking into a coffee shop. In a split second you know that person's about to bump into you, the barista is overwhelmed, that table is about to free up. You didn't reason your way to any of that. You just saw it. That's fast seeing. Now try to find your friend's face in a crowded stadium, or count how many people are wearing red, or figure out which leg belongs to which person when two people are tangled up on a mat. That's slow seeing. You have to scan, compare, go back, check again.
+In 1973 a psychologist called [Gunnar Johansson](https://en.wikipedia.org/wiki/Biological_motion_perception) stuck a dozen little reflective patches on a person's joints - wrists, elbows, shoulders, hips, knees, ankles - and filmed them moving in the dark. Show people a still photo of those dots and they see nothing. Just dots. But the moment the dots start moving, everyone instantly sees a person. Walking, running, even what kind of mood they're in. From twelve dots! That's the street, in a lab.
 
-I'm not a neuroscientist (let me say that clearly before someone corrects me), so I'm careful with the biology. But from where I'm standing, the interesting part isn't that we have both. It's how well they hand off to each other. The fast part notices something is off, and the slow part goes and looks properly. The slow part works something out, and after enough times, the fast part just knows it. Isn't that what training is? When I started jiu-jitsu I was all slow seeing. "Okay, his right arm is posted, so I should..." and I'd be on my back before I finished the sentence. Almost three years later, some of that has moved into the fast part. Not most of it. Some of it.
+Then in 1996, [Thorpe and his colleagues](https://www.nature.com/articles/381520a0) flashed photos at people for 20 milliseconds and asked one question - is there an animal in it? People could do it, and their brains had sorted it out in about 150 milliseconds. You can't reason through anything in that time. It's just seen.
 
-Photography taught me the same thing from the other side. When I'm shooting at a competition, the click has to be fast, you can't think about it. But everything before the click is slow. Watching, waiting, reading the roll, guessing where it's going to go. Most of my good photos are really slow seeing that ended in one fast moment.
+And then there's the other side. You know Where's Wally? Anne Treisman's work on [visual search](https://www.sciencedirect.com/topics/neuroscience/feature-integration-theory) explains why that book is hard. If you're looking for one red dot among blue ones, it pops out instantly, and it doesn't matter if there are ten blue dots or a hundred. But if you're looking for something defined by a combination of features - a red-and-white striped shirt, glasses, a beanie, in a crowd full of red and white - you have to go looking, one by one, and it gets slower the more stuff there is. Her explanation is that single features are processed all at once, in parallel, but binding features together into one object needs focused attention. That's slow seeing.
 
-And this is where it gets interesting for me, because it's exactly the mess I'm in with machines right now.
+My favourite framing of all of this is [reverse hierarchy theory](https://www.cell.com/neuron/fulltext/S0896-6273(02)01091-7), from Hochstein and Ahissar. They split vision into "vision at a glance" and "vision with scrutiny". At a glance you get the gist first - forest before trees. Only when you need to do you go back down and scrutinise the details.
 
-The big vision-language models feel very System 2 to me. They're slow, expensive, and they can reason and describe things beautifully. Ask one about a grappling exchange and it'll talk about it like a commentator. The small models, pose estimators, segmentation tools, little classifiers reading frozen features, they feel much more System 1. Fast, cheap, reflexive. And so far, weirdly, some of the small fast ones have been more reliable at simple things like posture than I expected. While the big slow one can tell me an armbar is happening and still get confused about whose arm is whose.
+Think about a batter facing a fast bowler. They have roughly half a second from the ball leaving the hand. There's no time to scrutinise anything. Years of practice have pushed all of it into the glance - the wrist, the seam, the length. And yet the same batter can sit with the video later and explain every ball in painful detail. Same eyes, two speeds.
 
-Is that because we've built the two systems backwards? Is it because the fast part needs to come first and hand something useful to the slow part, the way it does in us? Or is the handoff itself the whole problem? Honestly, I don't know. I have hunches, and I have a lot of experiments that didn't work the way I hoped. Most days I'm less sure than I was the day before, which I'm learning is a normal part of research and not a sign that I'm doing it wrong (at least I hope so, lol).
+I feel this in jiu-jitsu too. When I started, I saw everything slowly, and I'd be on my back before I finished thinking. Almost three years in, a little of it has moved into the glance. Not most of it. A little.
 
-What I do know is that I've never paid this much attention to my own eyes. I catch myself noticing where I look first when I walk into a room. What I miss. What I only see the second time. It's made me a better watcher of jiu-jitsu, and maybe a slightly strange person to sit next to at a gig.
+So where do machines fit?
 
-I think if we ever want machines that can really be around people - coach them, look after them, work next to them - they're going to need both speeds, and they're going to need to pass things between them the way we do. I don't know what that looks like yet. But I'm watching very closely.
+The big vision-language models feel very System 2 to me. They're slow, they reason, and they describe things beautifully in words. But ask them for the kind of thing we get at a glance - where exactly is that arm, whose is it, which way is the weight going - and they struggle. Which is funny, because in Treisman's terms, "whose arm is it" is a binding problem. It's the slow kind even for us. We just get so much practice at it that it feels fast.
 
-I'll keep writing down what I see.
+So I got curious and went inside a few of these models. I probed their internal layers to see whether that spatial information, the stuff we'd call intuition, was in there at all. And I think some of it is. But not in the way I expected. I expected something abstract and conceptual, like a sense of shape or space. What I seem to be finding is that it's stored more like tokens of associated text - words and concepts the model relates to each other. The model doesn't quite hold "the arm is here". It holds something closer to words about the arm, near other words.
+
+I'm not the only one seeing this, which was a relief. [Researchers looking inside VLMs](https://arxiv.org/abs/2410.07149) have found that visual tokens start turning into words in the middle layers of the model. And [another group](https://arxiv.org/abs/2506.08008) found that VLMs often do worse than their own vision encoders on spatial tasks like depth and correspondence. The information is right there inside the model. It just doesn't get used.
+
+So here's the seed of a thought I'm working with, and I want to be upfront that it's still fuzzy. Maybe the problem isn't that the models can't see. Maybe it's how we encode what they see, and how we decode it back out. We squeeze an image into tokens that behave like words, and then ask a language model to reason about space using words. What if we could build more of those spatial and visual cues into the architecture itself - the glance-level stuff, the twelve dots - and keep it spatial instead of translating it into text? Would the model see a little more like we do?
+
+I honestly don't know yet. I have hunches, and a lot of experiments that didn't go the way I hoped. Some days I feel like I'm onto something, and some days I feel like I've just rediscovered something people figured out years ago (which, to be fair, is also how you learn).
+
+But I've never paid this much attention to my own eyes. I catch myself noticing what I see first when I walk into a room, what I miss, and what I only see the second time. It's made me a better watcher, and probably a slightly strange person to walk down a street with.
+
+These are the seeds that got me working on this. I'll keep watching, and I'll keep writing down what I see.
