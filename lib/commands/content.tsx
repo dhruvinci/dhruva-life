@@ -1,6 +1,7 @@
 import type React from "react"
 import { CommandLink } from "@/components/terminal/command-link"
 import { CopyButton } from "@/components/terminal/copy-button"
+import { Gallery } from "@/components/terminal/gallery"
 import { Markdown } from "@/components/terminal/markdown"
 import type { Page, Post, Project, ResearchItem, SiteData } from "@/lib/site-types"
 import type { Command, MenuItem } from "./types"
@@ -65,36 +66,27 @@ function PageView({ page, children }: { page: Page; children?: React.ReactNode }
 }
 
 function WorkView({ data }: { data: SiteData }) {
-  const clusters = [
-    ...data.config.projectClusters,
-    ...data.projects.map((project) => project.cluster).filter((cluster) => !data.config.projectClusters.includes(cluster)),
-  ].filter((cluster, index, all) => all.indexOf(cluster) === index)
-
   return (
     <div className="space-y-7">
       <Heading>Work</Heading>
       {data.intros.work && <Markdown html={data.intros.work} />}
-      {clusters.map((cluster) => {
-        const projects = data.projects.filter((project) => project.cluster === cluster)
-        if (projects.length === 0) return null
-        return (
-          <section key={cluster} className="space-y-4">
-            <h3 className="text-ochre text-xs uppercase tracking-widest">{cluster}</h3>
-            {projects.map((project) => (
-              <div key={project.slug} className="group/item">
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <CommandLink command={`/work ${project.slug}`} className="text-foreground font-medium hover:text-accent">
-                    {project.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
-                  </CommandLink>
-                  <Tag tone="muted">{project.period ?? project.year}</Tag>
-                  <Tag tone={statusTone(project.status)}>{project.status.toLowerCase()}</Tag>
-                </div>
-                <p className="text-muted-foreground mt-1 max-w-[65ch]">{project.summary}</p>
-              </div>
-            ))}
-          </section>
-        )
-      })}
+      <ol className="space-y-6">
+        {data.projects.map((project) => (
+          <li key={project.slug} className="group/item border-l-2 border-border pl-4 hover:border-accent/60 transition-colors">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <CommandLink command={`/work ${project.slug}`} className="text-foreground font-medium hover:text-accent">
+                {project.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+              </CommandLink>
+              <Tag tone={statusTone(project.status)}>{project.status.toLowerCase()}</Tag>
+            </div>
+            <p className="text-sm text-muted-foreground mt-0.5">
+              {[project.role, project.period ?? project.year].filter(Boolean).join(" · ")}
+            </p>
+            <p className="mt-1.5 max-w-[65ch]">{project.summary}</p>
+          </li>
+        ))}
+      </ol>
+      {data.outros.work && <Markdown html={data.outros.work} />}
     </div>
   )
 }
@@ -140,13 +132,13 @@ function ProjectView({ project, data }: { project: Project; data: SiteData }) {
   )
 }
 
-function WritingView({ data }: { data: SiteData }) {
+function BlogView({ data }: { data: SiteData }) {
   const years = [...new Set(data.posts.map((post) => post.date.slice(0, 4)))]
 
   return (
     <div className="space-y-7">
-      <Heading>Writing</Heading>
-      {data.intros.writing && <Markdown html={data.intros.writing} />}
+      <Heading>Blog</Heading>
+      {data.intros.blog && <Markdown html={data.intros.blog} />}
       {years.map((year) => (
         <section key={year} className="space-y-4">
           <h3 className="text-ochre text-xs uppercase tracking-widest">{year}</h3>
@@ -155,7 +147,7 @@ function WritingView({ data }: { data: SiteData }) {
             .map((post) => (
               <div key={post.slug} className="group/item">
                 <div className="flex flex-wrap items-baseline gap-x-3">
-                  <CommandLink command={`/writing ${post.slug}`} className="text-foreground font-medium hover:text-accent">
+                  <CommandLink command={`/blog ${post.slug}`} className="text-foreground font-medium hover:text-accent">
                     {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
                   </CommandLink>
                   <Tag tone="muted">{formatDate(post.date)}</Tag>
@@ -186,50 +178,79 @@ function PostView({ post, data }: { post: Post; data: SiteData }) {
       </div>
       <Markdown html={post.html} />
       <Sequence
-        items={data.posts.map((item) => ({ title: item.title, command: `/writing ${item.slug}` }))}
+        items={data.posts.map((item) => ({ title: item.title, command: `/blog ${item.slug}` }))}
         index={index}
-        back={<CommandLink command="/writing">all writing</CommandLink>}
+        back={<CommandLink command="/blog">all posts</CommandLink>}
       />
     </article>
   )
 }
 
-function RecentLog({ data }: { data: SiteData }) {
-  if (data.logs.length === 0) return null
-  return (
-    <section className="space-y-4 pt-2">
-      <h3 className="text-ochre text-xs uppercase tracking-widest">Recently</h3>
-      {data.logs.map((entry) => (
-        <div key={entry.date} className="grid sm:grid-cols-[7.5rem_1fr] gap-x-4 gap-y-1">
-          <h4 className="text-olive text-sm">{formatDate(entry.date)}</h4>
-          <Markdown html={entry.html} />
-        </div>
-      ))}
-    </section>
-  )
-}
 
 function ResearchView({ data }: { data: SiteData }) {
+  const papers = data.research.filter((item) => item.kind === "paper")
+  const ongoing = data.research.filter((item) => item.kind !== "paper")
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       <Heading>Research</Heading>
       {data.intros.research && <Markdown html={data.intros.research} />}
-      <div className="space-y-5">
-        {data.research.map((item) => (
-          <div key={item.slug} className="group/item">
-            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-              <Tag tone="accent">{item.kind}</Tag>
-              <CommandLink command={`/research ${item.slug}`} className="text-foreground font-medium hover:text-accent">
-                {item.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+
+      {papers.length > 0 && (
+        <section className="space-y-4">
+          <h3 className="text-ochre text-xs uppercase tracking-widest">Published</h3>
+          {papers.map((item) => (
+            <div key={item.slug} className="rounded-lg border border-border bg-card p-4 space-y-3">
+              <div className="flex flex-wrap gap-x-3">
+                {item.venue && <Tag>{item.venue}</Tag>}
+                <Tag tone="muted">{formatDate(item.date)}</Tag>
+              </div>
+              <CommandLink command={`/research ${item.slug}`} className="block text-foreground font-medium hover:text-accent">
+                {item.title} →
               </CommandLink>
+              <p className="font-serif text-lg max-w-[65ch]">{item.summary}</p>
+              {item.highlights.length > 0 && (
+                <ul className="space-y-1 text-sm text-muted-foreground">
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight} className="grid grid-cols-[1rem_1fr]">
+                      <span aria-hidden>–</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+                {item.links.map((link) => (
+                  <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                    {link.label} ↗
+                  </a>
+                ))}
+                {item.bibtex && <CopyButton text={item.bibtex} label="Copy BibTeX" />}
+              </div>
             </div>
-            <p className="text-muted-foreground mt-1 max-w-[65ch]">{item.summary}</p>
-            <p className="text-muted-foreground text-xs mt-1">
-              {[item.venue, formatDate(item.date)].filter(Boolean).join(" · ")}
-            </p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </section>
+      )}
+
+      {ongoing.length > 0 && (
+        <section className="space-y-4">
+          <h3 className="text-ochre text-xs uppercase tracking-widest">In progress</h3>
+          {ongoing.map((item) => (
+            <div key={item.slug} className="group/item border-l-2 border-border pl-4 hover:border-accent/60 transition-colors">
+              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <CommandLink command={`/research ${item.slug}`} className="text-foreground font-medium hover:text-accent">
+                  {item.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
+                </CommandLink>
+                <Tag tone="accent">{item.kind}</Tag>
+                <Tag tone="muted">{formatDate(item.date)}</Tag>
+              </div>
+              <p className="text-muted-foreground mt-1 max-w-[65ch]">{item.summary}</p>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {data.outros.research && <Markdown html={data.outros.research} />}
     </div>
   )
 }
@@ -280,28 +301,28 @@ export function createContentCommands(data: SiteData): Command[] {
   const pageCommands: Command[] = data.pages.map((page) => ({
     name: page.name,
     description: page.description,
-    aliases: page.aliases,
-    hidden: !page.listed,
+    fun: page.fun,
+    emoji: page.emoji,
     run: () => ({
       title: page.title,
       next: withSlash(page.next),
-      content: <PageView page={page}>{page.name === "now" && <RecentLog data={data} />}</PageView>,
+      playMusic: page.name === "music",
+      content: <PageView page={page}>{page.name === "camera" && <Gallery photos={data.photos} />}</PageView>,
     }),
   }))
 
   const researchItems = (): MenuItem[] =>
-    data.research.map((item) => ({ value: `/research ${item.slug}`, label: item.title, description: item.kind }))
+    data.research.map((item) => ({ value: `/research ${item.slug}`, label: item.title, description: [item.kind, item.venue].filter(Boolean).join(' · ') }))
   const projectItems = (): MenuItem[] =>
     data.projects.map((project) => ({ value: `/work ${project.slug}`, label: project.title, description: project.period ?? project.year }))
   const postItems = (): MenuItem[] =>
-    data.posts.map((post) => ({ value: `/writing ${post.slug}`, label: post.title, description: formatDate(post.date) }))
+    data.posts.map((post) => ({ value: `/blog ${post.slug}`, label: post.title, description: formatDate(post.date) }))
 
   return [
     ...pageCommands,
     {
       name: "research",
-      description: "Papers, experiments, and open questions",
-      aliases: ["papers"],
+      description: "Vision-language models and human movement",
       complete: researchItems,
       run: (args) => {
         const slug = args[0]?.toLowerCase()
@@ -319,8 +340,7 @@ export function createContentCommands(data: SiteData): Command[] {
     },
     {
       name: "work",
-      description: "What I've built, most recent first",
-      aliases: ["projects"],
+      description: data.projects.map((project) => project.title).join(", "),
       complete: projectItems,
       run: (args) => {
         const slug = args[0]?.toLowerCase()
@@ -337,21 +357,21 @@ export function createContentCommands(data: SiteData): Command[] {
       },
     },
     {
-      name: "writing",
-      description: "Essays, one or more a quarter since 2021",
+      name: "blog",
+      description: `${data.posts.length} essays since 2021`,
       complete: postItems,
       run: (args) => {
         const slug = args[0]?.toLowerCase()
         if (!slug) {
           return {
-            title: "Writing",
-            next: data.posts.slice(0, 2).map((post) => `/writing ${post.slug}`).concat("/research"),
-            content: <WritingView data={data} />,
+            title: "Blog",
+            next: data.posts.slice(0, 2).map((post) => `/blog ${post.slug}`).concat("/research"),
+            content: <BlogView data={data} />,
           }
         }
         const post = data.posts.find((entry) => entry.slug === slug)
-        if (!post) return notFound("essay", "writing", slug)
-        return { title: post.title, next: ["/writing", "/research"], content: <PostView post={post} data={data} /> }
+        if (!post) return notFound("post", "blog", slug)
+        return { title: post.title, next: ["/blog", "/research"], content: <PostView post={post} data={data} /> }
       },
     },
   ]

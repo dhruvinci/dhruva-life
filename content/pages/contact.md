@@ -1,7 +1,7 @@
 ---
 title: Contact
 description: Get in touch
-next: [research, cv, about]
+next: [research, work, about]
 ---
 
 **Open to research.** If you work on how machines understand human movement and interaction - vision, video understanding, embodied AI - I'd love to talk about PhD positions and collaborations.

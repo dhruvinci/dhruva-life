@@ -9,16 +9,9 @@
     "about",
     "research",
     "work",
-    "writing",
-    "now",
-    "cv",
-    "contact"
-  ],
-  "quickActions": [
-    "/about",
-    "/research",
-    "/work",
-    "/contact"
+    "blog",
+    "contact",
+    "fun"
   ],
   "projectClusters": [
     "Vision AI",
@@ -34,7 +27,12 @@
     },
     {
       "label": "open to work",
-      "command": "/contact"
+      "command": "/work"
     }
-  ]
+  ],
+  "contact": {
+    "email": "0xdhruva@gmail.com",
+    "calendar": "https://calendar.app.google/586qyoAWdRjQMcB1A",
+    "linkedin": "https://in.linkedin.com/in/dhruva-chakravarthi"
+  }
 }

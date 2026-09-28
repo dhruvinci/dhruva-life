@@ -13,7 +13,7 @@ export interface Route {
 }
 
 /** Command names implemented in code; content pages cannot reuse them. */
-export const RESERVED_COMMANDS = ["work", "writing", "research", "help", "clear", "theme"]
+export const RESERVED_COMMANDS = ["work", "blog", "research", "fun", "theme"]
 
 export function getRoutes(data: SiteData): Route[] {
   return [
@@ -37,13 +37,14 @@ export function getRoutes(data: SiteData): Route[] {
       title: project.title,
       description: project.summary,
     })),
-    { path: "/writing", input: "/writing", title: "Writing", description: "Essays, one or more a quarter since 2021" },
+    { path: "/blog", input: "/blog", title: "Blog", description: "Essays, one or more a quarter since 2021" },
     ...data.posts.map((post) => ({
-      path: `/writing/${post.slug}`,
-      input: `/writing ${post.slug}`,
+      path: `/blog/${post.slug}`,
+      input: `/blog ${post.slug}`,
       title: post.title,
       description: post.excerpt,
     })),
+    { path: "/fun", input: "/fun", title: "Fun", description: "Music, jiu-jitsu, photos and themes" },
   ]
 }
 

@@ -1,68 +1,89 @@
 # dhruva.life
 
-Terminal-style personal website for Dhruva Chakravarthi. Visitors can type commands or just click; every piece of content also has a real URL (`/work`, `/writing/<slug>`, ...) that is server-rendered, shareable, and indexable.
+Terminal-style personal website for Dhruva Chakravarthi. It works like Claude Code: type `/` (or tap the `/` button on mobile) to open the command menu, or just click around. Every page also has a real, server-rendered URL.
+
+## Commands
+
+| Command | What it shows |
+|---|---|
+| `/about` | Who I am |
+| `/research` | Published paper, work in progress, code - with a persistent contact strip |
+| `/work` | Every role as a case study, plus education and skills - with a persistent contact strip |
+| `/blog` | Essays, one or more a quarter since 2021 |
+| `/contact` | How to reach me |
+| `/fun` | Unlocks the fun commands below; they then sit as emojis in the prompt bar |
+
+Fun: 🎵 `/music` (records, gigs, and a mini Spotify player of songs from both) · 🤼 `/bjj` (fights, gyms, links) · 📷 `/camera` (cameras and a photo gallery) · 🎨 `/theme` (dark, light, matrix, pokemon, claude, amber).
 
 ## Updating the site
 
-All content is Markdown in `content/`. Pushing to `main` deploys (Vercel). If a file is malformed, the build fails with a message naming the file and the problem, and the live site stays as it was.
+All content is in `content/`. Pushing to `main` deploys (Vercel). If a file is malformed, the build fails with a message naming the file, and the live site stays as it was.
 
-| To...                         | Do this                                                            |
-| ----------------------------- | ------------------------------------------------------------------ |
-| Add a log entry               | `pnpm new log`, then write bullets in `content/log/<today>.md`     |
-| Publish a post                | `pnpm new post "Title"`, then write in `content/writing/<slug>.md` |
-| Add a project                 | `pnpm new project "Name"`, then fill in the frontmatter            |
-| Update "now"                  | Edit `content/pages/now.md` and bump `updated:`                    |
-| Edit about/contact/etc.       | Edit the file in `content/pages/`                                  |
-| Add a whole new command + URL | `pnpm new page "Title"` (file name becomes the command and `/path`) |
-| Change nav, tagline, hints    | Edit `content/site.json`                                           |
+| To... | Do this |
+|---|---|
+| Publish a post | `pnpm new post "Title"`, then write in `content/blog/<slug>.md` |
+| Add a project | `pnpm new project "Name"`, then fill in the frontmatter |
+| Add research | Create `content/research/<slug>.md` (see below) |
+| Edit about / contact / music / bjj / camera | Edit the file in `content/pages/` |
+| Change the player's songs | Edit `content/playlist.json` (Spotify track ids) |
+| Add gallery photos | Put images in `public/photos/` and list them in `content/photos.json` |
+| Change tagline, main menu, contact links | Edit `content/site.json` |
 
-**Drafts:** add `draft: true` to any file's frontmatter. It shows in `pnpm dev` but is left out of the live site until you remove it.
+**Drafts:** `draft: true` in frontmatter shows a file in `pnpm dev` only.
 
-**From a phone:** open the file on github.com, tap the pencil, edit, commit to `main`. For a new post, use "Add file → Create new file" in `content/writing/` and copy the frontmatter from an existing post.
+**From a phone:** open the file on github.com, tap the pencil, edit, commit to `main`.
 
 ### Content reference
 
 ```text
 content/
-  site.json            name, tagline, nav order, mobile quick actions, project cluster order, secret hints
-  pages/<name>.md      one command + URL each: /about, /now, /contact, /stack, ...
-  projects/<slug>.md   shown on /work, detail at /work/<slug>
-  writing/<slug>.md    shown on /writing, detail at /writing/<slug>
-  log/<YYYY-MM-DD>.md  shown on /log, newest first
+  site.json               tagline, main menu order, availability tags, contact links
+  pages/<name>.md         one command + URL each (fun: true puts it under /fun)
+  projects/<slug>.md      /work and /work/<slug>; _intro.md above the list, _outro.md below
+  research/<slug>.md      /research and /research/<slug>; same _intro/_outro
+  blog/<slug>.md          /blog and /blog/<slug>
+  playlist.json           songs for the /music player
+  photos.json             the /camera gallery
 ```
-
-Frontmatter by type:
 
 ```yaml
 # pages/<name>.md
-title: Now                        # heading
-description: What I'm doing now   # shown in help
-updated: 2026-09-27               # optional, shows "Updated ..."
-aliases: [whatsup]                # optional extra command names
-next: [work, log]                 # optional follow-up chips on mobile
+title: Music
+description: Shown in the slash menu
+fun: true                          # optional: a fun command, unlocked by /fun
+emoji: "🎵"                        # optional: its emoji in the fun row
+next: [bjj, camera]                # optional follow-up links
 
 # projects/<slug>.md
-title: Graicie
-cluster: AI                       # grouping on /work (order set in site.json)
-status: Active                    # Active | Concept | Archived | anything
-year: "2025"
+title: kakashi.ai
+cluster: Vision AI
+status: Active                     # Active | Past | Acquired | ...
+year: "2026"
+period: Oct 2025 – now             # optional, shown instead of year
+role: Founder & Engineer           # optional
 summary: One sentence.
-order: 1                          # optional, lower first
-role: Founder, engineer           # optional case-study facts
-period: 2025 – now                # optional, shown instead of year
-stack: [Python, Gemini, SAM]      # optional
-cover: /images/graicie.png        # optional, file in public/
-links:                            # optional
-  - label: Site
-    href: https://example.com
+stack: [Gemini, React]             # optional
+links: [{ label: Site, href: https://example.com }]   # optional
+order: 1                           # optional, lower first
 
-# writing/<slug>.md
-title: Entropy and Order
-date: 2025-07-28
-excerpt: Optional; defaults to the first ~140 characters.
+# research/<slug>.md
+title: Paper title
+date: 2026-07-15
+kind: paper                        # paper | experiment | ongoing
+venue: CAISc 2026                  # optional
+summary: One sentence.
+highlights: ["headline result"]    # optional, shown on the /research card
+links: [{ label: Paper, href: ... }]
+bibtex: |                          # optional, enables "Copy BibTeX"
+  @inproceedings{...}
+
+# blog/<slug>.md
+title: Essay title
+date: 2026-09-27
+excerpt: Optional one-liner.
 ```
 
-Bodies are regular Markdown. Link to other parts of the site with plain paths, e.g. `[my projects](/work)`; the terminal runs those as commands in place.
+Link to other parts of the site with plain paths, e.g. `[my projects](/work)`; the terminal runs those in place.
 
 ## Development
 
@@ -75,20 +96,18 @@ pnpm check        # typecheck + lint + build
 ## How it works
 
 ```text
-content/**            Markdown + site.json (the only place content lives)
-lib/content.ts        server-only loader: parses + validates content, renders Markdown to HTML
-lib/routes.ts         the URL <-> command table used by everything below
-lib/commands/         command registry: content commands, /help, /clear and hidden /theme
-components/terminal/  the terminal UI (client component, server-rendered on first load)
-app/page.tsx          home
-app/[...slug]/        every content route, statically generated from content/
-app/og/[...slug]/     per-page social card images
-app/feed.xml/         RSS for writing
-app/sitemap.ts        generated from the same route table
+content/**             Markdown, site.json, playlist.json, photos.json
+lib/content.ts         server-only loader: parses + validates content, renders Markdown to HTML
+lib/routes.ts          the URL <-> command table used by everything below
+lib/themes.ts          the /theme palettes (colours live in app/globals.css)
+lib/commands/          registry (slash parsing, menu, execute), content commands, /fun and /theme
+components/terminal/   terminal, boot intro, prompt + slash menu, output blocks, music player, gallery
+app/[...slug]/         every content route, statically generated
+app/og/[...slug]/      per-page social card images
+app/feed.xml/          RSS for the blog
 ```
 
-- Each route is statically generated with its command already "run", so the HTML contains the content (SEO, link previews, works without JS).
-- After hydration, commands run client-side. Routed commands update the URL with `history.pushState`; back/forward replay the matching command; plain clicks on internal links are intercepted and run in place, modified clicks open new tabs normally.
-- It works like Claude Code: type `/` to open the command menu (`/about /research /work /writing /now /cv /contact /help /clear`). A space after `/work`, `/research` or `/writing` lists their items. Menu picks and typed commands append below like a terminal; clicking links in the content replaces the screen like a website.
-- Each page gets its own social card from `app/og/[...slug]/route.tsx`; writing has an RSS feed at `/feed.xml`.
-- Per-visitor state (command history, theme) lives in `localStorage` and is optional. `/theme dark|light|auto` switches colours.
+- Each route is statically generated with its command already run, so the HTML contains the content.
+- Commands typed or picked from the menu append below like a terminal; clicking links in the content replaces the screen like a website. Back/forward replay the matching command.
+- Per-visitor state (command history, fun unlocked, theme) lives in `localStorage` and is optional.
+- Every text colour in every theme is at least 4.5:1 against its backgrounds (WCAG AA).

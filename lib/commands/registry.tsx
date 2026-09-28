@@ -2,8 +2,7 @@ import { routeForInput } from "@/lib/routes"
 import type { SiteData } from "@/lib/site-types"
 import { CommandLink } from "@/components/terminal/command-link"
 import { createContentCommands } from "./content"
-import { helpCommand } from "./help"
-import { utilityCommands } from "./utilities"
+import { createFunCommands, funRank } from "./fun"
 import type { Command, CommandContext, CommandResult, MenuItem } from "./types"
 
 export interface Resolved {
@@ -41,7 +40,7 @@ function editDistance(a: string, b: string) {
 }
 
 export function createRegistry(data: SiteData) {
-  const commands: Command[] = [...createContentCommands(data), helpCommand, ...utilityCommands]
+  const commands: Command[] = [...createContentCommands(data), ...createFunCommands(data)]
   const byName = new Map<string, Command>()
 
   for (const command of commands) {
@@ -54,11 +53,11 @@ export function createRegistry(data: SiteData) {
 
   const find = (name: string) => byName.get(name.toLowerCase())
 
-  /** Commands shown in the slash menu and in /help, in the configured order. */
-  const menuCommands = () => {
-    const visible = commands.filter((command) => !command.hidden)
-    const order = [...data.config.nav, "help", "clear"]
-    return visible.sort((a, b) => (order.indexOf(a.name) + 1 || 99) - (order.indexOf(b.name) + 1 || 99))
+  /** Commands in the slash menu: the main ones in site order, then the fun ones once unlocked. */
+  const menuCommands = (funUnlocked = false) => {
+    const main = data.config.nav.map((name) => find(name)).filter((command): command is Command => Boolean(command && !command.fun))
+    const fun = commands.filter((command) => command.fun).sort((a, b) => funRank(a.name) - funRank(b.name))
+    return funUnlocked ? [...main, ...fun] : main
   }
 
   function resolve(input: string): Resolved {
@@ -81,7 +80,7 @@ export function createRegistry(data: SiteData) {
   function closest(name: string) {
     const lower = name.toLowerCase()
     let best: { name: string; distance: number } | undefined
-    for (const command of menuCommands()) {
+    for (const command of menuCommands(true)) {
       const distance = editDistance(lower, command.name)
       if (!best || distance < best.distance) best = { name: command.name, distance }
     }
@@ -91,18 +90,22 @@ export function createRegistry(data: SiteData) {
 
   /**
    * What the slash menu shows for the current input:
-   * "/wr" -> matching commands; "/writing see" -> matching essays.
+   * "/wr" -> matching commands; "/blog see" -> matching posts.
    */
-  function menu(input: string): MenuItem[] {
+  function menu(input: string, funUnlocked = false): MenuItem[] {
     if (!input.startsWith("/")) return []
     const body = input.slice(1)
     const spaceAt = body.indexOf(" ")
 
     if (spaceAt === -1) {
       const prefix = body.toLowerCase()
-      return menuCommands()
+      return menuCommands(funUnlocked)
         .filter((command) => command.name.startsWith(prefix))
-        .map((command) => ({ value: `/${command.name}`, label: `/${command.name}`, description: command.description }))
+        .map((command) => ({
+          value: `/${command.name}`,
+          label: command.emoji ? `${command.emoji} /${command.name}` : `/${command.name}`,
+          description: command.description,
+        }))
     }
 
     const command = find(body.slice(0, spaceAt))

@@ -9,6 +9,7 @@ import type { SiteData } from "@/lib/site-types"
 import { storage } from "@/lib/storage"
 import { TerminalContext, type TerminalApi } from "./context"
 import { Welcome } from "./intro"
+import { MusicPlayer } from "./music-player"
 import { OutputBlock, type Block } from "./output-block"
 import { Prompt } from "./prompt"
 
@@ -62,6 +63,8 @@ export function Terminal({ data, initialInput }: TerminalProps) {
   const [path, setPath] = useState(initial?.path ?? "/")
   const [history, setHistory] = useState<string[]>([])
   const [announcement, setAnnouncement] = useState("")
+  const [funUnlocked, setFunUnlocked] = useState(false)
+  const [music, setMusic] = useState<{ open: boolean; request: number }>({ open: false, request: 0 })
 
   const goHome = useCallback(
     (source: Source, { replace = false } = {}) => {
@@ -89,8 +92,12 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         setHistory(nextHistory)
       }
 
-      const { result, path: routePath } = registry.execute(trimmed, { data })
-      if (result.clear) return goHome(source, { replace: true })
+      const { result, resolved, path: routePath } = registry.execute(trimmed, { data })
+      if (result.unlockFun || resolved.command?.fun) {
+        setFunUnlocked(true)
+        storage.setFun()
+      }
+      if (result.playMusic && data.playlist.length > 0) setMusic((current) => ({ open: true, request: current.request + 1 }))
 
       const block: Block = {
         id: `b${nextId.current++}`,
@@ -111,11 +118,12 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         if (result.title) document.title = `${result.title} | ${data.config.name}`
       }
     },
-    [data, goHome, registry],
+    [data, registry],
   )
 
   useEffect(() => {
     setHistory(storage.getHistory())
+    setFunUnlocked(storage.getFun())
   }, [])
 
   // Back/forward shows the page for that URL instead of reloading.
@@ -196,7 +204,10 @@ export function Terminal({ data, initialInput }: TerminalProps) {
             ))}
           </div>
         </main>
-        <Prompt registry={registry} history={history} path={path} inputRef={inputRef} />
+        {music.open && (
+          <MusicPlayer playlist={data.playlist} request={music.request} onClose={() => setMusic((current) => ({ ...current, open: false }))} />
+        )}
+        <Prompt registry={registry} history={history} path={path} funUnlocked={funUnlocked} inputRef={inputRef} />
         <p aria-live="polite" className="sr-only">
           {announcement}
         </p>

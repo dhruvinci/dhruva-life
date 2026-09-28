@@ -9,13 +9,13 @@ Quick context for coding agents working in this repository.
 ## Commands
 
 - `pnpm check` - typecheck + lint + build (run before pushing)
-- `pnpm new <log | post "Title" | project "Title" | page "Title">` - scaffold content
+- `pnpm new <post "Title" | project "Title" | page "Title">` - scaffold content
 
 Use `pnpm`. Pushing to `main` deploys to production via Vercel. The owner is fine with direct pushes to `main`.
 
 ## Content
 
-Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json`. For content updates ("add a log entry", "post this", "update now"), use the `content-update` skill.
+Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json`. For content updates ("post this", "add a project", "change the tagline") use the content-update skill.
 
 Never invent biographical facts, links, or numbers; ask.
 
@@ -23,7 +23,7 @@ Never invent biographical facts, links, or numbers; ask.
 
 `lib/routes.ts` is the single URL <-> command table used by static params, metadata, sitemap, and the terminal. Every route is statically generated with its command already run, so the HTML carries the content; after hydration the same commands run client-side and update the URL via `pushState`. A new routed command therefore needs an entry in `getRoutes`, not just a registry command, or it gets no URL.
 
-A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Keep the menu small: nine visible commands. Pages with `listed: false` (e.g. /music) keep their URL but stay out of the menu. There is no navbar and no ⌘K by design.
+A content page's file name becomes its command and URL; names in `RESERVED_COMMANDS` (`lib/routes.ts`) are taken. Keep the menu small: /about /research /work /blog /contact /fun. Pages with `fun: true` (/music, /bjj, /camera) plus /theme join the menu only after /fun and show as emojis in the prompt bar. No navbar, no ⌘K, no aliases, by design. /research and /work show a persistent contact strip.
 
 ## Styling
 

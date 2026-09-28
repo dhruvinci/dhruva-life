@@ -1,0 +1,122 @@
+[
+  {
+    "artist": "Foo Fighters",
+    "title": "Everlong",
+    "spotify": "07q6QTQXyPRCf7GbLakRPr",
+    "source": "both"
+  },
+  {
+    "artist": "TOOL",
+    "title": "Fear Inoculum",
+    "spotify": "39zWYYZStDgWi32sOU9AX4",
+    "source": "both"
+  },
+  {
+    "artist": "Oasis",
+    "title": "Live Forever",
+    "spotify": "1KgfeuVn5OlsBEtoEmBa1t",
+    "source": "both"
+  },
+  {
+    "artist": "Linkin Park",
+    "title": "Numb",
+    "spotify": "1y1sChqjzdNWzwdHQADMrR",
+    "source": "both"
+  },
+  {
+    "artist": "Greta Van Fleet",
+    "title": "When the Curtain Falls",
+    "spotify": "2ZMI0QNoqU9fQZFirR9WpK",
+    "source": "both"
+  },
+  {
+    "artist": "Cigarettes After Sex",
+    "title": "Apocalypse",
+    "spotify": "1oAwsWBovWRIp7qLMGPIet",
+    "source": "both"
+  },
+  {
+    "artist": "Ratatat",
+    "title": "Seventeen Years",
+    "spotify": "1QR7ARTB6WdrX4eQxAqJUI",
+    "source": "both"
+  },
+  {
+    "artist": "Deep Purple",
+    "title": "Burn",
+    "spotify": "5s8IEEjgCTrujK3aUalvfF",
+    "source": "both"
+  },
+  {
+    "artist": "A Perfect Circle",
+    "title": "Judith",
+    "spotify": "5KDNFlHAdDJ84fhK27c35X",
+    "source": "both"
+  },
+  {
+    "artist": "King Crimson",
+    "title": "21st Century Schizoid Man",
+    "spotify": "1xuJvmZvjnG9w8YFMMRGn8",
+    "source": "both"
+  },
+  {
+    "artist": "Porcupine Tree",
+    "title": "Fear of a Blank Planet",
+    "spotify": "5TnIBKE4G3OEqOnRG7gnNb",
+    "source": "vinyl"
+  },
+  {
+    "artist": "Steven Wilson",
+    "title": "Hand Cannot Erase",
+    "spotify": "6ynMlqhDok5wPO2EIsSj7w",
+    "source": "both"
+  },
+  {
+    "artist": "Pink Floyd",
+    "title": "Wish You Were Here",
+    "spotify": "6mFkJmJqdDVQ1REhVfGgd1",
+    "source": "vinyl"
+  },
+  {
+    "artist": "Radiohead",
+    "title": "Paranoid Android",
+    "spotify": "6LgJvl0Xdtc73RJ1mmpotq",
+    "source": "vinyl"
+  },
+  {
+    "artist": "Thermal and a Quarter",
+    "title": "Bangalore Blues",
+    "spotify": "7HwfCx882Hl0aBslxcTguy",
+    "source": "live"
+  },
+  {
+    "artist": "Parvaaz",
+    "title": "Beparwah",
+    "spotify": "6DLdRRieCPBwUND4P9xmVn",
+    "source": "live"
+  },
+  {
+    "artist": "Motherjane",
+    "title": "Chasing the Sun",
+    "spotify": "1ZNBTihf1HHwAsIbxYZXTz",
+    "source": "live"
+  },
+  {
+    "artist": "Swarathma",
+    "title": "Pyaasi",
+    "spotify": "3kgEXsE9kei6lgpPl1187o",
+    "source": "live"
+  },
+  {
+    "artist": "Prateek Kuhad",
+    "title": "cold/mess",
+    "spotify": "4Psh3fEnAMftNPOTsAHPgG",
+    "source": "live"
+  },
+  {
+    "artist": "The Local Train",
+    "title": "Choo Lo",
+    "spotify": "0rlLBWFFTQiOWi963SH9bb",
+    "source": "live"
+  }
+]

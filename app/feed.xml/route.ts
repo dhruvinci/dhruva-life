@@ -11,8 +11,8 @@ export function GET() {
     .map(
       (post) => `    <item>
       <title>${escape(post.title)}</title>
-      <link>${config.url}/writing/${post.slug}</link>
-      <guid>${config.url}/writing/${post.slug}</guid>
+      <link>${config.url}/blog/${post.slug}</link>
+      <guid>${config.url}/blog/${post.slug}</guid>
       <pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate>
       <description>${escape(post.excerpt)}</description>
       <content:encoded><![CDATA[${post.html}]]></content:encoded>
@@ -24,7 +24,7 @@ export function GET() {
 <rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>${escape(config.name)}</title>
-    <link>${config.url}/writing</link>
+    <link>${config.url}/blog</link>
     <description>${escape(config.description)}</description>
 ${items}
   </channel>

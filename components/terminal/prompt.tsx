@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useEffect, useMemo, useState } from "react"
+import { funCommands } from "@/lib/commands/fun"
 import type { Registry } from "@/lib/commands/registry"
 import { useTerminalApi } from "./context"
 
@@ -9,14 +10,21 @@ interface PromptProps {
   registry: Registry
   history: string[]
   path: string
+  funUnlocked: boolean
   inputRef: React.RefObject<HTMLInputElement | null>
 }
 
+/** Where the persistent contact strip shows, and what it says there. */
+const CONTACT_PROMPTS: Array<{ prefix: string; text: string }> = [
+  { prefix: "/research", text: "Want to collaborate on research?" },
+  { prefix: "/work", text: "Building vision AI or robots? Let's talk." },
+]
+
 /**
  * Claude Code-style prompt: a bordered input, and a slash menu that opens above it.
- * "/" lists commands; "/writing " lists essays; Enter or Tab picks the highlighted row.
+ * "/" lists commands; "/blog " lists posts; Enter or Tab picks the highlighted row.
  */
-export function Prompt({ registry, history, path, inputRef }: PromptProps) {
+export function Prompt({ registry, history, path, funUnlocked, inputRef }: PromptProps) {
   const { run } = useTerminalApi()
   const [input, setInput] = useState("")
   const [historyIndex, setHistoryIndex] = useState(-1)
@@ -24,7 +32,9 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
   const [active, setActive] = useState(0)
   const [dismissed, setDismissed] = useState(false)
 
-  const items = useMemo(() => registry.menu(input), [input, registry])
+  const items = useMemo(() => registry.menu(input, funUnlocked), [input, registry, funUnlocked])
+  const contactPrompt = CONTACT_PROMPTS.find((entry) => path === entry.prefix || path.startsWith(`${entry.prefix}/`))
+  const { contact } = registry.data.config
   const menuOpen = focused && !dismissed && items.length > 0
   const activeItem = items[Math.min(active, items.length - 1)]
 
@@ -130,6 +140,21 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
           </ul>
         )}
 
+        {contactPrompt && (
+          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 px-1 text-xs">
+            <span className="text-muted-foreground">{contactPrompt.text}</span>
+            <a href={`mailto:${contact.email}`} className="text-accent hover:underline">
+              email me
+            </a>
+            <a href={contact.calendar} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+              book a call
+            </a>
+            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+              LinkedIn
+            </a>
+          </p>
+        )}
+
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -137,12 +162,12 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
               update("/")
               inputRef.current?.focus()
             }}
-            className="md:hidden shrink-0 rounded-lg border border-border bg-card px-3 py-2.5 text-sm text-accent"
+            className="md:hidden shrink-0 rounded-lg border border-border bg-card px-3 py-2 text-sm text-accent"
             aria-label="Show commands"
           >
             /
           </button>
-          <label className="flex flex-1 items-center gap-3 rounded-lg md:rounded-none border md:border-0 border-border bg-card md:bg-transparent px-3 md:px-0 py-2.5 md:py-1">
+          <label className="flex flex-1 min-w-0 items-center gap-3 py-2">
             <span className="text-sage text-sm" aria-hidden>
               $
             </span>
@@ -162,21 +187,29 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
               aria-activedescendant={menuOpen ? `slash-${Math.min(active, items.length - 1)}` : undefined}
               aria-autocomplete="list"
               placeholder="type / for commands"
-              className="prompt-input w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+              className="prompt-input w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck={false}
             />
           </label>
-        </div>
-
-        <div className="hidden md:flex items-center justify-between gap-4 px-1 text-xs text-muted-foreground" aria-hidden>
-          <span className="truncate">
-            <span className="text-sage">{registry.data.config.name}</span>
-            <span className="text-ochre"> ~{path === "/" ? "" : path}</span>
-          </span>
-          <span>/ for commands · tab to complete · ↑↓ history</span>
+          {funUnlocked && (
+            <nav aria-label="Fun" className="flex shrink-0 items-center gap-0.5">
+              {funCommands(registry.data).map((item) => (
+                <button
+                  key={item.command}
+                  type="button"
+                  onClick={() => run(item.command)}
+                  className="rounded px-1.5 py-1 text-lg leading-none hover:bg-muted"
+                  aria-label={item.label}
+                  title={item.command}
+                >
+                  {item.emoji}
+                </button>
+              ))}
+            </nav>
+          )}
         </div>
       </div>
     </div>

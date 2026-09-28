@@ -4,6 +4,10 @@ date: 2026-07-15
 kind: paper
 venue: CAISc 2026
 summary: "VLMs describe movement fluently but not faithfully. A harness built on cheap computer-vision signals makes them far more accurate - and makes them fail in predictable ways."
+highlights:
+  - "~11x position macro-F1 on a densely annotated match, from grounding a frozen VLM in cheap computer-vision signals"
+  - "58.9% position identification across 496 clips"
+  - "On 200 unseen real uploads, 93% of errors were confusions between adjacent positions - it fails well"
 links:
   - label: Paper (OpenReview)
     href: https://openreview.net/pdf?id=uWNdzkIJ7g

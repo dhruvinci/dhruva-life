@@ -14,7 +14,10 @@ export interface CommandResult {
   title?: string
   /** Suggested follow-up commands, shown under the output. */
   next?: string[]
-  clear?: boolean
+  /** Unlocks the fun commands (/music, /bjj, /camera, /theme). */
+  unlockFun?: boolean
+  /** Starts the mini music player. */
+  playMusic?: boolean
 }
 
 /** One entry in the slash menu: what gets inserted, what's shown, and a hint. */
@@ -27,10 +30,11 @@ export interface MenuItem {
 export interface Command {
   name: string
   description: string
-  /** Hidden commands still run but don't appear in the slash menu or help. */
-  hidden?: boolean
+  /** Fun commands only appear in the slash menu after /fun. */
+  fun?: boolean
+  emoji?: string
   aliases?: string[]
-  /** Items offered after "/name ", e.g. essays for /writing. */
+  /** Items offered after "/name ", e.g. posts for /blog. */
   complete?: (data: SiteData) => MenuItem[]
   run: (args: string[], ctx: CommandContext) => CommandResult
 }

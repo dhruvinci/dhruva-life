@@ -6,7 +6,7 @@ import fs from "node:fs"
 import path from "node:path"
 import matter from "gray-matter"
 import { Marked } from "marked"
-import type { Link, LogEntry, Page, Post, Project, ResearchItem, SiteConfig, SiteData } from "./site-types"
+import type { Link, LogEntry, Page, Photo, Post, Project, ResearchItem, SiteConfig, SiteData, Track } from "./site-types"
 import { RESERVED_COMMANDS } from "./routes"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
@@ -120,8 +120,8 @@ function linkList(data: Record<string, unknown>, file: string): Link[] {
 }
 
 /** content/<dir>/_intro.md rendered to HTML, or "" when absent. */
-function loadIntro(dir: string) {
-  const file = path.join(CONTENT_DIR, dir, "_intro.md")
+function loadIntro(dir: string, name = "_intro.md") {
+  const file = path.join(CONTENT_DIR, dir, name)
   if (!fs.existsSync(file)) return ""
   return renderMarkdown(matter(fs.readFileSync(file, "utf8")).content.trim())
 }
@@ -136,7 +136,8 @@ function loadPages(): Page[] {
       title: requireString(data, "title", file),
       description: requireString(data, "description", file),
       aliases: optionalStringList(data, "aliases", file),
-      listed: data.listed !== false,
+      fun: data.fun === true,
+      emoji: optionalString(data, "emoji", file),
       next: optionalStringList(data, "next", file),
       updated: data.updated === undefined ? undefined : toDateString(data.updated, file, "updated"),
       html: renderMarkdown(body),
@@ -170,7 +171,7 @@ function loadProjects(): Project[] {
 }
 
 function loadPosts(): Post[] {
-  return readDir("writing")
+  return readDir("blog")
     .map(({ file, slug, data, body }) => ({
       slug,
       title: requireString(data, "title", file),
@@ -195,6 +196,7 @@ function loadResearch(): ResearchItem[] {
       summary: requireString(data, "summary", file),
       links: linkList(data, file),
       bibtex: optionalString(data, "bibtex", file)?.trim(),
+      highlights: optionalStringList(data, "highlights", file),
       html: hasBody(body) ? renderMarkdown(body) : "",
       text: plainText(body),
     }))
@@ -213,6 +215,28 @@ function loadLogs(): LogEntry[] {
     .sort((a, b) => b.date.localeCompare(a.date))
 }
 
+/** content/photos.json: the /camera gallery. Missing file means an empty gallery. */
+function loadPhotos(): Photo[] {
+  const file = path.join(CONTENT_DIR, "photos.json")
+  if (!fs.existsSync(file)) return []
+  const photos = JSON.parse(fs.readFileSync(file, "utf8")) as Photo[]
+  photos.forEach((photo, index) => {
+    if (!photo.src || !photo.alt) throw new ContentError("photos.json", `photo ${index + 1} needs "src" and "alt"`)
+  })
+  return photos
+}
+
+/** content/playlist.json: songs the /music player picks from. */
+function loadPlaylist(): Track[] {
+  const file = path.join(CONTENT_DIR, "playlist.json")
+  if (!fs.existsSync(file)) return []
+  const tracks = JSON.parse(fs.readFileSync(file, "utf8")) as Track[]
+  tracks.forEach((track, index) => {
+    if (!/^[A-Za-z0-9]{22}$/.test(track.spotify)) throw new ContentError("playlist.json", `track ${index + 1} has an invalid Spotify id`)
+  })
+  return tracks
+}
+
 function loadConfig(): SiteConfig {
   return JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, "site.json"), "utf8")) as SiteConfig
 }
@@ -229,7 +253,10 @@ export function getSiteData(): SiteData {
     posts: loadPosts(),
     research: loadResearch(),
     logs: loadLogs(),
-    intros: { work: loadIntro("projects"), writing: loadIntro("writing"), research: loadIntro("research") },
+    photos: loadPhotos(),
+    playlist: loadPlaylist(),
+    intros: { work: loadIntro("projects"), blog: loadIntro("blog"), research: loadIntro("research") },
+    outros: { work: loadIntro("projects", "_outro.md"), blog: loadIntro("blog", "_outro.md"), research: loadIntro("research", "_outro.md") },
   }
 
   // Slugs stay unique across collections so a name always means one thing.
@@ -237,7 +264,7 @@ export function getSiteData(): SiteData {
   for (const [dir, slugs] of [
     ["projects", data.projects.map((item) => item.slug)],
     ["research", data.research.map((item) => item.slug)],
-    ["writing", data.posts.map((item) => item.slug)],
+    ["blog", data.posts.map((item) => item.slug)],
     ["pages", data.pages.map((item) => item.name)],
   ] as const) {
     for (const slug of slugs) {

@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { JetBrains_Mono, Newsreader } from "next/font/google"
 import { getSiteData } from "@/lib/content"
+import { DARK_THEMES, THEME_NAMES } from "@/lib/themes"
 import "./globals.css"
 
 const jetbrainsMono = JetBrains_Mono({
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
 }
 
 // Runs before paint so the saved theme applies without a flash.
-const bootScript = `try{var t=localStorage.getItem("terminal-theme")||"dark",m=t==="auto"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):t,c=document.documentElement.classList;c.toggle("dark",m==="dark")}catch(e){}`
+const bootScript = `try{var t=localStorage.getItem("terminal-theme")||"dark",d=${JSON.stringify(DARK_THEMES)},r=document.documentElement;if(${JSON.stringify(THEME_NAMES)}.indexOf(t)<0)t="dark";r.dataset.theme=t;r.classList.toggle("dark",d.indexOf(t)>=0)}catch(e){}`
 
 export default function RootLayout({
   children,

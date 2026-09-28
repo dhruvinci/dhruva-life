@@ -44,6 +44,78 @@
   color-scheme: dark;
 }
 
+/* Fun themes (/theme). Same contrast rule as above: every text colour >= 4.5:1 on every surface. */
+html[data-theme="matrix"] {
+  --background: #000000;
+  --card: #050d06;
+  --muted: #0b1a0d;
+  --foreground: #00ff41;
+  --muted-foreground: #1fb83f;
+  --border: #0f3316;
+  --accent: #b8ffc8;
+  --terracotta: #b8ffc8;
+  --olive: #7dff9b;
+  --ochre: #00d936;
+  --teal-stone: #5cffa0;
+  --sage: #39e06a;
+  --destructive: #ff6b6b;
+  color-scheme: dark;
+}
+html[data-theme="matrix"] body {
+  text-shadow: 0 0 6px rgb(0 255 65 / 0.35);
+}
+html[data-theme="pokemon"] {
+  --background: #9bbc0f;
+  --card: #aecb3a;
+  --muted: #8bac0f;
+  --foreground: #0f380f;
+  --muted-foreground: #173d17;
+  --border: #306230;
+  --accent: #5a0a0a;
+  --terracotta: #5a0a0a;
+  --olive: #0f380f;
+  --ochre: #3a2a00;
+  --teal-stone: #0f380f;
+  --sage: #173d17;
+  --destructive: #6b0000;
+  color-scheme: light;
+}
+html[data-theme="claude"] {
+  --background: #faf9f5;
+  --card: #f0eee6;
+  --muted: #e8e6dc;
+  --foreground: #141413;
+  --muted-foreground: #5e5d59;
+  --border: #dad7cc;
+  --accent: #9c4a2a;
+  --terracotta: #9c4a2a;
+  --olive: #4a6331;
+  --ochre: #7a5510;
+  --teal-stone: #2c5f5c;
+  --sage: #44614c;
+  --destructive: #b3261e;
+  color-scheme: light;
+}
+html[data-theme="amber"] {
+  --background: #0d0900;
+  --card: #161000;
+  --muted: #1f1700;
+  --foreground: #ffb000;
+  --muted-foreground: #c98a00;
+  --border: #3a2a00;
+  --accent: #ffd27a;
+  --terracotta: #ffd27a;
+  --olive: #e0a100;
+  --ochre: #ffc53d;
+  --teal-stone: #f5b841;
+  --sage: #d9a02a;
+  --destructive: #ff6b5b;
+  color-scheme: dark;
+}
+html[data-theme="amber"] body {
+  text-shadow: 0 0 5px rgb(255 176 0 / 0.3);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -7,10 +7,10 @@ export interface SiteConfig {
   tagline: string
   description: string
   twitter: string
-  /** Order of commands in the slash menu and /help. */
+  /** Main commands, in slash-menu and home-screen order. */
   nav: string[]
-  /** Suggested commands shown under /help output. */
-  quickActions: string[]
+  /** Contact links shown in the persistent contact strip on /research and /work. */
+  contact: { email: string; calendar: string; linkedin: string }
   /** Display order for project clusters on /work. Unlisted clusters follow. */
   projectClusters: string[]
   /** Short status tags on the home page, e.g. "open to research", each linking to a command. */
@@ -27,8 +27,10 @@ export interface Page {
   title: string
   description: string
   aliases: string[]
-  /** false keeps the page reachable by URL but out of the slash menu (e.g. /music). */
-  listed: boolean
+  /** Fun pages (/music, /bjj, /camera) join the menu once /fun has been run. */
+  fun: boolean
+  /** Emoji shown for fun pages in the fun row. */
+  emoji?: string
   /** Suggested follow-up commands. */
   next: string[]
   updated?: string
@@ -77,8 +79,26 @@ export interface ResearchItem {
   summary: string
   links: Link[]
   bibtex?: string
+  /** Short headline results, shown on the /research card. */
+  highlights: string[]
   html: string
   text: string
+}
+
+export interface Photo {
+  /** Path under public/ or an absolute URL that allows cross-site embedding. */
+  src: string
+  alt: string
+  caption?: string
+}
+
+export interface Track {
+  artist: string
+  title: string
+  /** Spotify track id, played through Spotify's embed. */
+  spotify: string
+  /** Where it comes from: a record on the shelf, a band seen live, or both. */
+  source: "vinyl" | "live" | "both"
 }
 
 export interface LogEntry {
@@ -96,6 +116,9 @@ export interface SiteData {
   posts: Post[]
   research: ResearchItem[]
   logs: LogEntry[]
-  /** Optional intro text from content/<collection>/_intro.md. */
-  intros: { work: string; writing: string; research: string }
+  photos: Photo[]
+  playlist: Track[]
+  /** Optional text from content/<collection>/_intro.md (above) and _outro.md (below). */
+  intros: { work: string; blog: string; research: string }
+  outros: { work: string; blog: string; research: string }
 }

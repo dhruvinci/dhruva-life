@@ -1,9 +1,9 @@
 ---
 title: Music
-description: Gigs, records, and what's playing
-aliases: [gigs, vinyls, vinyl, spotify]
-listed: false
-next: [about, writing]
+description: 265 bands seen live, 100 records on the shelf
+fun: true
+emoji: "🎵"
+next: [bjj, camera, fun]
 ---
 
 ## Gigs
@@ -48,8 +48,3 @@ The Beach Boys – *Best of The Beach Boys* · Bob Marley & the Wailers – *Leg
 
 *Absolute Beginners* (soundtrack) · The Alley Cats – *Nightmare City* · Ananda Shankar – *Ananda Shankar* · Annie Anxiety – *Soul Possession* · Lata Mangeshkar – *Live at Royal Albert Hall, 1974* · Various Artists – *Live From Lawrence* (KJHK's Quest for Vinyl)
 
-## On repeat
-
-- **Deep Focus:** Ambient techno for coding sessions
-- **Flow States:** Minimalist beats for training
-- **Sunday Mornings:** Jazz & reflection

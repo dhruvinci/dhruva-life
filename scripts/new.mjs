@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 // Scaffold new content with the right file name and frontmatter.
 //
-//   pnpm new log                     -> content/log/<today>.md
-//   pnpm new post "My Title"         -> content/writing/my-title.md
+//   pnpm new post "My Title"         -> content/blog/my-title.md
 //   pnpm new project "Project Name"  -> content/projects/project-name.md
 //   pnpm new page "Title"            -> content/pages/title.md (new command + URL)
 
@@ -19,9 +18,8 @@ const slugify = (text) =>
     .replace(/^-|-$/g, "")
 
 const templates = {
-  log: () => [`log/${today}.md`, `- \n`],
   post: () => [
-    `writing/${slugify(title)}.md`,
+    `blog/${slugify(title)}.md`,
     `---\ntitle: ${title}\ndate: ${today}\nexcerpt: One line that shows up in the writing list.\n---\n\nWrite here.\n`,
   ],
   project: () => [
@@ -34,8 +32,8 @@ const templates = {
   ],
 }
 
-if (!templates[kind] || (kind !== "log" && !title)) {
-  console.error('Usage: pnpm new <log | post "Title" | project "Title" | page "Title">')
+if (!templates[kind] || !title) {
+  console.error('Usage: pnpm new <post "Title" | project "Title" | page "Title">')
   process.exit(1)
 }
 
