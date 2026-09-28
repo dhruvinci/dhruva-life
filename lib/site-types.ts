@@ -88,8 +88,10 @@ export interface ResearchItem {
 }
 
 export interface Photo {
-  /** Path under public/ or an absolute URL that allows cross-site embedding. */
+  /** Path under public/, e.g. /photos/palms.jpg (web-sized, metadata stripped). */
   src: string
+  width: number
+  height: number
   alt: string
   caption?: string
 }

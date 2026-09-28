@@ -221,7 +221,12 @@ function loadPhotos(): Photo[] {
   if (!fs.existsSync(file)) return []
   const photos = JSON.parse(fs.readFileSync(file, "utf8")) as Photo[]
   photos.forEach((photo, index) => {
-    if (!photo.src || !photo.alt) throw new ContentError("photos.json", `photo ${index + 1} needs "src" and "alt"`)
+    if (!photo.src || !photo.alt || !photo.width || !photo.height) {
+      throw new ContentError("photos.json", `photo ${index + 1} needs "src", "width", "height" and "alt"`)
+    }
+    if (!fs.existsSync(path.join(process.cwd(), "public", photo.src))) {
+      throw new ContentError("photos.json", `photo ${index + 1}: public${photo.src} doesn't exist`)
+    }
   })
   return photos
 }

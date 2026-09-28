@@ -1,1 +1,128 @@
-[]
+[
+  {
+    "src": "/photos/on-the-mats.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "Two grapplers locked together on the mat, black and white",
+    "caption": "On the mats, 2023"
+  },
+  {
+    "src": "/photos/pinned.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "A grappler pinned under his training partner, black and white",
+    "caption": "Pinned, 2023"
+  },
+  {
+    "src": "/photos/afternoon-rolls.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "Light falling across the mats during a roll",
+    "caption": "Afternoon rolls, 2023"
+  },
+  {
+    "src": "/photos/mid-roll.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "Two grapplers mid-roll on blue mats",
+    "caption": "Mid-roll, 2023"
+  },
+  {
+    "src": "/photos/close-quarters.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "Close-up of a grappler mid-roll, black and white",
+    "caption": "Close quarters, 2023"
+  },
+  {
+    "src": "/photos/the-scramble.jpg",
+    "width": 1364,
+    "height": 908,
+    "alt": "Legs tangled in a scramble on the mat",
+    "caption": "The scramble, 2023"
+  },
+  {
+    "src": "/photos/grip-fight.jpg",
+    "width": 1364,
+    "height": 908,
+    "alt": "Two athletes fighting for grips, sepia",
+    "caption": "Grip fight, 2023"
+  },
+  {
+    "src": "/photos/palms.jpg",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Two palm trees seen from below against a blue sky",
+    "caption": "Palms, 2025"
+  },
+  {
+    "src": "/photos/beach-dance.jpg",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Two people dancing on the beach at the water's edge",
+    "caption": "On the beach, 2025"
+  },
+  {
+    "src": "/photos/through-the-palms.jpg",
+    "width": 1200,
+    "height": 1600,
+    "alt": "The ocean framed by palm fronds",
+    "caption": "Through the palms, 2025"
+  },
+  {
+    "src": "/photos/hoop.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "A basketball hoop seen from directly below",
+    "caption": "Hoop, 2025"
+  },
+  {
+    "src": "/photos/dancers.jpg",
+    "width": 1440,
+    "height": 1440,
+    "alt": "Dancers on stage, blurred in motion",
+    "caption": "Dancers in motion, 2025"
+  },
+  {
+    "src": "/photos/fire-escape.jpg",
+    "width": 1280,
+    "height": 1600,
+    "alt": "Looking up a fire escape, black and white",
+    "caption": "Fire escape, 2022"
+  },
+  {
+    "src": "/photos/waverly-place.jpg",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Waverly Place street sign in San Francisco",
+    "caption": "Waverly Place, San Francisco, 2025"
+  },
+  {
+    "src": "/photos/mountains.jpg",
+    "width": 1080,
+    "height": 1080,
+    "alt": "A monk in red robes looking out over a mountain valley",
+    "caption": "Mountains, 2017"
+  },
+  {
+    "src": "/photos/cal-jam.jpg",
+    "width": 1080,
+    "height": 1080,
+    "alt": "The Foo Fighters on a red-lit stage at Cal Jam",
+    "caption": "Foo Fighters at Cal Jam, 2018"
+  },
+  {
+    "src": "/photos/grohl.jpg",
+    "width": 1080,
+    "height": 1080,
+    "alt": "Dave Grohl singing with the Foo Fighters",
+    "caption": "Foo Fighters, 2017"
+  },
+  {
+    "src": "/photos/foo-fighters.jpg",
+    "width": 1080,
+    "height": 1080,
+    "alt": "Two Foo Fighters guitarists playing face to face",
+    "caption": "Foo Fighters, 2017"
+  }
+]

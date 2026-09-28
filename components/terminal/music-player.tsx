@@ -1,5 +1,6 @@
 "use client"
 
+import type React from "react"
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { Track } from "@/lib/site-types"
 
@@ -7,6 +8,7 @@ import type { Track } from "@/lib/site-types"
 interface YouTubePlayer {
   loadVideoById: (id: string) => void
   playVideo: () => void
+  pauseVideo: () => void
   destroy: () => void
 }
 interface YouTubeNamespace {
@@ -23,7 +25,7 @@ interface YouTubeNamespace {
       }
     },
   ) => YouTubePlayer
-  PlayerState: { ENDED: number }
+  PlayerState: { ENDED: number; PLAYING: number; PAUSED: number }
 }
 declare global {
   interface Window {
@@ -48,9 +50,23 @@ function loadYouTubeApi() {
 }
 
 const SOURCE_LABEL: Record<Track["source"], string> = {
-  vinyl: "from my record shelf",
-  live: "a band I've seen live",
-  both: "on my shelf, and seen live",
+  vinyl: "on my shelf",
+  live: "seen live",
+  both: "on my shelf & seen live",
+}
+
+function IconButton({ label, onClick, children }: { label: string; onClick: () => void; children: React.ReactNode }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={label}
+      title={label}
+      className="grid h-7 w-7 place-items-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+    >
+      {children}
+    </button>
+  )
 }
 
 function randomIndex(length: number, not?: number) {
@@ -76,6 +92,7 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null)
   const playerRef = useRef<YouTubePlayer | null>(null)
   const [index, setIndex] = useState(() => randomIndex(playlist.length))
+  const [playing, setPlaying] = useState(false)
   const indexRef = useRef(index)
   const track = playlist[index]
 
@@ -100,11 +117,13 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
       playerRef.current = new YT.Player(mountRef.current, {
         videoId: playlist[indexRef.current].youtube,
         width: "100%",
-        height: 200,
-        playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
+        height: "100%",
+        playerVars: { autoplay: 1, playsinline: 1, rel: 0, controls: 0, iv_load_policy: 3, disablekb: 1 },
         events: {
           onReady: (event) => event.target.playVideo(),
           onStateChange: (event) => {
+            if (event.data === YT.PlayerState.PLAYING) setPlaying(true)
+            if (event.data === YT.PlayerState.PAUSED) setPlaying(false)
             if (event.data === YT.PlayerState.ENDED) playRef.current(randomIndex(playlist.length, indexRef.current))
           },
         },
@@ -128,35 +147,46 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
 
   if (!track) return null
 
+  const toggle = () => {
+    if (playing) playerRef.current?.pauseVideo()
+    else playerRef.current?.playVideo()
+  }
+
   return (
-    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-[22rem] bottom-[4.25rem] rounded-lg border border-border bg-card shadow-lg overflow-hidden">
-      <div className="flex items-center justify-between gap-2 px-3 py-2 text-xs">
-        <span className="min-w-0 truncate">
-          <span className="text-foreground">{track.title}</span>
-          <span className="text-muted-foreground"> · {track.artist}</span>
-        </span>
-        <span className="flex shrink-0 gap-3">
-          <button
-            type="button"
-            onClick={() => play(randomIndex(playlist.length, indexRef.current))}
-            className="text-muted-foreground hover:text-accent"
-            aria-label="Play another random song"
-            title="Another random song"
-          >
-            ⤮ shuffle
-          </button>
-          <button type="button" onClick={onClose} className="text-muted-foreground hover:text-accent" aria-label="Close player">
-            ✕
-          </button>
-        </span>
-      </div>
-      <div className="bg-black">
+    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-96 bottom-[4.25rem] rounded-xl border border-border bg-card p-2 shadow-xl">
+      <div className="overflow-hidden rounded-lg bg-black aspect-video min-h-[200px] [&_iframe]:h-full [&_iframe]:w-full">
         <div ref={mountRef} />
       </div>
-      <p className="px-3 py-1.5 text-[11px] text-muted-foreground">
-        <span aria-hidden>🎵 </span>
-        {SOURCE_LABEL[track.source]} · plays on as you browse
-      </p>
+      <div className="flex items-center gap-2 px-1.5 pt-2 pb-0.5">
+        <div className="min-w-0 flex-1 leading-tight">
+          <p className="truncate text-sm text-foreground">{track.title}</p>
+          <p className="truncate text-xs text-muted-foreground">
+            {track.artist} · {SOURCE_LABEL[track.source]}
+          </p>
+        </div>
+        <IconButton label={playing ? "Pause" : "Play"} onClick={toggle}>
+          {playing ? (
+            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden>
+              <rect x="3" y="2.5" width="3.5" height="11" rx="1" />
+              <rect x="9.5" y="2.5" width="3.5" height="11" rx="1" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-current" aria-hidden>
+              <path d="M4 2.8v10.4a.8.8 0 0 0 1.2.7l8.4-5.2a.8.8 0 0 0 0-1.4L5.2 2.1A.8.8 0 0 0 4 2.8z" />
+            </svg>
+          )}
+        </IconButton>
+        <IconButton label="Another random song" onClick={() => play(randomIndex(playlist.length, indexRef.current))}>
+          <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M2 4h2.5c3 0 4 8 7 8H14M2 12h2.5c1.2 0 2-1.3 2.7-3M9.3 7c.7-1.7 1.5-3 2.7-3H14M12 2l2 2-2 2M12 10l2 2-2 2" />
+          </svg>
+        </IconButton>
+        <IconButton label="Close player" onClick={onClose}>
+          <svg viewBox="0 0 16 16" className="h-3 w-3 fill-none stroke-current" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+            <path d="M3 3l10 10M13 3L3 13" />
+          </svg>
+        </IconButton>
+      </div>
     </div>
   )
 }
