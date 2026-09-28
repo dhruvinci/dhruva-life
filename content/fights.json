@@ -1,0 +1,28 @@
+[
+  {
+    "event": "PKD",
+    "date": "2025",
+    "wins": 3,
+    "losses": 2,
+    "note": "Five fights in a day, through the loser's bracket. No nerves for the first time - someone said I was playing like Rahul Dravid.",
+    "essay": "the-wall"
+  },
+  {
+    "event": "Strangle",
+    "date": "Dec 2024",
+    "location": "Delhi",
+    "wins": 1,
+    "losses": 1,
+    "note": "Won my first fight, called my coach, and lost the second one fifteen minutes later.",
+    "essay": "a-sport-for-life"
+  },
+  {
+    "event": "ADCC India Nationals",
+    "date": "May 2024",
+    "location": "Delhi",
+    "wins": 0,
+    "losses": 1,
+    "note": "My first competition. Lost on points, and didn't tap to the rear naked choke.",
+    "essay": "a-sport-for-life"
+  }
+]

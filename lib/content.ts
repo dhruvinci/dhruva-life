@@ -6,7 +6,7 @@ import fs from "node:fs"
 import path from "node:path"
 import matter from "gray-matter"
 import { Marked } from "marked"
-import type { Link, LogEntry, Page, Photo, Post, Project, ResearchItem, SiteConfig, SiteData, Track } from "./site-types"
+import type { Fight, Link, LogEntry, Page, Photo, Post, Project, ResearchItem, SiteConfig, SiteData, Track, VinylRecord } from "./site-types"
 import { RESERVED_COMMANDS } from "./routes"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
@@ -232,9 +232,20 @@ function loadPlaylist(): Track[] {
   if (!fs.existsSync(file)) return []
   const tracks = JSON.parse(fs.readFileSync(file, "utf8")) as Track[]
   tracks.forEach((track, index) => {
-    if (!/^[A-Za-z0-9]{22}$/.test(track.spotify)) throw new ContentError("playlist.json", `track ${index + 1} has an invalid Spotify id`)
+    if (!/^[A-Za-z0-9_-]{11}$/.test(track.youtube)) throw new ContentError("playlist.json", `track ${index + 1} has an invalid YouTube id`)
   })
   return tracks
+}
+
+/** content/<name>.json, or the fallback when the file doesn't exist. */
+function loadJson<T>(name: string, fallback: T): T {
+  const file = path.join(CONTENT_DIR, name)
+  if (!fs.existsSync(file)) return fallback
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8")) as T
+  } catch (error) {
+    throw new ContentError(name, `invalid JSON (${String(error)})`)
+  }
 }
 
 function loadConfig(): SiteConfig {
@@ -255,6 +266,9 @@ export function getSiteData(): SiteData {
     logs: loadLogs(),
     photos: loadPhotos(),
     playlist: loadPlaylist(),
+    fights: loadJson<Fight[]>("fights.json", []),
+    gigs: loadJson<string[]>("gigs.json", []),
+    records: loadJson<VinylRecord[]>("records.json", []),
     intros: { work: loadIntro("projects"), blog: loadIntro("blog"), research: loadIntro("research") },
     outros: { work: loadIntro("projects", "_outro.md"), blog: loadIntro("blog", "_outro.md"), research: loadIntro("research", "_outro.md") },
   }

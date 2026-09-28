@@ -3,32 +3,43 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import type { Track } from "@/lib/site-types"
 
-// Minimal types for Spotify's iFrame embed API (https://developer.spotify.com/documentation/embeds).
-interface SpotifyController {
-  loadUri: (uri: string) => void
-  play: () => void
+// Minimal types for the YouTube IFrame Player API (https://developers.google.com/youtube/iframe_api_reference).
+interface YouTubePlayer {
+  loadVideoById: (id: string) => void
+  playVideo: () => void
   destroy: () => void
 }
-interface SpotifyIFrameAPI {
-  createController: (
+interface YouTubeNamespace {
+  Player: new (
     element: HTMLElement,
-    options: { uri: string; width?: string | number; height?: string | number },
-    callback: (controller: SpotifyController) => void,
-  ) => void
+    options: {
+      videoId: string
+      width: string | number
+      height: string | number
+      playerVars?: Record<string, number | string>
+      events?: {
+        onReady?: (event: { target: YouTubePlayer }) => void
+        onStateChange?: (event: { data: number }) => void
+      }
+    },
+  ) => YouTubePlayer
+  PlayerState: { ENDED: number }
 }
 declare global {
   interface Window {
-    onSpotifyIframeApiReady?: (api: SpotifyIFrameAPI) => void
+    YT?: YouTubeNamespace
+    onYouTubeIframeAPIReady?: () => void
   }
 }
 
-let apiPromise: Promise<SpotifyIFrameAPI> | null = null
-function loadSpotifyApi() {
+let apiPromise: Promise<YouTubeNamespace> | null = null
+function loadYouTubeApi() {
   if (!apiPromise) {
     apiPromise = new Promise((resolve) => {
-      window.onSpotifyIframeApiReady = resolve
+      if (window.YT?.Player) return resolve(window.YT)
+      window.onYouTubeIframeAPIReady = () => resolve(window.YT as YouTubeNamespace)
       const script = document.createElement("script")
-      script.src = "https://open.spotify.com/embed/iframe-api/v1"
+      script.src = "https://www.youtube.com/iframe_api"
       script.async = true
       document.body.appendChild(script)
     })
@@ -56,39 +67,54 @@ interface MusicPlayerProps {
   onClose: () => void
 }
 
-/** A small persistent player, docked above the prompt. Survives navigation. */
+/**
+ * A small persistent player docked above the prompt. Plays full songs through YouTube
+ * and moves on to another random song when one ends, so it keeps going while you browse.
+ * YouTube requires the video itself to stay visible (at least 200px tall), so it is.
+ */
 export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
   const mountRef = useRef<HTMLDivElement>(null)
-  const controllerRef = useRef<SpotifyController | null>(null)
+  const playerRef = useRef<YouTubePlayer | null>(null)
   const [index, setIndex] = useState(() => randomIndex(playlist.length))
+  const indexRef = useRef(index)
   const track = playlist[index]
 
   const play = useCallback(
     (nextIndex: number) => {
+      indexRef.current = nextIndex
       setIndex(nextIndex)
-      const uri = `spotify:track:${playlist[nextIndex].spotify}`
-      if (controllerRef.current) {
-        controllerRef.current.loadUri(uri)
-        controllerRef.current.play()
-      }
+      playerRef.current?.loadVideoById(playlist[nextIndex].youtube)
     },
     [playlist],
   )
+  const playRef = useRef(play)
+  useEffect(() => {
+    playRef.current = play
+  }, [play])
 
-  // Create the embed once.
+  // Create the player once; later songs go through play().
   useEffect(() => {
     let cancelled = false
-    loadSpotifyApi().then((api) => {
-      if (cancelled || !mountRef.current || controllerRef.current) return
-      api.createController(mountRef.current, { uri: `spotify:track:${playlist[index].spotify}`, width: "100%", height: 80 }, (controller) => {
-        controllerRef.current = controller
-        controller.play()
+    loadYouTubeApi().then((YT) => {
+      if (cancelled || !mountRef.current || playerRef.current) return
+      playerRef.current = new YT.Player(mountRef.current, {
+        videoId: playlist[indexRef.current].youtube,
+        width: "100%",
+        height: 200,
+        playerVars: { autoplay: 1, playsinline: 1, rel: 0 },
+        events: {
+          onReady: (event) => event.target.playVideo(),
+          onStateChange: (event) => {
+            if (event.data === YT.PlayerState.ENDED) playRef.current(randomIndex(playlist.length, indexRef.current))
+          },
+        },
       })
     })
     return () => {
       cancelled = true
+      playerRef.current?.destroy()
+      playerRef.current = null
     }
-    // Only on mount; later songs go through play().
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -96,31 +122,23 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
   const firstRequest = useRef(request)
   useEffect(() => {
     if (request === firstRequest.current) return
-    play(randomIndex(playlist.length, index))
+    play(randomIndex(playlist.length, indexRef.current))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [request])
-
-  useEffect(
-    () => () => {
-      controllerRef.current?.destroy()
-      controllerRef.current = null
-    },
-    [],
-  )
 
   if (!track) return null
 
   return (
-    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-80 bottom-[4.75rem] rounded-lg border border-border bg-card shadow-lg overflow-hidden">
+    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-[22rem] bottom-[4.25rem] rounded-lg border border-border bg-card shadow-lg overflow-hidden">
       <div className="flex items-center justify-between gap-2 px-3 py-2 text-xs">
-        <span className="truncate text-muted-foreground">
-          <span aria-hidden>🎵 </span>
-          {SOURCE_LABEL[track.source]}
+        <span className="min-w-0 truncate">
+          <span className="text-foreground">{track.title}</span>
+          <span className="text-muted-foreground"> · {track.artist}</span>
         </span>
         <span className="flex shrink-0 gap-3">
           <button
             type="button"
-            onClick={() => play(randomIndex(playlist.length, index))}
+            onClick={() => play(randomIndex(playlist.length, indexRef.current))}
             className="text-muted-foreground hover:text-accent"
             aria-label="Play another random song"
             title="Another random song"
@@ -132,7 +150,13 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
           </button>
         </span>
       </div>
-      <div ref={mountRef} />
+      <div className="bg-black">
+        <div ref={mountRef} />
+      </div>
+      <p className="px-3 py-1.5 text-[11px] text-muted-foreground">
+        <span aria-hidden>🎵 </span>
+        {SOURCE_LABEL[track.source]} · plays on as you browse
+      </p>
     </div>
   )
 }

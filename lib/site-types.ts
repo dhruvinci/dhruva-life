@@ -9,6 +9,8 @@ export interface SiteConfig {
   twitter: string
   /** Main commands, in slash-menu and home-screen order. */
   nav: string[]
+  /** One or two sentences on what I'm doing right now, shown on the home screen. */
+  now: string
   /** Contact links shown in the persistent contact strip on /research and /work. */
   contact: { email: string; calendar: string; linkedin: string }
   /** Display order for project clusters on /work. Unlisted clusters follow. */
@@ -95,10 +97,28 @@ export interface Photo {
 export interface Track {
   artist: string
   title: string
-  /** Spotify track id, played through Spotify's embed. */
-  spotify: string
+  /** YouTube video id (official artist, "Topic" or VEVO upload), played through YouTube's embed. */
+  youtube: string
   /** Where it comes from: a record on the shelf, a band seen live, or both. */
   source: "vinyl" | "live" | "both"
+}
+
+export interface Fight {
+  event: string
+  date: string
+  location?: string
+  wins: number
+  losses: number
+  note: string
+  /** Blog slug with the story, if any. */
+  essay?: string
+}
+
+export interface VinylRecord {
+  artist: string | null
+  album: string
+  genre: string
+  note?: string | null
 }
 
 export interface LogEntry {
@@ -118,6 +138,9 @@ export interface SiteData {
   logs: LogEntry[]
   photos: Photo[]
   playlist: Track[]
+  fights: Fight[]
+  gigs: string[]
+  records: VinylRecord[]
   /** Optional text from content/<collection>/_intro.md (above) and _outro.md (below). */
   intros: { work: string; blog: string; research: string }
   outros: { work: string; blog: string; research: string }

@@ -1,0 +1,602 @@
+[
+ {
+  "artist": "ABBA",
+  "album": "Gold",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "The Alan Parsons Project",
+  "album": "I Robot",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "The Beatles",
+  "album": "1",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Black Sabbath",
+  "album": "Paranoid",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Bob Dylan",
+  "album": "Bob Dylan's Greatest Hits",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Creedence Clearwater Revival",
+  "album": "Chronicle",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Creedence Clearwater Revival",
+  "album": "Creedence Gold",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Crosby, Stills & Nash",
+  "album": "Crosby, Stills & Nash",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "David Bowie",
+  "album": "ChangesOneBowie",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Deep Purple",
+  "album": "Burn",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Dire Straits",
+  "album": "Alchemy",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Dire Straits & Mark Knopfler",
+  "album": "Private Investigations",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "The Doors",
+  "album": "The Doors",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Electric Light Orchestra",
+  "album": "A New World Record",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Fleetwood Mac",
+  "album": "Greatest Hits",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Grateful Dead",
+  "album": "From the Mars Hotel",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Jimi Hendrix",
+  "album": "Experience Hendrix",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Led Zeppelin",
+  "album": "Led Zeppelin",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Oasis",
+  "album": "Definitely Maybe",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Outlaws",
+  "album": "Outlaws",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "Relics",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "The Dark Side of the Moon",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "Wish You Were Here",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "Animals",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "The Wall",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "A Momentary Lapse of Reason",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Pink Floyd",
+  "album": "The Division Bell",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Queen",
+  "album": "A Night at the Opera",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Rush",
+  "album": "Moving Pictures",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "The Who",
+  "album": "The Who by Numbers",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "The Who",
+  "album": "Who's Greatest Hits",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "XTC",
+  "album": "Go 2",
+  "note": null,
+  "genre": "Classic rock"
+ },
+ {
+  "artist": "Camel",
+  "album": "I Can See Your House From Here",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Camel",
+  "album": "A Live Record",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "King Crimson",
+  "album": "In the Court of the Crimson King",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Porcupine Tree",
+  "album": "In Absentia",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Porcupine Tree",
+  "album": "Deadwing",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Porcupine Tree",
+  "album": "Fear of a Blank Planet",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Porcupine Tree",
+  "album": "Closure/Continuation",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Puscifer",
+  "album": "Existential Reckoning",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Steven Wilson",
+  "album": "Hand. Cannot. Erase.",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Steven Wilson",
+  "album": "Transience",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "Tool",
+  "album": "Fear Inoculum",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "White Moth Black Butterfly",
+  "album": "Atone",
+  "note": null,
+  "genre": "Prog"
+ },
+ {
+  "artist": "A Perfect Circle",
+  "album": "Mer de Noms",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Arctic Monkeys",
+  "album": "AM",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Foo Fighters",
+  "album": "Greatest Hits",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Foo Fighters",
+  "album": "Concrete and Gold",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Gojira",
+  "album": "From Mars to Sirius",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Greta Van Fleet",
+  "album": "Anthem of the Peaceful Army",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Linkin Park",
+  "album": "Meteora",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Metallica",
+  "album": "Master of Puppets",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Nirvana",
+  "album": "Nevermind",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Noel Gallagher's High Flying Birds",
+  "album": "Who Built the Moon?",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Pearl Jam",
+  "album": "Ten",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Pearl Jam",
+  "album": "Vs.",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Radiohead",
+  "album": "OK Computer OKNOTOK 1997–2017",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Radiohead",
+  "album": "Kid A",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Rage Against the Machine",
+  "album": "Rage Against the Machine",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Red Hot Chili Peppers",
+  "album": "Californication",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Red Hot Chili Peppers",
+  "album": "By the Way",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Weezer",
+  "album": "Weezer (Blue Album)",
+  "note": null,
+  "genre": "Rock and metal"
+ },
+ {
+  "artist": "Bonobo",
+  "album": "Black Sands",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Cigarettes After Sex",
+  "album": "Cigarettes After Sex",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Daft Punk",
+  "album": "Random Access Memories",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Gorillaz",
+  "album": "Demon Days",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Khruangbin",
+  "album": "Mordechai",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Kias Fansuri",
+  "album": "Dua Tahun Pertama",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "King Gizzard & the Lizard Wizard",
+  "album": "Nonagon Infinity",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "MGMT",
+  "album": "Oracular Spectacular",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Of Monsters and Men",
+  "album": "My Head Is an Animal",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Ratatat",
+  "album": "Ratatat",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "The Shins",
+  "album": "Oh, Inverted World",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Sigur Rós",
+  "album": "Með suð í eyrum við spilum endalaust",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Tame Impala",
+  "album": "Lonerism",
+  "note": null,
+  "genre": "Indie and electronic"
+ },
+ {
+  "artist": "Billie Eilish",
+  "album": "When We All Fall Asleep, Where Do We Go?",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "boygenius",
+  "album": "boygenius",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "boygenius",
+  "album": "the record",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "Halsey",
+  "album": "If I Can't Have Love, I Want Power",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "Mali",
+  "album": "Caution to the Wind",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "Phoebe Bridgers",
+  "album": "Punisher",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "Taylor Swift",
+  "album": "Red (Taylor's Version)",
+  "note": null,
+  "genre": "Pop and singer-songwriters"
+ },
+ {
+  "artist": "Arthur Blythe",
+  "album": "Elaborations",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Hiatus Kaiyote",
+  "album": "Tawk Tomahawk",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Little Simz",
+  "album": "Sometimes I Might Be Introvert",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Nu Soul Habits",
+  "album": "Meant to Be",
+  "note": "1993 Motown promo 12\"",
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Phil Bodner & Company",
+  "album": "Fine & Dandy",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Ray Cash",
+  "album": "Dope Game",
+  "note": "12\"",
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Thelonious Monk Quartet",
+  "album": "Monk's Dream",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "Tom Misch & Yussef Dayes",
+  "album": "What Kinda Music",
+  "note": null,
+  "genre": "Soul, jazz and hip-hop"
+ },
+ {
+  "artist": "The Beach Boys",
+  "album": "Best of The Beach Boys",
+  "note": null,
+  "genre": "Oldies"
+ },
+ {
+  "artist": "Bob Marley & the Wailers",
+  "album": "Legend",
+  "note": null,
+  "genre": "Oldies"
+ },
+ {
+  "artist": "Buddy Holly",
+  "album": "The Very Best of Buddy Holly",
+  "note": null,
+  "genre": "Oldies"
+ },
+ {
+  "artist": "Harry Belafonte",
+  "album": "Calypso",
+  "note": null,
+  "genre": "Oldies"
+ },
+ {
+  "artist": null,
+  "album": "Absolute Beginners",
+  "note": "soundtrack",
+  "genre": "Everything else"
+ },
+ {
+  "artist": "The Alley Cats",
+  "album": "Nightmare City",
+  "note": null,
+  "genre": "Everything else"
+ },
+ {
+  "artist": "Ananda Shankar",
+  "album": "Ananda Shankar",
+  "note": null,
+  "genre": "Everything else"
+ },
+ {
+  "artist": "Annie Anxiety",
+  "album": "Soul Possession",
+  "note": null,
+  "genre": "Everything else"
+ },
+ {
+  "artist": "Lata Mangeshkar",
+  "album": "Live at Royal Albert Hall, 1974",
+  "note": null,
+  "genre": "Everything else"
+ },
+ {
+  "artist": "Various Artists",
+  "album": "Live From Lawrence",
+  "note": "KJHK's Quest for Vinyl",
+  "genre": "Everything else"
+ }
+]

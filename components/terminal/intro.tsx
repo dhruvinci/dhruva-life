@@ -22,6 +22,15 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
     )
   }
 
+  const paper = data.research.find((item) => item.kind === "paper")
+  const inProgress = data.research.find((item) => item.kind !== "paper")
+  const post = data.posts[0]
+  const quickLinks = [
+    inProgress && { label: "in progress", command: `/research ${inProgress.slug}`, title: inProgress.title },
+    paper && { label: "paper", command: `/research ${paper.slug}`, title: paper.title },
+    post && { label: "latest post", command: `/blog ${post.slug}`, title: post.title },
+  ].filter(Boolean) as Array<{ label: string; command: string; title: string }>
+
   const lines: React.ReactNode[] = [
     <span key="name" className="font-medium">
       {config.name}
@@ -41,6 +50,23 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
       </p>
     </div>,
     <span key="rule" className="block h-px w-full bg-border" />,
+    <section key="now" aria-label="Currently" className="space-y-2">
+      <p className="text-xs uppercase tracking-widest text-muted-foreground">currently</p>
+      <p className="font-serif text-base max-w-[62ch]">{config.now}</p>
+      <ul className="space-y-1 pt-1">
+        {quickLinks.map((link) => (
+          <li key={link.command} className="grid grid-cols-[1.25rem_7.5rem_1fr] gap-x-2">
+            <span className="text-muted-foreground" aria-hidden>
+              ⎿
+            </span>
+            <span className="text-ochre">[{link.label}]</span>
+            <CommandLink command={link.command} className="text-foreground hover:text-accent">
+              {link.title}
+            </CommandLink>
+          </li>
+        ))}
+      </ul>
+    </section>,
     <nav key="nav" aria-label="Sections" className="flex flex-wrap gap-x-5 gap-y-2 text-base">
       {config.nav.map((name) => (
         <CommandLink key={name} command={`/${name}`} className="text-terracotta hover:underline">

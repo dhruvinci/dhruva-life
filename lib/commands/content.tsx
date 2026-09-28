@@ -1,6 +1,9 @@
 import type React from "react"
 import { CommandLink } from "@/components/terminal/command-link"
 import { CopyButton } from "@/components/terminal/copy-button"
+import { FightRecord } from "@/components/fun/fight-record"
+import { GigList } from "@/components/fun/gig-list"
+import { RecordShelf } from "@/components/fun/record-shelf"
 import { Gallery } from "@/components/terminal/gallery"
 import { Markdown } from "@/components/terminal/markdown"
 import type { Page, Post, Project, ResearchItem, SiteData } from "@/lib/site-types"
@@ -54,15 +57,36 @@ function Sequence({ items, index, back }: { items: Array<{ title: string; comman
   )
 }
 
+/**
+ * A Markdown page. Extra content (fight record, gig list, gallery) goes where the page's
+ * Markdown has <!-- slot -->, or at the end if there's no slot.
+ */
 function PageView({ page, children }: { page: Page; children?: React.ReactNode }) {
+  const [before, after = ""] = page.html.split("<!-- slot -->")
   return (
-    <article className="space-y-4">
+    <article className="space-y-6">
       <Heading>{page.title}</Heading>
       {page.updated && <p className="text-muted-foreground text-xs">updated {formatDate(page.updated)}</p>}
-      <Markdown html={page.html} />
+      {before.trim() && <Markdown html={before} />}
       {children}
+      {after.trim() && <Markdown html={after} />}
     </article>
   )
+}
+
+/** Components that some pages carry alongside their Markdown. */
+function pageExtras(name: string, data: SiteData): React.ReactNode {
+  if (name === "bjj") return <FightRecord fights={data.fights} />
+  if (name === "camera") return <Gallery photos={data.photos} />
+  if (name === "music") {
+    return (
+      <div className="space-y-12">
+        <GigList gigs={data.gigs} />
+        <RecordShelf records={data.records} />
+      </div>
+    )
+  }
+  return null
 }
 
 function WorkView({ data }: { data: SiteData }) {
@@ -307,7 +331,7 @@ export function createContentCommands(data: SiteData): Command[] {
       title: page.title,
       next: withSlash(page.next),
       playMusic: page.name === "music",
-      content: <PageView page={page}>{page.name === "camera" && <Gallery photos={data.photos} />}</PageView>,
+      content: <PageView page={page}>{pageExtras(page.name, data)}</PageView>,
     }),
   }))
 
