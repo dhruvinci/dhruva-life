@@ -31,7 +31,7 @@ A content page's file name becomes its command and URL; names in `RESERVED_COMMA
 
 ## Styling
 
-Earthy palette (terracotta, sage, olive, ochre, teal-stone) defined per theme; every text color is >= 4.5:1 against background, card and muted surfaces, so keep that invariant when adding colors. Mono (JetBrains) for interface, serif (Newsreader) for anything read at length (`.md`, `font-serif`).
+Deep orange (between Bitcoin and Goku orange) on neutral charcoal or paper, with gold, blue, olive and sage, defined per theme; every text color is >= 4.5:1 against background, card and muted surfaces, so keep that invariant when adding colors. Mono (JetBrains) for interface, serif (Newsreader) for anything read at length (`.md`, `font-serif`).
 
 ## Verification
 

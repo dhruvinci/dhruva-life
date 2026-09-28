@@ -9,7 +9,7 @@ export const LOGO = {
 }
 
 /** Brand colours from the dark theme in app/globals.css. */
-export const LOGO_COLORS = { ground: "#161412", window: "#df7c5c", prompt: "#ece5d8", cursor: "#93a898" }
+export const LOGO_COLORS = { ground: "#121212", window: "#f7821b", prompt: "#f1eee8", cursor: "#9fb3a5" }
 
 interface SvgOptions {
   /** Draw on a rounded dark tile (for browser and app icons). */

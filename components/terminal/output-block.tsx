@@ -83,7 +83,7 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
           <div className="min-w-0">
           <div className={`leading-relaxed ${block.tone ? toneClasses[block.tone] : ""}`}>{block.content}</div>
           {block.notice && (
-            <p role="status" className="mt-4 text-sm text-teal-stone bg-teal-stone/10 border border-teal-stone/25 rounded px-3 py-2">
+            <p role="status" className="mt-4 text-sm text-blue bg-blue/10 border border-blue/25 rounded px-3 py-2">
               {block.notice}
             </p>
           )}

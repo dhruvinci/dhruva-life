@@ -30,25 +30,25 @@ export function renderOgImage({ path, title, description, eyebrow }: { path: str
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#161412",
-          color: "#ece5d8",
+          background: "#121212",
+          color: "#f1eee8",
           padding: "72px",
           fontFamily: "JetBrains Mono",
         }}
       >
         <div style={{ display: "flex", fontSize: 30 }}>
-          <span style={{ color: "#93a898" }}>dhruva@life</span>
-          <span style={{ color: "#a69d90" }}>:</span>
-          <span style={{ color: "#d6b36a" }}>~{path === "/" ? "" : path}</span>
-          <span style={{ color: "#a69d90" }}>&nbsp;$</span>
+          <span style={{ color: "#9fb3a5" }}>dhruva@life</span>
+          <span style={{ color: "#a19d96" }}>:</span>
+          <span style={{ color: "#f2b93b" }}>~{path === "/" ? "" : path}</span>
+          <span style={{ color: "#a19d96" }}>&nbsp;$</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          {eyebrow && <div style={{ fontSize: 26, color: "#d6b36a", letterSpacing: 1 }}>{eyebrow}</div>}
+          {eyebrow && <div style={{ fontSize: 26, color: "#f2b93b", letterSpacing: 1 }}>{eyebrow}</div>}
           <div style={{ fontFamily: "Newsreader", fontSize: title.length > 60 ? 56 : title.length > 28 ? 72 : 92, lineHeight: 1.05, letterSpacing: -1 }}>{title}</div>
-          <div style={{ fontSize: 27, color: "#a69d90", lineHeight: 1.45 }}>{trimmed}</div>
+          <div style={{ fontSize: 27, color: "#a19d96", lineHeight: 1.45 }}>{trimmed}</div>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, color: "#a69d90" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 14, color: "#df7c5c" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 26, color: "#a19d96" }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 14, color: "#f7821b" }}>
             {/* eslint-disable-next-line @next/next/no-img-element -- rendered to PNG by next/og */}
             <img src={logoDataUri()} width={40} height={40} alt="" />
             dhruva.life

@@ -22,8 +22,8 @@ function Heading({ children }: { children: React.ReactNode }) {
 }
 
 /** Terminal-style tag, e.g. [AI]. */
-function Tag({ children, tone = "ochre" }: { children: React.ReactNode; tone?: "ochre" | "muted" | "accent" }) {
-  const toneClass = { ochre: "text-ochre", muted: "text-muted-foreground", accent: "text-accent" }[tone]
+function Tag({ children, tone = "gold" }: { children: React.ReactNode; tone?: "gold" | "muted" | "accent" }) {
+  const toneClass = { gold: "text-gold", muted: "text-muted-foreground", accent: "text-accent" }[tone]
   return <span className={`text-xs ${toneClass}`}>[{children}]</span>
 }
 
@@ -165,7 +165,7 @@ function BlogView({ data }: { data: SiteData }) {
       {data.intros.blog && <Markdown html={data.intros.blog} />}
       {years.map((year) => (
         <section key={year} className="space-y-4">
-          <h3 className="text-ochre text-xs uppercase tracking-widest">{year}</h3>
+          <h3 className="text-gold text-xs uppercase tracking-widest">{year}</h3>
           {data.posts
             .filter((post) => post.date.startsWith(year))
             .map((post) => (
@@ -222,7 +222,7 @@ function ResearchView({ data }: { data: SiteData }) {
 
       {papers.length > 0 && (
         <section className="space-y-4">
-          <h3 className="text-ochre text-xs uppercase tracking-widest">Published</h3>
+          <h3 className="text-gold text-xs uppercase tracking-widest">Published</h3>
           {papers.map((item) => (
             <div key={item.slug} className="rounded-lg border border-border bg-card p-4 space-y-3">
               <div className="flex flex-wrap gap-x-3">
@@ -258,7 +258,7 @@ function ResearchView({ data }: { data: SiteData }) {
 
       {ongoing.length > 0 && (
         <section className="space-y-4">
-          <h3 className="text-ochre text-xs uppercase tracking-widest">In progress</h3>
+          <h3 className="text-gold text-xs uppercase tracking-widest">In progress</h3>
           {ongoing.map((item) => (
             <div key={item.slug} className="group/item border-l-2 border-border pl-4 hover:border-accent/60 transition-colors">
               <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">

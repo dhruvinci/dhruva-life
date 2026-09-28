@@ -49,7 +49,7 @@ export function RecordShelf({ records }: { records: VinylRecord[] }) {
             <p className="font-serif text-base italic leading-snug text-foreground">{record.album}</p>
             <div>
               {record.artist && <p className="text-xs text-muted-foreground">{record.artist}</p>}
-              {record.note && <p className="text-[11px] text-ochre">{record.note}</p>}
+              {record.note && <p className="text-[11px] text-gold">{record.note}</p>}
             </div>
           </li>
         ))}

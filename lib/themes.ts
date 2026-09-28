@@ -9,7 +9,7 @@ export interface ThemeInfo {
 }
 
 export const THEMES: ThemeInfo[] = [
-  { name: "dark", label: "Dark", description: "Warm charcoal, the default", dark: true },
+  { name: "dark", label: "Dark", description: "Charcoal and orange, the default", dark: true },
   { name: "light", label: "Light", description: "Paper and ink", dark: false },
   { name: "matrix", label: "Matrix", description: "Green rain on black", dark: true },
   { name: "pokemon", label: "Pokémon", description: "Original Game Boy green", dark: false },

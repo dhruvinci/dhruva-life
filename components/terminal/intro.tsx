@@ -19,7 +19,7 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
           <Logo className="h-4 w-4" />
           {config.name}
         </a>
-        <span className="text-terracotta">{config.tagline}</span>
+        <span className="text-orange">{config.tagline}</span>
       </header>
     )
   }
@@ -42,7 +42,7 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
       Loading identity<span className="loading-dots" aria-hidden />
     </span>,
     <div key="tagline" className="space-y-2">
-      <p className="text-terracotta font-medium text-lg sm:text-xl">{config.tagline}</p>
+      <p className="text-orange font-medium text-lg sm:text-xl">{config.tagline}</p>
       <p className="flex flex-wrap gap-x-4 gap-y-1 text-xs">
         {config.availability.map((item) => (
           <CommandLink key={item.label} command={item.command} className="text-olive hover:underline">
@@ -62,7 +62,7 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
             <span className="text-muted-foreground" aria-hidden>
               ⎿
             </span>
-            <span className="text-ochre">[{link.label}]</span>
+            <span className="text-gold">[{link.label}]</span>
             <CommandLink command={link.command} className="text-foreground hover:text-accent">
               {link.title}
             </CommandLink>
@@ -72,13 +72,13 @@ export function Welcome({ data, compact }: { data: SiteData; compact: boolean })
     </section>,
     <nav key="nav" aria-label="Sections" className="flex flex-wrap gap-x-5 gap-y-2 text-base">
       {config.nav.map((name) => (
-        <CommandLink key={name} command={`/${name}`} className="text-terracotta hover:underline">
+        <CommandLink key={name} command={`/${name}`} className="text-orange hover:underline">
           {name}
         </CommandLink>
       ))}
     </nav>,
     <span key="hint" className="text-muted-foreground text-xs">
-      Click around, or type <span className="text-terracotta">/</span> to see everything.
+      Click around, or type <span className="text-orange">/</span> to see everything.
     </span>,
   ]
 
