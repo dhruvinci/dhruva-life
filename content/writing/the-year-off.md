@@ -36,7 +36,13 @@ The first was my health. I've already learned once what happens when you pour ev
 
 The second was learning. What I love most isn't the win at the end, it's being a beginner at something hard and slowly, painfully, getting less bad at it. I wanted a sport that works like that. Not one where you peak at twenty-five and spend the rest of your life talking about it, but a lifelong puzzle.
 
-Jiu-jitsu is both. I've trained on and off before, always squeezed around work, always a bit guilty about the time. This year there's nothing to squeeze it around. Six hours a day, six days a week, here in Bangalore. Yes, six. My body has already filed a formal complaint, and it's only January.
+Jiu-jitsu turned out to be both, and I found it almost by accident.
+
+I sold my startup on a Friday. That weekend I went to a crypto conference, mostly just to see friends, not to do any work, and I told a few of them I wanted to pick up a sport, maybe a martial art. I was thinking Muay Thai. One friend said, "Come to the Institute of Jiu-Jitsu. It's one of the best gyms in the country." Where is it? Sadashivnagar. I said that's a bit far, it's eight kilometres from me. He said, "I come from Hoskote." That's twenty-five kilometres. If this guy could make that trip, so could I.
+
+I went for a trial class that Monday morning. The gym is on the second floor, and I was in such bad shape that I was panting just climbing the stairs. By the end of the class I was blacking out and throwing up electrolytes. My body had been pushed right to its limit, and somewhere in that haze I knew it was exactly what I wanted.
+
+My body took a while to agree. The first few weeks I could only manage two days a week. Then three. Then four. And in the last week of the year, right around New Year's Eve, I finally trained six days in a row. So that's the plan now. Six days a week, here in Bangalore, for the whole year. My body has filed several formal complaints, and it's only January.
 
 People ask if I'm worried about falling behind. Falling behind is only a problem if you're in a race, and I stopped running that race a long time ago. A year of learning to use my body well, to stay calm under pressure, to lose a hundred times a week and come back the next morning - I think that'll pay off in ways I can't predict yet. And maybe me telling people "I do jiu-jitsu" with a straight face helps someone else who's been scared to take the road not taken.
 

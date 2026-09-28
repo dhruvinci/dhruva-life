@@ -1,29 +1,27 @@
 ---
 title: Coming Home to Build
 date: 2021-12-05
-excerpt: "Is it strange to feel homesick for a place while you're standing in it?"
+excerpt: "Nobody I knew had done this before me. That's exactly why I wanted to come back and make it easier for the next person."
 ---
 
 Is it strange to feel homesick for a place while you're standing in it?
 
-That's been my first few weeks back in Bangalore. Everything is familiar and everything has moved slightly to the left. The roads are the same roads with new names for the traffic. Friends have become managers and parents and, surprisingly often, founders. I keep catching myself converting prices in my head like a tourist. I'm home, but I'm also new here, and I'm not sure yet which of those feelings is going to win.
+That's been my first few weeks back in Bangalore. Everything is familiar and everything has moved slightly to the left. Friends have become managers and parents and, surprisingly often, founders. I keep catching myself converting prices in my head like a tourist. But I'm home. I'm close to my family again, and I can't describe what a weight off my chest that is.
 
-A lot of people asked why I'd come back to build instead of staying in the US, where the money is closer and the ecosystem is deeper. It's a fair question and I gave a different answer every time, which probably means none of them were the real one.
+Nobody I knew had done this before me. Leave the job, leave the visa, come back, and build something from scratch here. There was no senior to call, no playbook, nobody who'd walked the road and could tell me where the potholes were. I had to do this myself, for myself, for the first time. And somewhere in the middle of all that, I realised the most useful thing I could do with it was make the road a little easier for whoever comes next.
 
-The real one is simpler and a bit embarrassing. I missed it. I missed the chaos and the food and the gigs and my people. I missed being in a place where I knew how things worked, even when they didn't work. Five years away is long enough to realise that home isn't where you're comfortable, it's where you care what happens.
+In the months before I came back, I spent a few hours almost every day on Clubhouse, just talking. Teaching people in India about crypto, about NFTs, about what this new internet could mean for artists and builders here. Rooms full of strangers asking questions late into the night. I never kept count of how many people I spoke to. I didn't do it for any reason other than it felt good to help, and I'd rather pass on what I know than sit on it.
 
-And I do care what happens here.
+A candle doesn't lose any light when you use it to light another candle, but makes the room brighter.
 
-The thing I keep noticing, now that I'm back with fresh eyes, is how much talent there is that doesn't know what it could be. Everyone I meet is sharp. Engineers who learn a new stack over a weekend because they're curious, who'll stay up with you debugging something just to see it work. But so many of them have been trained, and trained well, to build someone else's roadmap. Building your own thing still feels like a risk you have to justify to your family and your neighbours and yourself.
+The other reason I came back is harder to put into words, so let me try.
 
-I get it. I only did it after years of the safe version.
+I know what it's like to be the underrated kid. I didn't get the best marks. I didn't get into the college everyone expected. I spent four years in a system that graded me on whether my code matched the answer key, not on whether I could think. There are thousands of students in this city right now who are exactly like I was - curious, inquisitive, a bit of a misfit, with marks that say nothing about how bright they are, for reasons that are none of their fault. Give them real work and they'll surprise you. They're hungry in a way you can't teach.
 
-What Bangalore lacks isn't people or ideas. It's permission, and early believers for weird ideas, the ones who'll back you before it makes sense on a spreadsheet. With crypto it also lacks clarity - nobody quite knows what the rules are going to be, and that fog keeps a lot of good people waiting on the sidelines. I don't think you fix any of that with a policy paper. I think you fix it one person at a time, by building out loud and pulling people in with you.
+That's who I want to build with. Not the people with the perfect CVs, who'll be fine either way. The people nobody's given a shot yet.
 
-Being able to go to gigs here again has been the best part of coming back. The small ones, where you can't tell who's in the band and who's just a friend of the band. Half the room knows each other, nobody's getting rich, and everybody's having the time of their lives. I've been going to rooms like that since college, and it hits different now. That's the feeling. That's what I want to build a company around.
+I'm not naive about it. Building here means some late calls across time zones, some explaining to relatives who think I've taken a step backwards, and a lot of fog around crypto that nobody's cleared up yet. Some days the fog will win.
 
-I'm not naive about it. Some days the fog will win. There'll be late calls across time zones, and a lot of explaining to people who think I've taken a step backwards.
+But it doesn't feel like a step backwards. It feels like I've come home with something to give.
 
-It doesn't feel like a step backwards. It feels like I finally walked into the room I've been trying to get back to.
-
-It's good to be home.
+Let's plant some seeds.

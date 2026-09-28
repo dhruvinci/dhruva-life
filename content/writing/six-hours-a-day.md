@@ -1,6 +1,6 @@
 ---
 title: Six Hours a Day
-date: 2024-05-12
+date: 2024-04-21
 excerpt: "You can't pitch your way out of side control."
 ---
 
@@ -24,6 +24,12 @@ The fourth thing is humility, and it's arrived in large doses. I've spent years 
 
 I'm not saying this is better than building a company. But whatever I do next, I think I'll do it differently. Less talking, more reps. More patience with the slow parts. More respect for the gap between knowing a thing and being able to do it when someone's sitting on your chest.
 
+Around New Year's, when I'd only just managed my first full week of six days, I came across the idea of a misogi. Once a year, you pick one thing that feels genuinely impossible for you, and you go and do it. Not a resolution. A single, scary, specific thing. So I asked myself what mine would be. I could barely get through a week of training without my body falling apart. The impossible thing, I decided, was to compete this year.
+
+I've signed up. ADCC India Nationals, in Delhi, next month.
+
+Just typing that makes my stomach do a small flip. I'll be walking onto a mat in front of people, against someone who's probably been doing this for years, with four months of training behind me. I have no idea how it'll go. But I've spent my whole life being the person who picks the uncomfortable road, and I'm starting to understand my relationship with fear a bit better. It doesn't go away. You just learn to walk next to it.
+
 People keep asking me if six hours a day is sustainable. Probably not forever. But the pursuit of being really, truly excellent at one hard thing, even for a year, even if I'm never the best in the room, feels like the most honest thing I've done in a long time.
 
-Tomorrow's Monday. My body has opinions about that.
+Delhi, here I come. My body has opinions about that.

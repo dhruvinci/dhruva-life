@@ -1,29 +1,31 @@
 ---
 title: Taking the Leap
 date: 2021-09-12
-excerpt: "I've been living two lives for about a month, and I've started to notice which one I look forward to."
+excerpt: "Everyone I asked told me not to do it. It took me eight months to realise I was asking the wrong people."
 ---
 
-I've been living two lives for about a month now, and I've started to notice which one I look forward to.
+In January my father had a heart attack.
 
-In the first one I have a good job. A really good job, the kind people back home nod at when you describe it. Calls in the morning, calls in the afternoon, a few more calls in the evening to catch the team on the other side of the world. I'm good at it. Nobody's worried about me.
+He was at home, halfway around the world from me, and it came out of nowhere. I remember my hands shaking when I heard the news. I booked the first flight out and got home as fast as I could. And then, almost as soon as I landed, I was counting days. My company said I had to use my leave, there was no extra time to be given, and I had to be back soon. So I sat with my family, and I counted days.
 
-In the second one it's late, the work laptop is closed, and I'm building something that might not exist in six months.
+That's when something in me broke a little, in a good way. I didn't like the fact that I was chained to a visa, in a country I wasn't happy in, so far away from the people I love. None of it - the job, the title, the safe path - mattered if I couldn't be around my family when it counted.
 
-I didn't get into crypto because someone pitched it to me. I went down the rabbit hole the way I go down every rabbit hole, by pulling on one thread and finding it doesn't end. First it was curiosity about how any of it worked. Then it was reading everything I could find at 2am. Then it was this slow, slightly uncomfortable realisation that people were laying down new rails for the internet in real time, and I was watching from the side of the road.
+That was eight months ago. It's taken me all of those eight months to act on it.
 
-The obvious question, the one I keep asking myself in the shower, is why now. Why not wait a year and see how it shakes out.
+I started asking people. Should I quit? Should I give up my H1B, come back to India, and work full time on the startup I've been building on nights and weekends? And every single person I asked said no. Don't do it. Too risky. Wait a bit. You're throwing away something people would kill for.
 
-I don't have a great answer. The honest one is that frontiers don't stay frontiers for long. Right now the tools are rough, the standards are half-written, and most of the people building are doing it because they genuinely believe in it. The space is still small enough that a handful of people with an idea can change the shape of something. By the time it's all figured out, someone else will have figured it out.
+It took me an embarrassingly long time to notice that I was asking people who had never done what I was about to do. Of course they'd tell me not to. They wouldn't know how.
 
-There's also a less noble answer, which is that I'm restless. I've been on the safe path for a few years and I can feel myself getting comfortable, and comfortable scares me more than broke does. Which is probably easy to say while I still have a salary (lol).
+It reminds me of a friend of mine, one of my closest. He'd come over to hang out whenever we had a gig to go to, and at the time I was going through a rough patch in my relationship. He was single, and he'd written off relationships entirely - a proper non-believer in love - and he would sit there and preach to me about mine. One day I told him, "Bro, no offence, but you know why I listen to you, right?" He said, "What?" I said, "Don't take it the wrong way, but I listen to you so I know what not to do."
 
-I'm not going to pretend I have a plan. I don't know how to price anything. I don't know how to hire. I don't really know what a company is, beyond the ones I've worked at, and those were all very big and very old and very sure of themselves. I'm going to learn by getting it wrong, repeatedly, in front of people.
+He was quite alarmed. But he took it in good stride, and a couple of years later he found someone, committed, and settled down. Turns out he just hadn't done it yet.
 
-The fear is real. Every few days I have a version of the same conversation with someone who cares about me, where they ask, kindly, whether I'm sure. I'm not. I don't think you get to be sure about the things worth doing. I think you get to be sure about how you feel at the end of the day.
+That's how I've started hearing the advice. Not as wrong, exactly. Just as coming from people who haven't taken this particular leap. Nobody I know has. That's sort of the story of my life, honestly - I keep ending up on roads where there's nobody ahead of me to ask.
 
-And that part is clear. One of these lives leaves me tired. The other one leaves me tired and happy, and weirdly excited to be tired again tomorrow.
+So I stopped waiting for permission and started building the courage myself. I put in the work. I saved money. I made the startup real enough that leaving wouldn't be a jump into nothing. Slowly, the fear got smaller than the reason.
 
-I haven't worked out the timing of everything else yet, and I'm trying not to think too far ahead.
+I want to say one more thing, because I've been thinking about the people who come back home not by choice. People who lose a visa or a job and get sent back, and feel like failures for it. I'd much rather make this decision by choice than have it made for me by circumstance. But if it was made for you, I want you to know - I'm choosing the life you were handed, on purpose, with my eyes open. It's not a consolation prize. I think it might be the best thing I ever do.
 
-But I know which one I'm waking up for.
+I haven't worked out every detail. I don't have a plan for everything that could go wrong. But I know where I want to be the next time my family needs me.
+
+Home. I'm going home.

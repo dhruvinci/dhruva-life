@@ -1,27 +1,33 @@
 ---
 title: Hire the Hungry
 date: 2023-02-19
-excerpt: "I didn't have the money to hire experience, so I hired people who wanted it badly."
+excerpt: "The best resume I ever received was one line in a DM: \"I can build anything in Solidity.\""
 ---
 
-Who do you hire when you can't afford anyone with a CV?
+The best resume I ever received was one line long.
 
-That was the honest question in the early days of Dehidden. We were a small crypto startup in Bangalore building NFT products for brands, and the people with ten years of experience were either at big companies earning big salaries or they looked at the word "Web3" and quietly closed the tab (fair enough, I'd have done the same a few years ago). So I did the only thing I could. I hired people who were hungry.
+An 18-year-old kid who was always quiet on Twitter. I asked him to send me his resume. He replied with one line: "I can build anything in Solidity." I hired him as an intern on the spot.
 
-I mean that pretty literally. The folks who showed up were young, some of them barely out of college, a few who'd never shipped anything to a real user, and what they had instead of experience was this restlessness - they'd been hacking on side projects at 2am, reading smart contracts for fun, asking questions in Discord servers nobody else was reading. You could see it in the first conversation. They didn't want a job. They wanted a shot.
+I think about that DM a lot, because it sums up how I've built my team. I've ended up with what I honestly believe is one of the best sets of Web3 developers at any Indian crypto startup, maybe any on this side of the world, and almost none of them would have made it through a normal hiring process.
 
-I never had the pedigree myself. I didn't crack IIT, I went to whichever college would take me, and years later a couple of the IIT and IIM grads I grew up comparing myself to ended up working under me. CVs lie in both directions. I didn't know a thing about running a business either, but I had grit and a mission, so I recognised it when I saw it. What I didn't know was how to hire, or how to trust someone with a client's launch when they'd been writing code professionally for six months. I had to learn that by doing it.
+My engineering manager is someone I met on Clubhouse. We'd had these long, deep conversations in rooms about crypto late at night, and at some point I realised I'd already interviewed him a dozen times without either of us knowing it. Another engineer, I gave an assignment to see what he could do. He delivered the whole stack within 24 hours. He barely had a resume either.
 
-Here's what I learned. Hungry people will surprise you if you let them. The trick is the "if you let them" part. It's very easy, as a founder who's scared of dropping the ball, to hand someone a tiny ticket and then check it three times, and the moment you do that the hunger goes out of them because you've told them, without saying it, that you don't really believe in them. So I tried to do the opposite. I'd put people in front of problems slightly too big for them - a whole minting flow, a client integration, a feature a brand was going to announce to millions of people - and then stay close enough to catch them if they fell, but far enough that they could feel it was theirs.
+They're misfits, most of them. They came from very different places, a lot of them didn't have the marks or the college names, and some of them had never shipped anything to a real user. What they had instead was restlessness. They'd been hacking on side projects at 2am, reading smart contracts for fun, asking questions in Discord servers nobody else was reading. You could see it in the first conversation. They didn't want a job. They wanted a shot.
 
-Sometimes it went sideways. Things broke in staging, and once or twice in places worse than staging. We'd sit together and fix it, and nobody got yelled at, because I'd rather lose an evening than lose someone's confidence. Most of the time though, they rose to it, and faster than I'd have believed. People who'd never spoken to a client were running calls with brand teams a few months later. People who'd been nervous to push to main were designing systems I'd have been proud to put my name on.
+I never had the pedigree myself. I didn't crack IIT, I went to whichever college would take me, and years later a couple of the IIT and IIM grads I grew up comparing myself to ended up working under me. CVs lie in both directions. So I recognise the hunger when I see it.
 
-The part I didn't expect is what happens after.
+Hiring them was the easy part. The hard part is what comes after, which is actually trusting them.
 
-I can already tell some of them aren't going to stay employees for long. You hear it in the questions they start asking - not "how do I build this" but "why are we building this, and who pays for it". The first time I noticed it I felt this odd mix in my chest, a bit of "oh no, who's going to own that module", and then, almost immediately, a much bigger feeling that I can only describe as pride. If people see how a startup runs from the inside, the ugly bits included, and want to do it themselves anyway, that's the best review a place can get.
+It's very easy, as a founder who's scared of dropping the ball, to hand someone a tiny ticket and then check it three times. The moment you do that, the hunger goes out of them, because you've told them, without saying it, that you don't really believe in them. So I try to do the opposite. I put people in front of problems slightly too big for them - a whole minting flow, a client integration, a feature a brand is going to announce to millions of people - and stay close enough to catch them if they fall, but far enough that they feel it's theirs. Most of the time they rise to it faster than I'd have believed. People who'd never spoken to a client are running calls with brand teams a few months later.
 
-I think about it like this. A candle doesn't lose any light when you use it to light another candle, but makes the room brighter. I used to think of hiring as filling seats, and of people leaving as a loss you had to manage. Now I think the job, or at least part of it, is to light as many candles as you can while they're near you. Some of them will stay and burn beside you for a long time. Some will walk into another room and light it up. Either way there's more light.
+And sometimes the thing you do for people isn't even a hire.
 
-So if you're hiring and you can't afford experience, don't apologise for it. Look for the hunger, give it something real to chew on, and then get out of the way a little.
+About four months after I moved back to Bangalore, I got a message from someone I didn't recognise. He said, "Hey Dhruva, just so you know, I'm working at a crypto company now, and my journey started in one of your Clubhouse rooms months ago. I don't know if you'd even remember me, but thank you." He'd sat in on one of those late-night sessions where I talked about crypto and NFTs to whoever showed up, gone off and learned more on his own, built things himself, and landed a job.
+
+I didn't remember him. I'd never kept count of those rooms. And that message made my whole month.
+
+That's the butterfly effect of small things. You say something useful to a room of strangers, you give an 18-year-old a shot because of one line in a DM, and you never know which of those seeds is going to grow. Most of them you'll never hear about. But you do right by them, you take care of them, and some of them weather the storm.
+
+So if you're hiring and you can't afford experience, don't apologise for it. Look for the hunger, give it something real to chew on, and then get out of the way.
 
 They'll outgrow you. That's the point.

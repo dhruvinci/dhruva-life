@@ -1,31 +1,29 @@
 ---
 title: Analog
 date: 2026-06-21
-excerpt: "A record doesn't care how fast you are. That's why I keep going back to it."
+excerpt: "My mother likes to say I never lost a pencil or an eraser in twelve years of school. I think that explains most of me."
 ---
 
-There's a particular sound a record makes when it's dirty. A soft crackle under everything, like rain on a tin roof two streets away, and a pop every so often that pulls you right out of the song.
+My mother likes to tell people that in twelve years of school, I never lost a single pencil or eraser. I had a pencil box, everything had its place, and everything came home. It's a small thing to be known for, but I think it explains most of me.
 
-So I clean it. I take Kind of Blue out of its sleeve, holding it by the edges the way you're supposed to, and I wipe it slowly, following the grooves, turning it a little at a time. You can't rush this part. If you rush it you just push the dust around. Then it goes on the platter, the needle comes down, and there's that half second of nothing before the first note.
+I take care of my things. Not because they're expensive, most of them aren't, but because I like things that last, and things only last if someone looks after them.
 
-I've been doing a lot of this lately.
+For twelve years I rode my mother's Kinetic Honda. A two-stroke, bought right around the time I was born, so it was exactly as old as I was. It took me from school to college and well beyond, and it was beaten and worn in every way a scooter can be. To keep it alive I used to sit in mechanic shops and learn how two-stroke engines actually work, and help out, so I could maintain it myself. People in my neighbourhood knew me by it. The engine finally seized about three years ago. I still use the helmet my dad bought to go with it, all those years ago. It's very well taken care of.
 
-My days are spent inside very fast things. Models that answer before I've finished thinking the question. Pipelines that chew through hours of footage while I make a cup of tea. A paper that went from experiments to submission in a blur of late nights and AI-assisted drafts. It's exciting and I love it, and I also notice that by the end of some days my head feels like a browser with forty tabs open, all of them playing audio.
+Right before I left for the US, my mother gave me a Swiss Army knife. I've used it for everything since - cutting an apple, and assembling and reassembling every piece of furniture in every home I've lived in, one move after another. It's never let me down. It still works today.
 
-The analog things are how I close the tabs.
+I'm sitting on a chair my dad made for me when I was a teenager as I write this. You can see all the scratch marks from years of anxious fidgeting, the places where it's been rocked back and forth, where the wood's gone smooth from friction. It's perfectly worn to my body, and it's grown with me from before puberty to my aching thirties. I sit the same way in it every single time.
 
-Chopping vegetables is another one. Onions, then tomatoes, then whatever else the day calls for. There's a rhythm to it if you let it happen, the knife going down, the board, the pile slowly growing at the edge. You can't think about token budgets while you're chopping an onion, or you'll lose a fingertip. The task demands exactly enough attention that there's none left over for anything else, and that's the gift. For fifteen minutes the only thing that exists is the knife and the onion.
+Music comes with the same care. Once, in Melbourne, walking down the street with a colleague, I spotted a record store and dragged us in. I asked the guy if he had any Porcupine Tree, and he pulled out Fear of a Blank Planet. A first pressing. This one record had somehow made its way around the world to a little shop in Australia, and I got to find it. It's still one of my most prized possessions. My turntable at home runs through an old Technics stereo amplifier that my dad was gifted by my uncle about a decade before I was born. When I was a toddler, I stuck a sticker on one of the speakers. It's still there. In the US I kept buying old equipment from the eighties because it was built to last, unlike most of the technology we make today.
 
-And then there's photography, which might be the slowest of them all, even though a shutter is over in a fraction of a second. The picture isn't the click. The picture is the waiting. You see something - light hitting a wall a certain way, someone about to turn their head, a moment that's building - and you wait for it to become the thing you saw coming. Most of the time it doesn't. Sometimes it does, and you're ready, and you get it. Most of photography, for me, is standing still and paying attention.
+I'm a utilitarian at heart. I care about what a thing does, and whether it'll keep doing it for a long time. But I've come to realise that's only half of it. Things that last carry memories with them. My mother's scooter, my father's helmet, a sticker from when I was three. You can't download that.
 
-Kahneman's Thinking, Fast and Slow has been on my mind a lot, and it's hard not to see my own life in it. There's the fast, reflexive part of you that reacts before you've thought, and the slow, deliberate part that actually reasons. I spend my working hours trying to get machines to do both. I've started to wonder if I need the same balance myself. My days are all speed. Everything reflexive, everything immediate.
+My days are spent inside very fast things. Models that answer before I've finished thinking the question. Pipelines that chew through hours of footage while I make a cup of tea. It's exciting and I love it, and I also notice that by the end of some days my head feels like a browser with forty tabs open, all of them playing audio.
 
-The record, the onion and the camera are where I get to be slow on purpose.
+The analog things are how I close the tabs. Cleaning a record slowly, following the grooves, before the needle comes down. Chopping vegetables, where the task takes exactly enough attention that there's none left over for anything else.
 
-It's the same thing jiu-jitsu taught me, in a way. The people who panic on the mat are the ones trying to go fast. The ones who are really good look almost lazy. They wait. They feel where the weight is going, and they move when the moment arrives, not a second before. Slowness isn't the absence of skill. Most of the time, it's what skill looks like from the outside.
+And photography, especially at jiu-jitsu and MMA competitions, which might be the slowest thing I do even though a shutter lasts a fraction of a second. You can't rush it. You wait for the right angle, the right timing, the right frame. A move that's about to land, a finish, the emotion on someone's face in the middle of a roll. Most of the time you miss it. When you get it, it's one of the most fulfilling feelings there is.
 
-I don't want to romanticise it too much. I'm not moving to a cabin. I'll be back at my desk tomorrow, asking a model to watch footage faster than I ever could. But I think the fast stuff is better when there's something slow underneath it, holding the weight.
+I spend my working hours trying to get machines to be both fast and slow. I've started to realise I need the same balance myself.
 
-Tonight it's Kiasmos. Blurred EP, side A.
-
-The needle's already down.
+The needle's down. The chair's rocking. All is well.
