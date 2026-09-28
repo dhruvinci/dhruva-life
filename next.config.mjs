@@ -18,6 +18,7 @@ const nextConfig = {
       "/work/arenatwo": "/work",
       "/writing/twenty-nine-clients": "/writing/productization",
       "/writing/a-million-in-a-week": "/writing/one-click",
+      "/writing/the-trapped-arm": "/writing/seeing-fast-and-slow",
       "/writing/time-is-the-missing-variable": "/writing/a-machine-in-a-mans-world",
     }
     return Object.entries(moved).map(([source, destination]) => ({ source, destination, permanent: true }))
