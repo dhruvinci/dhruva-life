@@ -93,6 +93,8 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
   const playerRef = useRef<YouTubePlayer | null>(null)
   const [index, setIndex] = useState(() => randomIndex(playlist.length))
   const [playing, setPlaying] = useState(false)
+  // Phones get a one-line bar; the video folds away until asked for.
+  const [showVideo, setShowVideo] = useState(() => typeof window === "undefined" || window.matchMedia("(min-width: 640px)").matches)
   const indexRef = useRef(index)
   const track = playlist[index]
 
@@ -153,11 +155,15 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
   }
 
   return (
-    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-96 bottom-[4.25rem] rounded-xl border border-border bg-card p-2 shadow-xl">
-      <div className="overflow-hidden rounded-lg bg-black aspect-video min-h-[200px] [&_iframe]:h-full [&_iframe]:w-full">
+    <div className="print:hidden fixed z-40 right-3 left-3 sm:left-auto sm:w-96 bottom-[4.25rem] rounded-xl border border-border bg-card p-1.5 sm:p-2 shadow-xl">
+      <div
+        className={`overflow-hidden rounded-lg bg-black [&_iframe]:h-full [&_iframe]:w-full ${
+          showVideo ? "aspect-video min-h-[200px] mb-2" : "h-px opacity-0 pointer-events-none"
+        }`}
+      >
         <div ref={mountRef} />
       </div>
-      <div className="flex items-center gap-2 px-1.5 pt-2 pb-0.5">
+      <div className="flex items-center gap-1 sm:gap-2 px-1.5 py-0.5">
         <div className="min-w-0 flex-1 leading-tight">
           <p className="truncate text-sm text-foreground">{track.title}</p>
           <p className="truncate text-xs text-muted-foreground">
@@ -179,6 +185,11 @@ export function MusicPlayer({ playlist, request, onClose }: MusicPlayerProps) {
         <IconButton label="Another random song" onClick={() => play(randomIndex(playlist.length, indexRef.current))}>
           <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M2 4h2.5c3 0 4 8 7 8H14M2 12h2.5c1.2 0 2-1.3 2.7-3M9.3 7c.7-1.7 1.5-3 2.7-3H14M12 2l2 2-2 2M12 10l2 2-2 2" />
+          </svg>
+        </IconButton>
+        <IconButton label={showVideo ? "Hide video" : "Show video"} onClick={() => setShowVideo((show) => !show)}>
+          <svg viewBox="0 0 16 16" className={`h-3.5 w-3.5 fill-none stroke-current transition-transform ${showVideo ? "" : "rotate-180"}`} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M4 6l4 4 4-4" />
           </svg>
         </IconButton>
         <IconButton label="Close player" onClick={onClose}>

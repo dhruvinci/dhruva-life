@@ -7,7 +7,7 @@ import type { Command } from "./types"
 export const FUN_ORDER = ["music", "bjj", "camera", "theme"]
 export const funRank = (name: string) => (FUN_ORDER.indexOf(name) + 1 || 99)
 
-/** The fun row: emoji commands, unlocked by /fun. */
+/** The fun row: emoji commands, always shown in the prompt bar. */
 export function funCommands(data: SiteData) {
   return [
     ...data.pages.filter((page) => page.fun).map((page) => ({ name: page.name, command: `/${page.name}`, emoji: page.emoji ?? "✦", label: page.name })),
@@ -36,13 +36,12 @@ export function createFunCommands(data: SiteData): Command[] {
   return [
     {
       name: "fun",
-      description: "Unlock music, jiu-jitsu, photos and themes",
+      description: "Music, jiu-jitsu, photos and themes",
       run: () => ({
         title: "Fun",
-        unlockFun: true,
         content: (
           <div className="space-y-4">
-            <p>Fun mode is on. These now live at the bottom of the screen too.</p>
+            <p>The things I do when I&apos;m not working. They also live in the bar at the bottom.</p>
             <div className="flex flex-wrap gap-3">
               {funCommands(data).map((item) => (
                 <CommandLink
@@ -69,11 +68,11 @@ export function createFunCommands(data: SiteData): Command[] {
       complete: () => THEMES.map((theme) => ({ value: `/theme ${theme.name}`, label: theme.label, description: theme.description })),
       run: (args) => {
         const name = args[0]?.toLowerCase()
-        if (!name) return { title: "Themes", unlockFun: true, content: <ThemePicker /> }
+        if (!name) return { title: "Themes", content: <ThemePicker /> }
         const theme = THEMES.find((entry) => entry.name === name)
         if (!theme) return { tone: "error", content: <div className="space-y-3"><p>No theme called &quot;{name}&quot;. Pick one:</p><ThemePicker /></div> }
         window.dispatchEvent(new CustomEvent("terminal-theme", { detail: theme.name }))
-        return { tone: "success", unlockFun: true, content: `${theme.label} theme on. ${theme.description}.` }
+        return { tone: "success", content: `${theme.label} theme on. ${theme.description}.` }
       },
     },
   ]

@@ -14,8 +14,6 @@ export interface CommandResult {
   title?: string
   /** Suggested follow-up commands, shown under the output. */
   next?: string[]
-  /** Unlocks the fun commands (/music, /bjj, /camera, /theme). */
-  unlockFun?: boolean
   /** Starts the mini music player. */
   playMusic?: boolean
 }

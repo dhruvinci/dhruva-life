@@ -63,7 +63,6 @@ export function Terminal({ data, initialInput }: TerminalProps) {
   const [path, setPath] = useState(initial?.path ?? "/")
   const [history, setHistory] = useState<string[]>([])
   const [announcement, setAnnouncement] = useState("")
-  const [funUnlocked, setFunUnlocked] = useState(false)
   const [music, setMusic] = useState<{ open: boolean; request: number }>({ open: false, request: 0 })
 
   const goHome = useCallback(
@@ -92,11 +91,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         setHistory(nextHistory)
       }
 
-      const { result, resolved, path: routePath } = registry.execute(trimmed, { data })
-      if (result.unlockFun || resolved.command?.fun) {
-        setFunUnlocked(true)
-        storage.setFun()
-      }
+      const { result, path: routePath } = registry.execute(trimmed, { data })
       if (result.playMusic && data.playlist.length > 0) setMusic((current) => ({ open: true, request: current.request + 1 }))
 
       const block: Block = {
@@ -123,7 +118,6 @@ export function Terminal({ data, initialInput }: TerminalProps) {
 
   useEffect(() => {
     setHistory(storage.getHistory())
-    setFunUnlocked(storage.getFun())
   }, [])
 
   // Back/forward shows the page for that URL instead of reloading.
@@ -207,7 +201,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         {music.open && (
           <MusicPlayer playlist={data.playlist} request={music.request} onClose={() => setMusic((current) => ({ ...current, open: false }))} />
         )}
-        <Prompt registry={registry} history={history} path={path} funUnlocked={funUnlocked} inputRef={inputRef} />
+        <Prompt registry={registry} history={history} path={path} inputRef={inputRef} />
         <p aria-live="polite" className="sr-only">
           {announcement}
         </p>

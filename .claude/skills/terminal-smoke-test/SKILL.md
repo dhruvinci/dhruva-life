@@ -10,7 +10,8 @@ After `pnpm check` passes, smoke test in `pnpm dev` (desktop and ~390px mobile):
 - Enter on a menu row runs it; typo suggestion (`/wrok`); plain text nudges to `/`
 - clicking content links changes the URL without a reload; back/forward; deep-link reload (e.g. `/work/kakashi`)
 - `/research` and `/work` show the contact strip; other pages don't
-- `/fun` unlocks the emoji row; fun commands appear in the menu afterwards (and persist on reload)
+- The fun emoji row and fun menu entries are always visible; `/fun` lists them
+- On a phone-sized viewport the bar is a button: tapping it opens the command list, no keyboard
 - 🎵 `/music` opens the player; shuffle and close work
 - 🎨 `/theme matrix` (and back to `/theme dark`) applies and persists
 - 📷 `/camera` gallery opens a lightbox; photos don't link out

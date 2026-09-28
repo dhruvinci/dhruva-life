@@ -10,7 +10,6 @@ interface PromptProps {
   registry: Registry
   history: string[]
   path: string
-  funUnlocked: boolean
   inputRef: React.RefObject<HTMLInputElement | null>
 }
 
@@ -23,19 +22,23 @@ const CONTACT_PROMPTS: Array<{ prefix: string; text: string }> = [
 /**
  * Claude Code-style prompt: a bordered input, and a slash menu that opens above it.
  * "/" lists commands; "/blog " lists posts; Enter or Tab picks the highlighted row.
+ * On phones there is no typing: the bar is a button that opens the command list.
  */
-export function Prompt({ registry, history, path, funUnlocked, inputRef }: PromptProps) {
+export function Prompt({ registry, history, path, inputRef }: PromptProps) {
   const { run } = useTerminalApi()
   const [input, setInput] = useState("")
   const [historyIndex, setHistoryIndex] = useState(-1)
   const [focused, setFocused] = useState(false)
   const [active, setActive] = useState(0)
   const [dismissed, setDismissed] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
-  const items = useMemo(() => registry.menu(input, funUnlocked), [input, registry, funUnlocked])
+  const typedItems = useMemo(() => registry.menu(input), [input, registry])
+  const allCommands = useMemo(() => registry.menu("/"), [registry])
+  const items = sheetOpen ? allCommands : typedItems
   const contactPrompt = CONTACT_PROMPTS.find((entry) => path === entry.prefix || path.startsWith(`${entry.prefix}/`))
   const { contact } = registry.data.config
-  const menuOpen = focused && !dismissed && items.length > 0
+  const menuOpen = sheetOpen || (focused && !dismissed && items.length > 0)
   const activeItem = items[Math.min(active, items.length - 1)]
 
   useEffect(() => {
@@ -64,6 +67,7 @@ export function Prompt({ registry, history, path, funUnlocked, inputRef }: Promp
   }
 
   const submit = (command: string) => {
+    setSheetOpen(false)
     if (!command.trim()) return
     run(command, "typed")
     update("")
@@ -111,96 +115,111 @@ export function Prompt({ registry, history, path, funUnlocked, inputRef }: Promp
   }
 
   return (
-    <div className="print:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border pb-safe">
-      <div className="max-w-3xl mx-auto px-3 sm:px-6 py-3 space-y-2">
-        {menuOpen && (
-          <ul
-            id="slash-menu"
-            role="listbox"
-            aria-label="Commands"
-            className="max-h-[45vh] overflow-y-auto rounded-lg border border-border bg-card py-1 text-sm shadow-lg"
-          >
-            {items.map((item, index) => (
-              <li
-                key={item.value}
-                id={`slash-${index}`}
-                role="option"
-                aria-selected={index === active}
-                onMouseEnter={() => setActive(index)}
-                onMouseDown={(event) => event.preventDefault()}
-                onClick={() => submit(item.value)}
-                className={`grid grid-cols-[minmax(7rem,auto)_1fr] gap-x-4 px-3 py-2 md:py-1.5 cursor-pointer ${
-                  index === active ? "bg-muted" : ""
-                }`}
-              >
-                <span className={`truncate ${index === active ? "text-accent" : "text-foreground"}`}>{item.label}</span>
-                <span className="truncate text-muted-foreground">{item.description}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+    <>
+      {sheetOpen && (
+        <button
+          type="button"
+          aria-label="Close commands"
+          onClick={() => setSheetOpen(false)}
+          className="print:hidden fixed inset-0 z-30 bg-background/60 md:hidden"
+        />
+      )}
+      <div className="print:hidden fixed bottom-0 inset-x-0 z-40 bg-background/95 backdrop-blur border-t border-border pb-safe">
+        <div className="max-w-3xl mx-auto px-3 sm:px-6 py-3 space-y-2">
+          {menuOpen && (
+            <ul
+              id="slash-menu"
+              role="listbox"
+              aria-label="Commands"
+              className="max-h-[45vh] overflow-y-auto rounded-lg border border-border bg-card py-1 text-sm shadow-lg"
+            >
+              {items.map((item, index) => (
+                <li
+                  key={item.value}
+                  id={`slash-${index}`}
+                  role="option"
+                  aria-selected={index === active}
+                  onMouseEnter={() => setActive(index)}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => submit(item.value)}
+                  className={`grid grid-cols-[minmax(7rem,auto)_1fr] gap-x-4 px-3 py-3 md:py-1.5 cursor-pointer ${
+                    index === active ? "bg-muted" : ""
+                  }`}
+                >
+                  <span className={`truncate ${index === active ? "text-accent" : "text-foreground"}`}>{item.label}</span>
+                  <span className="truncate text-muted-foreground">{item.description}</span>
+                </li>
+              ))}
+            </ul>
+          )}
 
-        {contactPrompt && (
-          <p className="flex flex-wrap items-center gap-x-3 gap-y-1 px-1 text-xs">
-            <span className="text-muted-foreground">{contactPrompt.text}</span>
-            <a href={`mailto:${contact.email}`} className="text-accent hover:underline">
-              email me
-            </a>
-            <a href={contact.calendar} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-              book a call
-            </a>
-            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
-              LinkedIn
-            </a>
-          </p>
-        )}
+          {contactPrompt && (
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-1 px-1 text-xs">
+              <span className="text-muted-foreground">{contactPrompt.text}</span>
+              <a href={`mailto:${contact.email}`} className="text-accent hover:underline">
+                email me
+              </a>
+              <a href={contact.calendar} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                book a call
+              </a>
+              <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                LinkedIn
+              </a>
+            </p>
+          )}
 
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              update("/")
-              inputRef.current?.focus()
-            }}
-            className="md:hidden shrink-0 rounded-lg border border-border bg-card px-3 py-2 text-sm text-accent"
-            aria-label="Show commands"
-          >
-            /
-          </button>
-          <label className="flex flex-1 min-w-0 items-center gap-3 py-2">
-            <span className="text-sage text-sm" aria-hidden>
-              $
-            </span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(event) => update(event.target.value)}
-              onKeyDown={handleKeyDown}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              enterKeyHint="go"
-              role="combobox"
-              aria-label="Command"
-              aria-expanded={menuOpen}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSheetOpen((open) => !open)}
+              aria-expanded={sheetOpen}
               aria-controls="slash-menu"
-              aria-activedescendant={menuOpen ? `slash-${Math.min(active, items.length - 1)}` : undefined}
-              aria-autocomplete="list"
-              placeholder="type / for commands"
-              className="prompt-input w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck={false}
-            />
-          </label>
-          {funUnlocked && (
+              className="md:hidden flex flex-1 min-w-0 items-center gap-3 py-2 text-left text-sm"
+            >
+              <span className="text-sage" aria-hidden>
+                $
+              </span>
+              <span className="flex-1 truncate text-muted-foreground">tap for commands</span>
+              <span className={`text-accent transition-transform ${sheetOpen ? "rotate-180" : ""}`} aria-hidden>
+                ▴
+              </span>
+            </button>
+            <label className="hidden md:flex flex-1 min-w-0 items-center gap-3 py-2">
+              <span className="text-sage text-sm" aria-hidden>
+                $
+              </span>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(event) => update(event.target.value)}
+                onKeyDown={handleKeyDown}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                enterKeyHint="go"
+                role="combobox"
+                aria-label="Command"
+                aria-expanded={menuOpen}
+                aria-controls="slash-menu"
+                aria-activedescendant={menuOpen ? `slash-${Math.min(active, items.length - 1)}` : undefined}
+                aria-autocomplete="list"
+                placeholder="type / for commands"
+                className="prompt-input w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+              />
+            </label>
             <nav aria-label="Fun" className="flex shrink-0 items-center gap-0.5">
               {funCommands(registry.data).map((item) => (
                 <button
                   key={item.command}
                   type="button"
-                  onClick={() => run(item.command)}
+                  onClick={() => {
+                    setSheetOpen(false)
+                    run(item.command)
+                  }}
                   className="rounded px-1.5 py-1 text-lg leading-none hover:bg-muted"
                   aria-label={item.label}
                   title={item.command}
@@ -209,9 +228,9 @@ export function Prompt({ registry, history, path, funUnlocked, inputRef }: Promp
                 </button>
               ))}
             </nav>
-          )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

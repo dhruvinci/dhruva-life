@@ -53,11 +53,11 @@ export function createRegistry(data: SiteData) {
 
   const find = (name: string) => byName.get(name.toLowerCase())
 
-  /** Commands in the slash menu: the main ones in site order, then the fun ones once unlocked. */
-  const menuCommands = (funUnlocked = false) => {
+  /** Commands in the slash menu: the main ones in site order, then the fun ones. */
+  const menuCommands = () => {
     const main = data.config.nav.map((name) => find(name)).filter((command): command is Command => Boolean(command && !command.fun))
     const fun = commands.filter((command) => command.fun).sort((a, b) => funRank(a.name) - funRank(b.name))
-    return funUnlocked ? [...main, ...fun] : main
+    return [...main, ...fun]
   }
 
   function resolve(input: string): Resolved {
@@ -80,7 +80,7 @@ export function createRegistry(data: SiteData) {
   function closest(name: string) {
     const lower = name.toLowerCase()
     let best: { name: string; distance: number } | undefined
-    for (const command of menuCommands(true)) {
+    for (const command of menuCommands()) {
       const distance = editDistance(lower, command.name)
       if (!best || distance < best.distance) best = { name: command.name, distance }
     }
@@ -92,14 +92,14 @@ export function createRegistry(data: SiteData) {
    * What the slash menu shows for the current input:
    * "/wr" -> matching commands; "/blog see" -> matching posts.
    */
-  function menu(input: string, funUnlocked = false): MenuItem[] {
+  function menu(input: string): MenuItem[] {
     if (!input.startsWith("/")) return []
     const body = input.slice(1)
     const spaceAt = body.indexOf(" ")
 
     if (spaceAt === -1) {
       const prefix = body.toLowerCase()
-      return menuCommands(funUnlocked)
+      return menuCommands()
         .filter((command) => command.name.startsWith(prefix))
         .map((command) => ({
           value: `/${command.name}`,

@@ -1,6 +1,6 @@
 # dhruva.life
 
-Terminal-style personal website for Dhruva Chakravarthi. It works like Claude Code: type `/` (or tap the `/` button on mobile) to open the command menu, or just click around. Every page also has a real, server-rendered URL.
+Terminal-style personal website for Dhruva Chakravarthi. It works like Claude Code: type `/` to open the command menu (on mobile, tap the bar; there is no typing), or just click around. Every page also has a real, server-rendered URL.
 
 ## Commands
 
@@ -11,9 +11,9 @@ Terminal-style personal website for Dhruva Chakravarthi. It works like Claude Co
 | `/work` | Every role as a case study, plus education and skills - with a persistent contact strip |
 | `/blog` | Essays, one or more a quarter since 2021 |
 | `/contact` | How to reach me |
-| `/fun` | Unlocks the fun commands below; they then sit as emojis in the prompt bar |
+| `/fun` | The fun commands below, which also sit as emojis in the prompt bar |
 
-Fun: 🎵 `/music` (records, gigs, and a mini Spotify player of songs from both) · 🤼 `/bjj` (fights, gyms, links) · 📷 `/camera` (cameras and a photo gallery) · 🎨 `/theme` (dark, light, matrix, pokemon, claude, amber).
+Fun: 🎵 `/music` (records, gigs, and a YouTube player of songs from both that keeps playing) · 🤼 `/bjj` (fights, gyms, links) · 📷 `/camera` (cameras and a photo gallery) · 🎨 `/theme` (dark, light, matrix, pokemon, claude, amber).
 
 ## Updating the site
 
@@ -25,7 +25,7 @@ All content is in `content/`. Pushing to `main` deploys (Vercel). If a file is m
 | Add a project | `pnpm new project "Name"`, then fill in the frontmatter |
 | Add research | Create `content/research/<slug>.md` (see below) |
 | Edit about / contact / music / bjj / camera | Edit the file in `content/pages/` |
-| Change the player's songs | Edit `content/playlist.json` (Spotify track ids) |
+| Change the player's songs | Edit `content/playlist.json` (YouTube video ids) |
 | Add gallery photos | Put images in `public/photos/` and list them in `content/photos.json` |
 | Change tagline, main menu, contact links | Edit `content/site.json` |
 
@@ -50,7 +50,7 @@ content/
 # pages/<name>.md
 title: Music
 description: Shown in the slash menu
-fun: true                          # optional: a fun command, unlocked by /fun
+fun: true                          # optional: a fun command (emoji row + /fun)
 emoji: "🎵"                        # optional: its emoji in the fun row
 next: [bjj, camera]                # optional follow-up links
 
@@ -109,5 +109,5 @@ app/feed.xml/          RSS for the blog
 
 - Each route is statically generated with its command already run, so the HTML contains the content.
 - Commands typed or picked from the menu append below like a terminal; clicking links in the content replaces the screen like a website. Back/forward replay the matching command.
-- Per-visitor state (command history, fun unlocked, theme) lives in `localStorage` and is optional.
+- Per-visitor state (command history, theme) lives in `localStorage` and is optional.
 - Every text colour in every theme is at least 4.5:1 against its backgrounds (WCAG AA).
