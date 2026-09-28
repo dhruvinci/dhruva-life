@@ -1,12 +1,12 @@
 ---
 title: Sovereignty
 date: 2022-02-20
-excerpt: "I own a copy of Kind of Blue. I don't own a single song on my phone. That difference is why I'm in crypto."
+excerpt: "I own a copy of The Dark Side of the Moon. I don't own a single song on my phone. That difference is why I'm in crypto."
 ---
 
-I own a copy of Kind of Blue. It sits on a shelf, it collects a bit of dust, and every now and then I clean it and play it and it sounds exactly the way it did the first time.
+I own a copy of The Dark Side of the Moon. It sits on a shelf, it collects a bit of dust, and every now and then I clean it and play it and it sounds exactly the way it did the first time.
 
-Nobody can take it off my shelf because a licensing deal expired. Nobody can change the terms on it overnight. If I want to lend it to a friend, I lend it. If I want to sell it, I sell it. If some company decides next year that jazz isn't profitable, it still spins.
+Nobody can take it off my shelf because a licensing deal expired. Nobody can change the terms on it overnight. If I want to lend it to a friend, I lend it. If I want to sell it, I sell it. If some company decides next year that prog rock isn't profitable, it still spins.
 
 Meanwhile I don't own a single song on my phone. I rent access, and the landlord can change the rules whenever they like.
 
