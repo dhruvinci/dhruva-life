@@ -10,4 +10,4 @@ Content lives only in `content/` as Markdown with YAML frontmatter, plus `site.j
 3. Run `pnpm build`. `lib/content.ts` validates every file and fails with `content/<file>: <problem>` on bad input.
 4. Stage only the files you changed (not `git add -A`), commit, and push to `main` if the user asked to publish.
 
-Never invent biographical facts, links, or numbers; ask. Write essays in Dhruva's voice, not an AI's.
+Never invent biographical facts, links, or numbers; ask. To write or rewrite an essay or post (not just publish one), use the `essay` skill.

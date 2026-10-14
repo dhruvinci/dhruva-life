@@ -16,7 +16,7 @@ Use `pnpm`. Pushing to `main` deploys to production via Vercel. The owner is fin
 
 ## Content
 
-Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json` and a few JSON files (`playlist.json`, `photos.json`, `fights.json`, `gigs.json`, `records.json`). README.md has the full frontmatter reference. For content updates ("post this", "add a project", "change the tagline") use the content-update skill.
+Content lives only in `content/` as Markdown with YAML frontmatter, plus `content/site.json` and a few JSON files (`playlist.json`, `photos.json`, `fights.json`, `gigs.json`, `records.json`). README.md has the full frontmatter reference. For content updates ("post this", "add a project", "change the tagline") use the content-update skill; for writing essays or posts with Dhruva, use the essay skill.
 
 `lib/content.ts` loads and validates everything at build time; bad input fails the build with `content/<file>: <problem>`. Rules it enforces: file names are lowercase-with-dashes and become slugs; slugs must be unique across `blog/`, `research/`, `projects/` and `pages/`; files starting with `_` (`_intro.md`, `_outro.md`) are not entries but render above/below the index; `photos.json` entries must exist under `public/`. Markdown is rendered once at build time with `marked` (GFM, raw HTML passes through) and injected via `components/terminal/markdown.tsx` inside `.md` styles in `app/globals.css`. Post images go in `public/images/blog/<slug>/` (not `public/blog/`, which would shadow the post's URL); inline SVG charts and `<figure>`/`<details>` use the theme-aware `.md` styles.
 
