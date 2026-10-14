@@ -63,6 +63,7 @@ function renderMarkdown(body: string) {
 function plainText(body: string) {
   return body
     .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<[^>]+>/g, " ")
     .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
     .replace(/^\s*(?:[-*+]|\d+\.|#+|>)\s+/gm, "")
     .replace(/[*_`]/g, "")
@@ -179,6 +180,14 @@ function loadProjects(): Project[] {
     .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title))
 }
 
+function postCategory(data: Record<string, unknown>, file: string) {
+  const category = optionalString(data, "category", file)?.trim().toLowerCase()
+  if (category !== undefined && !SLUG_PATTERN.test(category)) {
+    throw new ContentError(file, `"category" must be lowercase-with-dashes, like research (got "${category}")`)
+  }
+  return category
+}
+
 function loadPosts(): Post[] {
   return readDir("blog")
     .map(({ file, slug, data, body }) => ({
@@ -186,6 +195,7 @@ function loadPosts(): Post[] {
       title: requireString(data, "title", file),
       date: toDateString(data.date, file, "date"),
       excerpt: typeof data.excerpt === "string" ? data.excerpt : plainText(body).slice(0, 140),
+      category: postCategory(data, file),
       minutes: Math.max(1, Math.round(plainText(body).split(" ").length / 230)),
       html: renderMarkdown(body),
       text: plainText(body),
@@ -306,6 +316,13 @@ export function getSiteData(): SiteData {
     for (const slug of slugs) {
       if (seen.has(slug)) throw new ContentError(`${dir}/${slug}.md`, `name "${slug}" is already used in content/${seen.get(slug)}/`)
       seen.set(slug, dir)
+    }
+  }
+
+  // A category shares /blog/<name> with posts, so it can't reuse a post's name.
+  for (const post of data.posts) {
+    if (post.category && data.posts.some((other) => other.slug === post.category)) {
+      throw new ContentError(`blog/${post.slug}.md`, `category "${post.category}" is also a post's file name`)
     }
   }
 

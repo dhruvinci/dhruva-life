@@ -91,7 +91,7 @@ export function llmsTxt(data: SiteData) {
     "",
     "## Blog",
     "",
-    ...data.posts.map((post) => line(`${url}/blog/${post.slug}`, post.title, `${post.date}. ${post.excerpt}`)),
+    ...data.posts.map((post) => line(`${url}/blog/${post.slug}`, post.title, `${[post.date, post.category].filter(Boolean).join(", ")}. ${post.excerpt}`)),
     "",
     "## Optional",
     "",

@@ -25,6 +25,13 @@ export const RESERVED_COMMANDS = ["work", "blog", "research", "fun", "theme"]
 const formatDate = (date: string) =>
   new Date(`${date}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })
 
+const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
+
+/** Post categories in first-seen order (posts are newest first). */
+export function blogCategories(data: SiteData) {
+  return [...new Set(data.posts.flatMap((post) => (post.category ? [post.category] : [])))]
+}
+
 export function getRoutes(data: SiteData): Route[] {
   const { author } = data.config
   return [
@@ -73,6 +80,13 @@ export function getRoutes(data: SiteData): Route[] {
       description: `${data.posts.length} essays by ${author} on vision AI, building startups, jiu-jitsu and music, written since 2021.`,
       kind: "index",
     },
+    ...blogCategories(data).map((category): Route => ({
+      path: `/blog/${category}`,
+      input: `/blog ${category}`,
+      title: `Blog · ${category}`,
+      description: `${capitalize(category)} essays by ${author}.`,
+      kind: "index",
+    })),
     ...data.posts.map((post): Route => ({
       path: `/blog/${post.slug}`,
       input: `/blog ${post.slug}`,

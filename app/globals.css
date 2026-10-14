@@ -263,6 +263,114 @@ html[data-theme="amber"] body {
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }
+.md hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2em 0;
+}
+.md figure {
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+}
+/* Images keep their natural size up to the column width, so small ones (a GIF) stay small. */
+.md figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+.md figcaption {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.55;
+  color: var(--muted-foreground);
+  margin-top: 0.6em;
+}
+.md details {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0.7em 0;
+}
+.md summary {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.md details[open] summary {
+  margin-bottom: 0.7em;
+}
+.md details > :not(summary) {
+  font-size: 0.95rem;
+}
+/* The two athletes in mask figures. Red and blue only where the theme has them;
+   fun themes fall back to bold foreground, since the word itself says which. */
+.md .ath-red {
+  color: var(--destructive);
+  font-weight: 600;
+}
+.md .ath-blue {
+  color: var(--blue);
+  font-weight: 600;
+}
+html[data-theme="matrix"] .md :is(.ath-red, .ath-blue),
+html[data-theme="pokemon"] .md :is(.ath-red, .ath-blue),
+html[data-theme="amber"] .md :is(.ath-red, .ath-blue) {
+  color: var(--foreground);
+}
+/* Inline SVG charts in posts; all colours come from the theme. */
+.md .chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-mono);
+}
+.md .chart text {
+  font-size: 12px;
+  fill: var(--foreground);
+}
+.md .chart .axis-label {
+  font-size: 11px;
+  fill: var(--muted-foreground);
+}
+.md .chart .in-bar {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--background);
+}
+.md .chart .grid {
+  stroke: var(--border);
+}
+.md .chart .band {
+  fill: color-mix(in srgb, var(--blue) 12%, transparent);
+}
+.md .chart .right {
+  fill: var(--olive);
+}
+.md .chart .swap {
+  fill: var(--accent);
+}
+.md .chart .hole {
+  fill: var(--muted-foreground);
+}
+.md .legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 1.2em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted-foreground);
+}
+.md .legend span::before {
+  content: "";
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  margin-right: 0.4em;
+  border-radius: 2px;
+  background: var(--swatch);
+}
 
 /* The prompt caret is a block, like a real terminal (where supported). */
 .prompt-input {

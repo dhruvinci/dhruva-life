@@ -72,6 +72,8 @@ export interface Post {
   title: string
   date: string
   excerpt: string
+  /** Optional grouping, e.g. "research"; gets its own /blog/<category> page. */
+  category?: string
   /** Estimated reading time in minutes. */
   minutes: number
   html: string

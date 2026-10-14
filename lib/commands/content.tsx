@@ -6,6 +6,7 @@ import { GigList } from "@/components/fun/gig-list"
 import { RecordShelf } from "@/components/fun/record-shelf"
 import { Gallery } from "@/components/terminal/gallery"
 import { Markdown } from "@/components/terminal/markdown"
+import { blogCategories } from "@/lib/routes"
 import type { Page, Post, Project, ResearchItem, SiteData } from "@/lib/site-types"
 import type { Command, MenuItem } from "./types"
 
@@ -156,17 +157,36 @@ function ProjectView({ project, data }: { project: Project; data: SiteData }) {
   )
 }
 
-function BlogView({ data }: { data: SiteData }) {
-  const years = [...new Set(data.posts.map((post) => post.date.slice(0, 4)))]
+/** "all · research · ..." links above the blog list; the current one isn't a link. */
+function CategoryLinks({ data, current }: { data: SiteData; current?: string }) {
+  const categories = blogCategories(data)
+  if (categories.length === 0) return null
+  const items = [{ label: "all", command: "/blog", active: !current }, ...categories.map((name) => ({ label: name, command: `/blog ${name}`, active: name === current }))]
+  return (
+    <nav aria-label="Categories" className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
+      {items.map((item, index) => (
+        <span key={item.label}>
+          {index > 0 && <span aria-hidden="true">· </span>}
+          {item.active ? <span className="text-foreground">{item.label}</span> : <CommandLink command={item.command}>{item.label}</CommandLink>}
+        </span>
+      ))}
+    </nav>
+  )
+}
+
+function BlogView({ data, category }: { data: SiteData; category?: string }) {
+  const posts = category ? data.posts.filter((post) => post.category === category) : data.posts
+  const years = [...new Set(posts.map((post) => post.date.slice(0, 4)))]
 
   return (
     <div className="space-y-7">
-      <Heading>Blog</Heading>
-      {data.intros.blog && <Markdown html={data.intros.blog} />}
+      <Heading>{category ? `Blog · ${category}` : "Blog"}</Heading>
+      {!category && data.intros.blog && <Markdown html={data.intros.blog} />}
+      <CategoryLinks data={data} current={category} />
       {years.map((year) => (
         <section key={year} className="space-y-4">
           <h3 className="text-gold text-xs uppercase tracking-widest">{year}</h3>
-          {data.posts
+          {posts
             .filter((post) => post.date.startsWith(year))
             .map((post) => (
               <div key={post.slug} className="group/item">
@@ -175,6 +195,7 @@ function BlogView({ data }: { data: SiteData }) {
                     {post.title} <span className="text-muted-foreground group-hover/item:text-accent">→</span>
                   </CommandLink>
                   <Tag tone="muted">{formatDate(post.date)}</Tag>
+                  {post.category && <Tag tone="accent">{post.category}</Tag>}
                 </div>
                 <p className="text-muted-foreground mt-1 max-w-[65ch]">{post.excerpt}</p>
               </div>
@@ -195,9 +216,16 @@ function PostView({ post, data }: { post: Post; data: SiteData }) {
   return (
     <article className="space-y-5">
       <div className="space-y-2">
-        <Tag tone="muted">
-          {formatDate(post.date)} · {post.minutes} min read
-        </Tag>
+        <div className="flex flex-wrap gap-x-3">
+          <Tag tone="muted">
+            {formatDate(post.date)} · {post.minutes} min read
+          </Tag>
+          {post.category && (
+            <CommandLink command={`/blog ${post.category}`}>
+              <Tag tone="accent">{post.category}</Tag>
+            </CommandLink>
+          )}
+        </div>
         <Heading>{post.title}</Heading>
       </div>
       <Markdown html={post.html} />
@@ -339,8 +367,10 @@ export function createContentCommands(data: SiteData): Command[] {
     data.research.map((item) => ({ value: `/research ${item.slug}`, label: item.title, description: [item.kind, item.venue].filter(Boolean).join(' · ') }))
   const projectItems = (): MenuItem[] =>
     data.projects.map((project) => ({ value: `/work ${project.slug}`, label: project.title, description: project.period ?? project.year }))
-  const postItems = (): MenuItem[] =>
-    data.posts.map((post) => ({ value: `/blog ${post.slug}`, label: post.title, description: formatDate(post.date) }))
+  const postItems = (): MenuItem[] => [
+    ...blogCategories(data).map((category) => ({ value: `/blog ${category}`, label: `[${category}]`, description: "category" })),
+    ...data.posts.map((post) => ({ value: `/blog ${post.slug}`, label: post.title, description: formatDate(post.date) })),
+  ]
 
   return [
     ...pageCommands,
@@ -392,6 +422,9 @@ export function createContentCommands(data: SiteData): Command[] {
             next: data.posts.slice(0, 2).map((post) => `/blog ${post.slug}`).concat("/research"),
             content: <BlogView data={data} />,
           }
+        }
+        if (blogCategories(data).includes(slug)) {
+          return { title: `Blog · ${slug}`, next: ["/blog", "/research"], content: <BlogView data={data} category={slug} /> }
         }
         const post = data.posts.find((entry) => entry.slug === slug)
         if (!post) return notFound("post", "blog", slug)
