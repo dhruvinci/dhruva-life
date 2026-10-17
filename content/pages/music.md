@@ -7,4 +7,4 @@ emoji: "🎵"
 next: [bjj, camera, fun]
 ---
 
-Two lists I keep adding to: every band I've seen live, and every record on my shelf.
+Two lists I keep adding to: every record on my shelf, and every band I've seen live.

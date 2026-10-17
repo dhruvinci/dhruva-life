@@ -4,6 +4,7 @@ import { CopyButton } from "@/components/terminal/copy-button"
 import { FightRecord } from "@/components/fun/fight-record"
 import { GigList } from "@/components/fun/gig-list"
 import { RecordShelf } from "@/components/fun/record-shelf"
+import { PlaySong } from "@/components/fun/play-song"
 import { Gallery } from "@/components/terminal/gallery"
 import { Markdown } from "@/components/terminal/markdown"
 import { blogCategories } from "@/lib/routes"
@@ -82,8 +83,16 @@ function pageExtras(name: string, data: SiteData): React.ReactNode {
   if (name === "music") {
     return (
       <div className="space-y-12">
-        <GigList gigs={data.gigs} />
+        {data.playlist.length > 0 && <PlaySong count={data.playlist.length} />}
         <RecordShelf records={data.records} />
+        <GigList gigs={data.gigs} />
+        <p className="font-mono text-sm text-muted-foreground">
+          I also document the indie music scene on{" "}
+          <a href="https://www.pushit.tv" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+            pushit.tv ↗
+          </a>
+          : rehearsals, sets, and the people behind them.
+        </p>
       </div>
     )
   }

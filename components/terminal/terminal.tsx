@@ -81,6 +81,10 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     [baseTitle],
   )
 
+  const playMusic = useCallback(() => {
+    if (data.playlist.length > 0) setMusic((current) => ({ open: true, request: current.request + 1 }))
+  }, [data.playlist.length])
+
   const run = useCallback(
     (input: string, source: Source = "click") => {
       const trimmed = input.trim()
@@ -93,7 +97,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
       }
 
       const { result, path: routePath } = registry.execute(trimmed, { data })
-      if (result.playMusic && data.playlist.length > 0) setMusic((current) => ({ open: true, request: current.request + 1 }))
+      if (result.playMusic) playMusic()
 
       const block: Block = {
         id: `b${nextId.current++}`,
@@ -114,7 +118,7 @@ export function Terminal({ data, initialInput }: TerminalProps) {
         if (result.title) document.title = pageTitle(data, result.title)
       }
     },
-    [data, registry],
+    [data, registry, playMusic],
   )
 
   useEffect(() => {
@@ -183,7 +187,10 @@ export function Terminal({ data, initialInput }: TerminalProps) {
     run(route.input)
   }
 
-  const api = useMemo<TerminalApi>(() => ({ run: (input, source) => run(input, source), pathFor: registry.pathFor }), [run, registry])
+  const api = useMemo<TerminalApi>(
+    () => ({ run: (input, source) => run(input, source), pathFor: registry.pathFor, playMusic }),
+    [run, registry, playMusic],
+  )
 
   return (
     <TerminalContext.Provider value={api}>
