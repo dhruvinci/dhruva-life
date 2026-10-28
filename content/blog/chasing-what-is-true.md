@@ -15,7 +15,7 @@ It worked better than I'd hoped. On one densely annotated match, position accura
 
 But the result I care about most is the one that looks, at first glance, like bad news.
 
-When I ran it on 200 real uploads it had never seen before - 4,620 segments, each reviewed by an expert - exact accuracy dropped to 46.7%. That's the number a lot of people would bury in an appendix. I put it front and centre, because of what sat underneath it. 92.9% of its answers were either right or one neighbouring position off. When it was wrong, it was wrong the way a sharp white belt is wrong - mixing up two positions that are one hip movement apart - not the way a confused model is wrong, inventing something from nowhere.
+When I ran it on 200 real uploads it had never seen before - 4,620 segments, each reviewed by an expert - exact accuracy dropped to 46.7%. That's the number a lot of people would bury in an appendix. I put it front and centre, because of what sat underneath it. 93% of the mistakes were confusions between adjacent positions. When it was wrong, it was wrong the way a sharp white belt is wrong - mixing up two positions that are one hip movement apart - not the way a confused model is wrong, inventing something from nowhere.
 
 It fails well.
 
