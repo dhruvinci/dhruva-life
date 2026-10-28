@@ -17,7 +17,7 @@ You're writing a paper with Dhruva, not for him. He brings the research, the jud
 ## How a paper gets made
 
 1. **Plan before prose.** Agree the title, the one-sentence claim, the contribution list and the section outline with him in `PLAN.md`. His title wins.
-2. **Every number has an address.** Before a number goes in, find it in a RESULTS/FINDINGS file or note and keep the path in a comment next to it in the `.tex` (`% src: engage3d/experiments/E06.../RESULTS.md`). No source, no number - ask him or the research agent.
+2. **Every number has an address.** Before a number goes in, find it in a RESULTS/FINDINGS file or note and keep the path in a comment next to it in the `.tex` (`% src: engage3d/experiments/E06.../RESULTS.md`). No source, no number - ask him or the research agent. Check what metric each number is (IoU, F1, %, cm) and read the repo's audit notes: a result an audit voided stays out even if a README still prints it. Limb-entanglement's pre-fix Qwen vision IoUs (0/27, 0.665 → 0.066) are void; only the qualitative findings held. Raw logs beat READMEs; when Dhruva doubts a count, ask the Researcher session.
 3. **Measured vs defined vs proposed.** Say which each quantity is. Never let a definition or an idea read like a result.
 4. **No disclosures; results stated flatly** (see `register.md`). Describe what was done and measured, specifically. Never write about the author, reviewer identity or count, data availability, model access, or what wasn't run. Limits appear only as narrow next steps, the way the lab papers write them.
 5. **Related work is real and verified.** Search for it, read the abstract, check the venue and year, and put a working link or DOI in the `.bib`. Never cite from memory. Position his work honestly against the closest work, including where others are ahead.
@@ -62,6 +62,9 @@ Learned by giving the same lay-reader brief to twelve DeepMind and OpenAI papers
 ## Build and package
 
 - Template: `~/Documents/Code/preprints/_template/` (`preprint.sty`, a NeurIPS-style layout, `[preprint]` footer). Copy it to `~/Documents/Code/preprints/<nn>-<slug>/`.
+- References: generate `.bib` entries from the arXiv API with a script (see `06-machine-in-a-mans-world/make_bib.py`, `03-modern-labelling/verify_refs.py`), never by hand. Take a venue only from the arXiv comment or journal-ref field or the publisher; otherwise cite the arXiv preprint.
+- Figures from repo assets: crop title strips (they can carry sequence IDs) and move the values into the caption. A repo's experiment-verdict table makes a good appendix table. Render every chart and offset coincident points.
+- Shell: in zsh, `echo ====` fails (`=` expansion); use `printf`. Don't name a TikZ style `x`, which clashes with TikZ's built-in key.
 - Build with `tectonic --keep-intermediates paper.tex` (no pdflatex/bibtex installed). It writes the `.bbl` that arXiv needs.
 - **Numbered citations** (his choice, 2026-10-28): `\PassOptionsToPackage{numbers,sort&compress}{natbib}` before `\usepackage[preprint]{preprint}`, and `\bibliographystyle{unsrtnat}`. Cite with `\citep{}`; this gives [2, 5, 17] or [9–11], numbered in order of first appearance. The template already has both.
 - arXiv upload: `paper.tex`, the `.sty`, the `.bbl`, and only the figures used. Check the PDF page count and that every figure renders. Primary category cs.CV; cross-list cs.RO for engagement/robotics papers. arXiv versions are permanent, so read the final PDF in full before he uploads.
