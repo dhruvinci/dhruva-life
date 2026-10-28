@@ -81,5 +81,6 @@ Where the lab papers and his earlier rules differ, he decided to follow the lab 
 ## Domain
 
 - **Jiu-jitsu is the test, not the topic.** Grappling is the hardest case of people in contact; the contribution is about people in contact generally.
+- **Show range.** A paper whose topic isn't contact (paper 04, the VLM probe) uses no jiu-jitsu, no armbars and no third-party models he only tested (Laya Vision). Pick illustrative examples from a different domain (a baseball slide, a street, a room) so readers see he studies more than one thing (his call, 2026-10-28).
 - Define each grappling term once, in plain words (guard, mount, underhook, inside position, base, frames).
 - Use his concrete examples: "a trapped foot sits inside the other person's outline".
