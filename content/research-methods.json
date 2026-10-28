@@ -1,0 +1,147 @@
+[
+  {
+    "group": "Harness engineering",
+    "skills": [
+      {
+        "name": "Harnesses around frozen models",
+        "evidence": [
+          {
+            "where": "research/watching-a-match",
+            "note": "From one pass, to cached multi-pass, to CV anchors: $1 a video down to 1.3 cents"
+          },
+          {
+            "where": "research/faithful-movement",
+            "note": "MoveHarness: CV anchors, compact outputs and cached passes; position F1 0.017 → 0.189"
+          },
+          {
+            "where": "kakashi",
+            "note": "The same ideas in production, with versioned prompts tested offline before shipping"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Inside the models",
+    "skills": [
+      {
+        "name": "Training small models",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "A small two-person placement correction trained on Harmony4D, tested on held-out sequences and new people, public on Hugging Face"
+          }
+        ]
+      },
+      {
+        "name": "Layer probing",
+        "evidence": [
+          {
+            "where": "research/probing-qwen",
+            "note": "All 27 vision and 64 language layers of Qwen3.8-27B; 636 probe jobs to find the best layer"
+          }
+        ]
+      },
+      {
+        "name": "Reading weights",
+        "evidence": [
+          {
+            "where": "research/under-contact",
+            "note": "PromptHMR's cross-person attention is trained to track person order, not interaction"
+          },
+          {
+            "where": "research/fast-and-slow",
+            "note": "Showed a small VLM's vision tower is identical to the public model it's built on"
+          }
+        ]
+      },
+      {
+        "name": "Training on frozen features",
+        "evidence": [
+          {
+            "where": "research/probing-qwen",
+            "note": "Probes and mask decoders on VLM features, on a 6 GB laptop GPU"
+          },
+          {
+            "where": "research/fast-and-slow",
+            "note": "Decision heads (8.3M parameters), a temporal adapter, spatial decoders and readouts"
+          },
+          {
+            "where": "research/under-contact",
+            "note": "Adversarial de-biasing to stop a classifier recognising the room"
+          }
+        ]
+      },
+      {
+        "name": "Fine-tuning",
+        "evidence": [
+          {
+            "where": "zopu",
+            "note": "LoRA on platform feedback, in production"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Rigour",
+    "skills": [
+      {
+        "name": "Pre-registration",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Pass criteria written before every fix; failures reported as failures"
+          },
+          {
+            "where": "research/under-contact",
+            "note": "Every run with its falsifier; no claim below n = 30"
+          }
+        ]
+      },
+      {
+        "name": "Controls",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Shuffled partners: everything drops to ≤ 0.05"
+          },
+          {
+            "where": "research/probing-qwen",
+            "note": "Fixed-decoder identity swaps, shuffled frame order"
+          },
+          {
+            "where": "research/fast-and-slow",
+            "note": "Blank images, option order, athlete swaps"
+          }
+        ]
+      },
+      {
+        "name": "Statistics",
+        "evidence": [
+          {
+            "where": "research/faithful-movement",
+            "note": "Bootstrap and video-clustered confidence intervals"
+          },
+          {
+            "where": "research/data-engine",
+            "note": "Blind side-by-side reviews with a sign test"
+          }
+        ]
+      },
+      {
+        "name": "Auditing my own results",
+        "evidence": [
+          {
+            "where": "research/under-contact",
+            "note": "A leaking split, a matching bug, 19 retractions kept on record"
+          },
+          {
+            "where": "research/probing-qwen",
+            "note": "A provenance audit and a layout audit that voided my own earlier results"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,6 +1,7 @@
 ---
 title: Architect in the Loop
 date: 2025-12-14
+category: work
 excerpt: "I fell back in love with coding the year everyone said coding was over."
 ---
 
@@ -10,7 +11,7 @@ Here's what I mean. This year I helped my fiancée build her company's website. 
 
 That's the real shift, and it's easy to miss if you're busy laughing at the meme. Coding has been democratised for everyone. The barrier used to be years of learning syntax and frameworks and why your build is broken at 2am. Now the barrier is the willingness to build something. That's a much lower wall, and a lot more people are climbing it.
 
-For those of us who already code, the change is just as big, it just looks different. I'll say it plainly because it's true for me: I fired 3 of my developers and bought myself 8 AI subscriptions for a fraction of the cost. It wasn't an easy call, and I don't say it to sound tough. But writing code by hand against someone who's working with these tools is horses against race cars. The horse is beautiful. The race car wins.
+For those of us who already code, the change is just as big, it just looks different. I'll say it plainly because it's true for me: work that used to need a team of three developers, I now do myself with a handful of AI subscriptions, for a fraction of the cost. It wasn't an easy shift to make. But writing code by hand against someone who's working with these tools is horses against race cars. The horse is beautiful. The race car wins.
 
 What I didn't give up is the thinking. I still design the solution and the architecture, every time. I decide what the system is, how the pieces fit, where the data lives, what happens when something breaks. The models write most of the code, and I review it, steer it, throw it away when it's wrong. I've started calling it Architect-in-the-loop.
 

@@ -1,6 +1,7 @@
 ---
 title: Building in the Cold
 date: 2022-11-27
+category: work
 excerpt: "When the market stops pretending, you find out which parts of your work were real."
 ---
 

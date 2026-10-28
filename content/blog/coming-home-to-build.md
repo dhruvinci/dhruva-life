@@ -1,6 +1,7 @@
 ---
 title: Coming Home to Build
 date: 2021-12-05
+category: work
 excerpt: "Nobody I knew had done this before me. That's exactly why I wanted to come back and make it easier for the next person."
 ---
 

@@ -3,6 +3,7 @@
 // "At a glance" block, because the most common reader is an agent assessing Dhruva for
 // a role or a research position.
 
+import { evidenceTarget } from "./routes"
 import type { SiteData } from "./site-types"
 
 const line = (url: string, title: string, note?: string) => `- [${title}](${url})${note ? `: ${note}` : ""}`
@@ -10,6 +11,12 @@ const line = (url: string, title: string, note?: string) => `- [${title}](${url}
 /** Site-relative links ("/work/kakashi") become absolute, so they work out of context. */
 const absolute = (data: SiteData, markdown: string) =>
   markdown.replace(/<!--[\s\S]*?-->\n?/g, "").replace(/\]\(\//g, `](${data.config.url}/`)
+
+/** Absolute URL for a skill's evidence ("kakashi" → https://…/work/kakashi). */
+function evidenceUrl(data: SiteData, where: string) {
+  const target = evidenceTarget(data, where) ?? "/work"
+  return target.startsWith("http") ? target : `${data.config.url}/${target.slice(1).replace(" ", "/")}`
+}
 
 /** The body of a "## Heading" section in a Markdown document, or "". */
 function section(markdown: string, heading: string) {
@@ -30,12 +37,14 @@ function header(data: SiteData) {
 
 function atAGlance(data: SiteData) {
   const { config, notes } = data
-  const current = data.projects[0]
+  // The current role: the most recent timeline entry or main (non-side) project.
+  const role = [...data.timeline.filter((entry) => entry.kind === "role")].sort((a, b) => a.order - b.order)[0]
+  const current = data.projects.filter((project) => !project.side).sort((a, b) => a.order - b.order)[0]
   const paper = data.research.find((item) => item.kind === "paper")
   const contactPage = data.pages.find((page) => page.name === "contact")
   const openTo = (contactPage?.raw ?? "")
     .split(/\n\s*\n/)
-    .filter((paragraph) => paragraph.startsWith("**Open to"))
+    .filter((paragraph) => paragraph.startsWith("**Open to") || paragraph.startsWith("**Where I am"))
     .map((paragraph) => `- ${paragraph.trim()}`)
   const github = config.profiles?.find((url) => url.includes("github.com"))
 
@@ -44,8 +53,10 @@ function atAGlance(data: SiteData) {
     [
       "## At a glance",
       "",
-      current && `- **Now:** ${current.title}, ${current.role ?? current.cluster} (${current.period ?? current.year}). ${current.summary}`,
-      paper && `- **Published:** "${paper.title}", ${[paper.venue, paper.date.slice(0, 4)].filter(Boolean).join(", ")}. ${paper.summary} [Read more](/research/${paper.slug})`,
+      role && (!current || role.order < current.order)
+        ? `- **Now:** ${role.title} (${role.period}). ${role.summary}`
+        : current && `- **Now:** ${current.title}, ${current.role ?? current.cluster} (${current.period ?? current.year}). ${current.summary}`,
+      paper && `- **Published:** "${paper.title}", ${(paper.venue?.includes(paper.date.slice(0, 4)) ? [paper.venue] : [paper.venue, paper.date.slice(0, 4)]).filter(Boolean).join(", ")}. ${paper.summary} [Read more](/research)`,
       ...openTo,
       `- **Contact:** ${config.contact.email} · book a call: ${config.contact.calendar} · ${config.contact.linkedin}${github ? ` · ${github}` : ""}`,
       "",
@@ -53,14 +64,16 @@ function atAGlance(data: SiteData) {
       "",
       section(notes.workOutro, "Education"),
       "",
-      "### Skills",
+      "### Skills, with where each was used",
       "",
-      section(notes.workOutro, "Skills"),
-      "",
+      ...data.skills.flatMap((group) => [
+        `**${group.group}**`,
+        ...group.skills.map((skill) => `- ${skill.name}: ${skill.evidence.map((item) => `${item.note} (${evidenceUrl(data, item.where)})`).join("; ")}`),
+        "",
+      ]),
       "### Code",
       "",
-      section(notes.researchOutro, "Code"),
-      section(notes.workOutro, "Also built"),
+      section(notes.researchOutro, "Code, models and data"),
     ]
       .filter((item): item is string => typeof item === "string")
       .join("\n"),
@@ -81,12 +94,12 @@ export function llmsTxt(data: SiteData) {
     "",
     "## Research",
     "",
-    ...data.research.map((item) => line(`${url}/research/${item.slug}`, item.title, `${[item.venue, item.date].filter(Boolean).join(", ")}. ${item.summary}`)),
+    ...data.research.map((item) => line(item.links[0]?.href ?? `${url}/research`, item.title, `${[item.venue, item.date].filter(Boolean).join(", ")}. ${item.summary}`)),
     "",
     "## Work",
     "",
     ...data.projects.map((project) =>
-      line(`${url}/work/${project.slug}`, project.title, `${[project.role, project.period ?? project.year].filter(Boolean).join(", ")}. ${project.summary}`),
+      line(project.links[0]?.href ?? `${url}/work`, project.title, `${[project.role, project.period ?? project.year].filter(Boolean).join(", ")}. ${project.summary}`),
     ),
     "",
     "## Blog",
@@ -119,14 +132,19 @@ export function llmsFullTxt(data: SiteData) {
     ...data.research.map((item) =>
       page(
         item.title,
-        `${url}/research/${item.slug}`,
+        item.links[0]?.href ?? `${url}/research`,
         [item.venue && `Venue: ${item.venue}`, `Date: ${item.date}`, `Status: ${item.kind}`, ...item.links.map((link) => `${link.label}: ${link.href}`)],
         [item.summary, "", ...item.highlights.map((highlight) => `- ${highlight}`), "", item.raw].join("\n"),
       ),
     ),
     page("Work", `${url}/work`, [], [notes.workIntro, notes.workOutro].join("\n\n")),
     ...data.projects.map((project) =>
-      page(project.title, `${url}/work/${project.slug}`, [project.role && `Role: ${project.role}`, `Period: ${project.period ?? project.year}`], [project.summary, "", project.raw].join("\n")),
+      page(
+        project.title,
+        project.links[0]?.href ?? `${url}/work`,
+        [project.role && `Role: ${project.role}`, `Period: ${project.period ?? project.year}`],
+        [project.summary, "", ...project.highlights.map((highlight) => `- ${highlight}`)].join("\n"),
+      ),
     ),
     ...data.posts.map((post) => page(post.title, `${url}/blog/${post.slug}`, [`Date: ${post.date}`], post.raw)),
     ...data.pages.filter((item) => item.fun).map((item) => page(item.title, `${url}/${item.name}`, [], item.raw)),

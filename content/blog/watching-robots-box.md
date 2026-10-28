@@ -1,6 +1,7 @@
 ---
 title: Watching Robots Box
 date: 2026-02-15
+category: research
 excerpt: "Everyone laughed at the boxing robots. I was watching their feet."
 ---
 

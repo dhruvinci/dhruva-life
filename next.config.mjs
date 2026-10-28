@@ -15,7 +15,7 @@ const nextConfig = {
       "/journey": "/about",
       "/philosophy": "/about",
       "/random": "/about",
-      "/work/graicie": "/work/kakashi",
+      "/work/graicie": "/work",
       "/work/cultureco": "/work",
       "/work/shaadi-fun": "/work",
       "/work/arenatwo": "/work",
@@ -25,6 +25,10 @@ const nextConfig = {
       "/writing/a-million-in-a-week": "/blog/one-click",
       "/writing/the-trapped-arm": "/blog/seeing-fast-and-slow",
       "/writing/:slug": "/blog/:slug",
+      // Research threads are entries on /research now, each linking out to its repo.
+      "/research/:slug": "/research",
+      // Work too: every role and project is an entry on /work, linking out.
+      "/work/:slug": "/work",
     }
     return Object.entries(moved).map(([source, destination]) => ({ source, destination, permanent: true }))
   },

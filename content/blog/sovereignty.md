@@ -1,6 +1,7 @@
 ---
 title: Sovereignty
 date: 2022-02-20
+category: work
 excerpt: "I own a copy of The Dark Side of the Moon. I don't own a single song on my phone. That difference is why I'm in crypto."
 ---
 

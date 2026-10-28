@@ -1,6 +1,7 @@
 ---
 title: Entropy and Order
 date: 2025-07-28
+category: life
 excerpt: "Order -> chaos -> order again..."
 ---
 

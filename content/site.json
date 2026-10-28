@@ -35,11 +35,19 @@
     "calendar": "https://calendar.app.google/586qyoAWdRjQMcB1A",
     "linkedin": "https://in.linkedin.com/in/dhruva-chakravarthi"
   },
-  "now": "Mid-research on a question that sounds simple and isn't: when two people are tangled together, whose arm is it? Around that, building towards a fast/slow vision stack.",
+  "now": "Measuring how two people engage - where they touch, how their limbs wrap, how far apart they really are - in 3D and over time, from one ordinary camera.",
   "profiles": [
     "https://github.com/dhruvinci",
     "https://in.linkedin.com/in/dhruva-chakravarthi",
     "https://x.com/dhrude",
     "https://instagram.com/dhrude"
-  ]
+  ],
+  "guide": {
+    "research": "Current work first, with code, the paper, data and methods",
+    "work": "Roles, side projects, and skills with where they come from",
+    "blog": "Essays since 2021: research, work and life",
+    "about": "Who I am and how I got here",
+    "contact": "Email, a call, or LinkedIn",
+    "fun": "Music, jiu-jitsu, photos, themes"
+  }
 }

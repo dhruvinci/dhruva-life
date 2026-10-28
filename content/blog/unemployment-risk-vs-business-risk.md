@@ -1,6 +1,7 @@
 ---
 title: Unemployment Risk versus Business Risk
 date: 2026-09-30
+category: work
 excerpt: "Quitting your job and starting a business are two very different risks. I learned that the hard way."
 ---
 

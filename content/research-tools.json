@@ -1,0 +1,240 @@
+[
+  {
+    "group": "VLMs and LLMs, used",
+    "tools": [
+      {
+        "name": "Gemini 2.0 / 2.5 Flash, 2.5 Pro",
+        "note": "Frozen, inside the harness"
+      },
+      {
+        "name": "Qwen3.8-27B",
+        "note": "Open weights, taken apart layer by layer"
+      },
+      {
+        "name": "Laya Vision / SmolVLM",
+        "note": "A small VLM, tested against its own frozen features"
+      },
+      {
+        "name": "GPT-6, GPT-5.6, gpt-4o-mini",
+        "note": "AI reviewers, labellers and identity grounding"
+      }
+    ]
+  },
+  {
+    "group": "Segmentation and tracking, used",
+    "tools": [
+      {
+        "name": "RF-DETR",
+        "note": "Finding the people, before SAM 3.1 tracks them"
+      },
+      {
+        "name": "SAM 2 / 2.1",
+        "note": "Point prompts for dot-assisted correction"
+      },
+      {
+        "name": "SAM 3 / 3.1",
+        "note": "Auto-labelling and video tracking",
+        "href": "https://ai.meta.com/blog/segment-anything-model-3/"
+      },
+      {
+        "name": "CoTracker3",
+        "note": "Point tracking"
+      },
+      {
+        "name": "Sapiens",
+        "note": "Body-part segmentation; unusable below ~1,000 px person height, and fighters are 150–400 px"
+      }
+    ]
+  },
+  {
+    "group": "3D bodies, cameras and depth, used",
+    "tools": [
+      {
+        "name": "SAM 3D Body",
+        "note": "The one-camera 3D baseline",
+        "href": "https://ai.meta.com/research/publications/sam-3d-body-robust-full-body-human-mesh-recovery/"
+      },
+      {
+        "name": "PromptHMR",
+        "note": "Benchmarked, and read its weights",
+        "href": "https://yufu-wang.github.io/phmr-page/"
+      },
+      {
+        "name": "GeoCalib",
+        "note": "Per-shot camera estimation"
+      },
+      {
+        "name": "MoGe-2, Depth Pro, Depth-Anything-V2",
+        "note": "Monocular depth between two people"
+      }
+    ]
+  },
+  {
+    "group": "Pose and features, used",
+    "tools": [
+      {
+        "name": "BBoxMaskPose",
+        "note": "Finds the second athlete, then de-duplication deletes it",
+        "href": "https://huggingface.co/spaces/purkrmir/BBoxMaskPose-demo"
+      },
+      {
+        "name": "RTMPose, RTMW, ViTPose+, YOLO11 pose",
+        "note": "Pose, compared on a 6 GB laptop GPU"
+      },
+      {
+        "name": "DINOv2",
+        "note": "The strongest frozen encoder for posture"
+      },
+      {
+        "name": "Optical flow, PySceneDetect, faster-whisper",
+        "note": "Pipeline building blocks"
+      }
+    ]
+  },
+  {
+    "group": "Also read, cloned or evaluated",
+    "tools": [
+      {
+        "name": "OCHuman",
+        "note": "5,081 photos of heavily overlapping people"
+      },
+      {
+        "name": "Qwen3-VL-Seg",
+        "note": "Design reference for the Qwen probing decoders",
+        "href": "https://github.com/cp19045/Qwen3-VL-Seg"
+      },
+      {
+        "name": "VideoLISA",
+        "href": "https://arxiv.org/abs/2409.19603"
+      },
+      {
+        "name": "Molmo 2",
+        "href": "https://allenai.org/blog/molmo2"
+      },
+      {
+        "name": "Hidden in plain sight: VLMs overlook their visual representations",
+        "href": "https://arxiv.org/abs/2506.08008"
+      },
+      {
+        "name": "Harmony4D",
+        "note": "Used as ground truth",
+        "href": "https://jyuntins.github.io/harmony4d/"
+      },
+      {
+        "name": "OpenCap Monocular",
+        "note": "The path to joint loading from video",
+        "href": "https://github.com/utahmobl/opencap-monocular"
+      },
+      {
+        "name": "WHAM",
+        "href": "https://wham.is.tue.mpg.de/"
+      },
+      {
+        "name": "MotionBERT",
+        "href": "https://motionbert.github.io/"
+      },
+      {
+        "name": "D4RT",
+        "note": "Written evaluation; weights unreleased",
+        "href": "https://d4rt-paper.github.io"
+      },
+      {
+        "name": "Play4D",
+        "note": "Written evaluation: doesn't help separate interacting people",
+        "href": "https://research.nvidia.com/labs/amri/projects/play4d/"
+      },
+      {
+        "name": "StableMotion",
+        "note": "Written evaluation",
+        "href": "https://yxmu.foo/stablemotion-page/"
+      },
+      {
+        "name": "StreamingVLM",
+        "href": "https://arxiv.org/abs/2510.09608"
+      },
+      {
+        "name": "Marlin-2B",
+        "href": "https://huggingface.co/NemoStation/Marlin-2B"
+      },
+      {
+        "name": "LLaVA-NeXT-Video-7B",
+        "href": "https://huggingface.co/llava-hf/LLaVA-NeXT-Video-7B-hf"
+      },
+      {
+        "name": "YOLO26",
+        "href": "https://docs.ultralytics.com/models/yolo26#supported-tasks-and-modes"
+      },
+      {
+        "name": "TAPNext",
+        "href": "https://tap-next.github.io"
+      },
+      {
+        "name": "Track Everything",
+        "href": "https://trackeverything.github.io/"
+      },
+      {
+        "name": "DenseLandmarks",
+        "href": "https://microsoft.github.io/DenseLandmarks/"
+      },
+      {
+        "name": "SOMA",
+        "href": "https://github.com/edualvarado/SOMA"
+      },
+      {
+        "name": "BoxMind",
+        "href": "https://arxiv.org/pdf/2601.11492"
+      },
+      {
+        "name": "Diffuse2Seg",
+        "href": "https://arxiv.org/abs/2609.06491"
+      },
+      {
+        "name": "WiFi-JEPA",
+        "href": "https://wifi-jepa.github.io"
+      },
+      {
+        "name": "Gen4Regen",
+        "note": "Generated images for label scarcity",
+        "href": "https://www.researchgate.net/publication/404585561_Leveraging_Image_Generators_to_Address_Training_Data_Scarcity_The_Gen4Regen_Dataset_for_Forest_Regeneration_Mapping"
+      },
+      {
+        "name": "PAMI-Code",
+        "href": "https://github.com/Coral79/PAMI-Code"
+      },
+      {
+        "name": "ChaosRL",
+        "href": "https://github.com/bmind7/ChaosRL"
+      },
+      {
+        "name": "System One models and JEV",
+        "href": "https://typesafe.ai/blog/introducing-system-one-models-and-jev"
+      },
+      {
+        "name": "Laya vs JEV benchmark",
+        "href": "https://wavect.io/blog/laya-vs-jev-benchmark-ai-startup-moat/"
+      },
+      {
+        "name": "Harness engineering",
+        "href": "https://openai.com/index/harness-engineering/"
+      },
+      {
+        "name": "OpenAI function calling",
+        "href": "https://developers.openai.com/api/docs/guides/function-calling?api-mode=responses"
+      },
+      {
+        "name": "ExerciseDB",
+        "href": "https://github.com/ExerciseDB/exercisedb-api"
+      },
+      {
+        "name": "human-atlas",
+        "note": "A 3D anatomy viewer",
+        "href": "https://github.com/dhruvinci/human-atlas"
+      },
+      {
+        "name": "Sa2VA, GVHMR, TRAM, SAMURAI, Deep-EIoU, LLoVi, VideoTree, BIMBA",
+        "note": "Cloned and read"
+      }
+    ],
+    "collapsed": true
+  }
+]

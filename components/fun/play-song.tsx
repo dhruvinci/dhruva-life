@@ -17,7 +17,7 @@ export function PlaySong({ count }: { count: number }) {
       <span className="min-w-0">
         <span className="block text-sm text-foreground group-hover:text-accent">Play me a song</span>
         <span className="block text-xs text-muted-foreground">
-          A random one of {count} favourites from the shelf and the gigs. Tap again to shuffle.
+          One of {count} favourites from the shelf and the gigs. Tap again for another.
         </span>
       </span>
     </button>

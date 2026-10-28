@@ -1,6 +1,7 @@
 ---
 title: Seeing, Fast and Slow
 date: 2026-09-27
+category: research
 excerpt: "Kahneman wrote about thinking fast and slow. I went looking for whether anyone had studied seeing fast and slow - and it sent me down a rabbit hole about what our models actually see."
 ---
 

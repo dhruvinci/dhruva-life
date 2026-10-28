@@ -9,7 +9,7 @@ import type { SiteData } from "@/lib/site-types"
 import { homeTitle, pageTitle } from "@/lib/seo"
 import { storage } from "@/lib/storage"
 import { TerminalContext, type TerminalApi } from "./context"
-import { Welcome } from "./intro"
+import { SiteHeader, Welcome } from "./intro"
 import { MusicPlayer } from "./music-player"
 import { OutputBlock, type Block } from "./output-block"
 import { Prompt } from "./prompt"
@@ -197,12 +197,15 @@ export function Terminal({ data, initialInput }: TerminalProps) {
       <ThemeController />
       <div onClick={handleClick} className="min-h-screen">
         <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-[35vh] print:p-0 print:max-w-none">
-          <div className="print:hidden">
-            <Welcome data={data} compact={blocks.length > 0} />
-          </div>
-          <div className="space-y-10 mt-8 print:mt-0">
+          <SiteHeader data={data} path={path} />
+          {blocks.length === 0 && (
+            <div className="print:hidden mt-10">
+              <Welcome data={data} />
+            </div>
+          )}
+          <div className="space-y-10 mt-10 print:mt-0">
             {blocks.map((block, index) => (
-              <OutputBlock key={block.id} block={block} latest={index === blocks.length - 1} />
+              <OutputBlock key={block.id} block={block} data={data} latest={index === blocks.length - 1} />
             ))}
           </div>
         </main>

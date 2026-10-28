@@ -1,6 +1,7 @@
 ---
 title: Positive-Sum Systems
 date: 2025-07-15
+category: work
 excerpt: "Design games where everyone can win."
 ---
 

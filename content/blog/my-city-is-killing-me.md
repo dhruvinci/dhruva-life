@@ -1,6 +1,7 @@
 ---
 title: My City Is Killing Me
 date: 2026-10-12
+category: life
 excerpt: "I came home to Bangalore on purpose. Lately it feels like the city is telling me to leave."
 ---
 

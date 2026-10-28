@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Independent AI researcher",
+    "period": "Jan 2026 – now",
+    "summary": "Teaching machines to understand how people move and interact - where two bodies touch and how their limbs entangle - with jiu-jitsu as the test. One paper accepted, a public repo for every thread, and the negative results kept.",
+    "kind": "role",
+    "command": "/research",
+    "combines": [
+      "jiu-jitsu",
+      "computer vision",
+      "3D"
+    ],
+    "order": 0
+  },
+  {
+    "title": "The mats",
+    "period": "Dec 2023 – Dec 2024",
+    "summary": "Sold Dehidden on a Friday. First jiu-jitsu class on the Monday. Then a year of training six days a week, a training camp, and two competitions.",
+    "kind": "break",
+    "command": "/bjj",
+    "order": 2.5
+  }
+]

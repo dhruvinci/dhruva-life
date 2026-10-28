@@ -1,6 +1,7 @@
 ---
 title: Taking the Leap
 date: 2021-09-12
+category: work
 excerpt: "Everyone I asked told me not to do it. It took me eight months to realise I was asking the wrong people."
 ---
 

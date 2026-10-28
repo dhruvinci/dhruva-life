@@ -1,6 +1,7 @@
 ---
 title: The Trouble with Drawings
 date: 2025-05-25
+category: work
 excerpt: "A picture says a thousand words. The problem is working out which thousand."
 ---
 

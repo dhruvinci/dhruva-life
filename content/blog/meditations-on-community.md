@@ -1,6 +1,7 @@
 ---
 title: Meditations on Community
 date: 2025-08-10
+category: life
 excerpt: "Communities are the real engines of progress..."
 ---
 

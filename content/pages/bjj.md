@@ -1,6 +1,6 @@
 ---
 title: Jiu-jitsu
-description: Fights, gyms, and the sport that started the research
+description: My fight record and where I train
 seo: "Dhruva Chakravarthi's jiu-jitsu: a competition record from ADCC India Nationals, Strangle and PKD, the gyms, and how the sport led to the research."
 fun: true
 emoji: "🤼"
@@ -19,7 +19,7 @@ I walked into my first jiu-jitsu class the Monday after selling my startup, in D
 ## Elsewhere
 
 - **[@dhrujitsu](https://www.instagram.com/dhrujitsu/)** - my jiu-jitsu on Instagram.
-- **[kakashi.ai](https://kakashi.ai)** - the AI training partner I built because I wanted to understand my own rolls. [The story](/work/kakashi).
+- **[kakashi.ai](https://kakashi.ai)** - the AI training partner I built because I wanted to understand my own rolls. [The story](https://kakashi.ai).
 
 ## The essays
 

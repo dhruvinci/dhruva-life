@@ -6,8 +6,8 @@ import fs from "node:fs"
 import path from "node:path"
 import matter from "gray-matter"
 import { Marked } from "marked"
-import type { Fight, Link, LogEntry, Page, Photo, Post, Project, ResearchItem, SiteConfig, SiteData, Track, VinylRecord } from "./site-types"
-import { RESERVED_COMMANDS } from "./routes"
+import type { Fight, Link, LogEntry, Metric, Page, Photo, Post, Project, ResearchItem, SiteConfig, SiteData, SkillGroup, TimelineEntry, ToolGroup, Experiment, Track, VinylRecord } from "./site-types"
+import { evidenceTarget, RESERVED_COMMANDS } from "./routes"
 
 const CONTENT_DIR = path.join(process.cwd(), "content")
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
@@ -155,6 +155,14 @@ function loadPages(): Page[] {
   })
 }
 
+function metricList(data: Record<string, unknown>, file: string): Metric[] {
+  const metrics = data.metrics ?? []
+  if (!Array.isArray(metrics) || metrics.some((item) => typeof item?.value !== "string" || typeof item?.label !== "string")) {
+    throw new ContentError(file, `"metrics" must be a list of { value, label } (quote numbers, e.g. value: "377")`)
+  }
+  return metrics as Metric[]
+}
+
 function loadProjects(): Project[] {
   return readDir("projects")
     .map(({ file, slug, data, body }) => {
@@ -172,6 +180,11 @@ function loadProjects(): Project[] {
         period: optionalString(data, "period", file),
         stack: optionalStringList(data, "stack", file),
         cover: optionalString(data, "cover", file),
+        combines: optionalStringList(data, "combines", file),
+        metrics: metricList(data, file),
+        side: data.side === true,
+        highlights: optionalStringList(data, "highlights", file),
+        posts: optionalStringList(data, "posts", file),
         html: hasBody(body) ? renderMarkdown(body) : "",
         text: plainText(body),
         raw: body,
@@ -216,6 +229,15 @@ function loadResearch(): ResearchItem[] {
       links: linkList(data, file),
       bibtex: optionalString(data, "bibtex", file)?.trim(),
       highlights: optionalStringList(data, "highlights", file),
+      period: optionalString(data, "period", file),
+      status: optionalString(data, "status", file),
+      question: optionalString(data, "question", file),
+      finding: optionalString(data, "finding", file),
+      ledTo: optionalString(data, "led_to", file),
+      posts: [...(optionalString(data, "post", file) ? [optionalString(data, "post", file) as string] : []), ...optionalStringList(data, "posts", file)],
+      venueNote: optionalString(data, "venue_note", file),
+      shortTitle: optionalString(data, "short_title", file),
+      metrics: metricList(data, file),
       html: hasBody(body) ? renderMarkdown(body) : "",
       text: plainText(body),
       raw: body,
@@ -264,6 +286,66 @@ function loadPlaylist(): Track[] {
 }
 
 /** content/<name>.json, or the fallback when the file doesn't exist. */
+/** skills.json and research-toolkit.json: groups of named items, each with evidence. */
+function loadEvidenceGroups(file: string): SkillGroup[] {
+  const groups = loadJson<unknown>(file, [])
+  const valid =
+    Array.isArray(groups) &&
+    groups.every(
+      (group) =>
+        typeof group?.group === "string" &&
+        Array.isArray(group.skills) &&
+        group.skills.every(
+          (skill: { name?: unknown; evidence?: unknown }) =>
+            typeof skill?.name === "string" &&
+            Array.isArray(skill.evidence) &&
+            skill.evidence.length > 0 &&
+            skill.evidence.every((item: { where?: unknown; note?: unknown }) => typeof item?.where === "string" && typeof item?.note === "string"),
+        ),
+    )
+  if (!valid) throw new ContentError(file, `must be a list of { group, skills: [{ name, evidence: [{ where, note }] }] }, each with at least one piece of evidence`)
+  return groups as SkillGroup[]
+}
+
+function loadToolGroups(): ToolGroup[] {
+  const file = "research-tools.json"
+  const groups = loadJson<unknown>(file, [])
+  const valid =
+    Array.isArray(groups) &&
+    groups.every(
+      (group) =>
+        typeof group?.group === "string" &&
+        Array.isArray(group.tools) &&
+        group.tools.every((tool: Record<string, unknown>) => typeof tool?.name === "string" && ["note", "href"].every((key) => tool[key] === undefined || typeof tool[key] === "string")),
+    )
+  if (!valid) throw new ContentError(file, `must be a list of { group, tools: [{ name, note?, href? }] }`)
+  return groups as ToolGroup[]
+}
+
+function loadExperiments(): Experiment[] {
+  const file = "experiments.json"
+  const items = loadJson<unknown>(file, [])
+  const valid =
+    Array.isArray(items) &&
+    items.every((item) => ["title", "result", "thread"].every((key) => typeof item?.[key] === "string"))
+  if (!valid) throw new ContentError(file, `must be a list of { thread, title, result }, in the order they were run`)
+  return items as Experiment[]
+}
+
+function loadTimeline(): TimelineEntry[] {
+  const file = "timeline.json"
+  const items = loadJson<unknown>(file, [])
+  const valid =
+    Array.isArray(items) &&
+    items.every((item) => ["title", "period", "summary"].every((key) => typeof item?.[key] === "string") && typeof item?.order === "number")
+  if (!valid) throw new ContentError(file, `must be a list of { title, period, summary, order, kind?, command?, combines? }`)
+  return (items as Array<Partial<TimelineEntry> & Pick<TimelineEntry, "title" | "period" | "summary" | "order">>).map((item) => ({
+    ...item,
+    kind: item.kind === "role" ? "role" : "break",
+    combines: item.combines ?? [],
+  }))
+}
+
 function loadJson<T>(name: string, fallback: T): T {
   const file = path.join(CONTENT_DIR, name)
   if (!fs.existsSync(file)) return fallback
@@ -295,6 +377,12 @@ export function getSiteData(): SiteData {
     fights: loadJson<Fight[]>("fights.json", []),
     gigs: loadJson<string[]>("gigs.json", []),
     records: loadJson<VinylRecord[]>("records.json", []),
+    skills: loadEvidenceGroups("skills.json"),
+    timeline: loadTimeline(),
+    researchData: loadEvidenceGroups("research-data.json"),
+    researchMethods: loadEvidenceGroups("research-methods.json"),
+    researchTools: loadToolGroups(),
+    experiments: loadExperiments(),
     intros: { work: loadIntro("projects"), blog: loadIntro("blog"), research: loadIntro("research") },
     outros: { work: loadIntro("projects", "_outro.md"), blog: loadIntro("blog", "_outro.md"), research: loadIntro("research", "_outro.md") },
     notes: {
@@ -323,6 +411,33 @@ export function getSiteData(): SiteData {
   for (const post of data.posts) {
     if (post.category && data.posts.some((other) => other.slug === post.category)) {
       throw new ContentError(`blog/${post.slug}.md`, `category "${post.category}" is also a post's file name`)
+    }
+  }
+
+  for (const [file, groups] of [["skills.json", data.skills], ["research-data.json", data.researchData], ["research-methods.json", data.researchMethods]] as const) {
+    for (const group of groups) {
+      for (const skill of group.skills) {
+        for (const item of skill.evidence) {
+          if (!evidenceTarget(data, item.where)) {
+            throw new ContentError(file, `"${skill.name}" points at "${item.where}", which isn't a project, page, research/<slug> or blog/<slug>`)
+          }
+        }
+      }
+    }
+  }
+  for (const experiment of data.experiments) {
+    if (!data.research.some((item) => item.slug === experiment.thread)) {
+      throw new ContentError("experiments.json", `"${experiment.title}" belongs to thread "${experiment.thread}", which isn't in content/research/`)
+    }
+  }
+  for (const project of data.projects) {
+    for (const slug of project.posts) {
+      if (!data.posts.some((post) => post.slug === slug)) throw new ContentError(`projects/${project.slug}.md`, `"posts" lists "${slug}", which isn't a blog post`)
+    }
+  }
+  for (const item of data.research) {
+    for (const slug of item.posts) {
+      if (!data.posts.some((post) => post.slug === slug)) throw new ContentError(`research/${item.slug}.md`, `"${slug}" isn't a blog post`)
     }
   }
 

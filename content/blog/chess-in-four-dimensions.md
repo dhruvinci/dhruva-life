@@ -1,6 +1,7 @@
 ---
 title: Chess in Four Dimensions
 date: 2024-08-18
+category: life
 excerpt: "Imagine playing chess where you are the pieces, the board keeps tilting, and nobody waits for your turn."
 ---
 

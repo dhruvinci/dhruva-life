@@ -1,6 +1,6 @@
 ---
 title: Camera
-description: What I shoot with, and what I've shot
+description: My cameras and photos
 seo: "The cameras Dhruva Chakravarthi shoots with, a Sony α7 IV and a Fujifilm X100VI, and a gallery of photos from the mats, gigs and travel."
 fun: true
 emoji: "📷"

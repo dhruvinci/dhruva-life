@@ -1,6 +1,7 @@
 ---
 title: Handing It Over
 date: 2023-12-17
+category: work
 excerpt: "Two and a bit years of my life fit into one sentence now. That's a strange thing to look at."
 ---
 

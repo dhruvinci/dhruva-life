@@ -9,6 +9,8 @@ next: [research, work, about]
 
 **Open to work.** If you're building vision AI or robots that have to deal with real people, I'd like to help.
 
+**Where I am.** Based in Bangalore, India, and open to relocating - I'd need work authorisation outside India. Available now, for research or roles that line up with this work.
+
 - **Email:** [0xdhruva@gmail.com](mailto:0xdhruva@gmail.com)
 - **Code:** [GitHub](https://github.com/dhruvinci)
 - **Elsewhere:** [LinkedIn](https://in.linkedin.com/in/dhruva-chakravarthi) · [X](https://x.com/dhrude/) · [Instagram](https://instagram.com/dhrude/)

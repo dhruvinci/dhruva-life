@@ -1,6 +1,7 @@
 ---
 title: Utility Is a Promise
 date: 2022-05-15
+category: work
 excerpt: "Every brand asks what the utility is. The better question is whether they'll still be around to deliver it."
 ---
 

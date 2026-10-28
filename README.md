@@ -7,9 +7,9 @@ Terminal-style personal website for Dhruva Chakravarthi. It works like Claude Co
 | Command | What it shows |
 |---|---|
 | `/about` | Who I am |
-| `/research` | Published paper, work in progress, code - with a persistent contact strip |
-| `/work` | Every role as a case study, plus education and skills - with a persistent contact strip |
-| `/blog` | Essays, one or more a quarter since 2021 |
+| `/research` | Research statement and questions, then every thread latest first (each linking out to its GitHub / Hugging Face / paper / post), data, methods and tools - with a persistent contact strip. No sub-pages |
+| `/work` | A timeline of roles (plus breaks), side projects, every skill with where it comes from, and education - each entry complete on the page, linking out to the company/code and related posts - with a persistent contact strip. No sub-pages |
+| `/blog` | Essays since 2021, filterable by research / work / life |
 | `/contact` | How to reach me |
 | `/fun` | The fun commands below, which also sit as emojis in the prompt bar |
 
@@ -37,11 +37,17 @@ All content is in `content/`. Pushing to `main` deploys (Vercel). If a file is m
 
 ```text
 content/
-  site.json               tagline, main menu order, availability tags, contact links
+  site.json               tagline, nav, availability tags, contact, "now" line, home "where to go" guide
   pages/<name>.md         one command + URL each (fun: true puts it under /fun)
-  projects/<slug>.md      /work and /work/<slug>; _intro.md above the list, _outro.md below
-  research/<slug>.md      /research and /research/<slug>; same _intro/_outro
-  blog/<slug>.md          /blog and /blog/<slug>
+  projects/<slug>.md      entries on /work (side: true puts them under side projects); _intro/_outro around the list
+  timeline.json           /work timeline entries that aren't projects (the research role, breaks)
+  skills.json             /work skills index: each skill with evidence (a project slug, a page, or research/<slug>)
+  research/<slug>.md      entries on /research, latest first; _intro (statement + questions) and _outro
+  experiments.json        the experiment log, listed under each research thread
+  research-data.json      /research data section (same shape as skills.json)
+  research-methods.json   /research methods section (same shape as skills.json)
+  research-tools.json     /research tools section ({ group, collapsed?, tools: [{ name, note?, href? }] })
+  blog/<slug>.md          /blog and /blog/<slug>; category: research | work | life
   playlist.json           songs for the /music player
   photos.json             the /camera gallery
 ```
@@ -55,32 +61,46 @@ fun: true                          # optional: a fun command (emoji row + /fun)
 emoji: "🎵"                        # optional: its emoji in the fun row
 next: [bjj, camera]                # optional follow-up links
 
-# projects/<slug>.md
+# projects/<slug>.md  (no page of its own; everything shows on /work)
 title: kakashi.ai
 cluster: Vision AI
-status: Active                     # Active | Past | Acquired | ...
+status: Beta 1 complete            # Active | Past | Acquired | Prototype | ...
 year: "2026"
-period: Oct 2025 – now             # optional, shown instead of year
+period: Oct 2025 – 2026            # optional, shown instead of year
 role: Founder & Engineer           # optional
 summary: One sentence.
+combines: [jiu-jitsu, vision AI]   # optional, shown as "jiu-jitsu × vision AI"
+highlights: ["What I did, concretely"]   # optional bullets
+metrics: [{ value: "377", label: beta users }]   # optional; quote the value
 stack: [Gemini, React]             # optional
-links: [{ label: Site, href: https://example.com }]   # optional
+links: [{ label: kakashi.ai, href: https://kakashi.ai }]   # GitHub/HF links render as logos
+posts: [shipping-kakashi]          # optional related blog posts
+side: true                         # optional: list under side projects
 order: 1                           # optional, lower first
 
-# research/<slug>.md
-title: Paper title
-date: 2026-07-15
-kind: paper                        # paper | experiment | ongoing
+# research/<slug>.md  (no page of its own; an entry on /research)
+title: Engagement in 3D
+date: 2026-10-01                   # sort key (latest first)
+period: Oct 2026 – now             # optional, shown instead of the date
+kind: ongoing                      # paper | experiment | ongoing
+status: current                    # current | accepted | completed | superseded
 venue: CAISc 2026                  # optional
-summary: One sentence.
-highlights: ["headline result"]    # optional, shown on the /research card
-links: [{ label: Paper, href: ... }]
-bibtex: |                          # optional, enables "Copy BibTeX"
+venue_note: One line of context    # optional
+short_title: For tight spots       # optional (home page)
+question: The question it asked.
+finding: One or two lines on what it found.
+led_to: What it set up next.
+summary: One sentence (search previews, llms.txt).
+metrics: [{ value: "11.2 → 3.2 cm", label: distance, held out }]
+links: [{ label: code, href: https://github.com/... }]   # first link is where skills point
+post: leg-spaghetti                # optional related post (or posts: [a, b])
+bibtex: |                          # optional, enables a BibTeX button
   @inproceedings{...}
 
 # blog/<slug>.md
 title: Essay title
 date: 2026-09-27
+category: research                 # research | work | life (adds a filter)
 excerpt: Optional one-liner.
 ```
 

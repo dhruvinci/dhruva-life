@@ -1,6 +1,7 @@
 ---
 title: The Wall
 date: 2025-04-13
+category: life
 excerpt: "Five fights, no nerves. Somebody said I was playing like Rahul Dravid, and I'll take it."
 ---
 

@@ -28,8 +28,13 @@ const formatDate = (date: string) =>
 const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1)
 
 /** Post categories in first-seen order (posts are newest first). */
+/** Blog categories in a fixed order (research, work, life), then any others alphabetically. */
+const CATEGORY_ORDER = ["research", "work", "life"]
+
 export function blogCategories(data: SiteData) {
-  return [...new Set(data.posts.flatMap((post) => (post.category ? [post.category] : [])))]
+  const found = [...new Set(data.posts.flatMap((post) => (post.category ? [post.category] : [])))]
+  const rank = (name: string) => (CATEGORY_ORDER.includes(name) ? CATEGORY_ORDER.indexOf(name) : CATEGORY_ORDER.length)
+  return found.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b))
 }
 
 export function getRoutes(data: SiteData): Route[] {
@@ -46,33 +51,16 @@ export function getRoutes(data: SiteData): Route[] {
       path: "/research",
       input: "/research",
       title: "Research",
-      description: `Research by ${author} on vision-language models and human movement: a CAISc 2026 paper on faithful movement understanding, plus ongoing experiments.`,
+      description: `Research by ${author} on how machines understand two people in contact: a CAISc 2026 paper on faithful movement understanding, and current work measuring engagement in 3D from video.`,
       kind: "index",
     },
-    ...data.research.map((item): Route => ({
-      path: `/research/${item.slug}`,
-      input: `/research ${item.slug}`,
-      title: item.title,
-      description: item.summary,
-      kind: "research",
-      date: item.date,
-      eyebrow: [item.kind === "paper" ? "Paper" : item.kind === "ongoing" ? "Ongoing research" : "Experiment", item.venue ?? formatDate(item.date)].join(" · "),
-    })),
     {
       path: "/work",
       input: "/work",
       title: "Work",
-      description: `What ${author} has built: kakashi.ai, Zopu.ai, Dehidden (acquired by Polygon), PwC and pushit.tv, most recent first.`,
+      description: `What ${author} has built: kakashi.ai, Zopu.ai, Dehidden (acquired by Polygon, now part of Layer-E), PwC and pushit.tv, most recent first.`,
       kind: "index",
     },
-    ...data.projects.map((project): Route => ({
-      path: `/work/${project.slug}`,
-      input: `/work ${project.slug}`,
-      title: project.title,
-      description: project.summary,
-      kind: "project",
-      eyebrow: [project.role ?? project.cluster, project.period ?? project.year].join(" · "),
-    })),
     {
       path: "/blog",
       input: "/blog",
@@ -118,4 +106,36 @@ export function routeForPath(data: SiteData, path: string) {
 
 export function routeForInput(data: SiteData, canonicalInput: string) {
   return getRoutes(data).find((route) => route.input === canonicalInput)
+}
+
+/** Where "back" goes from a page: its index (/blog/x → /blog), /fun for fun pages, otherwise home. */
+export function parentOf(data: SiteData, path?: string): { path: string; label: string } {
+  const segments = (path ?? "/").split("/").filter(Boolean)
+  if (segments.length >= 2) {
+    const index = routeForPath(data, `/${segments[0]}`)
+    if (index) return { path: index.path, label: index.title.toLowerCase() }
+  }
+  if (segments.length === 1 && data.pages.some((page) => page.fun && page.name === segments[0])) return { path: "/fun", label: "fun" }
+  return { path: "/", label: "home" }
+}
+
+/**
+ * Where a skill's evidence points: a terminal command for site pages ("/research"), or a URL -
+ * work and research entries link out (company site, GitHub, Hugging Face) rather than to sub-pages.
+ * Undefined if it names nothing.
+ */
+export function evidenceTarget(data: SiteData, where: string) {
+  const [first, second] = where.split("/")
+  if (!second) {
+    const project = data.projects.find((entry) => entry.slug === first)
+    if (project) return project.links[0]?.href ?? "/work"
+    if (first === "research" || data.pages.some((page) => page.name === first)) return `/${first}`
+    return undefined
+  }
+  if (first === "research") {
+    const item = data.research.find((entry) => entry.slug === second)
+    return item ? (item.links[0]?.href ?? "/research") : undefined
+  }
+  if (first === "blog" && data.posts.some((post) => post.slug === second)) return `/blog ${second}`
+  return undefined
 }

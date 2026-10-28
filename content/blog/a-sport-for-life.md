@@ -1,6 +1,7 @@
 ---
 title: A Sport for Life
 date: 2024-12-29
+category: life
 excerpt: "I don't remember my first win. I remember the loss right after it."
 ---
 

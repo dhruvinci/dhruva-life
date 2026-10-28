@@ -1,6 +1,7 @@
 ---
 title: Happiest I've Ever Been
 date: 2026-07-15
+category: life
 excerpt: "Everyone asks how it feels to be married. I only have one answer."
 ---
 

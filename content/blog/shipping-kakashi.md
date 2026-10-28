@@ -1,6 +1,7 @@
 ---
 title: Shipping Kakashi
 date: 2026-03-15
+category: work
 excerpt: "The best thing about launching Kakashi was the coaches telling me exactly where it was wrong."
 ---
 

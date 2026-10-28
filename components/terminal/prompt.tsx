@@ -179,7 +179,7 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
               <span className="text-sage" aria-hidden>
                 $
               </span>
-              <span className="flex-1 truncate text-muted-foreground">tap for commands</span>
+              <span className="flex-1 truncate text-muted-foreground">tap to jump to a page</span>
               <span className={`text-accent transition-transform ${sheetOpen ? "rotate-180" : ""}`} aria-hidden>
                 ▴
               </span>
@@ -203,7 +203,7 @@ export function Prompt({ registry, history, path, inputRef }: PromptProps) {
                 aria-controls="slash-menu"
                 aria-activedescendant={menuOpen ? `slash-${Math.min(active, items.length - 1)}` : undefined}
                 aria-autocomplete="list"
-                placeholder="type / for commands"
+                placeholder="jump to a page… (press /)"
                 className="prompt-input w-full min-w-0 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                 autoComplete="off"
                 autoCorrect="off"

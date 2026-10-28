@@ -6,11 +6,19 @@ year: "2021"
 period: Aug 2021 – Dec 2023
 order: 3
 role: Founder & CEO
-summary: "Web3 products for brands - client work first, then a self-serve product that got us acquired by Polygon."
+summary: "Web3 products for brands - client work first, then a self-serve product that got us acquired by Polygon, and merged with their eDAO to form Layer-E."
+combines: [enterprise architecture, crypto, brands]
+metrics:
+  - value: "29"
+    label: brand clients
+  - value: "1M+"
+    label: mints in four days
+  - value: "Polygon"
+    label: acquired us
+highlights:
+  - "Started it in August 2021 while wrapping up at PwC. Founder and effectively CEO: every client partnership, every product delivery, and the architecture behind them, for brands like Adidas x Prada and Mercedes."
+  - "A one-click open edition from a tweet or an email: over a million mints in four days, and almost nothing broke."
+  - "Hired on what people could build, not what their resumes said."
+  - "Turned 29 client builds into a self-serve product - the reason Polygon acquired us. They then merged us with their existing entity, eDAO, to form Layer-E."
+posts: [one-click, productization, hire-the-hungry, handing-it-over]
 ---
-
-I started Dehidden in August 2021, while I was still wrapping up at PwC. I was the face of it and effectively the CEO - my co-founder ran ops, and I took on every client partnership, every product delivery, and the product and solution architecture behind them. PwC had given me a lot of that muscle already. I'd also gone deep into crypto on my own, which meant when brands like Adidas x Prada and Mercedes asked for something new, I could actually invent it - minting, quests, dynamic and soulbound NFTs, smart contracts that did what the partnership needed.
-
-After delivering for 29 clients, the patterns were obvious, so we turned them into a proper self-serve product that brands could just come and use themselves. That product is why Polygon acquired us.
-
-It was my first startup. I didn't know a thing about running a business, but I had grit and a mission.

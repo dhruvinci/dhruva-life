@@ -1,6 +1,7 @@
 ---
 title: The Year Off
 date: 2024-01-21
+category: life
 excerpt: "This isn't my first year off. The last one taught me that life isn't a race."
 ---
 

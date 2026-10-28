@@ -1,6 +1,7 @@
 ---
 title: A Coach That Watches
 date: 2025-06-22
+category: research
 excerpt: "I watched the most entertaining jiu-jitsu match ever made and couldn't keep up. So I asked a machine to try."
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Six Hours a Day
 date: 2024-04-21
+category: life
 excerpt: "You can't pitch your way out of side control."
 ---
 

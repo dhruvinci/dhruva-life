@@ -1,6 +1,7 @@
 ---
 title: Chasing What Is True
 date: 2026-07-26
+category: research
 excerpt: "My paper got accepted. The part I'm proudest of is the section about where it falls short."
 ---
 
@@ -14,7 +15,7 @@ It worked better than I'd hoped. On one densely annotated match, position accura
 
 But the result I care about most is the one that looks, at first glance, like bad news.
 
-When I ran it on 200 real uploads it had never seen before - 4,620 segments, each reviewed by an expert - exact accuracy dropped to 46.7%. That's the number a lot of people would bury in an appendix. I put it front and centre, because of what sat underneath it. 93% of the mistakes were confusions between adjacent positions. When it was wrong, it was wrong the way a sharp white belt is wrong - mixing up two positions that are one hip movement apart - not the way a confused model is wrong, inventing something from nowhere.
+When I ran it on 200 real uploads it had never seen before - 4,620 segments, each reviewed by an expert - exact accuracy dropped to 46.7%. That's the number a lot of people would bury in an appendix. I put it front and centre, because of what sat underneath it. 92.9% of its answers were either right or one neighbouring position off. When it was wrong, it was wrong the way a sharp white belt is wrong - mixing up two positions that are one hip movement apart - not the way a confused model is wrong, inventing something from nowhere.
 
 It fails well.
 
@@ -24,7 +25,7 @@ The limitations section was the other part I'm proud of, which is a strange thin
 
 I've been thinking about why that felt so important to me, and I think it's because the entire paper is about machines that sound more certain than they are. It would've been a bit rich to write it in a voice that sounded more certain than I was. If I'm going to ask models to know what they don't know, I should at least be able to do it myself.
 
-That's what research is, for me, at its best. The pursuit of what's actually true, including the parts that don't flatter you, and then handing it to other people so they can go further. The code and a first cut of the benchmark, MoveBench v0, are open source. Someone out there can take my one dense match and make it a hundred. Someone can try a different model family and prove me wrong about something. I hope they do.
+That's what research is, for me, at its best. The pursuit of what's actually true, including the parts that don't flatter you, and then handing it to other people so they can go further. The code is open source, and the first cut of the benchmark, MoveBench v0, is there for anyone who asks. Someone out there can take my one dense match and make it a hundred. Someone can try a different model family and prove me wrong about something. I hope they do.
 
 This work happened on real mats, with real people rolling, and it will get better the same way jiu-jitsu gets better - one honest correction at a time. I'm just glad I got to share the first round.
 

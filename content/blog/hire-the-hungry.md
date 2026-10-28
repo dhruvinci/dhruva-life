@@ -1,6 +1,7 @@
 ---
 title: Hire the Hungry
 date: 2023-02-19
+category: work
 excerpt: "The best resume I ever received was one line in a DM: \"I can build anything in Solidity.\""
 ---
 

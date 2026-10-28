@@ -17,6 +17,8 @@ export interface SiteConfig {
   projectClusters: string[]
   /** Short status tags on the home page, e.g. "open to research", each linking to a command. */
   availability: Array<{ label: string; command: string }>
+  /** One line per section for the home page's "where to go" list, keyed by command name. */
+  guide?: Record<string, string>
   /** Profile URLs elsewhere (GitHub, LinkedIn, X...), for search engines' structured data. */
   profiles?: string[]
 }
@@ -46,6 +48,61 @@ export interface Page {
   raw: string
 }
 
+export interface Metric {
+  value: string
+  label: string
+}
+
+/** A skill and where it was actually used. `where` is a project slug, a page name, "research" or "research/<slug>". */
+export interface Skill {
+  name: string
+  evidence: Array<{ where: string; note: string }>
+}
+
+export interface Tool {
+  name: string
+  /** One line on what it was used for or what I found. */
+  note?: string
+  href?: string
+}
+
+export interface ToolGroup {
+  group: string
+  /** Fold the group behind a "show" toggle (for long reading lists). */
+  collapsed?: boolean
+  tools: Tool[]
+}
+
+/** One experiment; the log lists them under their thread, in file order. */
+export interface Experiment {
+  title: string
+  result: string
+  /** The research thread (content/research/<slug>.md) it belongs to. */
+  thread: string
+}
+
+export interface SkillGroup {
+  group: string
+  skills: Skill[]
+}
+
+/**
+ * A /work timeline entry that isn't a project page: a role that lives elsewhere on the site
+ * (independent research → /research) or a stretch between jobs (the mats → /bjj).
+ */
+export interface TimelineEntry {
+  title: string
+  period: string
+  summary: string
+  /** "role" draws like a job; "break" is quieter. */
+  kind: "role" | "break"
+  /** Command it links to, e.g. "/research". */
+  command?: string
+  combines: string[]
+  /** Sorts among projects by their `order`. */
+  order: number
+}
+
 export interface Project {
   slug: string
   title: string
@@ -61,6 +118,16 @@ export interface Project {
   stack: string[]
   /** Image under public/, e.g. /images/graicie.png */
   cover?: string
+  /** The disciplines this work brought together, e.g. ["jiu-jitsu", "vision AI"]. */
+  combines: string[]
+  /** Headline numbers, shown as a row on the project page and inline on /work. */
+  metrics: Metric[]
+  /** Built alongside the main work; listed separately on /work. */
+  side: boolean
+  /** A few concrete lines on what I did, shown under the entry on /work. */
+  highlights: string[]
+  /** Slugs of blog posts about this work. */
+  posts: string[]
   html: string
   text: string
   /** The Markdown source, for plain-text outputs like /llms-full.txt. */
@@ -93,6 +160,23 @@ export interface ResearchItem {
   bibtex?: string
   /** Short headline results, shown on the /research card. */
   highlights: string[]
+  /** Shown instead of the date when the work spans time, e.g. "Aug – Oct 2026". */
+  period?: string
+  /** published | current | completed | superseded */
+  status?: string
+  /** A short name for tight spots like the home page (YAML: short_title). */
+  shortTitle?: string
+  /** The question this piece of work asked. */
+  question?: string
+  /** One line on what it found. */
+  finding?: string
+  /** What the result led to next (YAML: led_to). */
+  ledTo?: string
+  /** Slugs of blog posts about this work (YAML: post, or posts as a list). */
+  posts: string[]
+  /** One line of context on the venue, e.g. what kind of conference it is (YAML: venue_note). */
+  venueNote?: string
+  metrics: Metric[]
   html: string
   text: string
   /** The Markdown source, for plain-text outputs like /llms-full.txt. */
@@ -157,6 +241,18 @@ export interface SiteData {
   fights: Fight[]
   gigs: string[]
   records: VinylRecord[]
+  /** content/skills.json: skills grouped, each with evidence. */
+  skills: SkillGroup[]
+  /** content/timeline.json: /work timeline entries that aren't project pages. */
+  timeline: TimelineEntry[]
+  /** content/research-data.json: data worked with and built, each with where it was used. */
+  researchData: SkillGroup[]
+  /** content/research-methods.json: methods and models, each with where it was used. */
+  researchMethods: SkillGroup[]
+  /** content/research-tools.json: every tool tested or read, grouped. */
+  researchTools: ToolGroup[]
+  /** content/experiments.json: the experiment log, in the order they were run. */
+  experiments: Experiment[]
   /** Optional text from content/<collection>/_intro.md (above) and _outro.md (below). */
   intros: { work: string; blog: string; research: string }
   outros: { work: string; blog: string; research: string }

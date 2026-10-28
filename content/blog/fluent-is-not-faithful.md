@@ -1,6 +1,7 @@
 ---
 title: Fluent Is Not Faithful
 date: 2026-01-18
+category: research
 excerpt: "The model told me a beautiful story about the match. It just wasn't the match I'd watched."
 ---
 

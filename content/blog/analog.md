@@ -1,6 +1,7 @@
 ---
 title: Analog
 date: 2026-06-21
+category: life
 excerpt: "My mother likes to say I never lost a pencil or an eraser in twelve years of school. I think that explains most of me."
 ---
 

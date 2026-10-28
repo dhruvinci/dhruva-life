@@ -1,0 +1,319 @@
+[
+  {
+    "group": "Vision & video",
+    "skills": [
+      {
+        "name": "VLM video analysis in production",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Full matches through Gemini in 60-second chunks, run in parallel, with who's-who carried across chunks"
+          }
+        ]
+      },
+      {
+        "name": "Two-person 3D from video",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Measuring how two people touch and wrap around each other in 3D from one camera: distance between them 11.2 → 3.2 cm on held-out sequences (optimistic: the body model saw that dataset in training)"
+          }
+        ]
+      },
+      {
+        "name": "Pose, segmentation and 3D body models",
+        "evidence": [
+          {
+            "where": "research/under-contact",
+            "note": "PromptHMR, SAM 3D Body, BBoxMaskPose and GeoCalib, pushed hardest where people overlap"
+          },
+          {
+            "where": "research/probing-qwen",
+            "note": "SAM 2.1, SAM 3 and 3.1 on a fully tangled armbar"
+          }
+        ]
+      },
+      {
+        "name": "Model internals and probing",
+        "evidence": [
+          {
+            "where": "research/probing-qwen",
+            "note": "Pulled features from all 27 vision and 64 language layers of a 27B VLM; trained probes and mask decoders on them"
+          }
+        ]
+      },
+      {
+        "name": "Video engineering",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "FFmpeg transcoding on upload; tracked down worker crashes caused by iPhone HDR footage"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Models & LLM systems",
+    "skills": [
+      {
+        "name": "Harnesses around frozen models",
+        "evidence": [
+          {
+            "where": "research/faithful-movement",
+            "note": "Grounding a frozen VLM in cheap CV signals: position F1 0.017 → 0.189, matched by a CV-only baseline"
+          },
+          {
+            "where": "kakashi",
+            "note": "Versioned prompts and parsers behind one registry, tested in an offline lab before shipping"
+          }
+        ]
+      },
+      {
+        "name": "Training small models",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "A small two-person placement model trained on Harmony4D, tested on new people, public on Hugging Face"
+          },
+          {
+            "where": "research/probing-qwen",
+            "note": "Probes and mask decoders on the frozen features of a 27B VLM"
+          }
+        ]
+      },
+      {
+        "name": "Fine-tuning",
+        "evidence": [
+          {
+            "where": "zopu",
+            "note": "LoRA fine-tuning on platform feedback, so the models kept moving towards how people used them"
+          }
+        ]
+      },
+      {
+        "name": "Multi-model pipelines and self-hosting",
+        "evidence": [
+          {
+            "where": "zopu",
+            "note": "The drawing-to-product pipeline: several models, optimised and hosted on our own servers, at ~200K daily users"
+          }
+        ]
+      },
+      {
+        "name": "Cost and latency",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Tokens and cost tracked for every analysis; about six cents a match"
+          }
+        ]
+      },
+      {
+        "name": "Agents in production",
+        "evidence": [
+          {
+            "where": "pushit",
+            "note": "A daily CI job where an agent writes up and publishes new pages with nobody touching it"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Evaluation & data",
+    "skills": [
+      {
+        "name": "Research in the open",
+        "evidence": [
+          {
+            "where": "research",
+            "note": "A public repo per research thread: pre-registered experiments, sourced numbers, every retraction kept"
+          }
+        ]
+      },
+      {
+        "name": "Benchmarks and scoring",
+        "evidence": [
+          {
+            "where": "research/faithful-movement",
+            "note": "MoveBench v0, a scorer that can't be gamed by degenerate outputs, and bootstrap confidence intervals"
+          }
+        ]
+      },
+      {
+        "name": "Experiment design",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Pass criteria written down before every fix, a shuffled-partner control, failures reported"
+          }
+        ]
+      },
+      {
+        "name": "Auditing my own results",
+        "evidence": [
+          {
+            "where": "research/under-contact",
+            "note": "Caught a classifier recognising the room instead of the position, and kept all 19 of my retractions on record"
+          }
+        ]
+      },
+      {
+        "name": "Datasets",
+        "evidence": [
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Harmony4D and ViCoS jiu-jitsu as independent ground truth"
+          },
+          {
+            "where": "research/data-engine",
+            "note": "Built a 120-hour combat-sports library and an auto-labeller"
+          }
+        ]
+      },
+      {
+        "name": "Human review",
+        "evidence": [
+          {
+            "where": "research/faithful-movement",
+            "note": "Reviewed 4,620 test segments by hand, with coaches from my gym"
+          },
+          {
+            "where": "kakashi",
+            "note": "Coverage warnings, star ratings and a queue of low-rated analyses"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Product & engineering",
+    "skills": [
+      {
+        "name": "Full-stack products",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "React app, Node API, Postgres with row-level security, accounts and payments"
+          }
+        ]
+      },
+      {
+        "name": "Queues and workers",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "An API and two queue workers on pg-boss; a failed job refunds the user's credit"
+          }
+        ]
+      },
+      {
+        "name": "Game development",
+        "evidence": [
+          {
+            "where": "uru-mon",
+            "note": "A full browser RPG on Phaser 3: an HD-2D lighting shader, touch controls, unit-tested battle rules"
+          }
+        ]
+      },
+      {
+        "name": "Content generated by code",
+        "evidence": [
+          {
+            "where": "uru-mon",
+            "note": "Maps, world pixel art, game data and chiptune music, all produced by Python pipelines"
+          }
+        ]
+      },
+      {
+        "name": "Testing",
+        "evidence": [
+          {
+            "where": "uru-mon",
+            "note": "Unit tests in Node and real-browser tests with Playwright"
+          },
+          {
+            "where": "keepr",
+            "note": "18 tests on a Solana vault program"
+          }
+        ]
+      },
+      {
+        "name": "Smart contracts",
+        "evidence": [
+          {
+            "where": "keepr",
+            "note": "A Solana vault in Rust with a check-in and grace-window state machine, and 18 tests"
+          },
+          {
+            "where": "dehidden",
+            "note": "Minting, quests, and dynamic and soulbound NFTs for brands"
+          }
+        ]
+      },
+      {
+        "name": "Enterprise integration",
+        "evidence": [
+          {
+            "where": "pwc",
+            "note": "Salesforce and MuleSoft integrations, tool rationalisation, and the tech side of M&A"
+          }
+        ]
+      },
+      {
+        "name": "Languages",
+        "evidence": [
+          {
+            "where": "research",
+            "note": "Python"
+          },
+          {
+            "where": "kakashi",
+            "note": "JavaScript and TypeScript"
+          },
+          {
+            "where": "keepr",
+            "note": "Rust"
+          },
+          {
+            "where": "dehidden",
+            "note": "Solidity"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Building companies",
+    "skills": [
+      {
+        "name": "Founding and running a company",
+        "evidence": [
+          {
+            "where": "dehidden",
+            "note": "From first client to acquisition, with a team I hired on what they could build"
+          }
+        ]
+      },
+      {
+        "name": "Turning services into a product",
+        "evidence": [
+          {
+            "where": "dehidden",
+            "note": "The patterns from 29 client builds became the self-serve product Polygon acquired"
+          }
+        ]
+      },
+      {
+        "name": "Shipping alone, end to end",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Pipeline, app, infrastructure and payments, almost entirely by myself"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,6 +1,7 @@
 ---
 title: Vibe Researching
 date: 2026-05-31
+category: research
 excerpt: "Most of the sentences in my first paper weren't written by me. Every claim in it was."
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: Legible Partiality
 date: 2026-04-26
+category: research
 excerpt: "Every model sees from somewhere. I'd rather it told me where it's standing."
 ---
 

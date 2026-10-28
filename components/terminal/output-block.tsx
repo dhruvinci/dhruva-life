@@ -2,6 +2,8 @@
 
 import type React from "react"
 import { useState } from "react"
+import { parentOf, routeForInput } from "@/lib/routes"
+import type { SiteData } from "@/lib/site-types"
 import { CommandLink } from "./command-link"
 
 export interface Block {
@@ -23,14 +25,17 @@ const toneClasses = {
 
 interface OutputBlockProps {
   block: Block
+  data: SiteData
   /** Older blocks start collapsed to their command line; the latest is always open. */
   latest: boolean
 }
 
-export function OutputBlock({ block, latest }: OutputBlockProps) {
+export function OutputBlock({ block, data, latest }: OutputBlockProps) {
   const [copied, setCopied] = useState(false)
   const [expanded, setExpanded] = useState<boolean | null>(null)
   const open = expanded ?? latest
+  const parent = parentOf(data, block.path)
+  const seeAlso = (block.next ?? []).filter((command) => routeForInput(data, command)?.path !== parent.path)
 
   const copyLink = async () => {
     if (!block.path) return
@@ -81,22 +86,40 @@ export function OutputBlock({ block, latest }: OutputBlockProps) {
             ⎿
           </span>
           <div className="min-w-0">
+          {latest && (
+            <p className="print:hidden mb-4 text-xs">
+              <a href={parent.path} className="text-muted-foreground hover:text-accent">
+                ← {parent.label}
+              </a>
+            </p>
+          )}
           <div className={`leading-relaxed ${block.tone ? toneClasses[block.tone] : ""}`}>{block.content}</div>
           {block.notice && (
             <p role="status" className="mt-4 text-sm text-blue bg-blue/10 border border-blue/25 rounded px-3 py-2">
               {block.notice}
             </p>
           )}
-          {latest && block.next && block.next.length > 0 && (
-            <nav aria-label="Next" className="print:hidden mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
-              <span className="text-muted-foreground">next:</span>
-              {block.next.map((command) => (
-                <CommandLink
-                  key={command}
-                  command={command}
-                  className="rounded border border-border bg-card px-2 py-1 text-muted-foreground hover:text-accent hover:border-accent/40"
-                />
-              ))}
+          {latest && (
+            <nav aria-label="Go to" className="print:hidden mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border pt-4 text-sm">
+              <a href={parent.path} className="text-accent hover:underline">
+                ← back to {parent.label}
+              </a>
+              {parent.path !== "/" && (
+                // eslint-disable-next-line @next/next/no-html-link-for-pages -- intercepted by the terminal to go home
+                <a href="/" className="text-accent hover:underline">
+                  home
+                </a>
+              )}
+              {seeAlso.length > 0 && (
+                <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <span className="text-muted-foreground">see also</span>
+                  {seeAlso.map((command) => (
+                    <CommandLink key={command} command={command} className="text-accent hover:underline">
+                      {routeForInput(data, command)?.title ?? command}
+                    </CommandLink>
+                  ))}
+                </span>
+              )}
             </nav>
           )}
           </div>

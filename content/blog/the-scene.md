@@ -1,6 +1,7 @@
 ---
 title: The Scene
 date: 2025-09-21
+category: life
 excerpt: "I've been showing up to small rooms with loud bands since 2012. It's the best education I never paid for."
 ---
 

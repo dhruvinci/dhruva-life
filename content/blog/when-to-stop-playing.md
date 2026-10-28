@@ -1,6 +1,7 @@
 ---
 title: When to Stop Playing
 date: 2023-09-10
+category: work
 excerpt: "For a while there, we were making more money than the value we were providing. I've been sitting with that."
 ---
 

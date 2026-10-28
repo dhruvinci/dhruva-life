@@ -1,6 +1,7 @@
 ---
 title: One Click
 date: 2022-08-21
+category: work
 excerpt: "The best answer to \"what is an NFT?\" turned out to be: click here."
 ---
 

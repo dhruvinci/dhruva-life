@@ -2,16 +2,32 @@
 title: Harnessing Vision–Language Models for Faithful Human-Movement Understanding
 date: 2026-07-15
 kind: paper
+short_title: Faithful human-movement understanding
+period: Mar – Jul 2026
+posts: [chasing-what-is-true, vibe-researching]
+venue_note: "CAISc 2026 is a new conference for research co-authored with AI (Open-Ended Problems track). The experiments and claims are mine; most of the prose was written with AI, which I wrote about in Vibe Researching."
+status: accepted
 venue: CAISc 2026
+question: "Can a frozen vision-language model give a temporally coherent, technically correct, grounded account of long, contact-heavy movement?"
+finding: "Grounding a frozen VLM in cheap computer-vision signals lifted position F1 from 0.017 to 0.189 (Δ +0.174, 95% CI [0.031, 0.209]) - but a CV-only baseline scored 0.213, and the paper says so. On 200 unseen real uploads it was 92.9% right to within a neighbouring position."
+led_to: "If the CV anchors carry the signal, measure with computer vision directly."
 summary: "VLMs describe movement fluently but not faithfully. A harness built on cheap computer-vision signals makes them far more accurate - and makes them fail in predictable ways."
 highlights:
-  - "~11x position macro-F1 on a densely annotated match, from grounding a frozen VLM in cheap computer-vision signals"
-  - "58.9% position identification across 496 clips"
-  - "On 200 unseen real uploads, 93% of errors were confusions between adjacent positions - it fails well"
+  - "Grounding a frozen VLM in cheap CV signals: position macro-F1 0.017 → 0.189, Δ +0.174 [95% CI 0.031, 0.209]; a CV-only baseline scored 0.213"
+  - "58.9% [54.5, 63.1] position identification across 496 clips"
+  - "On 200 unseen real uploads (4,620 segments I reviewed by hand): 46.7% exact, 92.9% right to within a neighbouring position"
+  - "Reported against itself: a CV-only baseline matched the best VLM"
+metrics:
+  - value: "0.017 → 0.189"
+    label: position F1 from CV grounding (CV-only baseline 0.213)
+  - value: "58.9%"
+    label: positions identified, 496 clips
+  - value: "4,620"
+    label: real-upload segments reviewed by hand
 links:
-  - label: Paper (OpenReview)
+  - label: paper
     href: https://openreview.net/pdf?id=uWNdzkIJ7g
-  - label: Code + MoveBench v0
+  - label: code
     href: https://github.com/dhruvinci/moveharness
 bibtex: |
   @inproceedings{chakravarthi2026faithful,
@@ -22,20 +38,3 @@ bibtex: |
     url       = {https://openreview.net/forum?id=uWNdzkIJ7g}
   }
 ---
-
-My first paper, and the research behind [Kakashi](/work/kakashi). Sole author, accepted at CAISc 2026.
-
-Ask a vision-language model to describe a few minutes of grappling and you get lovely, confident prose that's often wrong. It loses track of time, invents positions when bodies overlap, and gets expensive fast. Physio, injury prevention, coaching and elder care all need the opposite - an account that's precise, grounded and correct over minutes of footage.
-
-So instead of a bigger model, I built a harness around a frozen one. The through-line is *win by removing*: give the model small computer-vision anchors (pose, optical flow, contact) instead of everything, ask for a compact output instead of verbose JSON, treat the anchors as hints and not gospel, and cache the video once so you can make multiple cheap passes.
-
-What came out of it:
-
-- **Grounding helps a lot.** On one densely annotated match, position accuracy (macro-F1) goes up about 11x. Across 496 clips, it identifies the position 58.9% of the time.
-- **It fails well.** On 200 real uploads it had never seen (4,620 expert-reviewed segments), exact accuracy drops to 46.7% - but 93% of the mistakes are confusions between *adjacent* positions. It degrades gracefully instead of falling apart.
-- **Score by meaning, not by string match.** A generative model needs to be graded against an ontology, and the gaps between strict and lenient scoring are results in themselves.
-
-What it doesn't show yet: the dense evaluation is one match, all the models are frozen and from one family, and it's single-camera. Each of those is the next thing to fix - more videos and annotators, other model families, and seeing whether the right grounding can lift much smaller models.
-
-The code and a first cut of the benchmark, MoveBench v0, are [open source](https://github.com/dhruvinci/moveharness).
-

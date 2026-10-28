@@ -41,7 +41,7 @@ export function createFunCommands(data: SiteData): Command[] {
         title: "Fun",
         content: (
           <div className="space-y-4">
-            <p>The things I do when I&apos;m not working. They also live in the bar at the bottom.</p>
+            <p>The things I do when I&apos;m not working.</p>
             <div className="flex flex-wrap gap-3">
               {funCommands(data).map((item) => (
                 <CommandLink

@@ -1,6 +1,7 @@
 ---
 title: A Picture and a Thousand Prompts
 date: 2025-03-09
+category: work
 excerpt: "Most people can't write a good prompt to save their lives, but hand them a marker and they'll draw you the whole idea."
 ---
 

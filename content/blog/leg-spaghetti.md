@@ -22,11 +22,11 @@ I've been trying to teach a computer to see it.
 
 <hr>
 
-Honestly, I'm still figuring out how to say what I'm working on in one line. The closest I've got is visual intelligence for human movement - machines that can watch people move and actually understand it. [Kakashi](/work/kakashi) watches your rolls. [My paper](/research/faithful-movement) was about getting vision-language models to describe movement faithfully. And the further I go, the more everything keeps coming back to one stupidly simple question.
+Honestly, I'm still figuring out how to say what I'm working on in one line. The closest I've got is visual intelligence for human movement - machines that can watch people move and actually understand it. [Kakashi](https://kakashi.ai) watches your rolls. [My paper](/research) was about getting vision-language models to describe movement faithfully. And the further I go, the more everything keeps coming back to one stupidly simple question.
 
 Whose limb is that?
 
-Before a coach, a physio or a robot can tell you anything about how you moved, it needs to know which arm is yours and which leg is mine. Get that wrong and everything built on top of it is wrong too. I've watched the big models describe a scramble beautifully and still hand the trapped arm to the wrong person (that was [whose arm is it?](/research/whose-arm-is-it)). So this time I went down a level, to pixels.
+Before a coach, a physio or a robot can tell you anything about how you moved, it needs to know which arm is yours and which leg is mine. Get that wrong and everything built on top of it is wrong too. I've watched the big models describe a scramble beautifully and still hand the trapped arm to the wrong person (that was [whose arm is it?](/research)). So this time I went down a level, to pixels.
 
 The plan was an auto-labeller. Something that draws a mask over each athlete on every frame, so I can train models on top of it later. Standing up, it works. Most ground positions, it works. Then the legs get involved.
 

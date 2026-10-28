@@ -1,0 +1,162 @@
+[
+  {
+    "group": "Datasets I've worked with",
+    "skills": [
+      {
+        "name": "ViCoS jiu-jitsu positions",
+        "evidence": [
+          {
+            "where": "research/under-contact",
+            "note": "120,279 images, poses for both athletes, 18 positions. Found it's multi-view, and that a random split leaks the room"
+          },
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Expert position labels as ground truth for ground work: 1,426 frames"
+          }
+        ]
+      },
+      {
+        "name": "Harmony4D",
+        "evidence": [
+          {
+            "where": "research/engagement-in-4d",
+            "note": "Hugging, karate, sword fighting, MMA and grappling sequences as ground truth for the six-layer pipeline"
+          },
+          {
+            "where": "research/engagement-in-3d",
+            "note": "Multi-view 3D of people in close contact: 16 sequences, 5,596 views as ground truth"
+          },
+          {
+            "where": "research/under-contact",
+            "note": "Audited it first: the reference meshes interpenetrate in 51.7% of frames"
+          },
+          {
+            "where": "research/data-engine",
+            "note": "Tangle-tracker evaluation: 56 videos, 5,500 frames"
+          }
+        ]
+      },
+      {
+        "name": "MAMMA",
+        "evidence": [
+          {
+            "where": "research/engagement-in-4d",
+            "note": "Max Planck's dance motion capture: West Coast Swing scored against its 3D truth"
+          }
+        ]
+      },
+      {
+        "name": "Sapiens",
+        "evidence": [
+          {
+            "where": "research/data-engine",
+            "note": "Meta's 28-part body segmentation, tested on combat footage: it holds up on large, close-up people and breaks down below about 1,000 px tall"
+          }
+        ]
+      },
+      {
+        "name": "UT-Interaction, Penn Action",
+        "evidence": [
+          {
+            "where": "research/fast-and-slow",
+            "note": "Public interaction and movement benchmarks: 80.0% on interaction codes"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "Data I've built",
+    "skills": [
+      {
+        "name": "A hand-labelled match",
+        "evidence": [
+          {
+            "where": "research/watching-a-match",
+            "note": "Built my own ground-truth tool and labelled a 16-minute match: 124 labels. It became MoveBench v0, available on request"
+          }
+        ]
+      },
+      {
+        "name": "Kakashi-labelled videos from public sources",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Instructional and competition videos from public sources, labelled with Kakashi's pipeline"
+          }
+        ]
+      },
+      {
+        "name": "Crowdsourced footage from Kakashi",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Athletes from 250+ gyms uploading their own rolls, rated and corrected in the app"
+          },
+          {
+            "where": "research/faithful-movement",
+            "note": "4,620 real-upload segments I reviewed by hand with coaches from my gym"
+          }
+        ]
+      },
+      {
+        "name": "A combat-sports library",
+        "evidence": [
+          {
+            "where": "research/data-engine",
+            "note": "765 sources, about 120 hours, catalogued into cohorts; 65,159 images and 485,028 people auto-labelled"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "group": "How it was labelled",
+    "skills": [
+      {
+        "name": "By hand",
+        "evidence": [
+          {
+            "where": "research/watching-a-match",
+            "note": "Segment-by-segment ground truth in my own review tool"
+          },
+          {
+            "where": "research/data-engine",
+            "note": "A gold review of the auto-labels (103 verdicts) and blind side-by-side packs"
+          }
+        ]
+      },
+      {
+        "name": "AI-assisted",
+        "evidence": [
+          {
+            "where": "research/data-engine",
+            "note": "An AI reviewer as the teacher, marking people for SAM 3.1 to segment"
+          },
+          {
+            "where": "research/fast-and-slow",
+            "note": "Two blind AI reviewers labelling human state"
+          }
+        ]
+      },
+      {
+        "name": "Dot-assisted",
+        "evidence": [
+          {
+            "where": "research/data-engine",
+            "note": "932 dots on 94 frames, turned into point prompts and carried through the video: held-out accuracy 75% → 90%"
+          }
+        ]
+      },
+      {
+        "name": "Human-in-the-loop, in a product",
+        "evidence": [
+          {
+            "where": "kakashi",
+            "note": "Ratings, a low-rating review queue, and coaches correcting the model's segments"
+          }
+        ]
+      }
+    ]
+  }
+]
