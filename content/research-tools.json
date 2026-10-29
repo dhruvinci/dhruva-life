@@ -11,6 +11,14 @@
         "note": "Open weights, taken apart layer by layer"
       },
       {
+        "name": "SpatialAxiom-9B, Qwen3.5-9B",
+        "note": "A spatial fine-tune and its base, asked and probed side by side"
+      },
+      {
+        "name": "SpaceQwen2.5-VL-3B, Qwen2.5-VL-3B",
+        "note": "An open reproduction of SpatialVLM's recipe, and its base"
+      },
+      {
         "name": "Laya Vision / SmolVLM",
         "note": "A small VLM, tested against its own frozen features"
       },
@@ -25,7 +33,7 @@
     "tools": [
       {
         "name": "RF-DETR",
-        "note": "Finding the people, before SAM 3.1 tracks them"
+        "note": "Finding the people before SAM 3.1 tracks them, and the box baseline for the VLM probes"
       },
       {
         "name": "SAM 2 / 2.1",
@@ -65,7 +73,7 @@
       },
       {
         "name": "MoGe-2, Depth Pro, Depth-Anything-V2",
-        "note": "Monocular depth between two people"
+        "note": "Monocular depth between two people, and the depth baseline for the VLM probes"
       }
     ]
   },
@@ -79,7 +87,7 @@
       },
       {
         "name": "RTMPose, RTMW, ViTPose+, YOLO11 pose",
-        "note": "Pose, compared on a 6 GB laptop GPU"
+        "note": "Pose, compared on a 6 GB laptop GPU; ViTPose+ is the baseline for joints read from a VLM's vision tower"
       },
       {
         "name": "DINOv2",

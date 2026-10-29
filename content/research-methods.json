@@ -37,6 +37,10 @@
         "name": "Layer probing",
         "evidence": [
           {
+            "where": "research/blindsight",
+            "note": "Five VLMs, layer by layer: the vision tower, the image tokens, and the word that names the object"
+          },
+          {
             "where": "research/probing-qwen",
             "note": "All 27 vision and 64 language layers of Qwen3.8-27B; 636 probe jobs to find the best layer"
           }
@@ -58,6 +62,10 @@
       {
         "name": "Training on frozen features",
         "evidence": [
+          {
+            "where": "research/blindsight",
+            "note": "Depth, size and position decoders tested on scene types they never saw; dense depth and joint heads on a frozen vision tower"
+          },
           {
             "where": "research/probing-qwen",
             "note": "Probes and mask decoders on VLM features, on a 6 GB laptop GPU"
@@ -90,6 +98,10 @@
         "name": "Pre-registration",
         "evidence": [
           {
+            "where": "research/blindsight",
+            "note": "Five experiments, each pushed with its pass bar before it ran"
+          },
+          {
             "where": "research/engagement-in-3d",
             "note": "Pass criteria written before every fix; failures reported as failures"
           },
@@ -102,6 +114,10 @@
       {
         "name": "Controls",
         "evidence": [
+          {
+            "where": "research/blindsight",
+            "note": "A name-only prior, no image, a mismatched image, shuffled labels and random features"
+          },
           {
             "where": "research/engagement-in-3d",
             "note": "Shuffled partners: everything drops to ≤ 0.05"

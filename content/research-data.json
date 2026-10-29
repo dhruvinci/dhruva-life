@@ -33,6 +33,19 @@
           {
             "where": "research/data-engine",
             "note": "Tangle-tracker evaluation: 56 videos, 5,500 frames"
+          },
+          {
+            "where": "research/blindsight",
+            "note": "Hugging, sword, karate and ballroom sequences as the two-person scene type for VLM probes"
+          }
+        ]
+      },
+      {
+        "name": "COCO, NYU Depth v2, Hypersim, KITTI",
+        "evidence": [
+          {
+            "where": "research/blindsight",
+            "note": "People, real and synthetic rooms, and streets: scene types to probe VLMs on, and to test whether a decoder carries to one it never saw"
           }
         ]
       },
@@ -105,6 +118,15 @@
           {
             "where": "research/data-engine",
             "note": "765 sources, about 120 hours, catalogued into cohorts; 65,159 images and 485,028 people auto-labelled"
+          }
+        ]
+      },
+      {
+        "name": "A VLM spatial-probe set",
+        "evidence": [
+          {
+            "where": "research/blindsight",
+            "note": "Hidden states and answers from five VLMs, with depth, size and position labels from five public datasets. Available on request"
           }
         ]
       }

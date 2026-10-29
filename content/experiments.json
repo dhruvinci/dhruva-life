@@ -54,5 +54,12 @@
   {"thread": "engagement-in-4d", "title": "Six layers, one camera", "result": "Tracking, masks, 2D and 3D bodies, contact events, and VLM narration that cites the measured events"},
   {"thread": "engagement-in-4d", "title": "29 clips across kinds of engagement", "result": "Hugs, ballroom, West Coast Swing, karate, MMA and grappling; every clip passed per-layer quality gates; one VHS clip retired as a documented failure"},
   {"thread": "engagement-in-4d", "title": "Scored against truth on 12", "result": "0 identity switches, masks IoU 0.69–0.90, 3D limbs 2.9–5.2 cm; karate's 6 strikes all found within 0.2 s"},
-  {"thread": "engagement-in-4d", "title": "Where it's hard", "result": "Hugs hide arms, strikes are hard to time, and one dancer in front of the other throws depth off by 16–33 cm"}
+  {"thread": "engagement-in-4d", "title": "Where it's hard", "result": "Hugs hide arms, strikes are hard to time, and one dancer in front of the other throws depth off by 16–33 cm"},
+  {"thread": "blindsight", "title": "Token-layout audit before any probe", "result": "Every image patch mapped back to its row and column on all five models' processors"},
+  {"thread": "blindsight", "title": "Ask five VLMs, then probe them layer by layer", "result": "The object's word holds depth (0.172 abs-rel; MoGe-2 0.138). Asked, Qwen3.8-27B is no better than a guess from the name (0.370 vs 0.394). $4.07"},
+  {"thread": "blindsight", "title": "Spatial fine-tunes against their base models", "result": "SpatialAxiom-9B's spoken depth beats its base (0.233 vs 0.344) with the same probes inside; the SpatialVLM-recipe reproduction doesn't help here"},
+  {"thread": "blindsight", "title": "Decoders tested on a kind of scene they never saw", "result": "They don't carry over: 2 of 50 pass. Depth error on new scenes 0.73–5.3, against 0.20–0.57 for the model's own answer"},
+  {"thread": "blindsight", "title": "A dense head on Qwen3.8's own vision tower", "result": "Depth per pixel 0.186 vs MoGe-2's 0.096; joints 69% vs ViTPose+'s 96%. The geometry is there, but coarse"},
+  {"thread": "blindsight", "title": "Every question in a second wording", "result": "The findings hold. SpatialAxiom is the steadiest; the SpatialVLM-recipe model loses 10 points on relations asked the other way round"},
+  {"thread": "blindsight", "title": "Decoders trained on four kinds of scene", "result": "Still no transfer (1 of 26), but variety helps: indoor depth error 5.32 → 0.45 once synthetic rooms are in training"}
 ]
