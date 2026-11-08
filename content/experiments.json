@@ -50,6 +50,9 @@
   {"thread": "engagement-in-3d", "title": "Beyond grappling", "result": "Ballroom dancing: distance 2.7 cm, touching F1 0.96. Sword fighting 2.4 m apart: distance right to about 4%. Hugging still fails - the arms hide"},
   {"thread": "engagement-in-3d", "title": "Does time fill in hidden limbs?", "result": "Not on its own; a per-frame head helps a little in tangles (5.39 → 4.81 cm, exploratory)"},
   {"thread": "engagement-in-3d", "title": "A trust flag without ground truth", "result": "Flags bad frames at AUROC 0.795 held out, 0.76 on new people"},
+  {"thread": "engagement-in-3d", "title": "Letting the trust flag pick the camera", "result": "With three phones filming, taking each moment from the camera the flag trusts most: 1.82 cm against 3.37 cm from a random one (-46%), and -46% on new people"},
+  {"thread": "engagement-in-3d", "title": "Fully automatic, from detection up", "result": "Detected boxes cost nothing (+0.6%), but 92.7% of athletes were found end to end, short of the 95% bar"},
+  {"thread": "engagement-in-3d", "title": "A 2D keypoint model fine-tuned for contact", "result": "ViTPose+ fine-tuned on Harmony4D contact: tangled-limb 2D error 24.5 → 19.2 px (-21%; -23% on new people), short of its -30% bar"},
   {"thread": "engagement-in-3d", "title": "Engagement at range", "result": "Distance right to about 4% with the two people 2.4 m apart - but it misses its absolute pre-registered bars"},
   {"thread": "engagement-in-4d", "title": "Six layers, one camera", "result": "Tracking, masks, 2D and 3D bodies, contact events, and VLM narration that cites the measured events"},
   {"thread": "engagement-in-4d", "title": "29 clips across kinds of engagement", "result": "Hugs, ballroom, West Coast Swing, karate, MMA and grappling; every clip passed per-layer quality gates; one VHS clip retired as a documented failure"},
@@ -61,5 +64,7 @@
   {"thread": "blindsight", "title": "Decoders tested on a kind of scene they never saw", "result": "They don't carry over: 2 of 50 pass. Depth error on new scenes 0.73–5.3, against 0.20–0.57 for the model's own answer"},
   {"thread": "blindsight", "title": "A dense head on Qwen3.8's own vision tower", "result": "Depth per pixel 0.186 vs MoGe-2's 0.096; joints 69% vs ViTPose+'s 96%. The geometry is there, but coarse"},
   {"thread": "blindsight", "title": "Every question in a second wording", "result": "The findings hold. SpatialAxiom is the steadiest; the SpatialVLM-recipe model loses 10 points on relations asked the other way round"},
-  {"thread": "blindsight", "title": "Decoders trained on four kinds of scene", "result": "Still no transfer (1 of 26), but variety helps: indoor depth error 5.32 → 0.45 once synthetic rooms are in training"}
+  {"thread": "blindsight", "title": "Decoders trained on four kinds of scene", "result": "Still no transfer (1 of 26), but variety helps: indoor depth error 5.32 → 0.45 once synthetic rooms are in training"},
+  {"thread": "blindsight", "title": "The measures depth didn't cover", "result": "Which way an object faces is held, not said: 35.6° from its word against 52.4° asked (a guess from the name: 57.4°). Counting is the exception: said as well as RF-DETR (1.88 vs 2.07). $5.53"},
+  {"thread": "blindsight", "title": "Why decoders don't carry to new scenes", "result": "Absolute scale: fitting depth within each image helps on 7 of 8 held-out folds, so the order of depths transfers and metres don't. $0"}
 ]

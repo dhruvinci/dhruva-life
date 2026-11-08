@@ -88,6 +88,10 @@
           {
             "where": "zopu",
             "note": "LoRA fine-tuning on platform feedback, so the models kept moving towards how people used them"
+          },
+          {
+            "where": "research/engagement-in-3d",
+            "note": "ViTPose+ fine-tuned on Harmony4D contact: 21% lower 2D error on tangled limbs, 23% on new people; SAM 3D Body's decoder fine-tuned for contact, 8-9% better inside tangles than the released model"
           }
         ]
       },

@@ -41,11 +41,11 @@
         ]
       },
       {
-        "name": "COCO, NYU Depth v2, Hypersim, KITTI",
+        "name": "COCO, NYU Depth v2, Hypersim, KITTI, Objectron",
         "evidence": [
           {
             "where": "research/blindsight",
-            "note": "People, real and synthetic rooms, and streets: scene types to probe VLMs on, and to test whether a decoder carries to one it never saw"
+            "note": "People, real and synthetic rooms, streets, and objects with known 3D boxes: scenes to probe VLMs on for depth, which way things face, surfaces, motion and counts, and to test whether a decoder carries to a kind it never saw"
           }
         ]
       },
@@ -86,7 +86,7 @@
         "evidence": [
           {
             "where": "research/watching-a-match",
-            "note": "Built my own ground-truth tool and labelled a 16-minute match: 124 labels. It became MoveBench v0, available on request"
+            "note": "Built my own ground-truth tool and labelled a 16-minute match: 32 positions, 62 sub-positions and 122 technique labels. It became the MoveBench v0 seed, public in the moveharness repo (CC BY 4.0)"
           }
         ]
       },
@@ -126,7 +126,7 @@
         "evidence": [
           {
             "where": "research/blindsight",
-            "note": "Hidden states and answers from five VLMs, with depth, size and position labels from five public datasets. Available on request"
+            "note": "Hidden states and answers from five VLMs, with depth, size, position, orientation, surface, motion and count labels from six public datasets. Available on request"
           }
         ]
       }
